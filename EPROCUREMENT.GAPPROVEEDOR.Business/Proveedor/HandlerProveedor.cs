@@ -10,14 +10,14 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Business.Proveedor
 {
     public class HandlerProveedor
     {
-        private readonly CatalogoData catalogoData;
+        private readonly ProveedorData proveedorData;
 
         /// <summary>
         /// Constructor para la inicializacion de los accesos a datos
         /// </summary>
         public HandlerProveedor()
         {
-            catalogoData = new CatalogoData();
+            proveedorData = new ProveedorData();
         }
 
         /// <summary>
@@ -26,10 +26,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Business.Proveedor
         /// <returns></returns>
         public ProveedorResponseDTO GuardarProveedor(ProveedorRequesteDTO request)
         {
-            ProveedorResponseDTO response = new ProveedorResponseDTO();
-
-            //response = catalogoData.GetPaisList();
-            response.Success = true;
+            var response = proveedorData.ProveedorInsertar(request);
             if (!response.Success)
             {
                 response.ErrorList = new List<ErrorDTO> { new ErrorDTO { Codigo = "", Mensaje = string.Format("No fue posible recuperar datos disponibles o no se encontro alguna solicitud en proceso") } };

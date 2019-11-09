@@ -16,8 +16,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
         [Route("Insertar")]
         public ProveedorResponseDTO Process([FromBody]ProveedorRequesteDTO request)
         {
-            HandlerProveedor handlerProveedor = new HandlerProveedor();
-            var response = handlerProveedor.GuardarProveedor(request);
+            var response = new HandlerProveedor().GuardarProveedor(request);
             return response;
         }
     }
