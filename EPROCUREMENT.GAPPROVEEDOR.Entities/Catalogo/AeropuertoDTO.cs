@@ -14,5 +14,10 @@
         /// Representa El nombre del aeropuerto
         /// </summary>
         public string Nombre { get; set; }
+
+        /// <summary>
+        /// Representa El nombre del aeropuerto
+        /// </summary>
+        public bool Checado { get; set; }
     }
 }

@@ -228,4 +228,7 @@
   <data name="ZipCode" xml:space="preserve">
     <value>Zip Code</value>
   </data>
+  <data name="DefaultSelect" xml:space="preserve">
+    <value>Choose one</value>
+  </data>
 </root>

@@ -144,18 +144,6 @@
     </Compile>
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Entities\Comun\ErrorDTO.cs" />
-    <Compile Include="Entities\DTO\AeropuertoDTO.cs" />
-    <Compile Include="Entities\DTO\GiroDTO.cs" />
-    <Compile Include="Entities\DTO\NacionalidadDTO.cs" />
-    <Compile Include="Entities\Response\NacionalidadResponseDTO.cs" />
-    <Compile Include="Entities\DTO\PaisDTO.cs" />
-    <Compile Include="Entities\DTO\ZonaHorariaDTO.cs" />
-    <Compile Include="Entities\Response\AeropuertoResponseDTO.cs" />
-    <Compile Include="Entities\Response\GiroResponseDTO.cs" />
-    <Compile Include="Entities\Response\PaisResponseDTO.cs" />
-    <Compile Include="Entities\Response\ResponseBaseDTO.cs" />
-    <Compile Include="Entities\Response\ZonaHorariaResponseDTO.cs" />
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -163,6 +151,7 @@
     <Compile Include="Helpers\GlobalHelper.cs" />
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\PaisModel.cs" />
+    <Compile Include="Models\ProveedorRegistro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +269,7 @@
     <Content Include="scripts\popper.js.map" />
     <Content Include="scripts\popper-utils.min.js.map" />
     <Content Include="scripts\popper-utils.js.map" />
+    <Content Include="Views\Home\Editar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -316,6 +306,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EPROCUREMENT.GAPPROVEEDOR.Entities\EPROCUREMENT.GAPPROVEEDOR.Entities.csproj">
+      <Project>{82b84451-2b68-477a-8175-aea7244947de}</Project>
+      <Name>EPROCUREMENT.GAPPROVEEDOR.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

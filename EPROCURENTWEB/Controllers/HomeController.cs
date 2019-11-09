@@ -9,28 +9,57 @@ using EprocurementWeb.Content.Texts;
 using System.Net.Http;
 using System.Web.Script.Serialization;
 using EprocurementWeb.Business;
+using System.Threading.Tasks;
+using EPROCUREMENT.GAPPROVEEDOR.Entities;
+using EprocurementWeb.Models;
 
 namespace EprocurementWeb.Controllers
 {
     public class HomeController : BaseController
     {
+        public List<AeropuertoDTO> aeropuertoList;
+        public List<ZonaHorariaDTO> zonaHorariaList;
+        public List<NacionalidadDTO> nacionalidadList;
+        public List<GiroDTO> giroList;
+
         public ActionResult Index()
         {
-            return View();
+            BusinessLogic businessLogic = new BusinessLogic();
+            aeropuertoList = businessLogic.GetAeropuertosList();
+            zonaHorariaList = businessLogic.GetZonaHorariaList();
+            nacionalidadList = businessLogic.GetNacionalidadList();
+            giroList = businessLogic.GetGirosList();
+
+            ProveedorRegistro proveedor = new ProveedorRegistro { Contacto = null };
+            proveedor.AeropuertoList = aeropuertoList;
+            ViewBag.GiroList = giroList;
+            ViewBag.ZonaHorariaList = zonaHorariaList;
+            ViewBag.NacionalidadList = nacionalidadList;
+            return View(proveedor);
         }
-        
-        
-        [HttpPost]
+
+        [HttpPost, ActionName("Index")]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(FormCollection formCollection, ProveedorModel model)
+        public ActionResult GuardarProveedor(ProveedorRegistro proveedor)
         {
-            return View();
+            return View(proveedor);
+
         }
+
+        private void CargarCatalogos()
+        {
+            BusinessLogic businessLogic = new BusinessLogic();
+            aeropuertoList = businessLogic.GetAeropuertosList();
+            zonaHorariaList = businessLogic.GetZonaHorariaList();
+            nacionalidadList = businessLogic.GetNacionalidadList();
+            giroList = businessLogic.GetGirosList();
+        }
+
         /// <summary>
         /// Consumir API Método Traer Paises
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetPaisesList() 
+        public JsonResult GetPaisesList()
         {
             var bslogic = new BusinessLogic();
             return Json(bslogic.GetPaisesList(), JsonRequestBehavior.AllowGet);
@@ -72,7 +101,7 @@ namespace EprocurementWeb.Controllers
             return Json(bslogic.GetZonaHorariaList(), JsonRequestBehavior.AllowGet);
 
         }
-      
+
 
 
 
