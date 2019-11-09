@@ -45,18 +45,22 @@
     <Compile Include="Catalogo\GiroDTO.cs" />
     <Compile Include="Catalogo\NacionalidadDTO.cs" />
     <Compile Include="Catalogo\PaisDTO.cs" />
+    <Compile Include="Catalogo\ProveedorContactoDTO.cs" />
+    <Compile Include="Catalogo\ProveedorEmpresaDTO.cs" />
     <Compile Include="Catalogo\ZonaHorariaDTO.cs" />
     <Compile Include="Comun\ErrorDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proveedor\ProveedorDTO.cs" />
+    <Compile Include="Request\ProveedorRequesteDTO.cs" />
+    <Compile Include="Request\RequestBaseDTO.cs" />
     <Compile Include="Response\AeropuertoResponseDTO.cs" />
     <Compile Include="Response\GiroResponseDTO.cs" />
     <Compile Include="Response\NacionalidadResponseDTO.cs" />
     <Compile Include="Response\PaisResponseDTO.cs" />
+    <Compile Include="Response\ProveedorResponseDTO.cs" />
     <Compile Include="Response\ResponseBaseDTO.cs" />
     <Compile Include="Response\ZonaHorariaResponseDTO.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Request\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
