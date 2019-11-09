@@ -1,5 +1,4 @@
-﻿using EPROCUREMENT.GAPPROVEEDOR.Entities.Comun;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace EPROCUREMENT.GAPPROVEEDOR.Entities
 {

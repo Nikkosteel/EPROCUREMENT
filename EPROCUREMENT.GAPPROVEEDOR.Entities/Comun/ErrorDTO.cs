@@ -1,4 +1,4 @@
-﻿namespace EPROCUREMENT.GAPPROVEEDOR.Entities.Comun
+﻿namespace EPROCUREMENT.GAPPROVEEDOR.Entities
 {
     /// <summary>
     /// Clase para errores

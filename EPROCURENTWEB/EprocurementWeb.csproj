@@ -163,7 +163,6 @@
     <Compile Include="Helpers\GlobalHelper.cs" />
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\PaisModel.cs" />
-    <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

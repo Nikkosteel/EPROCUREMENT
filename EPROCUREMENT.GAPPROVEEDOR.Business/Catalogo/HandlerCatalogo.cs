@@ -1,6 +1,5 @@
 ﻿using EPROCUREMENT.GAPPROVEEDOR.Data;
 using EPROCUREMENT.GAPPROVEEDOR.Entities;
-using EPROCUREMENT.GAPPROVEEDOR.Entities.Comun;
 using System.Collections.Generic;
 
 namespace EPROCUREMENT.GAPPROVEEDOR.Business.Catalogo
@@ -8,11 +7,10 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Business.Catalogo
     public class HandlerCatalogo
     {
         private readonly CatalogoData catalogoData;
-        //  private readonly InputDataValidator inputDataValidator;
+
         /// <summary>
         /// Constructor para la inicializacion de los accesos a datos
         /// </summary>
-        /// <param name="client">Acceso a datos de tarjetas</param>
         public HandlerCatalogo()
         {
             catalogoData = new CatalogoData();
