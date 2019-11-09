@@ -43,7 +43,9 @@ namespace EprocurementWeb.Models
     public class EmpresaModel
     {
         public int Id { get; set; }
-        public int IdCatalogoAeropuerto { get; set; }
+        public string Nombre { get; set; }
+        public string IdCatalogoAeropuerto { get; set; }
+        public bool checado { get; set; }
 
     }
 
@@ -51,5 +53,6 @@ namespace EprocurementWeb.Models
     {
         public int Id { get; set; }
         public int IdCatalogoGiro { get; set; }
+        public string Nombre { get; set; }
     }
 }

@@ -9,6 +9,8 @@ using EprocurementWeb.Content.Texts;
 using System.Net.Http;
 using System.Web.Script.Serialization;
 using EprocurementWeb.Business;
+using System.Threading.Tasks;
+
 
 namespace EprocurementWeb.Controllers
 {
@@ -16,13 +18,28 @@ namespace EprocurementWeb.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            List<GiroModel> giroList = new List<GiroModel>();
+
+            ProveedorModel proveedor = new ProveedorModel { Contacto = null };
+            var bslogic = new BusinessLogic();
+            proveedor.Empresas = bslogic.GetAeropuertosList().Select(a => new EmpresaModel { IdCatalogoAeropuerto = a.Id, Nombre = a.Nombre }).ToList();
+            ViewBag.girosList = bslogic.GetGirosList().Select(g => new GiroModel { IdCatalogoGiro = g.IdGiro, Nombre = g.GiroNombre }).ToList();
+            return View(proveedor);
+        }
+
+        [HttpPost, ActionName("Index")]
+        [ValidateAntiForgeryToken]
+        public ActionResult GuardarProveedor(ProveedorModel proveedor)
+        {
+
+            return View(proveedor);
+
         }
         /// <summary>
         /// Consumir API Método Traer Paises
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetPaisesList() 
+        public JsonResult GetPaisesList()
         {
             var bslogic = new BusinessLogic();
             return Json(bslogic.GetPaisesList(), JsonRequestBehavior.AllowGet);
@@ -64,7 +81,7 @@ namespace EprocurementWeb.Controllers
             return Json(bslogic.GetZonaHorariaList(), JsonRequestBehavior.AllowGet);
 
         }
-      
+
 
 
 

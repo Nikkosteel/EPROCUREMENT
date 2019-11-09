@@ -255,52 +255,57 @@
                         @Html.Label("", "Marque los Aeropuertos que puede atender*", new { @class = "control-label" })
 
 
-                        <ul id="wkslist" class="ulChk"></ul>
+                        <ul id="wkslist" class="ulChk">
+                            @for (int idx = 0; idx < Model.Empresas.Count; idx++)
+                            {
+                                <li>
+                                    @Html.CheckBoxFor(model => model.Empresas[idx].checado)
+                                    @Html.LabelFor(model => model.Empresas[idx].Nombre)
+                                </li>
+                            }
+                        </ul>
 
                         @Html.Label("", "Favor de seleccionar el (los) giro (s) específicos que su empresa esta calificada (Máximo 5)*", new { @class = "control-label " })
 
-                        <div class="form-group col-md-12 sel-p">
-
+                        @for (int idx = 0; idx < 5; idx++)
+                        {
+                            <div class="form-group col-md-12 sel-p">
+                                @Html.Label("Giro1:", new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(x => x.Giros[idx].Id, new SelectList(ViewBag.girosList, "IdCatalogoGiro", "Nombre"))
+                                </div>
+                            </div>
+                        }
+                        @*<div class="form-group col-md-12 sel-p">
                             @Html.Label("giro1", "Giro1:", new { @class = "col-md-2 control-label" })
                             <div class="col-md-10">
                                 @Html.DropDownList("giro1", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
                             </div>
-
                         </div>
                         <div class="form-group col-md-12 sel-p ">
-
                             @Html.Label("giro2", "Giro2:", new { @class = "col-md-2 control-label" })
                             <div class="col-md-10">
                                 @Html.DropDownList("giro2", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
                             </div>
-
                         </div>
                         <div class="form-group col-md-12 sel-p ">
-
                             @Html.Label("giro3", "Giro3:", new { @class = "col-md-2 control-label" })
                             <div class="col-md-10">
                                 @Html.DropDownList("giro3", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
                             </div>
-
                         </div>
                         <div class="form-group col-md-12 sel-p ">
-
                             @Html.Label("giro4", "Giro4:", new { @class = "col-md-2 control-label" })
                             <div class="col-md-10">
                                 @Html.DropDownList("giro4", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
                             </div>
-
                         </div>
                         <div class="form-group col-md-12 sel-p">
-
                             @Html.Label("giro5", "Giro5:", new { @class = "col-md-2 control-label" })
                             <div class="col-md-10">
                                 @Html.DropDownList("giro5", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
                             </div>
-
-                        </div>
-
-
+                        </div>*@
                     </div>
                 </div>
             </div>
@@ -350,51 +355,51 @@
             },
             error: function (data) { }
         });
-        /// Cargar Aeropuertos
-        $.ajax({
-            url: "/Home/GetAeropuertosList",
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            datatype: JSON,
-            success: function (result) {
-                $.each(result, function (key, value) {
-                    var li = $('<li><input  type="checkbox" name="' + key + '" id="' + key + '"/>' +
-                        '<label for="' + key + '"></label></li>');
-                    li.find('label').text(value.GiroNombre);
-                    $('#wkslist').append(li);
-                });
-            },
-            error: function (data) { }
-        });
+        ///// Cargar Aeropuertos
+        //$.ajax({
+        //    url: "/Home/GetAeropuertosList",
+        //    type: "GET",
+        //    contentType: "application/json; charset=utf-8",
+        //    datatype: JSON,
+        //    success: function (result) {
+        //        $.each(result, function (key, value) {
+        //            var li = $('<li><input  type="checkbox" name="' + key + '" id="' + key + '"/>' +
+        //                '<label for="' + key + '"></label></li>');
+        //            li.find('label').text(value.GiroNombre);
+        //            $('#wkslist').append(li);
+        //        });
+        //    },
+        //    error: function (data) { }
+        //});
         /// Cargar Giros
-        $.ajax({
-            url: "/Home/GetGirosList",
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            datatype: JSON,
-            success: function (result) {
-                $(result).each(function () {
-                    $("#giro1").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
-                });
-                $(result).each(function () {
-                    $("#giro2").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
-                });
-                $(result).each(function () {
-                    $("#giro3").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
+        //$.ajax({
+        //    url: "/Home/GetGirosList",
+        //    type: "GET",
+        //    contentType: "application/json; charset=utf-8",
+        //    datatype: JSON,
+        //    success: function (result) {
+        //        $(result).each(function () {
+        //            $("#giro1").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
+        //        });
+        //        $(result).each(function () {
+        //            $("#giro2").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
+        //        });
+        //        $(result).each(function () {
+        //            $("#giro3").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
 
-                });
-                $(result).each(function () {
-                    $("#giro4").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
-                });
-                $(result).each(function () {
-                    $("#giro5").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
-                });
-                //$(result).each(function () {u eres
-                //    $("#paisConctacto").append($("<option></option>").val(this.IdPais).html(this.Nombre));
-                //});
-            },
-            error: function (data) { }
-        });
+        //        });
+        //        $(result).each(function () {
+        //            $("#giro4").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
+        //        });
+        //        $(result).each(function () {
+        //            $("#giro5").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
+        //        });
+        //        //$(result).each(function () {u eres
+        //        //    $("#paisConctacto").append($("<option></option>").val(this.IdPais).html(this.Nombre));
+        //        //});
+        //    },
+        //    error: function (data) { }
+        //});
         /// Cargar Giros
         $.ajax({
             url: "/Home/GetZonaHorariaList",
