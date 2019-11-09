@@ -12,9 +12,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
         [Route("PaisGetList")]
         public PaisResponseDTO GetPaisList()
         {
-            HandlerCatalogo handlerCatalogo = new HandlerCatalogo();
-            var paisResponseDTO = new PaisResponseDTO();
-            paisResponseDTO = handlerCatalogo.GetPaisList();
+            var paisResponseDTO = new HandlerCatalogo().GetPaisList();
 
             return paisResponseDTO;
         }
@@ -24,9 +22,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
         [Route("AeropuertoGetList")]
         public AeropuertoResponseDTO GetAeropuertoList()
         {
-            HandlerCatalogo handlerCatalogo = new HandlerCatalogo();
-            var aeropuertoResponseDTO = new AeropuertoResponseDTO();
-            aeropuertoResponseDTO = handlerCatalogo.GetAeropuertoList();
+            var aeropuertoResponseDTO = new HandlerCatalogo().GetAeropuertoList();
 
             return aeropuertoResponseDTO;
         }
@@ -36,9 +32,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
         [Route("GiroGetList")]
         public GiroResponseDTO GetGiroList()
         {
-            HandlerCatalogo handlerCatalogo = new HandlerCatalogo();
-            var giroResponseDTO = new GiroResponseDTO();
-            giroResponseDTO = handlerCatalogo.GetGiroList();
+            var giroResponseDTO = new HandlerCatalogo().GetGiroList();
 
             return giroResponseDTO;
         }
@@ -48,9 +42,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
         [Route("NacionalidadGetList")]
         public NacionalidadResponseDTO GetNacionalidadList()
         {
-            HandlerCatalogo handlerCatalogo = new HandlerCatalogo();
-            var nacionalidadResponseDTO = new NacionalidadResponseDTO();
-            nacionalidadResponseDTO = handlerCatalogo.GetNacionalidadList();
+            var nacionalidadResponseDTO = new HandlerCatalogo().GetNacionalidadList();
 
             return nacionalidadResponseDTO;
         }
@@ -60,11 +52,49 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
         [Route("ZonaHorariaGetList")]
         public ZonaHorariaResponseDTO GetZonaHorariaList()
         {
-            HandlerCatalogo handlerCatalogo = new HandlerCatalogo();
-            var zonaHorariaResponseDTO = new ZonaHorariaResponseDTO();
-            zonaHorariaResponseDTO = handlerCatalogo.GetZonaHorariaList();
+            var zonaHorariaResponseDTO = new HandlerCatalogo().GetZonaHorariaList();
 
             return zonaHorariaResponseDTO;
+        }
+
+        // GET: api/Estado
+        [HttpGet]
+        [Route("EstadoGetList")]
+        public EstadoResponseDTO GetEstadoList([FromBody]EstadoRequesteDTO request)
+        {
+            var estadoResponse = new HandlerCatalogo().GetEstadoList(request);
+
+            return estadoResponse;
+        }
+
+        // GET: api/Municipio
+        [HttpGet]
+        [Route("MunicipioGetList")]
+        public MunicipioResponseDTO GetMunicipioList([FromBody]MunicipioRequesteDTO request)
+        {
+            var municipioResponse = new HandlerCatalogo().GetMunicipioList(request);
+
+            return municipioResponse;
+        }
+
+        // GET: api/Idioma
+        [HttpGet]
+        [Route("IdiomaGetList")]
+        public IdiomaResponseDTO GetIdiomaList()
+        {
+            var idiomaResponse = new HandlerCatalogo().GetIdiomaList();
+
+            return idiomaResponse;
+        }
+
+        // GET: api/TipoProveedor
+        [HttpGet]
+        [Route("TipoProveedorGetList")]
+        public TipoProveedorResponseDTO GetTipoProveedorList()
+        {
+            var tipoProveedorResponse = new HandlerCatalogo().GetTipoProveedorList();
+
+            return tipoProveedorResponse;
         }
     }
 }

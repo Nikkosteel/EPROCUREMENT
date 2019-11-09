@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EPROCUREMENT.GAPPROVEEDOR.Entities
+namespace EPROCUREMENT.GAPPROVEEDOR
 {
     public class ProveedorDireccionDTO
     {

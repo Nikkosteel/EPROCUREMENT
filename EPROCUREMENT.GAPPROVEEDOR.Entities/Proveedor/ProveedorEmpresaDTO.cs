@@ -13,3 +13,4 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Entities
         public string IdCatalogoAeropuerto { get; set; }
     }
 }
+    

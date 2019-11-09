@@ -224,5 +224,179 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
 
             return tryCatch.SafeExecutor(action);
         }
+
+        /// <summary>
+        /// Obtiene un listado de Estados
+        /// </summary>
+        /// <param name="request">Un objeto de tipo EstadoRequesteDTO</param>
+        /// <returns>Un obejeto de tipo EstadoResponseDTO</returns>
+        public EstadoResponseDTO GetEstadoList(EstadoRequesteDTO request)
+        {
+            EstadoResponseDTO response = new EstadoResponseDTO()
+            {
+                EstadoList = new List<EstadoDTO>()
+            };
+
+            EstadoDTO estadoDTO = null;
+
+            Func<EstadoResponseDTO> action = () =>
+            {
+
+                using (var conexion = new SqlConnection(Helper.Connection()))
+                {
+                    conexion.Open();
+                    var cmd = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_Estado_GETL, conexion)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    cmd.Parameters.Add(new SqlParameter("@idPais", request.idPais));
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            estadoDTO = new EstadoDTO();
+                            estadoDTO.IdEstado = Convert.ToInt32(reader["IdEstado"]);
+                            estadoDTO.Nombre = reader["Nombre"].ToString();
+                            response.EstadoList.Add(estadoDTO);
+                        }
+                    }
+                }
+                response.Success = true;
+                return response;
+            };
+
+            return tryCatch.SafeExecutor(action);
+        }
+
+        /// <summary>
+        /// Obtiene un listado de Estados
+        /// </summary>
+        /// <param name="request">Un objeto de tipo MunicipioRequesteDTO</param>
+        /// <returns>Un obejeto de tipo MunicipioResponseDTO</returns>
+        public MunicipioResponseDTO GetMunicipioList(MunicipioRequesteDTO request)
+        {
+            MunicipioResponseDTO response = new MunicipioResponseDTO()
+            {
+                MunicipioList = new List<MunicipioDTO>()
+            };
+
+            MunicipioDTO municipioDTO = null;
+
+            Func<MunicipioResponseDTO> action = () =>
+            {
+
+                using (var conexion = new SqlConnection(Helper.Connection()))
+                {
+                    conexion.Open();
+                    var cmd = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_Municipio_GETL, conexion)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    cmd.Parameters.Add(new SqlParameter("@idEstado", request.idEstado));
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            municipioDTO = new MunicipioDTO();
+                            municipioDTO.IdMunicipio = Convert.ToInt32(reader["IdMunicipio"]);
+                            municipioDTO.Nombre = reader["Nombre"].ToString();
+                            response.MunicipioList.Add(municipioDTO);
+                        }
+                    }
+                }
+                response.Success = true;
+                return response;
+            };
+
+            return tryCatch.SafeExecutor(action);
+        }
+
+        /// <summary>
+        /// Obtiene un listado de Tipo de Proveedor
+        /// </summary>
+        /// <returns>Un obejeto de tipo TipoProveedorResponseDTO</returns>
+        public TipoProveedorResponseDTO GetTipoProveedorList()
+        {
+            TipoProveedorResponseDTO response = new TipoProveedorResponseDTO()
+            {
+                TipoProveedorList = new List<TipoProveedorDTO>()
+            };
+
+            TipoProveedorDTO tipoProveedorDTO = null;
+
+            Func<TipoProveedorResponseDTO> action = () =>
+            {
+
+                using (var conexion = new SqlConnection(Helper.Connection()))
+                {
+                    conexion.Open();
+                    var cmd = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_TipoProveedor_GETL, conexion)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            tipoProveedorDTO = new TipoProveedorDTO();
+                            tipoProveedorDTO.IdTipoProveedor = Convert.ToInt32(reader["IdTipoProveedor"]);
+                            tipoProveedorDTO.Tipo = reader["Tipo"].ToString();
+                            response.TipoProveedorList.Add(tipoProveedorDTO);
+                        }
+                    }
+                }
+                response.Success = true;
+                return response;
+            };
+
+            return tryCatch.SafeExecutor(action);
+        }
+
+        /// <summary>
+        /// Obtiene un listado de Idiomas
+        /// </summary>
+        /// <returns>Un obejeto de tipo IdiomaResponseDTO</returns>
+        public IdiomaResponseDTO GetIdiomaList()
+        {
+            IdiomaResponseDTO response = new IdiomaResponseDTO()
+            {
+                IdiomaList = new List<IdiomaDTO>()
+            };
+
+            IdiomaDTO idiomaDTO = null;
+
+            Func<IdiomaResponseDTO> action = () =>
+            {
+
+                using (var conexion = new SqlConnection(Helper.Connection()))
+                {
+                    conexion.Open();
+                    var cmd = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_Idioma_GETL, conexion)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            idiomaDTO = new IdiomaDTO();
+                            idiomaDTO.IdIdioma = Convert.ToInt32(reader["IdIdioma"]);
+                            idiomaDTO.NombreIdioma = reader["NombreIdioma"].ToString();
+                            idiomaDTO.Origen = reader["Origen"].ToString();
+                            idiomaDTO.Status = Convert.ToBoolean(reader["Status"]); 
+                            response.IdiomaList.Add(idiomaDTO);
+                        }
+                    }
+                }
+                response.Success = true;
+                return response;
+            };
+
+            return tryCatch.SafeExecutor(action);
+        }
     }
 }
