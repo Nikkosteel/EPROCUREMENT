@@ -106,7 +106,7 @@
                             <div class="form-group col-md-6">
                                 @Html.Label("zonaHoraria", @RHome.TZone, new { @class = "col-md-4 control-label" })
                                 <div class="col-md-8">
-                                    @Html.DropDownListFor(x => x.IdZonaHoraria, new SelectList(ViewBag.ZonaHorariaList, "IdZonaHoraria", "Nombre"), RHome.DefaultSelect)
+                                    @Html.DropDownListFor(x => x.IdZonaHoraria, new SelectList(ViewBag.ZonaHorariaList, "IdZonaHoraria", "Nombre"), RHome.DefaultSelect, new { @class="form-control" })
                                 </div>
                             </div>
                         </div>

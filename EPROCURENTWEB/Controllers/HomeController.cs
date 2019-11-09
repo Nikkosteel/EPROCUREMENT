@@ -22,13 +22,14 @@ namespace EprocurementWeb.Controllers
         public List<NacionalidadDTO> nacionalidadList;
         public List<GiroDTO> giroList;
 
-        public HomeController()
-        {
-            CargarCatalogos();
-        }
-
         public ActionResult Index()
         {
+            BusinessLogic businessLogic = new BusinessLogic();
+            aeropuertoList = businessLogic.GetAeropuertosList();
+            zonaHorariaList = businessLogic.GetZonaHorariaList();
+            nacionalidadList = businessLogic.GetNacionalidadList();
+            giroList = businessLogic.GetGirosList();
+
             ProveedorRegistro proveedor = new ProveedorRegistro { Contacto = null };
             proveedor.AeropuertoList = aeropuertoList;
             ViewBag.GiroList = giroList;
