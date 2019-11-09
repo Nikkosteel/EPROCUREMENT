@@ -39,13 +39,15 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                         CommandType = CommandType.StoredProcedure
                     };
 
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        pais = new PaisDTO();
-                        pais.IdPais = Convert.ToInt32(reader["IdPais"]);
-                        pais.Nombre = reader["Nombre"].ToString();
-                        response.PaisList.Add(pais);
+                        while (reader.Read())
+                        {
+                            pais = new PaisDTO();
+                            pais.IdPais = Convert.ToInt32(reader["IdPais"]);
+                            pais.Nombre = reader["Nombre"].ToString();
+                            response.PaisList.Add(pais);
+                        }
                     }
                 }
                 response.Success = true;
@@ -79,13 +81,15 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                         CommandType = CommandType.StoredProcedure
                     };
 
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        giro = new GiroDTO();
-                        giro.IdGiro = Convert.ToInt32(reader["IdGiro"]);
-                        giro.GiroNombre = reader["GiroNombre"].ToString();
-                        response.GiroList.Add(giro);
+                        while (reader.Read())
+                        {
+                            giro = new GiroDTO();
+                            giro.IdGiro = Convert.ToInt32(reader["IdGiro"]);
+                            giro.GiroNombre = reader["GiroNombre"].ToString();
+                            response.GiroList.Add(giro);
+                        }
                     }
                 }
                 response.Success = true;
@@ -119,13 +123,15 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                         CommandType = CommandType.StoredProcedure
                     };
 
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        aeropuertoDTO = new AeropuertoDTO();
-                        aeropuertoDTO.Id = reader["Id"].ToString();
-                        aeropuertoDTO.Nombre = reader["Nombre"].ToString();
-                        response.AeropuertoList.Add(aeropuertoDTO);
+                        while (reader.Read())
+                        {
+                            aeropuertoDTO = new AeropuertoDTO();
+                            aeropuertoDTO.Id = reader["Id"].ToString();
+                            aeropuertoDTO.Nombre = reader["Nombre"].ToString();
+                            response.AeropuertoList.Add(aeropuertoDTO);
+                        }
                     }
                 }
                 response.Success = true;
@@ -159,13 +165,15 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                         CommandType = CommandType.StoredProcedure
                     };
 
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        nacionalidadDTO = new NacionalidadDTO();
-                        nacionalidadDTO.IdNacionalidad = Convert.ToInt32(reader["IdNacionalidad"]);
-                        nacionalidadDTO.Nombre = reader["NacionalidadNombre"].ToString();
-                        response.NacionalidadList.Add(nacionalidadDTO);
+                        while (reader.Read())
+                        {
+                            nacionalidadDTO = new NacionalidadDTO();
+                            nacionalidadDTO.IdNacionalidad = Convert.ToInt32(reader["IdNacionalidad"]);
+                            nacionalidadDTO.Nombre = reader["NacionalidadNombre"].ToString();
+                            response.NacionalidadList.Add(nacionalidadDTO);
+                        }
                     }
                 }
                 response.Success = true;
@@ -199,13 +207,15 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                         CommandType = CommandType.StoredProcedure
                     };
 
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        zonaHorariaDTO = new ZonaHorariaDTO();
-                        zonaHorariaDTO.IdZonaHoraria = Convert.ToInt32(reader["IdZonaHoraria"]);
-                        zonaHorariaDTO.Nombre = reader["Nombre"].ToString();
-                        response.ZonaHorariaList.Add(zonaHorariaDTO);
+                        while (reader.Read())
+                        {
+                            zonaHorariaDTO = new ZonaHorariaDTO();
+                            zonaHorariaDTO.IdZonaHoraria = Convert.ToInt32(reader["IdZonaHoraria"]);
+                            zonaHorariaDTO.Nombre = reader["Nombre"].ToString();
+                            response.ZonaHorariaList.Add(zonaHorariaDTO);
+                        }
                     }
                 }
                 response.Success = true;

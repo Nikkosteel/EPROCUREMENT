@@ -97,6 +97,42 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_Proveedor_INS].
+        /// </summary>
+        internal static string usp_EPROCUREMENT_Proveedor_INS {
+            get {
+                return ResourceManager.GetString("usp_EPROCUREMENT_Proveedor_INS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_ProveedorContacto_INS].
+        /// </summary>
+        internal static string usp_EPROCUREMENT_ProveedorContacto_INS {
+            get {
+                return ResourceManager.GetString("usp_EPROCUREMENT_ProveedorContacto_INS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_ProveedorEmpresa_INS].
+        /// </summary>
+        internal static string usp_EPROCUREMENT_ProveedorEmpresa_INS {
+            get {
+                return ResourceManager.GetString("usp_EPROCUREMENT_ProveedorEmpresa_INS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_ProveedorGiro_INS].
+        /// </summary>
+        internal static string usp_EPROCUREMENT_ProveedorGiro_INS {
+            get {
+                return ResourceManager.GetString("usp_EPROCUREMENT_ProveedorGiro_INS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_ZonaHoraria_GETL].
         /// </summary>
         internal static string usp_EPROCUREMENT_ZonaHoraria_GETL {
