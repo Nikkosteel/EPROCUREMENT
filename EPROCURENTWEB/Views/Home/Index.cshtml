@@ -1,4 +1,6 @@
-﻿ @{
+﻿@model EprocurementWeb.Models.ProveedorModel
+
+@{
     ViewBag.Title = @RHome.Title;
 }
 
@@ -102,7 +104,7 @@
                                 @Html.Label("zonaHoraria", @RHome.TZone, new { @class = "col-md-4 control-label" })
                                 <div class="col-md-8">
                                     @Html.DropDownList("zonaHoraria", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -306,7 +308,7 @@
         </div>
         <div class="row">
             <div class="col-sm-6">
-                <button class ="btnStyle" type="submit" >Cancelar</button>
+                <button class="btnStyle" type="submit">Cancelar</button>
             </div>
             <div class="col-sm-6">
                 <button class="btnStyle" type="submit">Aceptar</button>
@@ -349,20 +351,21 @@
             error: function (data) { }
         });
         /// Cargar Aeropuertos
-        //$.ajax({
-        //    url: "/Home/GetAeropuertosList",
-        //    type: "GET",
-        //    contentType: "application/json; charset=utf-8",
-        //    datatype: JSON,
-        //    success: function (result) {
-        //          console.log("Traigo los Aeropuertos", result);
-                
-
-                                                           
-                
-        //    },
-        //    error: function (data) { }
-        //});
+        $.ajax({
+            url: "/Home/GetAeropuertosList",
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            datatype: JSON,
+            success: function (result) {
+                $.each(result, function (key, value) {
+                    var li = $('<li><input  type="checkbox" name="' + key + '" id="' + key + '"/>' +
+                        '<label for="' + key + '"></label></li>');
+                    li.find('label').text(value.GiroNombre);
+                    $('#wkslist').append(li);
+                });
+            },
+            error: function (data) { }
+        });
         /// Cargar Giros
         $.ajax({
             url: "/Home/GetGirosList",
@@ -386,15 +389,9 @@
                 $(result).each(function () {
                     $("#giro5").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
                 });
-                //$(result).each(function () {u eres 
+                //$(result).each(function () {u eres
                 //    $("#paisConctacto").append($("<option></option>").val(this.IdPais).html(this.Nombre));
                 //});
-                $.each(result, function (key, value) {
-                    var li = $('<li><input  type="checkbox" name="' + key + '" id="' + key + '"/>' +
-                        '<label for="' + key + '"></label></li>');
-                    li.find('label').text(value.GiroNombre);
-                    $('#wkslist').append(li);
-                });
             },
             error: function (data) { }
         });
@@ -416,7 +413,7 @@
             error: function (data) { }
         });
 
-          /// Cargar Nacionalidad
+        /// Cargar Nacionalidad
         $.ajax({
             url: "/Home/GetNacionalidadList",
             type: "GET",
@@ -426,7 +423,7 @@
                 $(result).each(function () {
                     $("#nacionalidad").append($("<option></option>").val(this.IdPais).html(this.Nombre));
                 });
-               
+
 
             },
             error: function (data) { }

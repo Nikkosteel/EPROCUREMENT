@@ -191,7 +191,6 @@
     <Content Include="Content\Styles\Site.css" />
     <Content Include="Content\Scripts\bootstrap.js" />
     <Content Include="Content\Scripts\bootstrap.min.js" />
-    <Content Include="angular.json" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
@@ -250,11 +249,6 @@
     <Content Include="scripts\umd\popper-utils.min.js" />
     <Content Include="scripts\umd\popper.js" />
     <Content Include="scripts\umd\popper.min.js" />
-    <Content Include="src\app\app.component.html" />
-    <Content Include="src\favicon.ico" />
-    <Content Include="src\index.html" />
-    <Content Include="src\karma.conf.js" />
-    <Content Include="src\styles.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -271,13 +265,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Content\Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_Contact.cshtml" />
-    <Content Include="src\assets\.gitkeep" />
-    <Content Include="src\browserslist" />
-    <Content Include="src\tsconfig.app.json" />
-    <Content Include="src\tsconfig.spec.json" />
-    <Content Include="src\tslint.json" />
-    <Content Include="package.json" />
-    <Content Include="tsconfig.json" />
     <Content Include="scripts\libs\main.js.map" />
     <Content Include="scripts\libs\polyfills.js.map" />
     <Content Include="scripts\libs\runtime.js.map" />
@@ -326,17 +313,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RGlobal.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="scripts\index.d.ts" />
-    <TypeScriptCompile Include="src\app\app.component.spec.ts" />
-    <TypeScriptCompile Include="src\app\app.component.ts" />
-    <TypeScriptCompile Include="src\app\app.module.ts" />
-    <TypeScriptCompile Include="src\environments\environment.prod.ts" />
-    <TypeScriptCompile Include="src\environments\environment.ts" />
-    <TypeScriptCompile Include="src\main.ts" />
-    <TypeScriptCompile Include="src\polyfills.ts" />
-    <TypeScriptCompile Include="src\test.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

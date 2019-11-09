@@ -123,7 +123,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                     while (reader.Read())
                     {
                         aeropuertoDTO = new AeropuertoDTO();
-                        aeropuertoDTO.Id = Convert.ToInt32(reader["Id"]);
+                        aeropuertoDTO.Id = reader["Id"].ToString();
                         aeropuertoDTO.Nombre = reader["Nombre"].ToString();
                         response.AeropuertoList.Add(aeropuertoDTO);
                     }
