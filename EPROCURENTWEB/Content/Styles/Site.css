@@ -23,25 +23,26 @@ textarea {
     max-width: 280px;
 }
 
-.langs{
-    position:fixed;
+.langs {
+    position: fixed;
     /*bottom:20px;*/
-    right:20px;
+    right: 20px;
 }
-.setLang img{
-    padding:2px;
+
+.setLang img {
+    padding: 2px;
 }
 
 .active-lang {
-    border: 2px solid #007eff;
+    border: 2px solid #bcadbe;
 }
 
 .red {
-    color:red;
+    color: red;
 }
 
 .blue {
-    color:blue;
+    color: blue;
 }
 /**Panels**/
 .clickable {
@@ -52,33 +53,39 @@ textarea {
     margin-top: -20px;
     font-size: 15px;
 }
+
 .row {
     padding-bottom: 25px;
 }
-.t-a-c{
-    text-align:center;
+
+.t-a-c {
+    text-align: center;
 }
+
 #wkslist {
     list-style-type: none;
     padding: 0;
 }
 
-.ulChk  {
+.ulChk {
     columns: 2;
     -webkit-columns: 2;
     -moz-columns: 2;
 }
-.sel-p{
-    padding-bottom:30px;
-}
-.b-c-p {
-    border-color:purple;
 
+.sel-p {
+    padding-bottom: 30px;
 }
+
+.b-c-p {
+    border-color: purple;
+}
+
 .b-c-p-h {
-    background-color:purple !important;
-    border-color:purple !important;
+    background-color: purple !important;
+    border-color: purple !important;
 }
+
 .btnStyle {
     width: 100%;
     background-color: purple;
@@ -86,3 +93,83 @@ textarea {
     height: 40px;
     border-radius: 5px;
 }
+
+    .btnStyle:hover {
+        width: 100%;
+        background-color: #af40f6;
+        color: white;
+        height: 40px;
+        border-radius: 5px;
+    }
+
+.chkCondiciones {
+    list-style-type: none;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: 0;
+    background: lightgray;
+    height: 16px;
+    width: 16px;
+    border: 1px solid white;
+}
+
+    input[type="checkbox"]:checked {
+        background: purple;
+    }
+
+    input[type="checkbox"]:hover {
+        filter: brightness(90%);
+    }
+
+    input[type="checkbox"]:disabled {
+        background: #e6e6e6;
+        opacity: 0.6;
+        pointer-events: none;
+    }
+
+    input[type="checkbox"]:after {
+        content: '';
+        position: relative;
+        left: 40%;
+        top: 20%;
+        width: 15%;
+        height: 40%;
+        border: solid #fff;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+        display: none;
+    }
+
+    input[type="checkbox"]:checked:after {
+        display: block;
+    }
+
+    input[type="checkbox"]:disabled:after {
+        border-color: #7b7b7b;
+    }
+
+.a-c {
+    color: black;
+    text-decoration: underline;
+}
+
+.menu-color {
+    background-color: purple;
+    border-color: purple;
+}
+
+
+.menu-idioma {
+    color: white;
+
+}
+
+    .menu-idioma:active {
+        color: #999999;
+    }
+

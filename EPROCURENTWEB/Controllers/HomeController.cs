@@ -18,6 +18,14 @@ namespace EprocurementWeb.Controllers
         {
             return View();
         }
+        
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(FormCollection formCollection, ProveedorModel model)
+        {
+            return View();
+        }
         /// <summary>
         /// Consumir API Método Traer Paises
         /// </summary>
