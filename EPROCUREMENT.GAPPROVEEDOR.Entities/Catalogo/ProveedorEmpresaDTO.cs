@@ -10,7 +10,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Entities
     {
         public int IdProveedorAeropuerto { get; set; }
         public int IdProveedor { get; set; }
-        public int IdCatalogoAeropuerto { get; set; }
+        public string IdCatalogoAeropuerto { get; set; }
         public bool? Checked { get; set; }
     }
 }
