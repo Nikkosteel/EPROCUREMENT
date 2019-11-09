@@ -58,3 +58,31 @@ textarea {
 .t-a-c{
     text-align:center;
 }
+#wkslist {
+    list-style-type: none;
+    padding: 0;
+}
+
+.ulChk  {
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+.sel-p{
+    padding-bottom:30px;
+}
+.b-c-p {
+    border-color:purple;
+
+}
+.b-c-p-h {
+    background-color:purple !important;
+    border-color:purple !important;
+}
+.btnStyle {
+    width: 100%;
+    background-color: purple;
+    color: white;
+    height: 40px;
+    border-radius: 5px;
+}

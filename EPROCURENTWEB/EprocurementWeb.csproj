@@ -145,9 +145,17 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Entities\Comun\ErrorDTO.cs" />
-    <Compile Include="Entities\PaisDTO.cs" />
+    <Compile Include="Entities\DTO\AeropuertoDTO.cs" />
+    <Compile Include="Entities\DTO\GiroDTO.cs" />
+    <Compile Include="Entities\DTO\NacionalidadDTO.cs" />
+    <Compile Include="Entities\Response\NacionalidadResponseDTO.cs" />
+    <Compile Include="Entities\DTO\PaisDTO.cs" />
+    <Compile Include="Entities\DTO\ZonaHorariaDTO.cs" />
+    <Compile Include="Entities\Response\AeropuertoResponseDTO.cs" />
+    <Compile Include="Entities\Response\GiroResponseDTO.cs" />
     <Compile Include="Entities\Response\PaisResponseDTO.cs" />
     <Compile Include="Entities\Response\ResponseBaseDTO.cs" />
+    <Compile Include="Entities\Response\ZonaHorariaResponseDTO.cs" />
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

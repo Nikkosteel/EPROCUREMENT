@@ -22,11 +22,51 @@ namespace EprocurementWeb.Controllers
         /// Consumir API Método Traer Paises
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetPaises() 
+        public JsonResult GetPaisesList() 
         {
             var bslogic = new BusinessLogic();
-            return Json(bslogic.getPaises(), JsonRequestBehavior.AllowGet);
+            return Json(bslogic.GetPaisesList(), JsonRequestBehavior.AllowGet);
         }
+        /// <summary>
+        /// Consumir API Método Traer Aeropuertos
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetAeropuertosList()
+        {
+            var bslogic = new BusinessLogic();
+            return Json(bslogic.GetAeropuertosList(), JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// Consumir API Método Traer Giros
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetGirosList()
+        {
+            var bslogic = new BusinessLogic();
+            return Json(bslogic.GetGirosList(), JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// Consumir API Método Traer Nacionalidad
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetNacionalidadList()
+        {
+            var bslogic = new BusinessLogic();
+            return Json(bslogic.GetNacionalidadList(), JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// Consumir API Método Traer ZonaHoraria
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetZonaHorariaList()
+        {
+            var bslogic = new BusinessLogic();
+            return Json(bslogic.GetZonaHorariaList(), JsonRequestBehavior.AllowGet);
+
+        }
+      
+
+
 
         public ActionResult About()
         {

@@ -1,252 +1,321 @@
-﻿@{
+﻿ @{
     ViewBag.Title = @RHome.Title;
 }
 
 @*<div class="jumbotron text-center">
 
     </div>*@
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 t-a-c">
-            <h1>
-                @RHome.ProvP
-            </h1>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col-sm-12 t-a-c">
-            <h3>
-                @RHome.TitlePP
-            </h3>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Detalles de la compañía
-                    </h3>
-                    <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
-                </div>
-                <div class="panel-body">
-
-                    <div class="row">
-
-                        <div class="form-group col-md-12 ">
-
-                            @Html.Label("empresa", @RHome.NameOfCompany, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.TextBox("empresa", "", new { @class = "form-control" })
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            @Html.Label("razonSocial", @RHome.BName, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.TextBox("razonSocial", "", new { @class = "form-control" })
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            @Html.Label("rfc", @RHome.RFC, new { @class = "col-md-4 control-label" })
-                            <div class="col-md-8">
-                                @Html.TextBox("rfc", "", new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            @Html.Label("nif", @RHome.NIF, new { @class = "col-md-4 control-label" })
-                            <div class="col-md-8">
-                                @Html.TextBox("nif", "", new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            @Html.Label("direccion", @RHome.Address, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.TextBox("direccion", "", new { @class = "form-control" })
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            @Html.Label("codigo", @RHome.ZipCode, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.TextBox("codigo", "", new { @class = "form-control" })
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            @Html.Label("pais", @RHome.Country, new { @class = "col-md-4 control-label" })
-                            <div class="col-md-8">
-                                @Html.DropDownList("pais", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
-                               
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            @Html.Label("zonaHoraria", @RHome.TZone, new { @class = "col-md-4 control-label" })
-                            <div class="col-md-8">
-                                @Html.TextBox("zonaHoraria", "", new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            @Html.Label("telefono", @RHome.Phone, new { @class = "col-md-4 control-label" })
-                            <div class="col-md-8">
-                                @Html.TextBox("telefono", "", new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            @Html.Label("fax", @RHome.Fax, new { @class = "col-md-4 control-label" })
-                            <div class="col-md-8">
-                                @Html.TextBox("fax", "", new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            @Html.Label("paginaWeb", @RHome.WPage, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.TextBox("paginaWeb", "", new { @class = "form-control" })
-                            </div>
-                        </div>
-
-                    </div>
-
-
-
-
-
-
-                </div>
+<form action="/Home/Index" method="post" class="registro-form" id="form_fact" name="form_fact">
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 t-a-c">
+                <h1>
+                    @RHome.ProvP
+                </h1>
             </div>
+
         </div>
+        <div class="row">
+            <div class="col-sm-12 t-a-c">
+                <h3>
+                    @RHome.TitlePP
+                </h3>
+            </div>
 
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Detalles del contacto
-                    </h3>
-                    <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="form-group col-md-12 ">
-
-                            @Html.Label("contacto", @RHome.CName, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.TextBox("contacto", "", new { @class = "form-control" })
-                            </div>
-
-                        </div>
-
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary b-c-p">
+                    <div class="panel-heading b-c-p-h">
+                        <h3 class="panel-title">
+                            Detalles de la compañía
+                        </h3>
+                        <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
                     </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            @Html.Label("cargo", @RHome.Position, new { @class = "col-md-4 control-label" })
-                            <div class="col-md-8">
-                                @Html.TextBox("cargo", "", new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            @Html.Label("nacionalidad", @RHome.Nacionality, new { @class = "col-md-4 control-label" })
-                            <div class="col-md-8">
-                                @Html.TextBox("nacionalidad", "", new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            @Html.Label("teledonoDirecto", @RHome.CPhone, new { @class = "col-md-4 control-label" })
-                            <div class="col-md-8">
-                                @Html.TextBox("teledonoDirecto", "", new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            @Html.Label("movil", @RHome.CellPhone, new { @class = "col-md-4 control-label" })
-                            <div class="col-md-8">
-                                @Html.TextBox("movil", "", new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            @Html.Label("fax", @RHome.Fax, new { @class = "col-md-4 control-label" })
-                            <div class="col-md-8">
-                                @Html.TextBox("fax", "", new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            @Html.Label("emailContacto", @RHome.Email, new { @class = "col-md-4 control-label" })
-                            <div class="col-md-8">
-                                @Html.TextBox("emailContacto", "", new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            @Html.Label("paisContacto", @RHome.Country, new { @class = "col-md-4 control-label" })
-                            <div class="col-md-8">
-                                @Html.DropDownList("paisConctacto", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
-                              
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            @Html.Label("zonaHorariaConctacto", @RHome.TZone, new { @class = "col-md-4 control-label" })
-                            <div class="col-md-8">
-                                @Html.TextBox("zonaHorariaConctacto", "", new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-12 ">
+                    <div class="panel-body">
 
-                            @Html.Label("idioma", @RHome.Language, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.TextBox("idioma", "", new { @class = "form-control" })
+                        <div class="row">
+
+                            <div class="form-group col-md-12 ">
+
+                                @Html.Label("empresa", @RHome.NameOfCompany, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.TextBox("empresa", "", new { @class = "form-control" })
+                                </div>
+
                             </div>
 
                         </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                @Html.Label("razonSocial", @RHome.BName, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.TextBox("razonSocial", "", new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.Label("rfc", @RHome.RFC, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBox("rfc", "", new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label("nif", @RHome.NIF, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBox("nif", "", new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                @Html.Label("direccion", @RHome.Address, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.TextBox("direccion", "", new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                @Html.Label("codigo", @RHome.ZipCode, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.TextBox("codigo", "", new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.Label("pais", @RHome.Country, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.DropDownList("pais", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label("zonaHoraria", @RHome.TZone, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.DropDownList("zonaHoraria", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.Label("telefono", @RHome.Phone, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBox("telefono", "", new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label("fax", @RHome.Fax, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBox("fax", "", new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                @Html.Label("paginaWeb", @RHome.WPage, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.TextBox("paginaWeb", "", new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+
 
                     </div>
                 </div>
             </div>
-        </div>
 
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Especialidades de la empresa
-                    </h3>
-                    <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary b-c-p">
+                    <div class="panel-heading b-c-p-h">
+                        <h3 class="panel-title">
+                            Detalles del contacto
+                        </h3>
+                        <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="form-group col-md-12 ">
+
+                                @Html.Label("contacto", @RHome.CName, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.TextBox("contacto", "", new { @class = "form-control" })
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.Label("cargo", @RHome.Position, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBox("cargo", "", new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label("nacionalidad", @RHome.Nacionality, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.DropDownList("nacionalidad", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.Label("teledonoDirecto", @RHome.CPhone, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBox("teledonoDirecto", "", new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label("movil", @RHome.CellPhone, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBox("movil", "", new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.Label("fax", @RHome.Fax, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBox("fax", "", new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label("emailContacto", @RHome.Email, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBox("emailContacto", "", new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.Label("paisContacto", @RHome.Country, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.DropDownList("paisConctacto", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label("zonaHorariaConctacto", @RHome.TZone, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.DropDownList("zonaHorariaContacto", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12 ">
+
+                                @Html.Label("idioma", @RHome.Language, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.TextBox("idioma", "", new { @class = "form-control" })
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-                <div class="panel-body">Panel content</div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary b-c-p">
+                    <div class="panel-heading b-c-p-h">
+                        <h3 class="panel-title">
+                            Especialidades de la empresa
+                        </h3>
+                        <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+
+                        </div>
+
+                        @Html.Label("", "Marque los Aeropuertos que puede atender*", new { @class = "control-label" })
+
+
+                        <ul id="wkslist" class="ulChk"></ul>
+
+                        @Html.Label("", "Favor de seleccionar el (los) giro (s) específicos que su empresa esta calificada (Máximo 5)*", new { @class = "control-label " })
+
+                        <div class="form-group col-md-12 sel-p">
+
+                            @Html.Label("giro1", "Giro1:", new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("giro1", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+                            </div>
+
+                        </div>
+                        <div class="form-group col-md-12 sel-p ">
+
+                            @Html.Label("giro2", "Giro2:", new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("giro2", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+                            </div>
+
+                        </div>
+                        <div class="form-group col-md-12 sel-p ">
+
+                            @Html.Label("giro3", "Giro3:", new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("giro3", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+                            </div>
+
+                        </div>
+                        <div class="form-group col-md-12 sel-p ">
+
+                            @Html.Label("giro4", "Giro4:", new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("giro4", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+                            </div>
+
+                        </div>
+                        <div class="form-group col-md-12 sel-p">
+
+                            @Html.Label("giro5", "Giro5:", new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("giro5", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <button class ="btnStyle" type="submit" >Cancelar</button>
+            </div>
+            <div class="col-sm-6">
+                <button class="btnStyle" type="submit">Aceptar</button>
             </div>
         </div>
 
     </div>
+</form>
 
-</div>
 
 
 
@@ -261,22 +330,112 @@
 
 <script type="text/javascript">
 
-    $(document).ready(function() {
+    $(document).ready(function () {
+
+        /// Cargar Paises
         $.ajax({
-            url: "/Home/GetPaises",
+            url: "/Home/GetPaisesList",
             type: "GET",
             contentType: "application/json; charset=utf-8",
             datatype: JSON,
-            success: function(result) {
-                $(result).each(function() {
+            success: function (result) {
+                $(result).each(function () {
                     $("#pais").append($("<option></option>").val(this.IdPais).html(this.Nombre));
                 });
-                  $(result).each(function() {
+                $(result).each(function () {
                     $("#paisConctacto").append($("<option></option>").val(this.IdPais).html(this.Nombre));
                 });
             },
-            error: function(data) {}
+            error: function (data) { }
+        });
+        /// Cargar Aeropuertos
+        //$.ajax({
+        //    url: "/Home/GetAeropuertosList",
+        //    type: "GET",
+        //    contentType: "application/json; charset=utf-8",
+        //    datatype: JSON,
+        //    success: function (result) {
+        //          console.log("Traigo los Aeropuertos", result);
+                
+
+                                                           
+                
+        //    },
+        //    error: function (data) { }
+        //});
+        /// Cargar Giros
+        $.ajax({
+            url: "/Home/GetGirosList",
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            datatype: JSON,
+            success: function (result) {
+                $(result).each(function () {
+                    $("#giro1").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
+                });
+                $(result).each(function () {
+                    $("#giro2").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
+                });
+                $(result).each(function () {
+                    $("#giro3").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
+
+                });
+                $(result).each(function () {
+                    $("#giro4").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
+                });
+                $(result).each(function () {
+                    $("#giro5").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
+                });
+                //$(result).each(function () {u eres 
+                //    $("#paisConctacto").append($("<option></option>").val(this.IdPais).html(this.Nombre));
+                //});
+                $.each(result, function (key, value) {
+                    var li = $('<li><input  type="checkbox" name="' + key + '" id="' + key + '"/>' +
+                        '<label for="' + key + '"></label></li>');
+                    li.find('label').text(value.GiroNombre);
+                    $('#wkslist').append(li);
+                });
+            },
+            error: function (data) { }
+        });
+        /// Cargar Giros
+        $.ajax({
+            url: "/Home/GetZonaHorariaList",
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            datatype: JSON,
+            success: function (result) {
+                $(result).each(function () {
+                    $("#zonaHoraria").append($("<option></option>").val(this.IdPais).html(this.Nombre));
+                });
+                $(result).each(function () {
+                    $("#zonaHorariaContacto").append($("<option></option>").val(this.IdPais).html(this.Nombre));
+                });
+
+            },
+            error: function (data) { }
         });
 
+          /// Cargar Nacionalidad
+        $.ajax({
+            url: "/Home/GetNacionalidadList",
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            datatype: JSON,
+            success: function (result) {
+                $(result).each(function () {
+                    $("#nacionalidad").append($("<option></option>").val(this.IdPais).html(this.Nombre));
+                });
+               
+
+            },
+            error: function (data) { }
+        });
+
+
+
+
+
+
     });
-</script>  
+</script>

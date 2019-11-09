@@ -58,13 +58,13 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
         // GET: api/ZonaHoraria
         [HttpGet]
         [Route("ZonaHorariaGetList")]
-        public NacionalidadResponseDTO GetZonaHorariaList()
+        public ZonaHorariaResponseDTO GetZonaHorariaList()
         {
             HandlerCatalogo handlerCatalogo = new HandlerCatalogo();
-            var nacionalidadResponseDTO = new NacionalidadResponseDTO();
-            nacionalidadResponseDTO = handlerCatalogo.GetNacionalidadList();
+            var zonaHorariaResponseDTO = new ZonaHorariaResponseDTO();
+            zonaHorariaResponseDTO = handlerCatalogo.GetZonaHorariaList();
 
-            return nacionalidadResponseDTO;
+            return zonaHorariaResponseDTO;
         }
     }
 }
