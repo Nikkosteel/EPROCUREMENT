@@ -1,4 +1,4 @@
-﻿@model EPROCUREMENT.GAPPROVEEDOR.Entities.ProveedorDTO
+﻿@model EprocurementWeb.Models.ProveedorRegistro
 
 @{
     ViewBag.Title = @RHome.Title;
@@ -43,7 +43,8 @@
 
                                 @Html.Label("empresa", @RHome.NameOfCompany, new { @class = "col-md-2 control-label" })
                                 <div class="col-md-10">
-                                    @Html.TextBox("empresa", "", new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => model.NombreEmpresa, new { @class = "form-control" })
+                                    @*@Html.TextBox("empresa", "", new { @class = "form-control" })*@
                                 </div>
 
                             </div>
@@ -54,7 +55,8 @@
                             <div class="form-group col-md-12">
                                 @Html.Label("razonSocial", @RHome.BName, new { @class = "col-md-2 control-label" })
                                 <div class="col-md-10">
-                                    @Html.TextBox("razonSocial", "", new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => model.RazonSocial, new { @class = "form-control" })
+                                    @*@Html.TextBox("razonSocial", "", new { @class = "form-control" })*@
                                 </div>
                             </div>
 
@@ -64,47 +66,47 @@
                             <div class="form-group col-md-6">
                                 @Html.Label("rfc", @RHome.RFC, new { @class = "col-md-4 control-label" })
                                 <div class="col-md-8">
-                                    @Html.TextBox("rfc", "", new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => model.RFC, new { @class = "form-control" })
+                                    @*@Html.TextBox("rfc", "", new { @class = "form-control" })*@
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
                                 @Html.Label("nif", @RHome.NIF, new { @class = "col-md-4 control-label" })
                                 <div class="col-md-8">
-                                    @Html.TextBox("nif", "", new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => model.NIF, new { @class = "form-control" })
+                                    @*@Html.TextBox("nif", "", new { @class = "form-control" })*@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                @Html.Label("direccion", @RHome.Address, new { @class = "col-md-2 control-label" })
-                                <div class="col-md-10">
-                                    @Html.TextBox("direccion", "", new { @class = "form-control" })
+                        @*<div class="row">
+                                <div class="form-group col-md-12">
+                                    @Html.Label("direccion", @RHome.Address, new { @class = "col-md-2 control-label" })
+                                    <div class="col-md-10">
+                                        @Html.TextBox("direccion", "", new { @class = "form-control" })
+                                    </div>
                                 </div>
-                            </div>
 
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                @Html.Label("codigo", @RHome.ZipCode, new { @class = "col-md-2 control-label" })
-                                <div class="col-md-10">
-                                    @Html.TextBox("codigo", "", new { @class = "form-control" })
+                            </div>*@
+                        @*<div class="row">
+                                <div class="form-group col-md-12">
+                                    @Html.Label("codigo", @RHome.ZipCode, new { @class = "col-md-2 control-label" })
+                                    <div class="col-md-10">
+                                        @Html.TextBox("codigo", "", new { @class = "form-control" })
+                                    </div>
                                 </div>
-                            </div>
-
-                        </div>
+                            </div>*@
                         <div class="row">
-                            <div class="form-group col-md-6">
-                                @Html.Label("pais", @RHome.Country, new { @class = "col-md-4 control-label" })
-                                <div class="col-md-8">
-                                    @Html.DropDownList("pais", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+                            @*<div class="form-group col-md-6">
+                                    @Html.Label("pais", @RHome.Country, new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("pais", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
 
-                                </div>
-                            </div>
+                                    </div>
+                                </div>*@
                             <div class="form-group col-md-6">
                                 @Html.Label("zonaHoraria", @RHome.TZone, new { @class = "col-md-4 control-label" })
                                 <div class="col-md-8">
-                                    @Html.DropDownList("zonaHoraria", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
-
+                                    @Html.DropDownListFor(x => x.IdZonaHoraria, new SelectList(ViewBag.ZonaHorariaList, "IdZonaHoraria", "Nombre"), RHome.DefaultSelect)
                                 </div>
                             </div>
                         </div>
@@ -112,13 +114,13 @@
                             <div class="form-group col-md-6">
                                 @Html.Label("telefono", @RHome.Phone, new { @class = "col-md-4 control-label" })
                                 <div class="col-md-8">
-                                    @Html.TextBox("telefono", "", new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => model.ProvTelefono, new { @class = "form-control" })
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
                                 @Html.Label("fax", @RHome.Fax, new { @class = "col-md-4 control-label" })
                                 <div class="col-md-8">
-                                    @Html.TextBox("fax", "", new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => model.ProvFax, new { @class = "form-control" })
                                 </div>
                             </div>
                         </div>
@@ -126,21 +128,13 @@
                             <div class="form-group col-md-12">
                                 @Html.Label("paginaWeb", @RHome.WPage, new { @class = "col-md-2 control-label" })
                                 <div class="col-md-10">
-                                    @Html.TextBox("paginaWeb", "", new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => model.PaginaWeb, new { @class = "form-control" })
                                 </div>
                             </div>
-
                         </div>
-
-
-
-
-
-
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -157,7 +151,8 @@
 
                                 @Html.Label("contacto", @RHome.CName, new { @class = "col-md-2 control-label" })
                                 <div class="col-md-10">
-                                    @Html.TextBox("contacto", "", new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => model.Contacto.NombreContacto, new { @class = "form-control" })
+                                    @*@Html.TextBox("contacto", "", new { @class = "form-control" })*@
                                 </div>
 
                             </div>
@@ -256,11 +251,13 @@
 
 
                         <ul id="wkslist" class="ulChk">
-                            @for (int idx = 0; idx < Model.Empresas.Count; idx++)
+                            @for (int idx = 0; idx < Model.AeropuertoList.Count; idx++)
                             {
+                                @Html.HiddenFor(model => model.AeropuertoList[idx].Id)
+                                @Html.HiddenFor(model => model.AeropuertoList[idx].Nombre)
                                 <li>
-                                    @Html.CheckBoxFor(model => model.Empresas[idx].checado)
-                                    @Html.LabelFor(model => model.Empresas[idx].Nombre)
+                                    @Html.CheckBoxFor(model => model.AeropuertoList[idx].Checado)
+                                    @Html.DisplayTextFor(model => model.AeropuertoList[idx].Nombre)
                                 </li>
                             }
                         </ul>
@@ -269,43 +266,44 @@
 
                         @for (int idx = 0; idx < 5; idx++)
                         {
+                            @Html.HiddenFor(model => model.GiroList[idx].GiroNombre)
                             <div class="form-group col-md-12 sel-p">
                                 @Html.Label("Giro1:", new { @class = "col-md-2 control-label" })
                                 <div class="col-md-10">
-                                    @Html.DropDownListFor(x => x.Giros[idx].Id, new SelectList(ViewBag.girosList, "IdCatalogoGiro", "Nombre"))
+                                    @Html.DropDownListFor(x => x.GiroList[idx].IdGiro, new SelectList(ViewBag.GiroList, "IdGiro", "GiroNombre"), RHome.DefaultSelect)
                                 </div>
                             </div>
                         }
                         @*<div class="form-group col-md-12 sel-p">
-                            @Html.Label("giro1", "Giro1:", new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.DropDownList("giro1", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+                                @Html.Label("giro1", "Giro1:", new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("giro1", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-12 sel-p ">
-                            @Html.Label("giro2", "Giro2:", new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.DropDownList("giro2", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+                            <div class="form-group col-md-12 sel-p ">
+                                @Html.Label("giro2", "Giro2:", new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("giro2", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-12 sel-p ">
-                            @Html.Label("giro3", "Giro3:", new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.DropDownList("giro3", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+                            <div class="form-group col-md-12 sel-p ">
+                                @Html.Label("giro3", "Giro3:", new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("giro3", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-12 sel-p ">
-                            @Html.Label("giro4", "Giro4:", new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.DropDownList("giro4", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+                            <div class="form-group col-md-12 sel-p ">
+                                @Html.Label("giro4", "Giro4:", new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("giro4", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-12 sel-p">
-                            @Html.Label("giro5", "Giro5:", new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.DropDownList("giro5", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
-                            </div>
-                        </div>*@
+                            <div class="form-group col-md-12 sel-p">
+                                @Html.Label("giro5", "Giro5:", new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("giro5", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+                                </div>
+                            </div>*@
                     </div>
                 </div>
             </div>

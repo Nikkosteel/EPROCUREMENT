@@ -151,6 +151,7 @@
     <Compile Include="Helpers\GlobalHelper.cs" />
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\PaisModel.cs" />
+    <Compile Include="Models\ProveedorRegistro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -268,6 +269,7 @@
     <Content Include="scripts\popper.js.map" />
     <Content Include="scripts\popper-utils.min.js.map" />
     <Content Include="scripts\popper-utils.js.map" />
+    <Content Include="Views\Home\Editar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

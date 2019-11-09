@@ -11,29 +11,49 @@ using System.Web.Script.Serialization;
 using EprocurementWeb.Business;
 using System.Threading.Tasks;
 using EPROCUREMENT.GAPPROVEEDOR.Entities;
+using EprocurementWeb.Models;
 
 namespace EprocurementWeb.Controllers
 {
     public class HomeController : BaseController
     {
+        public List<AeropuertoDTO> aeropuertoList;
+        public List<ZonaHorariaDTO> zonaHorariaList;
+        public List<NacionalidadDTO> nacionalidadList;
+        public List<GiroDTO> giroList;
+
+        public HomeController()
+        {
+            CargarCatalogos();
+        }
+
         public ActionResult Index()
         {
-            List<GiroDTO> giroList = new List<GiroDTO>();
-            ProveedorDTO proveedor = new ProveedorDTO { Contacto = null };
-            var bslogic = new BusinessLogic();
-            proveedor.EmpresaList = bslogic.GetAeropuertosList().Select(a => new ProveedorEmpresaDTO { IdCatalogoAeropuerto = a.Id,  = a.Nombre }).ToList();
-            ViewBag.girosList = bslogic.GetGirosList().Select(g => new GiroDTO { IdGiro = g.IdGiro, GiroNombre = g.GiroNombre }).ToList();
+            ProveedorRegistro proveedor = new ProveedorRegistro { Contacto = null };
+            proveedor.AeropuertoList = aeropuertoList;
+            ViewBag.GiroList = giroList;
+            ViewBag.ZonaHorariaList = zonaHorariaList;
+            ViewBag.NacionalidadList = nacionalidadList;
             return View(proveedor);
         }
 
         [HttpPost, ActionName("Index")]
         [ValidateAntiForgeryToken]
-        public ActionResult GuardarProveedor(ProveedorDTO proveedor)
+        public ActionResult GuardarProveedor(ProveedorRegistro proveedor)
         {
-
             return View(proveedor);
 
         }
+
+        private void CargarCatalogos()
+        {
+            BusinessLogic businessLogic = new BusinessLogic();
+            aeropuertoList = businessLogic.GetAeropuertosList();
+            zonaHorariaList = businessLogic.GetZonaHorariaList();
+            nacionalidadList = businessLogic.GetNacionalidadList();
+            giroList = businessLogic.GetGirosList();
+        }
+
         /// <summary>
         /// Consumir API Método Traer Paises
         /// </summary>
