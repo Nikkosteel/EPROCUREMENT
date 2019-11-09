@@ -8,7 +8,7 @@
         /// <summary>
         /// Representa el Id del aeropuerto
         /// </summary>
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Representa El nombre del aeropuerto
