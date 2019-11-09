@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Web.Script.Serialization;
 using EprocurementWeb.Business;
 using System.Threading.Tasks;
-
+using EPROCUREMENT.GAPPROVEEDOR.Entities;
 
 namespace EprocurementWeb.Controllers
 {
@@ -18,18 +18,17 @@ namespace EprocurementWeb.Controllers
     {
         public ActionResult Index()
         {
-            List<GiroModel> giroList = new List<GiroModel>();
-
-            ProveedorModel proveedor = new ProveedorModel { Contacto = null };
+            List<GiroDTO> giroList = new List<GiroDTO>();
+            ProveedorDTO proveedor = new ProveedorDTO { Contacto = null };
             var bslogic = new BusinessLogic();
-            proveedor.Empresas = bslogic.GetAeropuertosList().Select(a => new EmpresaModel { IdCatalogoAeropuerto = a.Id, Nombre = a.Nombre }).ToList();
-            ViewBag.girosList = bslogic.GetGirosList().Select(g => new GiroModel { IdCatalogoGiro = g.IdGiro, Nombre = g.GiroNombre }).ToList();
+            proveedor.EmpresaList = bslogic.GetAeropuertosList().Select(a => new ProveedorEmpresaDTO { IdCatalogoAeropuerto = a.Id,  = a.Nombre }).ToList();
+            ViewBag.girosList = bslogic.GetGirosList().Select(g => new GiroDTO { IdGiro = g.IdGiro, GiroNombre = g.GiroNombre }).ToList();
             return View(proveedor);
         }
 
         [HttpPost, ActionName("Index")]
         [ValidateAntiForgeryToken]
-        public ActionResult GuardarProveedor(ProveedorModel proveedor)
+        public ActionResult GuardarProveedor(ProveedorDTO proveedor)
         {
 
             return View(proveedor);

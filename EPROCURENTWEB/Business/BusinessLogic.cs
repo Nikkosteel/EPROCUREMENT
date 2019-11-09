@@ -5,10 +5,8 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Script.Serialization;
 using EprocurementWeb.Models;
-using EprocurementWeb.Entities.Response;
-
-using EprocurementWeb.Entities.DTO;
 using System.Configuration;
+using EPROCUREMENT.GAPPROVEEDOR.Entities;
 
 namespace EprocurementWeb.Business
 {
@@ -21,10 +19,8 @@ namespace EprocurementWeb.Business
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(urlApi + "api/Catalogo/");
-                //HTTP GET
                 var responseTask = client.GetAsync("PaisGetList");
                 responseTask.Wait();
-
                 var result = responseTask.Result;
                 if (result.IsSuccessStatusCode)
                 {
@@ -34,7 +30,6 @@ namespace EprocurementWeb.Business
                     var response = JSserializer.Deserialize<PaisResponseDTO>(readTask.Result);
                     lstPaises = response.PaisList;
                 }
-                
             }
             return lstPaises;
         }
@@ -44,10 +39,8 @@ namespace EprocurementWeb.Business
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(urlApi + "api/Catalogo/");
-                //HTTP GET
                 var responseTask = client.GetAsync("AeropuertoGetList");
                 responseTask.Wait();
-
                 var result = responseTask.Result;
                 if (result.IsSuccessStatusCode)
                 {
@@ -66,10 +59,8 @@ namespace EprocurementWeb.Business
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(urlApi + "api/Catalogo/");
-                //HTTP GET
                 var responseTask = client.GetAsync("GiroGetList");
                 responseTask.Wait();
-
                 var result = responseTask.Result;
                 if (result.IsSuccessStatusCode)
                 {
@@ -88,7 +79,6 @@ namespace EprocurementWeb.Business
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(urlApi + "api/Catalogo/");
-                //HTTP GET
                 var responseTask = client.GetAsync("NacionalidadGetList");
                 responseTask.Wait();
 
@@ -111,7 +101,6 @@ namespace EprocurementWeb.Business
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(urlApi + "api/Catalogo/");
-                //HTTP GET
                 var responseTask = client.GetAsync("ZonaHorariaGetList");
                 responseTask.Wait();
 
