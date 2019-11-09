@@ -21,6 +21,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Entities
         public string AXNumeroProveedor { get; set; }
         public DateTime? AXFechaRegistro { get; set; }
         public int IdNacionalidad { get; set; }
+        public ProveedorDireccionDTO Direccion { get; set; }
         public List<ProveedorEmpresaDTO> EmpresaList { get; set; }
         public ProveedorContactoDTO Contacto { get; set; }
         public List<GiroDTO> GiroList { get; set; }

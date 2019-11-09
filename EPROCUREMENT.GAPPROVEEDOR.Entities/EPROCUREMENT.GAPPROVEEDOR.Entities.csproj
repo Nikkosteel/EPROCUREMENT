@@ -50,6 +50,7 @@
     <Compile Include="Catalogo\ZonaHorariaDTO.cs" />
     <Compile Include="Comun\ErrorDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proveedor\ProveedorDireccionDTO.cs" />
     <Compile Include="Proveedor\ProveedorDTO.cs" />
     <Compile Include="Request\ProveedorRequesteDTO.cs" />
     <Compile Include="Request\RequestBaseDTO.cs" />
