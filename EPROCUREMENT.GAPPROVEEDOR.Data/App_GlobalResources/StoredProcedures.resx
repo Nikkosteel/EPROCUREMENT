@@ -126,6 +126,9 @@
   <data name="usp_EPROCUREMENT_Estado_GETL" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_Estado_GETL]</value>
   </data>
+  <data name="usp_EPROCUREMENT_EstatusProveedor_INS" xml:space="preserve">
+    <value>[dbo].[usp_EPROCUREMENT_EstatusProveedor_INS]</value>
+  </data>
   <data name="usp_EPROCUREMENT_Idioma_GETL" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_Idioma_GETL]</value>
   </data>
@@ -138,17 +141,32 @@
   <data name="usp_EPROCUREMENT_Pais_GETL" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_Pais_GETL]</value>
   </data>
+  <data name="usp_EPROCUREMENT_ProveedorContacto_GETIByIdProveedor" xml:space="preserve">
+    <value>[dbo].[usp_EPROCUREMENT_ProveedorContacto_GETIByIdProveedor]</value>
+  </data>
   <data name="usp_EPROCUREMENT_ProveedorContacto_INS" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_ProveedorContacto_INS]</value>
+  </data>
+  <data name="usp_EPROCUREMENT_ProveedorDireccion_GETIByIdProveedor" xml:space="preserve">
+    <value>[dbo].[usp_EPROCUREMENT_ProveedorDireccion_GETIByIdProveedor]</value>
   </data>
   <data name="usp_EPROCUREMENT_ProveedorDireccion_INS" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_ProveedorDireccion_INS]</value>
   </data>
+  <data name="usp_EPROCUREMENT_ProveedorEmpresa_GETLByIdProveedor" xml:space="preserve">
+    <value>[dbo].[usp_EPROCUREMENT_ProveedorEmpresa_GETLByIdProveedor]</value>
+  </data>
   <data name="usp_EPROCUREMENT_ProveedorEmpresa_INS" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_ProveedorEmpresa_INS]</value>
   </data>
+  <data name="usp_EPROCUREMENT_ProveedorGiro_GETLByIdProveedor" xml:space="preserve">
+    <value>[dbo].[usp_EPROCUREMENT_ProveedorGiro_GETLByIdProveedor]</value>
+  </data>
   <data name="usp_EPROCUREMENT_ProveedorGiro_INS" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_ProveedorGiro_INS]</value>
+  </data>
+  <data name="usp_EPROCUREMENT_Proveedor_GETIById" xml:space="preserve">
+    <value>[dbo].[usp_EPROCUREMENT_Proveedor_GETIById]</value>
   </data>
   <data name="usp_EPROCUREMENT_Proveedor_GETLByFilter" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_Proveedor_GETLByFilter]</value>

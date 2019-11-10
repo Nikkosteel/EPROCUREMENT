@@ -97,6 +97,15 @@ namespace EprocurementWeb.Content.Texts {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a AX Provider Number.
+        /// </summary>
+        public static string AXProviderNum {
+            get {
+                return ResourceManager.GetString("AXProviderNum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Business name.
         /// </summary>
         public static string BName {
@@ -120,6 +129,15 @@ namespace EprocurementWeb.Content.Texts {
         public static string CellPhone {
             get {
                 return ResourceManager.GetString("CellPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a City.
+        /// </summary>
+        public static string City {
+            get {
+                return ResourceManager.GetString("City", resourceCulture);
             }
         }
         
@@ -331,6 +349,15 @@ namespace EprocurementWeb.Content.Texts {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Provider Type.
+        /// </summary>
+        public static string ProvType {
+            get {
+                return ResourceManager.GetString("ProvType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a RFC.
         /// </summary>
         public static string RFC {
@@ -340,11 +367,29 @@ namespace EprocurementWeb.Content.Texts {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a State.
+        /// </summary>
+        public static string State {
+            get {
+                return ResourceManager.GetString("State", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a ASP.NET is a free web framework for building great Multi-Language MVC Web sites and Web applications using HTML, CSS and JavaScript..
         /// </summary>
         public static string Subtitle {
             get {
                 return ResourceManager.GetString("Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Suburb.
+        /// </summary>
+        public static string Suburb {
+            get {
+                return ResourceManager.GetString("Suburb", resourceCulture);
             }
         }
         

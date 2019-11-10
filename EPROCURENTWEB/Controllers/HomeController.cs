@@ -47,8 +47,24 @@ namespace EprocurementWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult GuardarProveedor(ProveedorRegistro proveedor)
         {
+            proveedor.Direccion.DireccionValidada = true;
+            CargarCatalogos();
+            ViewBag.GiroList = giroList;
+            ViewBag.ZonaHorariaList = zonaHorariaList;
+            ViewBag.NacionalidadList = nacionalidadList;
+            ViewBag.PaisList = paisList;
+            ViewBag.IdiomaList = idiomaList;
+            ViewBag.EstadoList = estadoList;
+            ViewBag.MunicipioList = municipioList;
+            ViewBag.TipoProveedorList = tipoProveedorList;
+            proveedor.EmpresaList = proveedor.AeropuertoList.Where(a => a.Checado).Select(a => new ProveedorEmpresaDTO { IdCatalogoAeropuerto = a.Id }).ToList();
+            BusinessLogic businessLogic = new BusinessLogic();
+            ProveedorResponseDTO response = businessLogic.PostProveedor(proveedor);
+            if (response.Success)
+            {
+                return RedirectToAction("Contact");
+            }
             return View(proveedor);
-
         }
 
         private void CargarCatalogos()
@@ -61,59 +77,23 @@ namespace EprocurementWeb.Controllers
             paisList = businessLogic.GetPaisesList();
             idiomaList = businessLogic.GetIdiomaList();
             tipoProveedorList = businessLogic.GetTipoProveedorList();
-            //estadoList = businessLogic.GetEstadoList();
-            //municipioList = businessLogic.GetMunicipioList();
         }
 
-        /// <summary>
-        /// Consumir API Método Traer Paises
-        /// </summary>
-        /// <returns></returns>
-        public JsonResult GetPaisesList()
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult GetEstados(int idPais)
         {
-            var bslogic = new BusinessLogic();
-            return Json(bslogic.GetPaisesList(), JsonRequestBehavior.AllowGet);
-        }
-        /// <summary>
-        /// Consumir API Método Traer Aeropuertos
-        /// </summary>
-        /// <returns></returns>
-        public JsonResult GetAeropuertosList()
-        {
-            var bslogic = new BusinessLogic();
-            return Json(bslogic.GetAeropuertosList(), JsonRequestBehavior.AllowGet);
-        }
-        /// <summary>
-        /// Consumir API Método Traer Giros
-        /// </summary>
-        /// <returns></returns>
-        public JsonResult GetGirosList()
-        {
-            var bslogic = new BusinessLogic();
-            return Json(bslogic.GetGirosList(), JsonRequestBehavior.AllowGet);
-        }
-        /// <summary>
-        /// Consumir API Método Traer Nacionalidad
-        /// </summary>
-        /// <returns></returns>
-        public JsonResult GetNacionalidadList()
-        {
-            var bslogic = new BusinessLogic();
-            return Json(bslogic.GetNacionalidadList(), JsonRequestBehavior.AllowGet);
-        }
-        /// <summary>
-        /// Consumir API Método Traer ZonaHoraria
-        /// </summary>
-        /// <returns></returns>
-        public JsonResult GetZonaHorariaList()
-        {
-            var bslogic = new BusinessLogic();
-            return Json(bslogic.GetZonaHorariaList(), JsonRequestBehavior.AllowGet);
-
+            BusinessLogic businessLogic = new BusinessLogic();
+            estadoList = businessLogic.GetEstadoList(idPais);
+            return Json(estadoList, JsonRequestBehavior.AllowGet);
         }
 
-
-
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult GetMunicipios(int idEstado)
+        {
+            BusinessLogic businessLogic = new BusinessLogic();
+            municipioList = businessLogic.GetMunicipioList(idEstado);
+            return Json(municipioList, JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult About()
         {

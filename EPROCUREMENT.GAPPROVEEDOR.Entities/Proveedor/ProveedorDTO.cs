@@ -24,6 +24,6 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Entities
         public ProveedorDireccionDTO Direccion { get; set; }
         public List<ProveedorEmpresaDTO> EmpresaList { get; set; }
         public ProveedorContactoDTO Contacto { get; set; }
-        public List<GiroDTO> GiroList { get; set; }
+        public List<ProveedorGiroDTO> ProveedorGiroList { get; set; }
     }
 }
