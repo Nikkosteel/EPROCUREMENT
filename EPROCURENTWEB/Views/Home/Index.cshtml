@@ -59,31 +59,6 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
-                                @Html.Label("direccion", @RHome.Address, new { @class = "col-md-4 control-label" })
-                                <div class="col-md-8">
-                                    @Html.TextBoxFor(model => model.Direccion.Calle, new { @class = "form-control" })
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                @Html.Label("codigo", @RHome.ZipCode, new { @class = "col-md-4 control-label" })
-                                <div class="col-md-8">
-                                    @Html.TextBoxFor(model => model.Direccion.CodigoPostal, new { @class = "form-control" })
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                @Html.Label("pais", @RHome.Country, new { @class = "col-md-4 control-label" })
-                                <div class="col-md-8">
-                                    @Html.DropDownListFor(model => model.Direccion.IdPais, new SelectList(ViewBag.PaisList, "IdPais", "Nombre"), RHome.DefaultSelect, new { @class = "form-control" })
-
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                @Html.Label("zonaHoraria", @RHome.TZone, new { @class = "col-md-4 control-label" })
-                                <div class="col-md-8">
-                                    @Html.DropDownListFor(x => x.IdZonaHoraria, new SelectList(ViewBag.ZonaHorariaList, "IdZonaHoraria", "Nombre"), RHome.DefaultSelect, new { @class = "form-control" })
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6">
                                 @Html.Label("telefono", @RHome.Phone, new { @class = "col-md-4 control-label" })
                                 <div class="col-md-8">
                                     @Html.TextBoxFor(model => model.ProvTelefono, new { @class = "form-control" })
@@ -99,6 +74,66 @@
                                 @Html.Label("paginaWeb", @RHome.WPage, new { @class = "col-md-4 control-label" })
                                 <div class="col-md-8">
                                     @Html.TextBoxFor(model => model.PaginaWeb, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label("zonaHoraria", @RHome.TZone, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(model => model.IdZonaHoraria, new SelectList(ViewBag.ZonaHorariaList, "IdZonaHoraria", "Nombre"), RHome.DefaultSelect, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label("tipoProveedor", @RHome.ProvType, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(model => model.IdTipoProveedor, new SelectList(ViewBag.TipoProveedorList, "IdTipoProveedor", "Tipo"), RHome.DefaultSelect, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label("axNumeroProveedor", @RHome.AXProviderNum, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(model => model.AXNumeroProveedor, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label("nacionalidad", @RHome.Nacionality, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(model => model.IdNacionalidad, new SelectList(ViewBag.NacionalidadList, "IdNacionalidad", "Nombre"), RHome.DefaultSelect, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label("codigo", @RHome.ZipCode, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(model => model.Direccion.CodigoPostal, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label("colonia", @RHome.Suburb, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(model => model.Direccion.Colonia, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label("direccion", @RHome.Address, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(model => model.Direccion.Calle, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label("pais", @RHome.Country, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(model => model.Direccion.IdPais, new SelectList(ViewBag.PaisList, "IdPais", "Nombre"), RHome.DefaultSelect, new { @class = "form-control", @id = "PaisProveedor" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label("estado", @RHome.State, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(model => model.Direccion.IdEstado, new SelectList(Enumerable.Empty<EPROCUREMENT.GAPPROVEEDOR.Entities.EstadoDTO>(), "IdEstado", "Nombre"), RHome.DefaultSelect, new { @class = "form-control", @id = "EstadoProveedor" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label("municipio", @RHome.City, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(model => model.Direccion.IdMunicipio, new SelectList(Enumerable.Empty<EPROCUREMENT.GAPPROVEEDOR.Entities.MunicipioDTO>(), "idMunicipio", "Nombre"), RHome.DefaultSelect, new { @class = "form-control", @id = "MunicipioProveedor" })
                                 </div>
                             </div>
                         </div>
@@ -332,7 +367,49 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
+        $("#PaisProveedor").change(function () {
+            var dID = $('#PaisProveedor option:selected').val();
+            $.getJSON("/Home/GetEstados", { idPais: dID },
+                function (data) {
+                    var select = $("#EstadoProveedor");
+                    var selectMunicipio = $("#MunicipioProveedor");
+                    select.empty();
+                    selectMunicipio.empty();
+                    select.append($('<option/>', {
+                        value: 0,
+                        text: "..."
+                    }));
+                    selectMunicipio.append($('<option/>', {
+                        value: 0,
+                        text: "..."
+                    }));
+                    $.each(data, function (index, itemData) {
+                        select.append($('<option/>', {
+                            value: itemData.IdEstado,
+                            text: itemData.Nombre
+                        }));
+                    });
+                });
+        });
 
+        $("#EstadoProveedor").change(function () {
+            var dID = $('#EstadoProveedor option:selected').val();
+            $.getJSON("/Home/GetMunicipios", { idEstado: dID },
+                function (data) {
+                    var select = $("#MunicipioProveedor");
+                    select.empty();
+                    select.append($('<option/>', {
+                        value: 0,
+                        text: "..."
+                    }));
+                    $.each(data, function (index, itemData) {
+                        select.append($('<option/>', {
+                            value: itemData.IdMunicipio,
+                            text: itemData.Nombre
+                        }));
+                    });
+                });
+        });
         /// Cargar Paises
         //$.ajax({
         //    url: "/Home/GetPaisesList",

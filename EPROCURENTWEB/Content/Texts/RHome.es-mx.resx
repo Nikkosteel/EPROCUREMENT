@@ -231,4 +231,19 @@
   <data name="DefaultSelect" xml:space="preserve">
     <value>Seleccione una opción</value>
   </data>
+  <data name="City" xml:space="preserve">
+    <value>Municipio</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="ProvType" xml:space="preserve">
+    <value>Tipo de proveedor</value>
+  </data>
+  <data name="AXProviderNum" xml:space="preserve">
+    <value>Número de proveedor AX</value>
+  </data>
+  <data name="Suburb" xml:space="preserve">
+    <value>Colonia</value>
+  </data>
 </root>
