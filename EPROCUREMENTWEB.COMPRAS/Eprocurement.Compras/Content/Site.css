@@ -1,6 +1,6 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    /*padding-top: 50px;
+    padding-bottom: 20px;*/
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +21,26 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+.bg-purple {
+    background-color: purple !important;
+    color: white;
+}
+.btn-purple {
+    color: #fff;
+    background-color: #800080;
+    border-color: #eaeef2;
+}
+.btn-purple:hover {
+    color: #fff;
+    background-color: #d194d16e;
+    border-color: #eaeef2;
+}
+.btn-purple:not(:disabled):not(.disabled):active, .btn-purple:not(:disabled):not(.disabled).active, .show > .btn-purple.dropdown-toggle {
+    color: #fff;
+    background-color: #d194d16e;
+    border-color: #eaeef2;
+}
+.icon-color {
+ color:purple;
 }

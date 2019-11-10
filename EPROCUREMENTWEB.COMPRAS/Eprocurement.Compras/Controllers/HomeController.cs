@@ -36,7 +36,7 @@ namespace Eprocurement.Compras.Controllers
             return View();
         }
 
-        public JsonResult GetProveedorEstatusList(int idTipoProveedor, int idGiroProveedor, string idAeropuerto, string nombreEmpresa, string rfc, string email)
+        public JsonResult GetProveedorEstatusList(int? idTipoProveedor, int? idGiroProveedor, string idAeropuerto, string nombreEmpresa, string rfc, string email)
         {
             try
             {
