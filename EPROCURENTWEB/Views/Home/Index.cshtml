@@ -265,11 +265,11 @@
 
                     @for (int idx = 0; idx < 5; idx++)
                     {
-                        @Html.HiddenFor(model => model.GiroList[idx].GiroNombre)
+                        @Html.HiddenFor(model => model.ProveedorGiroList[idx].IdProveedorGiro)
                         <div class="form-group col-md-12 sel-p">
                             @Html.Label("Giro1:", new { @class = "col-md-2 control-label" })
                             <div class="col-md-10">
-                                @Html.DropDownListFor(x => x.GiroList[idx].IdGiro, new SelectList(ViewBag.GiroList, "IdGiro", "GiroNombre"), RHome.DefaultSelect)
+                                @Html.DropDownListFor(x => x.ProveedorGiroList[idx].IdCatalogoGiro, new SelectList(ViewBag.GiroList, "IdGiro", "GiroNombre"), RHome.DefaultSelect)
                             </div>
                         </div>
                     }
