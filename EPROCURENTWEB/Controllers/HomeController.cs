@@ -21,20 +21,25 @@ namespace EprocurementWeb.Controllers
         public List<ZonaHorariaDTO> zonaHorariaList;
         public List<NacionalidadDTO> nacionalidadList;
         public List<GiroDTO> giroList;
+        public List<PaisDTO> paisList;
+        public List<IdiomaDTO> idiomaList;
+        public List<EstadoDTO> estadoList;
+        public List<MunicipioDTO> municipioList;
+        public List<TipoProveedorDTO> tipoProveedorList;
 
         public ActionResult Index()
         {
-            BusinessLogic businessLogic = new BusinessLogic();
-            aeropuertoList = businessLogic.GetAeropuertosList();
-            zonaHorariaList = businessLogic.GetZonaHorariaList();
-            nacionalidadList = businessLogic.GetNacionalidadList();
-            giroList = businessLogic.GetGirosList();
-
-            ProveedorRegistro proveedor = new ProveedorRegistro { Contacto = null };
+            CargarCatalogos();
+            ProveedorRegistro proveedor = new ProveedorRegistro { Contacto = null, Direccion = null };
             proveedor.AeropuertoList = aeropuertoList;
             ViewBag.GiroList = giroList;
             ViewBag.ZonaHorariaList = zonaHorariaList;
             ViewBag.NacionalidadList = nacionalidadList;
+            ViewBag.PaisList = paisList;
+            ViewBag.IdiomaList = idiomaList;
+            ViewBag.EstadoList = estadoList;
+            ViewBag.MunicipioList = municipioList;
+            ViewBag.TipoProveedorList = tipoProveedorList;
             return View(proveedor);
         }
 
@@ -53,6 +58,11 @@ namespace EprocurementWeb.Controllers
             zonaHorariaList = businessLogic.GetZonaHorariaList();
             nacionalidadList = businessLogic.GetNacionalidadList();
             giroList = businessLogic.GetGirosList();
+            paisList = businessLogic.GetPaisesList();
+            idiomaList = businessLogic.GetIdiomaList();
+            tipoProveedorList = businessLogic.GetTipoProveedorList();
+            //estadoList = businessLogic.GetEstadoList();
+            //municipioList = businessLogic.GetMunicipioList();
         }
 
         /// <summary>
