@@ -3,11 +3,11 @@
 }
 
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <div class="card ">
     <div class="card-header">
         Filtrar por
-        <button class="btn btn-primary float-right"><i class="fas fa-search"></i></button>
+        <button id="buscar" class="btn btn-primary float-right"><i class="fas fa-search"></i></button>
     </div>
     <div class="card-body">
         <div class="row">
@@ -24,7 +24,7 @@
                     @Html.Label("tipoProveedor", "Tipo proveedor", new { @class = "col-md-4 control-label text-right " })
                     <div class="col-sm-8">
                         @Html.DropDownList("tipoProveedor", new SelectList(ViewBag.TipoProveedorList, "IdTipoProveedor", "Tipo"), "Seleccione una opción", new { @class = "form-control" })
-                      
+
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                     @Html.Label("giro", "Giro", new { @class = "col-md-4 control-label text-right " })
                     <div class="col-sm-8">
                         @Html.DropDownList("giro", new SelectList(ViewBag.GiroList, "IdGiro", "GiroNombre"), "Seleccione una opción", new { @class = "form-control" })
-                        
+
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                     @Html.Label("aeropuerto", "Aeropuerto", new { @class = "col-md-4 control-label text-right " })
                     <div class="col-sm-8">
                         @Html.DropDownList("aeropuerto", new SelectList(ViewBag.AeropuertoList, "Id", "Nombre"), "Seleccione una opción", new { @class = "form-control" })
-                       
+
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
 
 
         </div>
-      
+
     </div>
 </div>
 
@@ -97,3 +97,130 @@
             <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
         </div>
     </div>*@
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $( "#buscar" ).click(function() {
+
+             var jsonData = JSON.stringify({ idTipoProveedor: $('#tipoProveedor').val(), idGiroProveedor: $('#giro').val(), idAeropuerto: $('#aeropuerto').val() , nombreEmpresa: $("#proveedor").val(), rfc:$("#proveedor").val(), email:("#email").val()});
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("GetProveedorEstatusList", "Home")',
+            data: jsonData,
+            async: false,
+            success: function (data) {
+                console.log("Traigo Datos", data)
+                //if (data != undefined && data != "") {
+                //    $("#msjInfoCotizacion").append('"' + data + '"');
+                //}
+            },
+        });
+});
+
+        /// Cargar Paises
+        //$.ajax({
+        //    url: "/Home/GetPaisesList",
+        //    type: "GET",
+        //    contentType: "application/json; charset=utf-8",
+        //    datatype: JSON,
+        //    success: function (result) {
+        //        $(result).each(function () {
+        //            $("#pais").append($("<option></option>").val(this.IdPais).html(this.Nombre));
+        //        });
+        //        $(result).each(function () {
+        //            $("#paisConctacto").append($("<option></option>").val(this.IdPais).html(this.Nombre));
+        //        });
+        //    },
+        //    error: function (data) { }
+        //});
+
+        ///// Cargar Aeropuertos
+        //$.ajax({
+        //    url: "/Home/GetAeropuertosList",
+        //    type: "GET",
+        //    contentType: "application/json; charset=utf-8",
+        //    datatype: JSON,
+        //    success: function (result) {
+        //        $.each(result, function (key, value) {
+        //            var li = $('<li><input  type="checkbox" name="' + key + '" id="' + key + '"/>' +
+        //                '<label for="' + key + '"></label></li>');
+        //            li.find('label').text(value.GiroNombre);
+        //            $('#wkslist').append(li);
+        //        });
+        //    },
+        //    error: function (data) { }
+        //});
+
+        /// Cargar Giros
+        //$.ajax({
+        //    url: "/Home/GetGirosList",
+        //    type: "GET",
+        //    contentType: "application/json; charset=utf-8",
+        //    datatype: JSON,
+        //    success: function (result) {
+        //        $(result).each(function () {
+        //            $("#giro1").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
+        //        });
+        //        $(result).each(function () {
+        //            $("#giro2").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
+        //        });
+        //        $(result).each(function () {
+        //            $("#giro3").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
+
+        //        });
+        //        $(result).each(function () {
+        //            $("#giro4").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
+        //        });
+        //        $(result).each(function () {
+        //            $("#giro5").append($("<option></option>").val(this.IdGiro).html(this.GiroNombre));
+        //        });
+        //        //$(result).each(function () {u eres
+        //        //    $("#paisConctacto").append($("<option></option>").val(this.IdPais).html(this.Nombre));
+        //        //});
+        //    },
+        //    error: function (data) { }
+        //});
+        /// Cargar Giros
+        //$.ajax({
+        //    url: "/Home/GetZonaHorariaList",
+        //    type: "GET",
+        //    contentType: "application/json; charset=utf-8",
+        //    datatype: JSON,
+        //    success: function (result) {
+        //        $(result).each(function () {
+        //            $("#zonaHoraria").append($("<option></option>").val(this.IdPais).html(this.Nombre));
+        //        });
+        //        $(result).each(function () {
+        //            $("#zonaHorariaContacto").append($("<option></option>").val(this.IdPais).html(this.Nombre));
+        //        });
+
+        //    },
+        //    error: function (data) { }
+        //});
+
+        /// Cargar Nacionalidad
+        //$.ajax({
+        //    url: "/Home/GetNacionalidadList",
+        //    type: "GET",
+        //    contentType: "application/json; charset=utf-8",
+        //    datatype: JSON,
+        //    success: function (result) {
+        //        $(result).each(function () {
+        //            $("#nacionalidad").append($("<option></option>").val(this.IdPais).html(this.Nombre));
+        //        });
+
+
+        //    },
+        //    error: function (data) { }
+        //});
+
+
+
+
+
+
+    });
+</script>

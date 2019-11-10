@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Eprocurement.Compras.Controllers
 {
-   
+
     public class HomeController : Controller
     {
         public List<AeropuertoDTO> aeropuertoList;
@@ -21,18 +21,37 @@ namespace Eprocurement.Compras.Controllers
             aeropuertoList = businessLogic.GetAeropuertosList();
             giroList = businessLogic.GetGirosList();
             tipoProveedorList = businessLogic.GetTipoProveedorList();
-          
-          
+
+
+
         }
 
         public ActionResult Index()
         {
             CargarCatalogos();
-            
+
             ViewBag.AeropuertoList = aeropuertoList;
             ViewBag.GiroList = giroList;
             ViewBag.TipoProveedorList = tipoProveedorList;
             return View();
+        }
+
+        public JsonResult GetProveedorEstatusList(int idTipoProveedor, int idGiroProveedor, string idAeropuerto, string nombreEmpresa, string rfc, string email)
+        {
+            try
+            {
+                BusinessLogic businessLogic = new BusinessLogic();
+                ProveedorEstatusRequestDTO request = new ProveedorEstatusRequestDTO();
+                request.ProveedorFiltro = new ProveedorFiltroDTO({ IdTipoProveedor = idTipoProveedor, IdGiroProveedor = idGiroProveedor, IdAeropuerto = idAeropuerto, NombreEmpresa = nombreEmpresa, RFC = rfc, Email = email });
+
+                var response = businessLogic.GetProveedorEstatusList(request);
+                return Json(response.ProveedorList, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
         }
 
         public ActionResult About()
