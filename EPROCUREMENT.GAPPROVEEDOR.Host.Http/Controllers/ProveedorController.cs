@@ -21,7 +21,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
         }
 
         // GET: api/Municipio
-        [HttpGet]
+        [HttpPost]
         [Route("ProveedorEstatusList")]
         public ProveedorEstatusResponseDTO GetProveedorEstatusList([FromBody]ProveedorEstatusRequestDTO request)
         {

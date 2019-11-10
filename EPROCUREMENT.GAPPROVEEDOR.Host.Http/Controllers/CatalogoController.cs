@@ -58,7 +58,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
         }
 
         // GET: api/Estado
-        [HttpGet]
+        [HttpPost]
         [Route("EstadoGetList")]
         public EstadoResponseDTO GetEstadoList([FromBody]EstadoRequesteDTO request)
         {
@@ -68,7 +68,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
         }
 
         // GET: api/Municipio
-        [HttpGet]
+        [HttpPost]
         [Route("MunicipioGetList")]
         public MunicipioResponseDTO GetMunicipioList([FromBody]MunicipioRequesteDTO request)
         {
