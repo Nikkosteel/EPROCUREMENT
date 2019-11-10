@@ -150,6 +150,9 @@
   <data name="usp_EPROCUREMENT_ProveedorGiro_INS" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_ProveedorGiro_INS]</value>
   </data>
+  <data name="usp_EPROCUREMENT_Proveedor_GETLByFilter" xml:space="preserve">
+    <value>[dbo].[usp_EPROCUREMENT_Proveedor_GETLByFilter]</value>
+  </data>
   <data name="usp_EPROCUREMENT_Proveedor_INS" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_Proveedor_INS]</value>
   </data>

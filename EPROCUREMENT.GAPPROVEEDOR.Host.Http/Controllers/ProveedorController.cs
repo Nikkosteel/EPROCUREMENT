@@ -19,5 +19,15 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
             var response = new HandlerProveedor().GuardarProveedor(request);
             return response;
         }
+
+        // GET: api/Municipio
+        [HttpPost]
+        [Route("ProveedorEstatusList")]
+        public ProveedorEstatusResponseDTO GetProveedorEstatusList([FromBody]ProveedorEstatusRequestDTO request)
+        {
+            var proveedorEstatus = new HandlerProveedor().GetProveedorEstatusList(request);
+
+            return proveedorEstatus;
+        }
     }
 }
