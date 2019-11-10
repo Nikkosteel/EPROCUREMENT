@@ -43,10 +43,10 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                         var idProveedor = ExecuteComandProveedor(cmdProveedor, request.Proveedor);
                         if (idProveedor > 0)
                         {
-                            foreach (var giro in request.Proveedor.GiroList)
+                            foreach (var proveedorGiro in request.Proveedor.ProveedorGiroList)
                             {
                                 var cmdGiro = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_ProveedorGiro_INS, conexion);
-                                if (ExecuteComandGiro(cmdGiro, giro.IdGiro, idProveedor) < 1) { return response; }
+                                if (ExecuteComandGiro(cmdGiro, proveedorGiro.IdCatalogoGiro, idProveedor) < 1) { return response; }
                             }
 
                             foreach (var empresa in request.Proveedor.EmpresaList)
@@ -64,6 +64,15 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                             request.Proveedor.Direccion.IdProveedor = idProveedor;
                             if (ExecuteComandDireccion(cmdDireccion, request.Proveedor.Direccion) < 1) { return response; }
 
+                            var cmdEstatus = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_EstatusProveedor_INS, conexion);
+                            var estatusProveedor = new HistoricoEstatusProveedorDTO
+                            {
+                                IdEstatusProveedor = 1,
+                                IdProveedor = idProveedor,
+                                IdUsuario = null,
+                                Observaciones = null
+                            };
+                            if (ExecuteComandEstatus(cmdEstatus, estatusProveedor) < 1) { return response; }
                             transactionScope.Complete();
                             response.Success = true;
                         }
@@ -102,7 +111,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                     cmd.Parameters.Add(new SqlParameter("@nombreEmpresa", SqlDbType.NVarChar, 50)).Value = request.ProveedorFiltro.NombreEmpresa;
                     cmd.Parameters.Add(new SqlParameter("@idTipoProveedor", request.ProveedorFiltro.IdTipoProveedor));
                     cmd.Parameters.Add(new SqlParameter("@idGiro", request.ProveedorFiltro.IdGiroProveedor));
-                    cmd.Parameters.Add(new SqlParameter("@idAeropuerto", request.ProveedorFiltro.IdAeropuerto));
+                    cmd.Parameters.Add(new SqlParameter("@idAeropuerto", SqlDbType.NVarChar, 100)).Value = request.ProveedorFiltro.IdAeropuerto;
                     cmd.Parameters.Add(new SqlParameter("@email", SqlDbType.NVarChar, 50)).Value = request.ProveedorFiltro.Email;
                     cmd.Parameters.Add(new SqlParameter("@rfc", SqlDbType.NVarChar, 50)).Value = request.ProveedorFiltro.RFC;
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -124,6 +133,193 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
             };
 
             return tryCatch.SafeExecutor(action);
+        }
+
+        /// <summary>
+        /// Obtiene el detalle de un proveedor
+        /// </summary>
+        /// <param name="request">Un objeto de tipo ProveedorEstatusRequestDTO con los filtros</param>
+        /// <returns>Un obejeto de tipo ProveedorEstatusResponseDTO</returns>
+        public ProveedorDetalleResponseDTO GetProveedorElemento(ProveedorDetalleRequestDTO request)
+        {
+            ProveedorDetalleResponseDTO response = new ProveedorDetalleResponseDTO()
+            {
+                Proveedor = null
+            };
+
+            Func<ProveedorDetalleResponseDTO> action = () =>
+            {
+                using (var conexion = new SqlConnection(Helper.Connection()))
+                {
+                    conexion.Open();
+                    var cmdProveedor = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_Proveedor_GETIById, conexion);
+                    response.Proveedor = ExecuteQueryProveedor(cmdProveedor, request.IdProveedor);
+
+                    var cmdDireccion = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_ProveedorDireccion_GETIByIdProveedor, conexion);
+                    response.Proveedor.Direccion = ExecuteQueryDireccion(cmdDireccion, request.IdProveedor);
+
+                    var cmdContacto = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_ProveedorContacto_GETIByIdProveedor, conexion);
+                    response.Proveedor.Contacto = ExecuteQueryContacto(cmdContacto, request.IdProveedor);
+                    
+                    var cmdEmpresa = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_ProveedorEmpresa_GETLByIdProveedor, conexion);
+                    response.Proveedor.EmpresaList = ExecuteQueryEmpresa(cmdEmpresa, request.IdProveedor);
+                    
+                    var cmdProveedorGiro = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_ProveedorGiro_GETLByIdProveedor, conexion);
+                    response.Proveedor.ProveedorGiroList = ExecuteQueryProveedorGiroList(cmdProveedorGiro, request.IdProveedor);
+                }
+                response.Success = true;
+                return response;
+            };
+
+            return tryCatch.SafeExecutor(action);
+        }
+
+        /// <summary>
+        /// Recupera la información del proveedor
+        /// </summary>
+        /// <param name="cmdProveedor">Información del comand</param>
+        /// <param name="idProveedor">Identificador del proveedor</param>
+        /// <returns>La respuesta de la consulta</returns>
+        private ProveedorDTO ExecuteQueryProveedor(SqlCommand cmdProveedor, int idProveedor)
+        {
+            var proveedor = new ProveedorDTO();
+            cmdProveedor.CommandType = CommandType.StoredProcedure;
+            cmdProveedor.Parameters.Add(new SqlParameter("@idProveedor", idProveedor));
+            using (SqlDataReader reader = cmdProveedor.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    proveedor.NombreEmpresa = reader["NombreEmpresa"].ToString();
+                    proveedor.RazonSocial = reader["RazonSocial"].ToString();
+                    proveedor.RFC = reader["RFC"].ToString();
+                    proveedor.NIF = reader["NIF"].ToString();
+                    proveedor.ProvTelefono = reader["ProvTelefono"].ToString();
+                    proveedor.ProvFax = reader["ProvFax"].ToString();
+                    proveedor.PaginaWeb = reader["PaginaWeb"].ToString();
+                    proveedor.IdZonaHoraria = Convert.ToInt32(reader["IdZonaHoraria"]);
+                    proveedor.IdTipoProveedor = Convert.ToInt32(reader["IdTipoProveedor"]);
+                    proveedor.AXNumeroProveedor = reader["AXNumeroProveedor"].ToString();
+                    proveedor.AXFechaRegistro = Convert.ToDateTime(reader["AXFechaRegistro"]);
+                    proveedor.IdNacionalidad = Convert.ToInt32(reader["IdNacionalidad"]);
+                }
+            }
+            return proveedor;
+        }
+
+        /// <summary>
+        /// Recupera la información de la dirección
+        /// </summary>
+        /// <param name="cmdDireccion">Información del comand</param>
+        /// <param name="idProveedor">Identificador del proveedor</param>
+        /// <returns>Retorna la dirección del proveedor</returns>
+        private ProveedorDireccionDTO ExecuteQueryDireccion(SqlCommand cmdDireccion, int idProveedor)
+        {
+            var direccion = new ProveedorDireccionDTO();
+            cmdDireccion.CommandType = CommandType.StoredProcedure;
+            cmdDireccion.Parameters.Add(new SqlParameter("@idProveedor", idProveedor));
+            using (SqlDataReader reader = cmdDireccion.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    direccion.IdProveedorDireccion = Convert.ToInt32(reader["IdProveedorDireccion"]);
+                    direccion.CodigoPostal = reader["CodigoPostal"].ToString();
+                    direccion.Colonia = reader["Colonia"].ToString();
+                    direccion.IdMunicipio = Convert.ToInt32(reader["IdMunicipio"]);
+                    direccion.Calle = reader["Calle"].ToString();
+                    direccion.IdPais = Convert.ToInt32(reader["IdPais"]);
+                    direccion.Estado = reader["Estado"].ToString();
+                    direccion.Municipio = reader["Municipio"].ToString();
+                    direccion.DireccionValidada = Convert.ToBoolean(reader["DireccionValidada"]);
+                    direccion.IdProveedor = idProveedor;
+                }
+            }
+
+            return direccion;
+        }
+
+        /// <summary>
+        /// Recupera la información del contacto
+        /// </summary>
+        /// <param name="cmdContacto">Información del comand</param>
+        /// <param name="idProveedor">Identificador del proveedor</param>
+        /// <returns>Retorna el contacto del proveedor</returns>
+        private ProveedorContactoDTO ExecuteQueryContacto(SqlCommand cmdContacto, int idProveedor)
+        {
+            var contacto = new ProveedorContactoDTO();
+            cmdContacto.CommandType = CommandType.StoredProcedure;
+            cmdContacto.Parameters.Add(new SqlParameter("@idProveedor", idProveedor));
+            using (SqlDataReader reader = cmdContacto.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    contacto.IdContacto = Convert.ToInt32(reader["IdContacto"]);
+                    contacto.IdProveedor = idProveedor;
+                    contacto.NombreContacto = reader["NombreContacto"].ToString();
+                    contacto.Cargo = reader["Cargo"].ToString();
+                    contacto.IdNacionalidad = Convert.ToInt32(reader["IdNacionalidad"]);
+                    contacto.TelefonoDirecto = reader["TelefonoDirecto"].ToString();
+                    contacto.TelefonoMovil = reader["TelefonoMovil"].ToString();
+                    contacto.Fax = reader["Fax"].ToString();
+                    contacto.Email = reader["Email"].ToString();
+                    contacto.IdZonaHoraria = Convert.ToInt32(reader["IdZonaHoraria"]);
+                    contacto.IdPais = Convert.ToInt32(reader["IdPais"]);
+                    contacto.IdIdioma = Convert.ToInt32(reader["IdIdioma"]);
+                }
+            }
+
+            return contacto;
+        }
+
+        /// <summary>
+        /// Recupera la información del aeropuerto
+        /// </summary>
+        /// <param name="cmdAeropuerto">Información del comand</param>
+        /// <param name="idProveedor">Identificador del proveedor</param>
+        /// <returns>Retorna los aeropuertos del proveedor</returns>
+        private List<ProveedorEmpresaDTO> ExecuteQueryEmpresa(SqlCommand cmdEmpresa, int idProveedor)
+        {
+            ProveedorEmpresaDTO empresa = null;
+            var empresaList = new List<ProveedorEmpresaDTO>();
+            cmdEmpresa.CommandType = CommandType.StoredProcedure;
+            cmdEmpresa.Parameters.Add(new SqlParameter("@idProveedor", idProveedor));
+            using (SqlDataReader reader = cmdEmpresa.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    empresa = new ProveedorEmpresaDTO();
+                    empresa.IdProveedorAeropuerto = Convert.ToInt32(reader["IdProveedorAeropuerto"]);
+                    empresa.IdProveedor = idProveedor;
+                    empresa.IdCatalogoAeropuerto = reader["IdCatalogoAeropuerto"].ToString();
+                    empresaList.Add(empresa);
+                }
+            }
+            return empresaList;
+        }
+
+        /// <summary>
+        /// Recupera la información de los giros del proveedor
+        /// </summary>
+        /// <param name="cmdProveedorGiro">Información del comand</param>
+        /// <param name="idProveedor">Identificador del proveedor</param>
+        /// <returns>Retorna los giros del proveedor</returns>
+        private List<ProveedorGiroDTO> ExecuteQueryProveedorGiroList(SqlCommand cmdProveedorGiro, int idProveedor)
+        {
+            ProveedorGiroDTO proveedorGiro = null;
+            var proveedorGiroList = new List<ProveedorGiroDTO>();
+            cmdProveedorGiro.CommandType = CommandType.StoredProcedure;
+            cmdProveedorGiro.Parameters.Add(new SqlParameter("@idProveedor", idProveedor));
+            using (SqlDataReader reader = cmdProveedorGiro.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    proveedorGiro = new ProveedorGiroDTO();
+                    proveedorGiro.IdProveedorGiro = Convert.ToInt32(reader["IdProveedorGiro"]);
+                    proveedorGiro.IdProveedor = idProveedor;
+                    proveedorGiro.IdCatalogoGiro = Convert.ToInt32(reader["IdCatalogoGiro"]);
+                    proveedorGiroList.Add(proveedorGiro);
+                }
+            }
+            return proveedorGiroList;
         }
 
         /// <summary>
@@ -236,6 +432,25 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
             cmdGiro.Parameters.Add(new SqlParameter("Result", SqlDbType.BigInt) { Direction = ParameterDirection.ReturnValue });
             cmdGiro.ExecuteNonQuery();
             var resultado = Convert.ToInt32(cmdGiro.Parameters["Result"].Value);
+            return resultado;
+        }
+
+        /// <summary>
+        /// Recupera los parametros para el registro del giro
+        /// </summary>
+        /// <param name="cmdEstatus">Información del comand</param>
+        /// <param name="estatusProveedor">Información del estatus</param>
+        /// <returns>La respuesta de la inserción</returns>
+        private int ExecuteComandEstatus(SqlCommand cmdEstatus, HistoricoEstatusProveedorDTO estatusProveedor)
+        {
+            cmdEstatus.CommandType = CommandType.StoredProcedure;
+            cmdEstatus.Parameters.Add(new SqlParameter("@IdEstatusProveedor", estatusProveedor.IdEstatusProveedor));
+            cmdEstatus.Parameters.Add(new SqlParameter("@IdProveedor", estatusProveedor.IdProveedor));
+            cmdEstatus.Parameters.Add(new SqlParameter("@Observaciones", SqlDbType.NVarChar, 50)).Value = estatusProveedor.Observaciones;
+            cmdEstatus.Parameters.Add(new SqlParameter("@IdUsuario", estatusProveedor.IdUsuario));
+            cmdEstatus.Parameters.Add(new SqlParameter("Result", SqlDbType.Int) { Direction = ParameterDirection.ReturnValue });
+            cmdEstatus.ExecuteNonQuery();
+            var resultado = Convert.ToInt32(cmdEstatus.Parameters["Result"].Value);
             return resultado;
         }
     }

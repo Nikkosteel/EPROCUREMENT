@@ -29,5 +29,15 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
 
             return proveedorEstatus;
         }
+
+        // GET: api/ProveedorElemento
+        [HttpPost]
+        [Route("ProveedorElemento")]
+        public ProveedorDetalleResponseDTO GetProveedorElemento([FromBody]ProveedorDetalleRequestDTO request)
+        {
+            var proveedorElemento = new HandlerProveedor().GetProveedorElemento(request);
+
+            return proveedorElemento;
+        }
     }
 }
