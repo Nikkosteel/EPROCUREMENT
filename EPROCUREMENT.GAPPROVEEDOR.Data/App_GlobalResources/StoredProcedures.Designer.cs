@@ -124,6 +124,15 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_Proveedor_GETLByFilter].
+        /// </summary>
+        internal static string usp_EPROCUREMENT_Proveedor_GETLByFilter {
+            get {
+                return ResourceManager.GetString("usp_EPROCUREMENT_Proveedor_GETLByFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_Proveedor_INS].
         /// </summary>
         internal static string usp_EPROCUREMENT_Proveedor_INS {
