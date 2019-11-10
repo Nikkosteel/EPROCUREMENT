@@ -33,5 +33,20 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Business.Proveedor
             }
             return response;
         }
+
+        /// <summary>
+        /// Obtiene un listado de provedores por filtro
+        /// </summary>
+        /// <param name="request">Un objeto de tipo ProveedorEstatusRequestDTO con los filtros</param>
+        /// <returns>Un obejeto de tipo ProveedorEstatusResponseDTO</returns>
+        public ProveedorEstatusResponseDTO GetProveedorEstatusList(ProveedorEstatusRequestDTO request)
+        {
+            var response = proveedorData.GetProveedorEstatusList(request);
+            if (!response.Success)
+            {
+                response.ErrorList = new List<ErrorDTO> { new ErrorDTO { Codigo = "", Mensaje = string.Format("No fue posible recuperar datos disponibles o no se encontro alguna solicitud en proceso") } };
+            }
+            return response;
+        }
     }
 }
