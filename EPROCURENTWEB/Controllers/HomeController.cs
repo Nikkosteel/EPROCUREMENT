@@ -47,8 +47,8 @@ namespace EprocurementWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult GuardarProveedor(ProveedorRegistro proveedor)
         {
+            proveedor.EmpresaList = proveedor.AeropuertoList.Where(a => a.Checado).Select(a => new ProveedorEmpresaDTO { IdCatalogoAeropuerto = a.Id }).ToList();
             return View(proveedor);
-
         }
 
         private void CargarCatalogos()
@@ -61,7 +61,7 @@ namespace EprocurementWeb.Controllers
             paisList = businessLogic.GetPaisesList();
             idiomaList = businessLogic.GetIdiomaList();
             tipoProveedorList = businessLogic.GetTipoProveedorList();
-            //estadoList = businessLogic.GetEstadoList();
+            estadoList = businessLogic.GetEstadoList(1);
             //municipioList = businessLogic.GetMunicipioList();
         }
 

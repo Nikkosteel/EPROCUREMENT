@@ -7,6 +7,9 @@ using System.Web.Script.Serialization;
 using EprocurementWeb.Models;
 using System.Configuration;
 using EPROCUREMENT.GAPPROVEEDOR.Entities;
+using Newtonsoft.Json;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace EprocurementWeb.Business
 {
@@ -55,7 +58,7 @@ namespace EprocurementWeb.Business
         }
         public List<GiroDTO> GetGirosList()
         {
-            var lstGiros= new List<GiroDTO>();
+            var lstGiros = new List<GiroDTO>();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(urlApi + "api/Catalogo/");
@@ -139,27 +142,29 @@ namespace EprocurementWeb.Business
             return lstIdioma;
         }
 
-        //public List<EstadoDTO> GetEstadoList()
-        //{
-        //    var lstEstado = new List<EstadoDTO>();
-        //    using (var client = new HttpClient())
-        //    {
-        //        client.BaseAddress = new Uri(urlApi + "api/Catalogo/");
-        //        var responseTask = client.GetAsync("EstadoGetList");
-        //        responseTask.Wait();
+        public List<EstadoDTO> GetEstadoList(int idPais)
+        {
+            List<EstadoDTO> lstEstado = new List<EstadoDTO>();
+            EstadoRequesteDTO estado = new EstadoRequesteDTO { idPais = idPais };
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi + "api/Proveedor");
+                var json = JsonConvert.SerializeObject(estado);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var responseTask = client.PostAsync("EstadoGetList", content);
+                responseTask.Wait();
 
-        //        var result = responseTask.Result;
-        //        if (result.IsSuccessStatusCode)
-        //        {
-        //            var readTask = result.Content.ReadAsStringAsync();
-        //            JavaScriptSerializer JSserializer = new JavaScriptSerializer();
-
-        //            var response = JSserializer.Deserialize<EstadoResponseDTO>(readTask.Result);
-        //            lstEstado = response.EstadoList;
-        //        }
-        //    }
-        //    return lstEstado;
-        //}
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSSerializer = new JavaScriptSerializer();
+                    var response = JSSerializer.Deserialize<EstadoResponseDTO>(readTask.Result);
+                    lstEstado = response.EstadoList;
+                }
+            }
+            return lstEstado;
+        }
 
         //public List<MunicipioDTO> GetMunicipioList()
         //{
@@ -203,6 +208,29 @@ namespace EprocurementWeb.Business
                 }
             }
             return lstTipoProveedor;
+        }
+
+        public ProveedorResponseDTO PostProveedor(ProveedorRegistro proveedor)
+        {
+            ProveedorResponseDTO response = null;
+            ProveedorRequesteDTO proveedorRequest = new ProveedorRequesteDTO { IdUsuario = 0, Proveedor = proveedor };
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi + "api/Proveedor");
+                var json = JsonConvert.SerializeObject(proveedor);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var responseTask = client.PostAsync("Insertar", content);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSSerializer = new JavaScriptSerializer();
+                    response = JSSerializer.Deserialize<ProveedorResponseDTO>(readTask.Result);
+                }
+            }
+            return response;
         }
     }
 }
