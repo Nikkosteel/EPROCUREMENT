@@ -44,7 +44,7 @@
                 <div class="form-group row">
                     @Html.Label("email", "Correo Electrónico", new { @class = "col-md-4 control-label text-right " })
                     <div class="col-sm-8">
-                        @Html.TextBox("mail", "", new { @class = "form-control" })
+                        @Html.TextBox("email", "", new { @class = "form-control" })
                     </div>
                 </div>
             </div>
@@ -104,7 +104,7 @@
     $(document).ready(function () {
         $( "#buscar" ).click(function() {
 
-             var jsonData = JSON.stringify({ idTipoProveedor: $('#tipoProveedor').val(), idGiroProveedor: $('#giro').val(), idAeropuerto: $('#aeropuerto').val() , nombreEmpresa: $("#proveedor").val(), rfc:$("#proveedor").val(), email:("#email").val()});
+             var jsonData = JSON.stringify({ idTipoProveedor: $('#tipoProveedor').val(), idGiroProveedor: $('#giro').val(), idAeropuerto: $('#aeropuerto').val() , nombreEmpresa: $("#proveedor").val(), rfc:$("#proveedor").val(), email:$("#email").val()});
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",

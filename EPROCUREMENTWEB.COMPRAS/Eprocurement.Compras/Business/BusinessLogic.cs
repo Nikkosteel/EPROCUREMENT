@@ -21,7 +21,7 @@ namespace Eprocurement.Compras.Business
             
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(urlApi + "api/Catalogo/");
+                client.BaseAddress = new Uri(urlApi + "api/Proveedor/");
                 var json = JsonConvert.SerializeObject(request);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var responseTask = client.PostAsync("ProveedorEstatusList", content);
