@@ -12,7 +12,13 @@ namespace Eprocurement.Compras.Controllers
     public class HomeController : Controller
     {
         public List<AeropuertoDTO> aeropuertoList;
+        public List<ZonaHorariaDTO> zonaHorariaList;
+        public List<NacionalidadDTO> nacionalidadList;
         public List<GiroDTO> giroList;
+        public List<PaisDTO> paisList;
+        public List<IdiomaDTO> idiomaList;
+        public List<EstadoDTO> estadoList;
+        public List<MunicipioDTO> municipioList;
         public List<TipoProveedorDTO> tipoProveedorList;
 
         private void CargarCatalogos()
@@ -21,9 +27,18 @@ namespace Eprocurement.Compras.Controllers
             aeropuertoList = businessLogic.GetAeropuertosList();
             giroList = businessLogic.GetGirosList();
             tipoProveedorList = businessLogic.GetTipoProveedorList();
+        }
 
-
-
+        private void CargarCatalogosAceptar()
+        {
+            BusinessLogic businessLogic = new BusinessLogic();
+            aeropuertoList = businessLogic.GetAeropuertosList();
+            zonaHorariaList = businessLogic.GetZonaHorariaList();
+            nacionalidadList = businessLogic.GetNacionalidadList();
+            giroList = businessLogic.GetGirosList();
+            paisList = businessLogic.GetPaisesList();
+            idiomaList = businessLogic.GetIdiomaList();
+            tipoProveedorList = businessLogic.GetTipoProveedorList();
         }
 
         public ActionResult Index()
@@ -33,6 +48,11 @@ namespace Eprocurement.Compras.Controllers
             ViewBag.AeropuertoList = aeropuertoList;
             ViewBag.GiroList = giroList;
             ViewBag.TipoProveedorList = tipoProveedorList;
+            return View();
+        }
+
+        public ActionResult AceptaProveedor(int idProveedor)
+        {
             return View();
         }
 
@@ -52,6 +72,22 @@ namespace Eprocurement.Compras.Controllers
 
                 return null;
             }
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult GetEstados(int idPais)
+        {
+            BusinessLogic businessLogic = new BusinessLogic();
+            estadoList = businessLogic.GetEstadoList(idPais);
+            return Json(estadoList, JsonRequestBehavior.AllowGet);
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult GetMunicipios(int idEstado)
+        {
+            BusinessLogic businessLogic = new BusinessLogic();
+            municipioList = businessLogic.GetMunicipioList(idEstado);
+            return Json(municipioList, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult About()
