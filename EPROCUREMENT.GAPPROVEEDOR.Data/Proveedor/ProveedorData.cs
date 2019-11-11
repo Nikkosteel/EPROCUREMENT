@@ -30,9 +30,8 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                 ErrorList = new List<ErrorDTO>()
             };
 
-            Func<ProveedorResponseDTO> action = () =>
+            try
             {
-
                 using (var conexion = new SqlConnection(Helper.Connection()))
                 {
                     conexion.Open();
@@ -78,10 +77,12 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                         }
                     }
                 }
-                return response;
-            };
-
-            return tryCatch.SafeExecutor(action);
+            }
+            catch (Exception exception)
+            {
+                response.Success = false;
+            }
+            return response;
         }
 
         /// <summary>
@@ -98,7 +99,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
 
             ProveedorEstatusDTO proveedorEstatus = null;
 
-            Func<ProveedorEstatusResponseDTO> action = () =>
+            try
             {
                 using (var conexion = new SqlConnection(Helper.Connection()))
                 {
@@ -130,9 +131,13 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                 }
                 response.Success = true;
                 return response;
-            };
+            }
+            catch (Exception exception)
+            {
+                response.Success = false;
+            }
 
-            return tryCatch.SafeExecutor(action);
+            return response;
         }
 
         /// <summary>
@@ -147,7 +152,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                 Proveedor = null
             };
 
-            Func<ProveedorDetalleResponseDTO> action = () =>
+            try
             {
                 using (var conexion = new SqlConnection(Helper.Connection()))
                 {
@@ -169,9 +174,13 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                 }
                 response.Success = true;
                 return response;
-            };
+            }
+            catch (Exception exception)
+            {
+                response.Success = false;
+            }
 
-            return tryCatch.SafeExecutor(action);
+            return response;
         }
 
         /// <summary>

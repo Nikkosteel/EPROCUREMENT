@@ -28,7 +28,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
 
             PaisDTO pais = null;
 
-            Func<PaisResponseDTO> action = () =>
+            try
             {
 
                 using (var conexion = new SqlConnection(Helper.Connection()))
@@ -52,9 +52,13 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                 }
                 response.Success = true;
                 return response;
-            };
+            }
+            catch (Exception exception)
+            {
+                
+            }
 
-            return tryCatch.SafeExecutor(action);
+            return response;
         }
 
         /// <summary>
@@ -70,9 +74,8 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
 
             GiroDTO giro = null;
 
-            Func<GiroResponseDTO> action = () =>
+            try
             {
-
                 using (var conexion = new SqlConnection(Helper.Connection()))
                 {
                     conexion.Open();
@@ -94,9 +97,12 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                 }
                 response.Success = true;
                 return response;
-            };
+            }
+            catch (Exception exception) 
+            {
+            }
 
-            return tryCatch.SafeExecutor(action);
+            return response;
         }
 
         /// <summary>
@@ -111,8 +117,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
             };
 
             AeropuertoDTO aeropuertoDTO = null;
-
-            Func<AeropuertoResponseDTO> action = () =>
+            try
             {
 
                 using (var conexion = new SqlConnection(Helper.Connection()))
@@ -136,9 +141,12 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                 }
                 response.Success = true;
                 return response;
-            };
+            }
+            catch (Exception exception)
+            {
+            }
 
-            return tryCatch.SafeExecutor(action);
+            return response;
         }
 
         /// <summary>
@@ -154,7 +162,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
 
             NacionalidadDTO nacionalidadDTO = null;
 
-            Func<NacionalidadResponseDTO> action = () =>
+            try
             {
 
                 using (var conexion = new SqlConnection(Helper.Connection()))
@@ -178,9 +186,12 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                 }
                 response.Success = true;
                 return response;
-            };
+            }
+            catch (Exception exception)
+            {
+            }
 
-            return tryCatch.SafeExecutor(action);
+            return response;
         }
 
         /// <summary>
@@ -196,9 +207,8 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
 
             ZonaHorariaDTO zonaHorariaDTO = null;
 
-            Func<ZonaHorariaResponseDTO> action = () =>
+            try
             {
-
                 using (var conexion = new SqlConnection(Helper.Connection()))
                 {
                     conexion.Open();
@@ -220,9 +230,12 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                 }
                 response.Success = true;
                 return response;
-            };
+            }
+            catch (Exception exception)
+            {
+            }
 
-            return tryCatch.SafeExecutor(action);
+            return response;
         }
 
         /// <summary>
@@ -239,9 +252,8 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
 
             EstadoDTO estadoDTO = null;
 
-            Func<EstadoResponseDTO> action = () =>
+            try
             {
-
                 using (var conexion = new SqlConnection(Helper.Connection()))
                 {
                     conexion.Open();
@@ -264,9 +276,12 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                 }
                 response.Success = true;
                 return response;
-            };
+            }
+            catch (Exception exception)
+            {
+            }
 
-            return tryCatch.SafeExecutor(action);
+            return response;
         }
 
         /// <summary>
@@ -283,9 +298,8 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
 
             MunicipioDTO municipioDTO = null;
 
-            Func<MunicipioResponseDTO> action = () =>
+            try
             {
-
                 using (var conexion = new SqlConnection(Helper.Connection()))
                 {
                     conexion.Open();
@@ -308,9 +322,12 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                 }
                 response.Success = true;
                 return response;
-            };
+            }
+            catch (Exception exception)
+            {
+            }
 
-            return tryCatch.SafeExecutor(action);
+            return response;
         }
 
         /// <summary>
@@ -326,9 +343,8 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
 
             TipoProveedorDTO tipoProveedorDTO = null;
 
-            Func<TipoProveedorResponseDTO> action = () =>
+            try
             {
-
                 using (var conexion = new SqlConnection(Helper.Connection()))
                 {
                     conexion.Open();
@@ -350,9 +366,12 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                 }
                 response.Success = true;
                 return response;
-            };
+            }
+            catch (Exception exception)
+            {
+            }
 
-            return tryCatch.SafeExecutor(action);
+            return response;
         }
 
         /// <summary>
@@ -368,9 +387,8 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
 
             IdiomaDTO idiomaDTO = null;
 
-            Func<IdiomaResponseDTO> action = () =>
+            try
             {
-
                 using (var conexion = new SqlConnection(Helper.Connection()))
                 {
                     conexion.Open();
@@ -394,9 +412,12 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                 }
                 response.Success = true;
                 return response;
-            };
+            }
+            catch (Exception exception)
+            {
+            }
 
-            return tryCatch.SafeExecutor(action);
+            return response;
         }
     }
 }

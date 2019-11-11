@@ -21,7 +21,8 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
             }
             catch (Exception ex)
             {
-
+                //Aqui se controlara el error
+                return action();
             }
 
             return default(T);
