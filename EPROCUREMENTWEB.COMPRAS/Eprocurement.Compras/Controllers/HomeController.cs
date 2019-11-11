@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Eprocurement.Compras.Models;
 
 namespace Eprocurement.Compras.Controllers
 {
@@ -51,11 +52,53 @@ namespace Eprocurement.Compras.Controllers
             return View();
         }
 
-        public ActionResult AceptaProveedor(int idProveedor)
+        public ActionResult AceptarProveedor(int idProvider)
         {
-            return View();
-        }
+            CargarCatalogosAceptar();
+            ProveedorRegistro proveedor;
+            ViewBag.GiroList = giroList;
+            ViewBag.ZonaHorariaList = zonaHorariaList;
+            ViewBag.NacionalidadList = nacionalidadList;
+            ViewBag.PaisList = paisList;
+            ViewBag.IdiomaList = idiomaList;
+            ViewBag.EstadoList = estadoList;
+            ViewBag.MunicipioList = municipioList;
+            ViewBag.TipoProveedorList = tipoProveedorList;
+            try
+            {
+                BusinessLogic businessLogic = new BusinessLogic();
+                ProveedorDetalleRequestDTO request = new ProveedorDetalleRequestDTO();
+                request.IdProveedor = idProvider;
 
+                var response = businessLogic.GetProveedorElemento(request).Proveedor;
+                proveedor = new ProveedorRegistro
+                {
+                    AeropuertoList = aeropuertoList,
+                    AXFechaRegistro = response.AXFechaRegistro,
+                    AXNumeroProveedor = response.AXNumeroProveedor,
+                    Contacto = response.Contacto,
+                    Direccion = response.Direccion,
+                    EmpresaList = response.EmpresaList,
+                    IdNacionalidad = response.IdNacionalidad,
+                    IdProveedor = response.IdProveedor,
+                    IdTipoProveedor = response.IdTipoProveedor,
+                    IdZonaHoraria = response.IdZonaHoraria,
+                    NIF = response.NIF,
+                    NombreEmpresa = response.NombreEmpresa,
+                    PaginaWeb = response.PaginaWeb,
+                    ProveedorGiroList = response.ProveedorGiroList,
+                    ProvFax = response.ProvFax,
+                    ProvTelefono = response.ProvTelefono,
+                    RazonSocial = response.RazonSocial,
+                    RFC = response.RFC
+                };
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(proveedor);
+        }
         public JsonResult GetProveedorEstatusList(int? idTipoProveedor, int? idGiroProveedor, string idAeropuerto, string nombreEmpresa, string rfc, string email)
         {
             try
@@ -89,7 +132,7 @@ namespace Eprocurement.Compras.Controllers
             municipioList = businessLogic.GetMunicipioList(idEstado);
             return Json(municipioList, JsonRequestBehavior.AllowGet);
         }
-        
+
         public ActionResult About(int idProvider)
         {
             try
@@ -100,7 +143,7 @@ namespace Eprocurement.Compras.Controllers
 
                 var response = businessLogic.GetProveedorElemento(request);
                 return View(response.Proveedor);
-              
+
             }
             catch (Exception ex)
             {
