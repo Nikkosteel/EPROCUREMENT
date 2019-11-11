@@ -80,7 +80,6 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
             }
             catch (Exception exception)
             {
-                response.Success = false;
             }
             return response;
         }
@@ -180,6 +179,36 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                 response.Success = false;
             }
 
+            return response;
+        }
+
+        /// <summary>
+        /// Registra el estatus del proveedor
+        /// </summary>
+        /// <returns>Un objeto de tipo ProveedorEstatusResponseDTO con la respuesta</returns>
+        public ProveedorEstatusResponseDTO EstatusProveedorInsertar(ProveedorAprobarRequestDTO request)
+        {
+            ProveedorEstatusResponseDTO response = new ProveedorEstatusResponseDTO()
+            {
+                ErrorList = new List<ErrorDTO>()
+            };
+
+            try
+            {
+                using (var conexion = new SqlConnection(Helper.Connection()))
+                {
+                    conexion.Open();
+
+                    var cmdEstatus = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_EstatusProveedor_INS, conexion);
+                    if (ExecuteComandEstatus(cmdEstatus, request.EstatusProveedor) > 0)
+                    {
+                        response.Success = true;
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+            }
             return response;
         }
 

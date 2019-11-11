@@ -61,6 +61,7 @@
     <Compile Include="Proveedor\ProveedorEmpresaDTO.cs" />
     <Compile Include="Proveedor\ProveedorGiroDTO.cs" />
     <Compile Include="Request\EstadoRequestDTO.cs" />
+    <Compile Include="Request\ProveedorAprobarRequestDTO.cs" />
     <Compile Include="Request\MunicipioRequestDTO.cs" />
     <Compile Include="Request\ProveedorDetalleRequestDTO.cs" />
     <Compile Include="Request\ProveedorEstatusRequestDTO.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Request\RequestBaseDTO.cs" />
     <Compile Include="Response\AeropuertoResponseDTO.cs" />
     <Compile Include="Response\EstadoResponseDTO.cs" />
+    <Compile Include="Response\EstatusProveedorResponseDTO.cs" />
     <Compile Include="Response\GiroResponseDTO.cs" />
     <Compile Include="Response\IdiomaResponseDTO.cs" />
     <Compile Include="Response\MunicipioResponseDTO.cs" />
