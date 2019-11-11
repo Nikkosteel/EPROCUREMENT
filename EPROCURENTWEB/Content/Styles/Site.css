@@ -20,13 +20,14 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    /*max-width: 280px;*/
 }
 
 .langs {
     position: fixed;
     /*bottom:20px;*/
     right: 20px;
+    top: 10px;
 }
 
 .setLang img {
@@ -65,12 +66,13 @@ textarea {
 #wkslist {
     list-style-type: none;
     padding: 0;
+    padding-left: 10%;
 }
 
 .ulChk {
-    columns: 2;
+    /*columns: 2;
     -webkit-columns: 2;
-    -moz-columns: 2;
+    -moz-columns: 2;*/
 }
 
 .sel-p {
@@ -116,6 +118,7 @@ input[type="checkbox"] {
     height: 16px;
     width: 16px;
     border: 1px solid white;
+    margin-right: 5px;
 }
 
     input[type="checkbox"]:checked {
@@ -132,13 +135,25 @@ input[type="checkbox"] {
         pointer-events: none;
     }
 
-    input[type="checkbox"]:after {
+    /*input[type="checkbox"]:after {
         content: '';
         position: relative;
         left: 40%;
         top: 20%;
         width: 15%;
         height: 40%;
+        border: solid #fff;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+        display: none;
+    }*/
+    input[type="checkbox"]:after {
+        content: '';
+        position: relative;
+        left: 35%;
+        top: 10%;
+        width: 35%;
+        height: 70%;
         border: solid #fff;
         border-width: 0 2px 2px 0;
         transform: rotate(45deg);
@@ -156,6 +171,7 @@ input[type="checkbox"] {
 .a-c {
     color: black;
     text-decoration: underline;
+    vertical-align: text-bottom;
 }
 
 .menu-color {
@@ -166,10 +182,16 @@ input[type="checkbox"] {
 
 .menu-idioma {
     color: white;
-
 }
 
     .menu-idioma:active {
         color: #999999;
     }
 
+.m-b-1 {
+    margin-bottom: 30px !important;
+}
+
+.m-t-1 {
+    margin-top: 30px !important;
+}
