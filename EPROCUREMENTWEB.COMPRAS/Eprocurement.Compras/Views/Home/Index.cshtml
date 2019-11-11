@@ -101,36 +101,9 @@
     </div>   
 </div>
 
-
-
-
-
-
-
-@*<div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </div>
-    </div>*@
-
-
 <script type="text/javascript">
-     $("#buscar").click(function() {
+    $("#buscar").click(function () {
+         
      var tipoProveedor = $('#tipoProveedor').val() == '' ? null : $('#tipoProveedor').val();
      var idGiroProveedor = $('#giro').val() == '' ? null : $('#giro').val();
      var idAeropuerto = $('#aeropuerto').val() == '' ? null : $('#aeropuerto').val();
@@ -146,16 +119,18 @@
          async: false,
          success: function(data) {
              console.log("Traigo Datos", data)
+                       
              $("#Table").append('<thead class="bg-purple"><tr><td>IdProveedor</td>' +
                  '<td>Proveedor</td>' +
                  '<td>RFC</td>' +
                  '<td>Email</td>' +
                  '<td>Estatus</td>' +
-                 '<td>Acción</td></tr></thead>'
+                 '<td>Ver</td></tr></thead>'
              );
+             
              $("#Table").append('<tbody>');
              for (i = 0; i < data.length; i++) {
-                 //var link = '@Html.ActionLink("Ver","About", "Home", new { id  = "_idProveedor_"})';
+                 
                  var link = '@Html.ActionLink(" ", "About", "Home", new { idProvider ="_idProveedor_" }, new { @class = "fas fa-eye icon-color" })';
                  link = link.replace('_idProveedor_', data[i].IdProveedor);
                  console.log("link", link);
@@ -170,7 +145,7 @@
                  );                 
              }
              $("#Table").append('</tbody>');
-             
+              
              $('#Table').DataTable({
                     "paging": false,
                      "bScrollInfinite": true,

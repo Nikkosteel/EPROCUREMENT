@@ -42,6 +42,34 @@ namespace Eprocurement.Compras.Business
 
             
         }
+        public ProveedorDetalleResponseDTO GetProveedorElemento(ProveedorDetalleRequestDTO request)
+        {
+            ProveedorDetalleResponseDTO response = new ProveedorDetalleResponseDTO();
+
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi + "api/Proveedor/");
+                var json = JsonConvert.SerializeObject(request);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var responseTask = client.PostAsync("ProveedorElemento", content);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSSerializer = new JavaScriptSerializer();
+                    response = JSSerializer.Deserialize<ProveedorDetalleResponseDTO>(readTask.Result);
+
+                }
+            }
+            return response;
+
+
+
+
+        }
         public List<PaisDTO> GetPaisesList()
         {
             var lstPaises = new List<PaisDTO>();
@@ -168,49 +196,53 @@ namespace Eprocurement.Compras.Business
             return lstIdioma;
         }
 
-        //public List<EstadoDTO> GetEstadoList()
-        //{
-        //    var lstEstado = new List<EstadoDTO>();
-        //    using (var client = new HttpClient())
-        //    {
-        //        client.BaseAddress = new Uri(urlApi + "api/Catalogo/");
-        //        var responseTask = client.GetAsync("EstadoGetList");
-        //        responseTask.Wait();
+        public List<EstadoDTO> GetEstadoList(int idPais)
+        {
+            List<EstadoDTO> lstEstado = new List<EstadoDTO>();
+            EstadoRequesteDTO estado = new EstadoRequesteDTO { idPais = idPais };
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi + "api/Catalogo/");
+                var json = JsonConvert.SerializeObject(estado);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var responseTask = client.PostAsync("EstadoGetList", content);
+                responseTask.Wait();
 
-        //        var result = responseTask.Result;
-        //        if (result.IsSuccessStatusCode)
-        //        {
-        //            var readTask = result.Content.ReadAsStringAsync();
-        //            JavaScriptSerializer JSserializer = new JavaScriptSerializer();
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSSerializer = new JavaScriptSerializer();
+                    var response = JSSerializer.Deserialize<EstadoResponseDTO>(readTask.Result);
+                    lstEstado = response.EstadoList;
+                }
+            }
+            return lstEstado;
+        }
 
-        //            var response = JSserializer.Deserialize<EstadoResponseDTO>(readTask.Result);
-        //            lstEstado = response.EstadoList;
-        //        }
-        //    }
-        //    return lstEstado;
-        //}
+        public List<MunicipioDTO> GetMunicipioList(int idEstado)
+        {
+            List<MunicipioDTO> lstMunicipio = new List<MunicipioDTO>();
+            MunicipioRequesteDTO estado = new MunicipioRequesteDTO { idEstado = idEstado };
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi + "api/Catalogo/");
+                var json = JsonConvert.SerializeObject(estado);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var responseTask = client.PostAsync("MunicipioGetList", content);
+                responseTask.Wait();
 
-        //public List<MunicipioDTO> GetMunicipioList()
-        //{
-        //    var lstMunicipio = new List<MunicipioDTO>();
-        //    using (var client = new HttpClient())
-        //    {
-        //        client.BaseAddress = new Uri(urlApi + "api/Catalogo/");
-        //        var responseTask = client.GetAsync("MunicipioGetList");
-        //        responseTask.Wait();
-
-        //        var result = responseTask.Result;
-        //        if (result.IsSuccessStatusCode)
-        //        {
-        //            var readTask = result.Content.ReadAsStringAsync();
-        //            JavaScriptSerializer JSserializer = new JavaScriptSerializer();
-
-        //            var response = JSserializer.Deserialize<MunicipioResponseDTO>(readTask.Result);
-        //            lstMunicipio = response.MunicipioList;
-        //        }
-        //    }
-        //    return lstMunicipio;
-        //}
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSSerializer = new JavaScriptSerializer();
+                    var response = JSSerializer.Deserialize<MunicipioResponseDTO>(readTask.Result);
+                    lstMunicipio = response.MunicipioList;
+                }
+            }
+            return lstMunicipio;
+        }
 
         public List<TipoProveedorDTO> GetTipoProveedorList()
         {
