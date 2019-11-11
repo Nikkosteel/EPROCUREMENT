@@ -89,12 +89,29 @@ namespace Eprocurement.Compras.Controllers
             municipioList = businessLogic.GetMunicipioList(idEstado);
             return Json(municipioList, JsonRequestBehavior.AllowGet);
         }
-
-        public ActionResult About()
+        
+        public ActionResult About(int idProvider)
         {
-            ViewBag.Message = "Your application description page.";
+            try
+            {
+                BusinessLogic businessLogic = new BusinessLogic();
+                ProveedorDetalleRequestDTO request = new ProveedorDetalleRequestDTO();
+                request.IdProveedor = idProvider;
 
-            return View();
+                var response = businessLogic.GetProveedorElemento(request);
+                return View(response.Proveedor);
+              
+            }
+            catch (Exception ex)
+            {
+
+                return View();
+            }
+
+
+            //ViewBag.Message = "Your application description page.";
+
+            //return View();
         }
 
         public ActionResult Contact()
