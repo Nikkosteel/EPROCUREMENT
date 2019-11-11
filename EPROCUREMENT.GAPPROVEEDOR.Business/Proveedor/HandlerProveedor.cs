@@ -63,5 +63,19 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Business.Proveedor
             }
             return response;
         }
+
+        /// <summary>
+        /// Metodo para insertar el estatus del proveedor
+        /// </summary>
+        /// <returns>Un objeto de tipo ProveedorResponseDTO con la respuesta</returns>
+        public ProveedorEstatusResponseDTO EstatusProveedorInsertar(ProveedorAprobarRequestDTO request)
+        {
+            var response = proveedorData.EstatusProveedorInsertar(request);
+            if (!response.Success)
+            {
+                response.ErrorList = new List<ErrorDTO> { new ErrorDTO { Codigo = "", Mensaje = string.Format("No fue posible recuperar datos disponibles o no se encontro alguna solicitud en proceso") } };
+            }
+            return response;
+        }
     }
 }
