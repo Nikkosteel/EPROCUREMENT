@@ -10,26 +10,23 @@ namespace EprocurementWeb
             bundles.UseCdn = true;
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Content/Scripts/jquery-{version}.js"));
+                        "~/scripts/jquery-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                        "~/scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/shared").Include(
                         "~/Content/Scripts/multiLanguajeDemo.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Content/Scripts/jquery.validate*"));
+            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+                        "~/scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Content/Scripts/bootstrap.js",
-                      "~/Content/Scripts/respond.js"));
+                      "~/scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/Styles/bootstrap.css",
+                      "~/Content/bootstrap.css",
                       "~/Content/Styles/site.css"));
-            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                 "~/Scripts/libs/runtime*",
-                 "~/Scripts/libs/polyfills*",
-                 "~/Scripts/libs/vendor*",
-                 "~/Scripts/libs/main*"));
         }
     }
 }
