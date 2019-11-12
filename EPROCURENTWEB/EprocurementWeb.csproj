@@ -169,8 +169,6 @@
     <Content Include="Content\Images\Mexico.png" />
     <Content Include="Content\Scripts\es-mx\jquery.validate.extension.js" />
     <Content Include="Content\Scripts\fr-fr\jquery.validate.extension.js" />
-    <Content Include="Content\Styles\bootstrap.css" />
-    <Content Include="Content\Styles\bootstrap.min.css" />
     <Content Include="Content\Images\en-us\welcome.jpg" />
     <Content Include="Content\Images\es-es\welcome.jpg" />
     <Content Include="Content\Images\Spain.png" />
@@ -178,8 +176,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Styles\Site.css" />
-    <Content Include="Content\Scripts\bootstrap.js" />
-    <Content Include="Content\Scripts\bootstrap.min.js" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
@@ -218,11 +214,14 @@
     <Content Include="scripts\bootstrap.js.map" />
     <Content Include="scripts\bootstrap.bundle.min.js.map" />
     <Content Include="scripts\bootstrap.bundle.js.map" />
-    <None Include="scripts\jquery-3.0.0-vsdoc.js" />
-    <Content Include="scripts\jquery-3.0.0.js" />
-    <Content Include="scripts\jquery-3.0.0.min.js" />
-    <Content Include="scripts\jquery-3.0.0.slim.js" />
-    <Content Include="scripts\jquery-3.0.0.slim.min.js" />
+    <None Include="scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="scripts\jquery-3.4.1.js" />
+    <Content Include="scripts\jquery-3.4.1.min.js" />
+    <Content Include="scripts\jquery-3.4.1.slim.js" />
+    <Content Include="scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="scripts\jquery.validate-vsdoc.js" />
+    <Content Include="scripts\jquery.validate.js" />
+    <Content Include="scripts\jquery.validate.min.js" />
     <Content Include="scripts\libs\favicon.ico" />
     <Content Include="scripts\libs\index.html" />
     <Content Include="scripts\libs\main.js" />
@@ -230,6 +229,7 @@
     <Content Include="scripts\libs\runtime.js" />
     <Content Include="scripts\libs\styles.js" />
     <Content Include="scripts\libs\vendor.js" />
+    <Content Include="scripts\modernizr-2.8.3.js" />
     <Content Include="scripts\popper-utils.js" />
     <Content Include="scripts\popper-utils.min.js" />
     <Content Include="scripts\popper.js" />
@@ -259,8 +259,6 @@
     <Content Include="scripts\libs\runtime.js.map" />
     <Content Include="scripts\libs\styles.js.map" />
     <Content Include="scripts\libs\vendor.js.map" />
-    <Content Include="scripts\jquery-3.0.0.slim.min.map" />
-    <Content Include="scripts\jquery-3.0.0.min.map" />
     <Content Include="scripts\umd\popper.min.js.map" />
     <Content Include="scripts\umd\popper.js.map" />
     <Content Include="scripts\umd\popper-utils.min.js.map" />
@@ -271,6 +269,8 @@
     <Content Include="scripts\popper-utils.min.js.map" />
     <Content Include="scripts\popper-utils.js.map" />
     <Content Include="Views\Home\Editar.cshtml" />
+    <Content Include="scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
