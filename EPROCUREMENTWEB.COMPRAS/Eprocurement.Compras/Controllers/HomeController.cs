@@ -71,10 +71,9 @@ namespace Eprocurement.Compras.Controllers
                 request.IdProveedor = idProvider;
 
                 var response = businessLogic.GetProveedorElemento(request).Proveedor;
-                var empresaList = response.EmpresaList;
                 proveedor = new ProveedorRegistro
                 {
-                    AeropuertoList = aeropuertoList.Select(a => new AeropuertoDTO { Id = a.Id, Nombre = a.Nombre, Checado = empresaList.Where(el => el.IdCatalogoAeropuerto == a.Id).Count() > 0 ? true : false }).ToList(),
+                    AeropuertoList = aeropuertoList,
                     AXFechaRegistro = response.AXFechaRegistro,
                     AXNumeroProveedor = response.AXNumeroProveedor,
                     Contacto = response.Contacto,
