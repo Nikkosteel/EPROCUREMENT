@@ -1,6 +1,6 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    /*padding-top: 50px;
+    padding-bottom: 20px;*/
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -117,12 +117,12 @@ input[type="checkbox"] {
     background: lightgray;
     height: 16px;
     width: 16px;
-    border: 1px solid white;
+    border: 1px solid #c6c7cb;
     margin-right: 5px;
 }
 
     input[type="checkbox"]:checked {
-        background: #432979;
+        background: #fff;
     }
 
     input[type="checkbox"]:hover {
@@ -154,7 +154,7 @@ input[type="checkbox"] {
         top: 10%;
         width: 35%;
         height: 70%;
-        border: solid #fff;
+        border: solid #43ac3e;
         border-width: 0 2px 2px 0;
         transform: rotate(45deg);
         display: none;
@@ -194,4 +194,8 @@ input[type="checkbox"] {
 
 .m-t-1 {
     margin-top: 30px !important;
+}
+.bg-purple {
+    background-color: #432979 !important;
+    color: white;
 }

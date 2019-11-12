@@ -44,9 +44,9 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group">  
+                                        <div class="form-group">
                                             @Html.Label("razonSocial", "Razón social", new { @class = "label-formulario" })
-                                            @Html.TextBoxFor(model => model.RazonSocial, new { @class = "form-control col-md-12" })                                                                                      
+                                            @Html.TextBoxFor(model => model.RazonSocial, new { @class = "form-control col-md-12" })
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -84,25 +84,25 @@
                                             @Html.Label("estado", "Estado", new { @class = "label-formulario" })
                                             @Html.DropDownListFor(model => model.Direccion.IdEstado, new SelectList(Enumerable.Empty<EPROCUREMENT.GAPPROVEEDOR.Entities.EstadoDTO>(), "IdEstado", "Nombre"), "...", new { @class = "form-control col-md-12", @id = "EstadoProveedor" })
                                         </div>
-                                    </div>  
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             @Html.Label("direccion", "Calle", new { @class = "label-formulario" })
                                             @Html.TextBoxFor(model => model.Direccion.Calle, new { @class = "form-control col-md-12" })
                                         </div>
-                                    </div>  
+                                    </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("pais", "País", new { @class = "label-formulario" })
                                             @Html.DropDownListFor(model => model.Direccion.IdPais, new SelectList(ViewBag.PaisList, "IdPais", "Nombre"), "...", new { @class = "form-control col-md-12", @id = "PaisProveedor" })
                                         </div>
-                                    </div>  
+                                    </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("zonaHoraria", "Zona horaria", new { @class = "label-formulario" })
                                             @Html.DropDownListFor(model => model.IdZonaHoraria, new SelectList(ViewBag.ZonaHorariaList, "IdZonaHoraria", "Nombre"), "...", new { @class = "form-control col-md-12" })
                                         </div>
-                                    </div>                               
+                                    </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("telefono", "Teléfono", new { @class = "label-formulario" })
@@ -120,7 +120,7 @@
                                             @Html.Label("paginaWeb", "Página web", new { @class = "label-formulario" })
                                             @Html.TextBoxFor(model => model.PaginaWeb, new { @class = "form-control col-md-12" })
                                         </div>
-                                    </div>                                    
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             @Html.Label("tipoProveedor", "Tipo proveedor", new { @class = "label-formulario" })
@@ -138,7 +138,7 @@
                                             @Html.Label("nacionalidad", "Nacionalidad", new { @class = "label-formulario" })
                                             @Html.DropDownListFor(model => model.IdNacionalidad, new SelectList(ViewBag.NacionalidadList, "IdNacionalidad", "Nombre"), "...", new { @class = "form-control col-md-12" })
                                         </div>
-                                    </div>                                                                       
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -253,25 +253,25 @@
                                     <div class="col-md-12">
                                         <ul id="wkslist" class="ulChk">
                                             @for (int idx = 0; idx < Model.AeropuertoList.Count; idx++)
-                                            { @Html.HiddenFor(model => model.AeropuertoList[idx].Id)
-                                                @Html.HiddenFor(model => model.AeropuertoList[idx].Nombre)
-                                                <li class="col-sm-6">
-                                                    @Html.CheckBoxFor(model => model.AeropuertoList[idx].Checado)
-                                                    @Html.DisplayTextFor(model => model.AeropuertoList[idx].Nombre)
-                                                </li>
-                                            }
+                                            {@Html.HiddenFor(model => model.AeropuertoList[idx].Id)
+                                            @Html.HiddenFor(model => model.AeropuertoList[idx].Nombre)
+                                            <li class="col-sm-6">
+                                                @Html.CheckBoxFor(model => model.AeropuertoList[idx].Checado)
+                                                @Html.DisplayTextFor(model => model.AeropuertoList[idx].Nombre)
+                                            </li>
+                                        }
                                         </ul>
                                         @Html.Label("", "Favor de seleccionar el (los) giro (s) específicos que su empresa esta calificada (Máximo 5)*", new { @class = "control-label m-b-1 m-t-1" })
                                         @for (int idx = 0; idx < 5; idx++)
-                                        { @Html.HiddenFor(model => model.ProveedorGiroList[idx].IdProveedorGiro)
-                                            <div class="form-group col-md-12 sel-p">
-                                                @Html.Label("Giro1:", new { @class = "col-md-2 control-label" })
-                                                <div class="col-md-10">
-                                                    @Html.DropDownListFor(x => x.ProveedorGiroList[idx].IdCatalogoGiro, new SelectList(ViewBag.GiroList, "IdGiro", "GiroNombre"), "...", new { @class = "form-control col-md-12" })
-                                                </div>
+                                        {@Html.HiddenFor(model => model.ProveedorGiroList[idx].IdProveedorGiro)
+                                        <div class="form-group col-md-12 sel-p">
+                                            @Html.Label("Giro1:", new { @class = "col-md-2 control-label" })
+                                            <div class="col-md-10">
+                                                @Html.DropDownListFor(x => x.ProveedorGiroList[idx].IdCatalogoGiro, new SelectList(ViewBag.GiroList, "IdGiro", "GiroNombre"), "...", new { @class = "form-control col-md-12" })
                                             </div>
-                                        }
-                                    </div>                                   
+                                        </div>
+                                    }
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -280,12 +280,13 @@
             </div>
         </div>
     </div>
-    <div class="row mt-2">
+
+    <div class="row">
         <div class="col-sm-3">
             <button class="btnStyle" type="submit">Documentacion pendiente</button>
         </div>
         <div class="col-sm-3">
-            <button class="btnStyle" type="submit">Rechazar</button>
+            <input type="button" class="btnStyle" data-toggle="modal" data-target="#modalRechazar" value="Rechazar" />
         </div>
         <div class="col-sm-3">
             <button class="btnStyle" type="submit">Cancelar</button>
@@ -294,6 +295,38 @@
             <button class="btnStyle" type="submit">Guardar</button>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalRechazar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-purple">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Motivo del rechazo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="observaciones" class="col-form-label">Ingresa un comentario para el proveedor</label>
+                            <textarea class="form-control" id="observaciones"></textarea>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btnRechazar" class="btnStyle"><i class='fas fa-paper-plane'></i>Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </form>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -340,5 +373,33 @@
                     });
                 });
         });
+
+
+        $("#btnRechazar").click(function () {
+
+            swal({
+                title: "¿Esta seguro de rechazar el proveedor?",
+                //text: "Once deleted, you will not be able to recover this imaginary file!",
+                icon: "warning",
+                buttons: {
+                    cancel: "Cancelar",
+                    Aceptar: true,
+                },
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $('#modalRechazar').modal('hide');
+                        swal("Se ha rechazado el proveedor", {
+                            icon: "success",
+                        });
+                    }
+                    //else {
+                    //    swal("Your imaginary file is safe!");
+                    //}
+                });
+
+        });
+
     });
 </script>
