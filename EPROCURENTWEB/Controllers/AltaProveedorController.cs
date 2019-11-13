@@ -45,7 +45,16 @@ namespace EprocurementWeb.Controllers
             var response = business.GuardarProveedorCuenta(request);
             if (response.Success)
             {
-                business.GuardarDocumentos(proveedor.RFC, proveedor.CatalogoDocumentoList);
+                bool respuestaDoc = business.GuardarDocumentos(proveedor.RFC, proveedor.CatalogoDocumentoList);
+                if (respuestaDoc)
+                {
+                    ProveedorAprobarRequestDTO requestAprobador = new ProveedorAprobarRequestDTO { EstatusProveedor = new HistoricoEstatusProveedorDTO { IdEstatusProveedor = 5, IdProveedor = proveedor.ProveedorCuentaList[0].IdProveedor, IdUsuario = 3 } };
+                    var responseAprobar = business.SetProveedorEstatus(requestAprobador);
+                    if (responseAprobar.Success)
+                    {
+                        return View(proveedor);
+                    }
+                }
             }
             return View(proveedor);
         }
