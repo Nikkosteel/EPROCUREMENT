@@ -84,6 +84,108 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
             return response;
         }
 
+        public ProveedorCuentaResponseDTO GuardarProveedorCuenta(ProveedorCuentaRequestDTO request)
+        {
+            ProveedorCuentaResponseDTO response = new ProveedorCuentaResponseDTO()
+            {
+                ErrorList = new List<ErrorDTO>()
+            };
+
+            try
+            {
+                using (var conexion = new SqlConnection(Helper.Connection()))
+                {
+                    conexion.Open();
+
+                    using (TransactionScope transactionScope = new TransactionScope())
+                    {
+                        foreach (var proveedorCuenta in request.ProveedorCuentaList)
+                        {
+                            var cmdCuenta = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_ProveedorCuenta_INS, conexion);
+                            cmdCuenta.CommandType = CommandType.StoredProcedure;
+                            cmdCuenta.Parameters.Add(new SqlParameter("@Cuenta", proveedorCuenta.Cuenta));
+                            cmdCuenta.Parameters.Add(new SqlParameter("@IdBanco", proveedorCuenta.IdBanco));
+                            cmdCuenta.Parameters.Add(new SqlParameter("@CLABE", proveedorCuenta.CLABE));
+                            cmdCuenta.Parameters.Add(new SqlParameter("@IdTipoCuenta", proveedorCuenta.IdTipoCuenta));
+                            cmdCuenta.Parameters.Add(new SqlParameter("@IdProveedor", proveedorCuenta.IdProveedor));
+                            cmdCuenta.Parameters.Add(new SqlParameter("Result", SqlDbType.BigInt) { Direction = ParameterDirection.ReturnValue });
+                            cmdCuenta.ExecuteNonQuery();
+                            var idProveedorCuenta = Convert.ToInt32(cmdCuenta.Parameters["Result"].Value);
+                            if (idProveedorCuenta > 0)
+                            {
+                                foreach (var aeropuerto in proveedorCuenta.AeropuertoList)
+                                {
+
+                                    var cmdAeropuerto = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_CuentaEmpresa_INS, conexion);
+                                    cmdAeropuerto.CommandType = CommandType.StoredProcedure;
+                                    cmdAeropuerto.Parameters.Add(new SqlParameter("@IdProveedorCuenta", idProveedorCuenta));
+                                    cmdAeropuerto.Parameters.Add(new SqlParameter("@IdCatalogoAeropuerto", SqlDbType.NVarChar, 50)).Value = aeropuerto.Id;
+                                    cmdAeropuerto.Parameters.Add(new SqlParameter("Result", SqlDbType.BigInt) { Direction = ParameterDirection.ReturnValue });
+                                    cmdAeropuerto.ExecuteNonQuery();
+                                    if (Convert.ToInt32(cmdAeropuerto.Parameters["Result"].Value) < 1)
+                                    {
+                                        return response;
+                                    }
+                                }
+                            }
+                            else { return response; }
+                        }
+
+                        transactionScope.Complete();
+                        response.Success = true;
+
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+            }
+            return response;
+        }
+
+        public ProveedorDocumentoResponseDTO GuardarProveedorDocumento(ProveedorDocumentoRequestDTO request)
+        {
+            ProveedorDocumentoResponseDTO response = new ProveedorDocumentoResponseDTO()
+            {
+                ErrorList = new List<ErrorDTO>()
+            };
+
+            try
+            {
+                using (var conexion = new SqlConnection(Helper.Connection()))
+                {
+                    conexion.Open();
+
+                    using (TransactionScope transactionScope = new TransactionScope())
+                    {
+                        foreach (var proveedorDocumento in request.ProveedorDocumentoList)
+                        {
+                            var cmdDocto = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_ProveedorDocumento_INS, conexion);
+                            cmdDocto.CommandType = CommandType.StoredProcedure;
+                            cmdDocto.Parameters.Add(new SqlParameter("@IdProveedor", proveedorDocumento.IdProveedor));
+                            cmdDocto.Parameters.Add(new SqlParameter("@IdCatalogoDocumento", proveedorDocumento.IdCatalogoDocumento));
+                            cmdDocto.Parameters.Add(new SqlParameter("@DescripcionDocumento", SqlDbType.NVarChar, 560)).Value = proveedorDocumento.DescripcionDocumento;
+                            cmdDocto.Parameters.Add(new SqlParameter("@DocumentoAutorizado", proveedorDocumento.DocumentoAutorizado));
+                            cmdDocto.Parameters.Add(new SqlParameter("Result", SqlDbType.BigInt) { Direction = ParameterDirection.ReturnValue });
+                            cmdDocto.ExecuteNonQuery();
+                            if (Convert.ToInt32(cmdDocto.Parameters["Result"].Value) < 1)
+                            {
+                                return response;
+                            }
+                        }
+
+                        transactionScope.Complete();
+                        response.Success = true;
+
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+            }
+            return response;
+        }
+
         /// <summary>
         /// Obtiene un listado de provedores por filtro
         /// </summary>
@@ -198,17 +300,88 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                 using (var conexion = new SqlConnection(Helper.Connection()))
                 {
                     conexion.Open();
+                    //var valorValido = 0;
+                    //var password = "";
+                    //while (valorValido != 0)
+                    //{
+                    //    password = GenerarPassword(10);
+                    //    var cmdPassword = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_EstatusProveedor_INS, conexion);
+                    //    cmdPassword.CommandType = CommandType.StoredProcedure;
+                    //    cmdPassword.Parameters.Add(new SqlParameter("@NombreContacto", SqlDbType.NVarChar, 300)).Value = contacto.NombreContacto;
+                    //    cmdPassword.Parameters.Add(new SqlParameter("Result", SqlDbType.Int) { Direction = ParameterDirection.ReturnValue });
+                    //    cmdPassword.ExecuteNonQuery();
+                    //    var resultado = Convert.ToInt32(cmdPassword.Parameters["Result"].Value);
+                    //}
 
                     var cmdEstatus = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_EstatusProveedor_INS, conexion);
-                    if (ExecuteComandEstatus(cmdEstatus, request.EstatusProveedor) > 0)
+                    if (request.EstatusProveedor.IdEstatusProveedor == 3)
                     {
-                        response.Success = true;
+                        var userPassword = GenerarPassword(10);
+                        var cmdUsuario = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_UsuarioProveedor_IN, conexion);
+                        var idUsuario = ExecuteComandUsuario(cmdUsuario, request.EstatusProveedor.IdProveedor, userPassword);
+                        request.EstatusProveedor.IdUsuario = idUsuario;
+                        if (idUsuario > 0)
+                        {
+                            if (ExecuteComandEstatus(cmdEstatus, request.EstatusProveedor) > 0)
+                            {
+
+                                new EmailData().Enviar(request.EstatusProveedor.IdProveedor, idUsuario);
+                                response.Success = true;
+                            }
+                        }
+                    }
+                    else if (request.EstatusProveedor.IdEstatusProveedor == 2)
+                    {
+                        if (ExecuteComandEstatus(cmdEstatus, request.EstatusProveedor) > 0)
+                        {
+                            response.Success = true;
+                        }
+                    }
+                    else
+                    {
+                        response.ErrorList = new List<ErrorDTO> { new ErrorDTO { Codigo = "", Mensaje = string.Format("Estatus No valido") } };
                     }
                 }
             }
             catch (Exception exception)
             {
             }
+            return response;
+        }
+
+        public ProveedorUsuarioDTO GetProvedorUsuarioItem(int idProveedor, int idUsuario)
+        {
+            ProveedorUsuarioDTO response = new ProveedorUsuarioDTO();
+
+            try
+            {
+                using (var conexion = new SqlConnection(Helper.Connection()))
+                {
+                    conexion.Open();
+                    var cmd = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_ProveedorUsuario_GETIById, conexion)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    cmd.Parameters.Add(new SqlParameter("@idProveedor", idProveedor));
+                    cmd.Parameters.Add(new SqlParameter("@IdUsuario", idUsuario));
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            response = new ProveedorUsuarioDTO();
+                            response.RFC = reader["RFC"].ToString();
+                            response.NombreEmpresa = reader["NombreEmpresa"].ToString();
+                            response.Email = reader["Email"].ToString();
+                            response.Password = reader["Password"].ToString();
+                        }
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+            }
+
             return response;
         }
 
@@ -490,6 +663,40 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
             cmdEstatus.ExecuteNonQuery();
             var resultado = Convert.ToInt32(cmdEstatus.Parameters["Result"].Value);
             return resultado;
+        }
+        private int ExecuteComandUsuario(SqlCommand cmdUsuario, int idProveedor, string password)
+        {
+            cmdUsuario.CommandType = CommandType.StoredProcedure;
+            cmdUsuario.Parameters.Add(new SqlParameter("@IdProveedor", idProveedor));
+            cmdUsuario.Parameters.Add(new SqlParameter("@Password", password));
+            cmdUsuario.Parameters.Add(new SqlParameter("Result", SqlDbType.Int) { Direction = ParameterDirection.ReturnValue });
+            cmdUsuario.ExecuteNonQuery();
+            var resultado = Convert.ToInt32(cmdUsuario.Parameters["Result"].Value);
+            return resultado;
+        }
+
+        public static string GenerarPassword(int longitud)
+        {
+            string contrasenia = string.Empty;
+            string[] letras = { "_", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "ñ", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+                                "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+            Random EleccionAleatoria = new Random();
+
+            for (int i = 0; i < longitud; i++)
+            {
+                int LetraAleatoria = EleccionAleatoria.Next(0, 100);
+                int NumeroAleatorio = EleccionAleatoria.Next(0, 9);
+
+                if (LetraAleatoria < letras.Length)
+                {
+                    contrasenia += letras[LetraAleatoria];
+                }
+                else
+                {
+                    contrasenia += NumeroAleatorio.ToString();
+                }
+            }
+            return contrasenia;
         }
     }
 }

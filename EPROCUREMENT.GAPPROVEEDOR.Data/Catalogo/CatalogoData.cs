@@ -51,7 +51,6 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                     }
                 }
                 response.Success = true;
-                return response;
             }
             catch (Exception exception)
             {
@@ -96,7 +95,6 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                     }
                 }
                 response.Success = true;
-                return response;
             }
             catch (Exception exception) 
             {
@@ -140,7 +138,6 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                     }
                 }
                 response.Success = true;
-                return response;
             }
             catch (Exception exception)
             {
@@ -185,7 +182,6 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                     }
                 }
                 response.Success = true;
-                return response;
             }
             catch (Exception exception)
             {
@@ -229,7 +225,6 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                     }
                 }
                 response.Success = true;
-                return response;
             }
             catch (Exception exception)
             {
@@ -321,7 +316,6 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                     }
                 }
                 response.Success = true;
-                return response;
             }
             catch (Exception exception)
             {
@@ -415,6 +409,167 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
             }
             catch (Exception exception)
             {
+            }
+
+            return response;
+        }
+
+        public TipoCuentaResponseDTO GetTipoCuentaList()
+        {
+            TipoCuentaResponseDTO response = new TipoCuentaResponseDTO()
+            {
+                TipoCuentaList = new List<TipoCuentaDTO>()
+            };
+
+            TipoCuentaDTO tipoCuenta = null;
+            try
+            {
+
+                using (var conexion = new SqlConnection(Helper.Connection()))
+                {
+                    conexion.Open();
+                    var cmd = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_TipoCuenta_GETL, conexion)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            tipoCuenta = new TipoCuentaDTO();
+                            tipoCuenta.IdTipoCuenta = Convert.ToInt32(reader["IdTipoCuenta"]);
+                            tipoCuenta.Tipo = reader["Tipo"].ToString();
+                            response.TipoCuentaList.Add(tipoCuenta);
+                        }
+                    }
+                }
+                response.Success = true;
+            }
+            catch (Exception exception)
+            {
+
+            }
+
+            return response;
+        }
+
+        public BancoResponseDTO GetBancoList()
+        {
+            BancoResponseDTO response = new BancoResponseDTO()
+            {
+                BancoList = new List<BancoDTO>()
+            };
+
+            BancoDTO banco = null;
+            try
+            {
+                using (var conexion = new SqlConnection(Helper.Connection()))
+                {
+                    conexion.Open();
+                    var cmd = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_Banco_GETL, conexion)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            banco = new BancoDTO();
+                            banco.IdBanco = Convert.ToInt32(reader["IdBanco"]);
+                            banco.Nombre = reader["Nombre"].ToString();
+                            response.BancoList.Add(banco);
+                        }
+                    }
+                }
+                response.Success = true;
+            }
+            catch (Exception exception)
+            {
+
+            }
+
+            return response;
+        }
+
+        public CatalogoDocumentoResponseDTO GetCatalogoDocumentoList()
+        {
+            CatalogoDocumentoResponseDTO response = new CatalogoDocumentoResponseDTO()
+            {
+                CatalogoDocumentoList = new List<CatalogoDocumentoDTO>()
+            };
+
+            CatalogoDocumentoDTO catalogoDocumento = null;
+            try
+            {
+                using (var conexion = new SqlConnection(Helper.Connection()))
+                {
+                    conexion.Open();
+                    var cmd = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_CatalogoDocumento_GETL, conexion)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            catalogoDocumento = new CatalogoDocumentoDTO();
+                            catalogoDocumento.IdProveedorDocumento = Convert.ToInt32(reader["IdProveedorDocumento"]);
+                            catalogoDocumento.NombreDocumento = reader["NombreDocumento"].ToString();
+                            catalogoDocumento.IdFormatoArchivo = Convert.ToInt32(reader["IdFormatoArchivo"]);
+                            catalogoDocumento.EsRequerido = Convert.ToBoolean(reader["EsRequerido"]);
+                            catalogoDocumento.IdFormulario = Convert.ToInt32(reader["IdFormulario"]);
+                            response.CatalogoDocumentoList.Add(catalogoDocumento);
+                        }
+                    }
+                }
+                response.Success = true;
+            }
+            catch (Exception exception)
+            {
+
+            }
+
+            return response;
+        }
+
+        public FormatoArchivoResponseDTO GetFormatoArchivoList()
+        {
+            FormatoArchivoResponseDTO response = new FormatoArchivoResponseDTO()
+            {
+                FormatoArchivoList = new List<FormatoArchivoDTO>()
+            };
+
+            FormatoArchivoDTO formatoArchivo = null;
+            try
+            {
+                using (var conexion = new SqlConnection(Helper.Connection()))
+                {
+                    conexion.Open();
+                    var cmd = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_FormatoArchivo_GETL, conexion)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            formatoArchivo = new FormatoArchivoDTO();
+                            formatoArchivo.IdFormatoArchivo = Convert.ToInt32(reader["IdFormatoArchivo"]); 
+                            formatoArchivo.FormatoNombre = reader["FormatoNombre"].ToString();
+                            formatoArchivo.FormatoDescripcion = reader["FormatoDescripcion"].ToString();
+                            response.FormatoArchivoList.Add(formatoArchivo);
+                        }
+                    }
+                }
+                response.Success = true;
+            }
+            catch (Exception exception)
+            {
+
             }
 
             return response;

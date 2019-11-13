@@ -34,6 +34,26 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Business.Proveedor
             return response;
         }
 
+        public ProveedorCuentaResponseDTO GuardarProveedorCuenta(ProveedorCuentaRequestDTO request)
+        {
+            var response = proveedorData.GuardarProveedorCuenta(request);
+            if (!response.Success)
+            {
+                response.ErrorList = new List<ErrorDTO> { new ErrorDTO { Codigo = "", Mensaje = string.Format("No fue posible recuperar datos disponibles o no se encontro alguna solicitud en proceso") } };
+            }
+            return response;
+        }
+
+        public ProveedorDocumentoResponseDTO GuardarProveedorDocumento(ProveedorDocumentoRequestDTO request)
+        {
+            var response = proveedorData.GuardarProveedorDocumento(request);
+            if (!response.Success)
+            {
+                response.ErrorList = new List<ErrorDTO> { new ErrorDTO { Codigo = "", Mensaje = string.Format("No fue posible recuperar datos disponibles o no se encontro alguna solicitud en proceso") } };
+            }
+            return response;
+        }
+
         /// <summary>
         /// Obtiene un listado de provedores por filtro
         /// </summary>

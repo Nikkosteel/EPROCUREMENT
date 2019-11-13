@@ -96,5 +96,45 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
 
             return tipoProveedorResponse;
         }
+
+        // GET: api/TipoCuenta
+        [HttpGet]
+        [Route("TipoCuentaGetList")]
+        public TipoCuentaResponseDTO GetTipoCuentaList()
+        {
+            var tipoCuentaResponse = new HandlerCatalogo().GetTipoCuentaList();
+
+            return tipoCuentaResponse;
+        }
+
+        // GET: api/Banco
+        [HttpGet]
+        [Route("BancoGetList")]
+        public BancoResponseDTO GetBancoList()
+        {
+            var bancoResponse = new HandlerCatalogo().GetBancoList();
+
+            return bancoResponse;
+        }
+
+        // GET: api/CatalogoDocumento
+        [HttpGet]
+        [Route("CatalogoDocumentoList")]
+        public CatalogoDocumentoResponseDTO GetCatalogoDocumentoList()
+        {
+            var catalogoDocumento = new HandlerCatalogo().GetCatalogoDocumentoList();
+
+            return catalogoDocumento;
+        }
+
+        // GET: api/FormatoArchivo
+        [HttpGet]
+        [Route("FormatoArchivoList")]
+        public FormatoArchivoResponseDTO GetFormatoArchivoList()
+        {
+            var formatoArchivoResponse = new HandlerCatalogo().GetFormatoArchivoList();
+
+            return formatoArchivoResponse;
+        }
     }
 }
