@@ -28,6 +28,14 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
             return response;
         }
 
+        [HttpPost]
+        [Route("GuardarProveedorDocumento")]
+        public ProveedorDocumentoResponseDTO GuardarProveedorDocumento([FromBody]ProveedorDocumentoRequestDTO request)
+        {
+            var response = new HandlerProveedor().GuardarProveedorDocumento(request);
+            return response;
+        }
+
         // GET: api/ProveedorEstatusList
         [HttpPost]
         [Route("ProveedorEstatusList")]

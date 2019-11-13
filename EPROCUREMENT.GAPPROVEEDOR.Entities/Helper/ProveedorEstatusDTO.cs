@@ -13,5 +13,6 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Entities
         public string NombreEmpresa { get; set; }
         public string Email { get; set; }
         public string Estatus { get; set; }
+        public int IdEstatus { get; set; }
     }
 }

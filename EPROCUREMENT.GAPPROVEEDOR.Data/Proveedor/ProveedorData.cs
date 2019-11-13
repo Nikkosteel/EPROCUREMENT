@@ -143,6 +143,49 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
             return response;
         }
 
+        public ProveedorDocumentoResponseDTO GuardarProveedorDocumento(ProveedorDocumentoRequestDTO request)
+        {
+            ProveedorDocumentoResponseDTO response = new ProveedorDocumentoResponseDTO()
+            {
+                ErrorList = new List<ErrorDTO>()
+            };
+
+            try
+            {
+                using (var conexion = new SqlConnection(Helper.Connection()))
+                {
+                    conexion.Open();
+
+                    using (TransactionScope transactionScope = new TransactionScope())
+                    {
+                        foreach (var proveedorDocumento in request.ProveedorDocumentoList)
+                        {
+                            var cmdDocto = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_ProveedorDocumento_INS, conexion);
+                            cmdDocto.CommandType = CommandType.StoredProcedure;
+                            cmdDocto.Parameters.Add(new SqlParameter("@IdProveedor", proveedorDocumento.IdProveedor));
+                            cmdDocto.Parameters.Add(new SqlParameter("@IdCatalogoDocumento", proveedorDocumento.IdCatalogoDocumento));
+                            cmdDocto.Parameters.Add(new SqlParameter("@DescripcionDocumento", SqlDbType.NVarChar, 560)).Value = proveedorDocumento.DescripcionDocumento;
+                            cmdDocto.Parameters.Add(new SqlParameter("@DocumentoAutorizado", proveedorDocumento.DocumentoAutorizado));
+                            cmdDocto.Parameters.Add(new SqlParameter("Result", SqlDbType.BigInt) { Direction = ParameterDirection.ReturnValue });
+                            cmdDocto.ExecuteNonQuery();
+                            if (Convert.ToInt32(cmdDocto.Parameters["Result"].Value) < 1)
+                            {
+                                return response;
+                            }
+                        }
+
+                        transactionScope.Complete();
+                        response.Success = true;
+
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+            }
+            return response;
+        }
+
         /// <summary>
         /// Obtiene un listado de provedores por filtro
         /// </summary>
@@ -183,6 +226,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                             proveedorEstatus.NombreEmpresa = reader["NombreEmpresa"].ToString();
                             proveedorEstatus.Email = reader["Email"].ToString();
                             proveedorEstatus.Estatus = reader["Estatus"].ToString();
+                            proveedorEstatus.IdEstatus = Convert.ToInt32(reader["IdEstatus"]);
                             response.ProveedorList.Add(proveedorEstatus);
                         }
                     }
@@ -271,7 +315,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                     //}
 
                     var cmdEstatus = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_EstatusProveedor_INS, conexion);
-                    if (request.EstatusProveedor.IdEstatusProveedor == 3)
+                    if (request.EstatusProveedor.IdEstatusProveedor == 4)
                     {
                         var userPassword = GenerarPassword(10);
                         var cmdUsuario = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_UsuarioProveedor_IN, conexion);
@@ -288,6 +332,13 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                         }
                     }
                     else if (request.EstatusProveedor.IdEstatusProveedor == 2)
+                    {
+                        if (ExecuteComandEstatus(cmdEstatus, request.EstatusProveedor) > 0)
+                        {
+                            response.Success = true;
+                        }
+                    }
+                    else if (request.EstatusProveedor.IdEstatusProveedor == 5)
                     {
                         if (ExecuteComandEstatus(cmdEstatus, request.EstatusProveedor) > 0)
                         {

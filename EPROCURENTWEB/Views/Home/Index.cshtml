@@ -78,10 +78,11 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            @Html.Label("municipio", @RHome.City, new { @class = "label-formulario" })
-                                            @Html.DropDownListFor(model => model.Direccion.IdMunicipio, new SelectList(Enumerable.Empty<EPROCUREMENT.GAPPROVEEDOR.Entities.MunicipioDTO>(), "idMunicipio", "Nombre"), "...", new { @class = "form-control col-md-12", @id = "MunicipioProveedor" })
+                                            @Html.Label("pais", @RHome.Country, new { @class = "label-formulario" })
+                                            @Html.DropDownListFor(model => model.Direccion.IdPais, new SelectList(ViewBag.PaisList, "IdPais", "Nombre"), "...", new { @class = "form-control col-md-12", @id = "PaisProveedor" })
                                         </div>
                                     </div>
+
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("estado", @RHome.State, new { @class = "label-formulario" })
@@ -96,10 +97,11 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            @Html.Label("pais", @RHome.Country, new { @class = "label-formulario" })
-                                            @Html.DropDownListFor(model => model.Direccion.IdPais, new SelectList(ViewBag.PaisList, "IdPais", "Nombre"), "...", new { @class = "form-control col-md-12", @id = "PaisProveedor" })
+                                            @Html.Label("municipio", @RHome.City, new { @class = "label-formulario" })
+                                            @Html.DropDownListFor(model => model.Direccion.IdMunicipio, new SelectList(Enumerable.Empty<EPROCUREMENT.GAPPROVEEDOR.Entities.MunicipioDTO>(), "idMunicipio", "Nombre"), "...", new { @class = "form-control col-md-12", @id = "MunicipioProveedor" })
                                         </div>
                                     </div>
+
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("zonaHoraria", @RHome.TZone, new { @class = "label-formulario" })
@@ -294,15 +296,17 @@
 
             <li>
                 <input type="checkbox" data-val="true" data-val-required="Es necesario aceptar los términos y condiciones." id="termino" name="termino" value="true" required>
+                He leído y acepto los
                 <a href="#" data-toggle="modal" data-target="#modalTerminos" class="a-c">
-                    He leído y acepto los Términos y condiciones*
+                    Términos y condiciones
                 </a>
 
             </li>
             <li>
                 <input type="checkbox" data-val="true" data-val-required="Es necesario aceptar el aviso de privacidad" id="avisos" name="avisos" value="true" required>
+                He leído y acepto el
                 <a href="#" data-toggle="modal" data-target="#modalAviso" class="a-c">
-                    He leído y acepto el Aviso de privacidad*
+                    Aviso de privacidad
 
                 </a>
             </li>
@@ -319,48 +323,61 @@
             <button class="btnStyle" type="submit">Aceptar</button>
         </div>
     </div>
-    <div id="modalTerminos" class="modal fade" role="dialog">
+    <div class="modal" id="modalTerminos">
         <div class="modal-dialog modal-lg">
-
-            <!-- Modal content-->
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                <!-- Modal Header -->
+                <div class="modal-header bg-purple">
                     <h4 class="modal-title">Términos y condiciones</h4>
-                </div>
-                <div class="modal-body">
-
-                    <embed src="~/Content/PDF/PruebaTerminos.pdf" frameborder="0" width="100%" height="400px">
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div id="modalAviso" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-lg">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Aviso de privacidad</h4>
                 </div>
+
+                <!-- Modal body -->
                 <div class="modal-body">
+                    <embed src="~/Content/PDF/PruebaTerminos.pdf" frameborder="0" width="100%" height="400px">
+                </div>
 
-                    <embed src="~/Content/PDF/PruebaAvisos.pdf" frameborder="0" width="100%" height="400px">
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <div class="row">
+                        <button type="button" class="btn btnStyle" data-dismiss="modal">Aceptar</button>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
+
                 </div>
 
             </div>
         </div>
     </div>
+    <div class="modal" id="modalAviso">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header bg-purple">
+                    <h4 class="modal-title">Aviso de privacidad</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <embed src="~/Content/PDF/PruebaAvisos.pdf" frameborder="0" width="100%" height="400px">
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <div class="row">
+                        <button type="button" class="btn btnStyle" data-dismiss="modal">Aceptar</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+  
 </form>
 
 
@@ -376,6 +393,33 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
+         var url = '@Url.Action("Contact", "Home")'; 
+        if (window.location.hash == "#success" ){
+            Swal.fire({
+                position: 'middle',
+                icon: 'success',
+                title: '¡Envío Exitoso!',
+                html: '<p class="text">Su información será validada.</p> ' +
+                    '</br> <p class="text">Agradecemos su interés en formar parte de ' +
+                    'nuestro padrón de proveedores. ' +
+                    'Su solicitud será revisada por personal de ' +
+                    'Adquisiciones. En breve recibirá la respuesta.</p></br>' +
+                    '<p class="text">Atte:</p></br>' +
+                    '<p class="text">Departamento de Adquisiciones, Grupo Aeroportuario del Pacífico.</p>',
+                showConfirmButton: true,
+                timer: 3000
+            })
+
+            //setTimeout(function(){  window.location.href = url; }, 1500);
+
+            
+            //location.hash = '#';
+        }
+
+
+
+
+
         $("#PaisProveedor").change(function () {
             var dID = $('#PaisProveedor option:selected').val();
             $.getJSON("/Home/GetEstados", { idPais: dID },

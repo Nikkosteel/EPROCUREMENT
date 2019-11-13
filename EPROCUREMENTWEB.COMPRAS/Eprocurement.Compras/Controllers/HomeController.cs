@@ -52,6 +52,7 @@ namespace Eprocurement.Compras.Controllers
             return View();
         }
 
+
         public ActionResult AceptarProveedor(int idProvider)
         {
             CargarCatalogosAceptar();
@@ -64,6 +65,7 @@ namespace Eprocurement.Compras.Controllers
             ViewBag.EstadoList = estadoList;
             ViewBag.MunicipioList = municipioList;
             ViewBag.TipoProveedorList = tipoProveedorList;
+            ViewBag.idProveedor = idProvider;
             try
             {
                 BusinessLogic businessLogic = new BusinessLogic();
@@ -92,6 +94,8 @@ namespace Eprocurement.Compras.Controllers
                     ProvTelefono = response.ProvTelefono,
                     RazonSocial = response.RazonSocial,
                     RFC = response.RFC
+
+                    
                 };
             }
             catch (Exception ex)
@@ -107,9 +111,46 @@ namespace Eprocurement.Compras.Controllers
                 BusinessLogic businessLogic = new BusinessLogic();
                 ProveedorEstatusRequestDTO request = new ProveedorEstatusRequestDTO();
                 request.ProveedorFiltro = new ProveedorFiltroDTO { IdTipoProveedor = idTipoProveedor, IdGiroProveedor = idGiroProveedor, IdAeropuerto = idAeropuerto, NombreEmpresa = nombreEmpresa, RFC = rfc, Email = email };
+                string[] estatus = { "1", "2", "3", "4" }; 
 
                 var response = businessLogic.GetProveedorEstatusList(request);
-                return Json(response.ProveedorList, JsonRequestBehavior.AllowGet);
+                var proveedorEstatus = (from t in response.ProveedorList
+                                        where estatus.Contains(t.IdEstatus.ToString())
+                                        select t).ToList();
+
+
+                //from person in people
+                //where names.Contains(person.Firstname)
+                //select person;
+
+                //(from aeropuerto in aeropuertos
+                // join aeropuertoA in aeropuertosAsignados on aeropuerto.Id equals aeropuertoA.IdCatalogoAeropuerto
+                // select new AeropuertoDTO { Id = aeropuerto.Id, Nombre = aeropuerto.Nombre, Checado = false }).ToList();
+
+
+
+                return Json(proveedorEstatus, JsonRequestBehavior.AllowGet);
+
+
+              
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+        }
+
+        public JsonResult SetProveedorEstatus(int idProveedor, int estatus, string observaciones )
+        {
+            try
+            {
+                BusinessLogic businessLogic = new BusinessLogic();
+                ProveedorAprobarRequestDTO request = new ProveedorAprobarRequestDTO();
+                request.EstatusProveedor = new HistoricoEstatusProveedorDTO { IdProveedor = idProveedor, IdEstatusProveedor = estatus, IdUsuario = 3, Observaciones = observaciones };
+
+                var response = businessLogic.SetProveedorEstatus(request);
+                return Json(response.Success, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

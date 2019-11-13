@@ -1,5 +1,6 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿
+@{
+    ViewBag.Title = "AprobarTesoreria";
 }
 
 <link href="~/Content/validacionProveedor.css" rel="stylesheet" />
@@ -80,22 +81,22 @@
     <div class="col-sm-12">
         <table id="Table">
             @*<thead>
-                <tr>
-                    <td>IdProveedor</td>
-                    <td>Proveedor</td>
-                    <td>RFC</td>
-                    <td>Email</td>
-                    <td>Estatus</td>
-                    <td>Accion</td>
-                </tr>
-            </thead>*@
+                    <tr>
+                        <td>IdProveedor</td>
+                        <td>Proveedor</td>
+                        <td>RFC</td>
+                        <td>Email</td>
+                        <td>Estatus</td>
+                        <td>Accion</td>
+                    </tr>
+                </thead>*@
         </table>
-    </div>   
+    </div>
 </div>
 
 <script type="text/javascript">
     $("#buscar").click(function () {
-       
+
      var tipoProveedor = $('#tipoProveedor').val() == '' ? null : $('#tipoProveedor').val();
      var idGiroProveedor = $('#giro').val() == '' ? null : $('#giro').val();
      var idAeropuerto = $('#aeropuerto').val() == '' ? null : $('#aeropuerto').val();
@@ -111,7 +112,7 @@
          async: false,
          success: function(data) {
              console.log("Traigo Datos", data)
-                       
+
              $("#Table").append('<thead class="bg-purple"><tr><td>IdProveedor</td>' +
                  '<td>Proveedor</td>' +
                  '<td>RFC</td>' +
@@ -122,10 +123,10 @@
               //("#Table").DataTable().destroy();
              $("#Table").DataTable().clear().draw();
              $("#Table").DataTable().destroy();
-             
+
              $("#Table").append('<tbody>');
              for (i = 0; i < data.length; i++) {
-                 
+
                  var link = '@Html.ActionLink(" ", "AceptarProveedor", "Home", new { idProvider ="_idProv_" }, new { @class = "fas fa-eye icon-color" })';
                  link = link.replace('_idProv_', data[i].IdProveedor);
                  console.log("link", link);
@@ -137,17 +138,17 @@
                      '<td align="center" style="dislay: none;">' + data[i].Email + '</td>' +
                      '<td align="center" style="dislay: none;">' + data[i].Estatus + '</td>' +
                      '<td align="center" style="dislay: none;">' + link + '</td>' + '</tr>'
-                 );                 
+                 );
              }
              $("#Table").append('</tbody>');
-              
+
              $('#Table').DataTable({
                     "paging": false,
                      "bScrollInfinite": true,
                      "bScrollCollapse": true,
                      "sScrollY": "200px"
                  });
-             
+
          },
      });
  });

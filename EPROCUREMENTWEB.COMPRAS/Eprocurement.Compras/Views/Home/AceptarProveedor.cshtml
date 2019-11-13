@@ -75,8 +75,8 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            @Html.Label("municipio", "Municipio", new { @class = "label-formulario" })
-                                            @Html.DropDownListFor(model => model.Direccion.IdMunicipio, new SelectList(Enumerable.Empty<EPROCUREMENT.GAPPROVEEDOR.Entities.MunicipioDTO>(), "idMunicipio", "Nombre"), "...", new { @class = "form-control col-md-12", @id = "MunicipioProveedor" })
+                                            @Html.Label("pais", "País", new { @class = "label-formulario" })
+                                            @Html.DropDownListFor(model => model.Direccion.IdPais, new SelectList(ViewBag.PaisList, "IdPais", "Nombre"), "...", new { @class = "form-control col-md-12", @id = "PaisProveedor" })
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -93,10 +93,11 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            @Html.Label("pais", "País", new { @class = "label-formulario" })
-                                            @Html.DropDownListFor(model => model.Direccion.IdPais, new SelectList(ViewBag.PaisList, "IdPais", "Nombre"), "...", new { @class = "form-control col-md-12", @id = "PaisProveedor" })
+                                            @Html.Label("municipio", "Municipio", new { @class = "label-formulario" })
+                                            @Html.DropDownListFor(model => model.Direccion.IdMunicipio, new SelectList(Enumerable.Empty<EPROCUREMENT.GAPPROVEEDOR.Entities.MunicipioDTO>(), "idMunicipio", "Nombre"), "...", new { @class = "form-control col-md-12", @id = "MunicipioProveedor" })
                                         </div>
                                     </div>
+
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("zonaHoraria", "Zona horaria", new { @class = "label-formulario" })
@@ -265,9 +266,9 @@
                                         @for (int idx = 0; idx < 5; idx++)
                                         {@Html.HiddenFor(model => model.ProveedorGiroList[idx].IdProveedorGiro)
                                         <div class="form-group col-md-12 sel-p">
-                                            @Html.Label("Giro1:", new { @class = "col-md-2 control-label" })
+                                            @Html.Label("Giro"+(idx+1).ToString()+":", new { @class = "col-md-2 control-label" })
                                             <div class="col-md-10">
-                                                @Html.DropDownListFor(x => x.ProveedorGiroList[idx].IdCatalogoGiro, new SelectList(ViewBag.GiroList, "IdGiro", "GiroNombre"), "...", new { @class = "form-control col-md-12" })
+                                                @Html.DropDownListFor(x => x.ProveedorGiroList[idx].IdCatalogoGiro, new SelectList(ViewBag.GiroList, "IdGiro", "GiroNombre", @Model.ProveedorGiroList[idx].IdCatalogoGiro), "...", new { @class = "form-control col-md-12" })
                                             </div>
                                         </div>
                                     }
@@ -283,16 +284,16 @@
 
     <div class="row">
         <div class="col-sm-3">
-            <button class="btnStyle" type="submit">Documentacion pendiente</button>
+            <input id="btnDocumentacion" class="btnStyle" type="button" value="Documentacion pendiente " />
         </div>
         <div class="col-sm-3">
             <input type="button" class="btnStyle" data-toggle="modal" data-target="#modalRechazar" value="Rechazar" />
         </div>
         <div class="col-sm-3">
-            <button class="btnStyle" type="submit">Cancelar</button>
+            <input id="btnCancelar" class="btnStyle" type="button" value="Cancelar" />
         </div>
         <div class="col-sm-3">
-            <button class="btnStyle" type="submit">Guardar</button>
+            <input id="btnAprobar" class="btnStyle" type="button" value="Guardar" />
         </div>
     </div>
 
@@ -311,11 +312,7 @@
                         <div class="col-sm-12">
                             <label for="observaciones" class="col-form-label">Ingresa un comentario para el proveedor</label>
                             <textarea class="form-control" id="observaciones"></textarea>
-
                         </div>
-
-
-
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -330,6 +327,13 @@
 </form>
 <script type="text/javascript">
     $(document).ready(function () {
+        var idProveedor = '@ViewBag.idProveedor';
+        var observaciones = "";
+        var estatus = 0;
+        var url = '@Url.Action("Index", "Home")'; 
+
+
+
         $("#PaisProveedor").change(function () {
             var dID = $('#PaisProveedor option:selected').val();
             $.getJSON("/Home/GetEstados", { idPais: dID },
@@ -376,28 +380,89 @@
 
 
         $("#btnRechazar").click(function () {
+             obs = $("#observaciones").val();
+            estatus = 2;
 
-            swal({
-                title: "¿Esta seguro de rechazar el proveedor?",
-                //text: "Once deleted, you will not be able to recover this imaginary file!",
-                icon: "warning",
-                buttons: {
-                    cancel: "Cancelar",
-                    Aceptar: true,
-                },
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $('#modalRechazar').modal('hide');
-                        swal("Se ha rechazado el proveedor", {
-                            icon: "success",
+            var jsonData = JSON.stringify({ idProveedor: idProveedor, observaciones: obs, estatus: estatus });
+            Swal.fire({
+                title: '¿Esta seguro de rechazar el proveedor?',
+
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#432979',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.value) {
+                     $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: "/Home/SetProveedorEstatus",
+                            data: jsonData,
+                            async: false,
+                            success: function (data) {
+                                if (data) {
+                                     console.log("Traigo Datos", data)
+                                    $('#modalRechazar').modal('hide');
+                                    Swal.fire({
+                                        position: 'middle',
+                                        icon: 'success',
+                                        title: 'El proveedor ha sifo rechazado con éxito',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                    setTimeout(function(){  window.location.href = url; }, 1500);
+                                }
+
+                            },
                         });
-                    }
-                    //else {
-                    //    swal("Your imaginary file is safe!");
-                    //}
-                });
+                }
+            })
+        });
+
+
+        $("#btnAprobar").click(function () {
+
+            obs = "";
+            estatus = 4;
+
+            var jsonData = JSON.stringify({ idProveedor: idProveedor, observaciones: obs, estatus: estatus });
+            Swal.fire({
+                title: '¿Esta seguro de aprobar el proveedor?',
+
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#432979',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.value) {
+                     $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: "/Home/SetProveedorEstatus",
+                            data: jsonData,
+                            async: false,
+                            success: function (data) {
+                                if (data) {
+                                     console.log("Traigo Datos", data)
+                                   Swal.fire({
+                                        position: 'middle',
+                                        icon: 'success',
+                                        title: 'El proveedor ha sido aprobado con éxito',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                    setTimeout(function(){  window.location.href = url; }, 1500);
+                                }
+
+                            },
+                        });
+                }
+            })
+
 
         });
 

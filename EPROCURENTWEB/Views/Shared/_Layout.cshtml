@@ -17,14 +17,14 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
+            @*<ul class="navbar-nav">
                 <li><a href="@Url.HttpRouteUrl(this.Culture==GlobalHelper.DefaultCulture ? "Default" : "LocalizedDefault",new { lang=GlobalHelper.CurrentCulture, action="Index", controller="Home"})">@RGlobal.Home</a></li>
-              
-            </ul>
+
+            </ul>*@
             <ul class="langs" style="list-style:none;">
                 @*<li style="display:inline;">
-                <a href="" class="setLang" data-lang="fr-FR"><img src="@Url.GetImage("france.png", false)" /></a>
-            </li>*@
+                        <a href="" class="setLang" data-lang="fr-FR"><img src="@Url.GetImage("france.png", false)" /></a>
+                    </li>*@
                 <li style="display:inline;">
                     <a href="" class="setLang" data-lang="es-MX"><img src="@Url.GetImage("Mexico.png",false)" /></a>
                 </li>
@@ -37,36 +37,6 @@
     </nav>
 
 
-
-    @*<div class="navbar navbar-inverse navbar-fixed-top menu-color">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="@Url.HttpRouteUrl(this.Culture==GlobalHelper.DefaultCulture ? "Default" : "LocalizedDefault",new { lang=GlobalHelper.CurrentCulture, action="Index", controller="Home"})">@RGlobal.Home</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="@Url.HttpRouteUrl(this.Culture==GlobalHelper.DefaultCulture ? "Default" : "LocalizedDefault",new { lang=GlobalHelper.CurrentCulture, action="Index", controller="Home"})">@RGlobal.Home</a></li>
-                 
-                 
-                </ul>
-                <ul class="langs" style="list-style:none;">
-                   
-                    <li style="display:inline;">
-                        <a href="" class="setLang" data-lang="es-MX"><img src="@Url.GetImage("Mexico.png",false)" /></a>
-                    </li>
-                    <li style="display:inline;">
-                        <a href="" class="setLang" data-lang="en-US"><img src="@Url.GetImage("usa.png", false)" /></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-    </div>*@
 
     <div class="container body-content">
 
@@ -82,6 +52,7 @@
     </div>
 
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 
     @RenderSection("scripts", required: false)
