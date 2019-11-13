@@ -18,24 +18,32 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
         /// Envia el correo electronico a los destinatarios
         /// </summary>
         /// <param name="emailEntity">Representa la información del correo a enviar</param>
-        public void Enviar(int idProveedor, int idUsuario)
+        public void Enviar(int idProveedor, int idUsuario, int idEstatus, string comentarios)
         {
             string EmailOrigen = "GAPProveedoresTest@gmail.com";
            // string Contraseña = "Kal08Test";
             //string url = "http://localhost:7886//Access/Recovery/?token=aab6714c9f6328f8dea4210141369515fa4f6ba40b31d0eaea9880c93d7d162f";
             string url = "http://localhost:7886//Access/Recovery/?token=aab6714c9f6328f8dea4210141369515fa4f6ba40b31d0eaea9880c93d7d162f";
             string hrefUrl = "<a href='" + url + "'>Click para ingresar</a>";
-            var proveedorUsuario = new ProveedorData().GetProvedorUsuarioItem(idProveedor, idUsuario);
             EmailDTO emailEntidad = new EmailDTO
             {
                 Origin = EmailOrigen,
-                Subject = "Login de proveedor",
+                Subject = "Estatus de Registro",
                 Html = true,
                 RecipientsList = new List<DireccionEmailDTO>(),
                 Prioridad = EmailPrioridadDTO.Normal
             };
-        
-            emailEntidad.Message = GetMaailBody(proveedorUsuario, hrefUrl);
+
+            ProveedorUsuarioDTO proveedorUsuario = null;
+            proveedorUsuario = new ProveedorData().GetProvedorUsuarioItem(idProveedor, idUsuario);
+            if (idEstatus == 4)
+            {
+                emailEntidad.Message = GetMaailBodyAprobar(proveedorUsuario, hrefUrl);
+            } 
+            else if(idEstatus == 2)
+            {
+                emailEntidad.Message = GetMaailBodyRechazar(proveedorUsuario, comentarios);
+            }
             emailEntidad.RecipientsList.Add(new DireccionEmailDTO { Address = proveedorUsuario.Email, DisplayName = proveedorUsuario.NombreEmpresa, UserIdentifier = 1 });             
             var mailMessage = ObtenerMensajeEmail(emailEntidad);
             var cliente = ObtenerClienteSmtp();
@@ -54,15 +62,24 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
         /// <param name="nombreCompañia">Nombre de la compañia</param>
         /// <param name="urlLogin">Url para el logueo</param>
         /// <returns>La estructura del correo</returns>
-        private string GetMaailBody(ProveedorUsuarioDTO proveedorUsuario, string urlLogin)
+        private string GetMaailBodyAprobar(ProveedorUsuarioDTO proveedorUsuario, string urlLogin)
         {
-            string layoutName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, App_GlobalResources.ResourceConstants.EmailLayout, "UserLogin.htm");
+            string layoutName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, App_GlobalResources.ResourceConstants.EmailLayout, "UssuarioAprobado.htm");
             string message = File.ReadAllText(layoutName);
             var details = new StringBuilder();
             message = message.Replace("<!--NombreCompania-->", proveedorUsuario.NombreEmpresa);
             message = message.Replace("<!--RFCCompania-->", proveedorUsuario.RFC);
             message = message.Replace("<!--ContaseñaCompania-->", proveedorUsuario.Password);
             message = message.Replace("<!--urlAction-->", urlLogin);
+            return message;
+        }
+        private string GetMaailBodyRechazar(ProveedorUsuarioDTO proveedorUsuario, string comentarios)
+        {
+            string layoutName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, App_GlobalResources.ResourceConstants.EmailLayout, "UsuarioRechazado.htm");
+            string message = File.ReadAllText(layoutName);
+            var details = new StringBuilder();
+            message = message.Replace("<!--NombreCompania-->", "Proveedor");
+            message = message.Replace("<!--observaciones-->", comentarios);
             return message;
         }
 

@@ -326,7 +326,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                             if (ExecuteComandEstatus(cmdEstatus, request.EstatusProveedor) > 0)
                             {
 
-                                new EmailData().Enviar(request.EstatusProveedor.IdProveedor, idUsuario);
+                                new EmailData().Enviar(request.EstatusProveedor.IdProveedor, idUsuario, request.EstatusProveedor.IdEstatusProveedor, request.EstatusProveedor.Observaciones);
                                 response.Success = true;
                             }
                         }
@@ -335,6 +335,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                     {
                         if (ExecuteComandEstatus(cmdEstatus, request.EstatusProveedor) > 0)
                         {
+                            new EmailData().Enviar(request.EstatusProveedor.IdProveedor, 0, request.EstatusProveedor.IdEstatusProveedor, request.EstatusProveedor.Observaciones);
                             response.Success = true;
                         }
                     }
