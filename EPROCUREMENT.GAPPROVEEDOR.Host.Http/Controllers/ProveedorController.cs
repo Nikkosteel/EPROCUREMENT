@@ -20,6 +20,14 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
             return response;
         }
 
+        [HttpPost]
+        [Route("GuardarProveedorCuenta")]
+        public ProveedorCuentaResponseDTO GuardarProveedorCuenta([FromBody]ProveedorCuentaRequestDTO request)
+        {
+            var response = new HandlerProveedor().GuardarProveedorCuenta(request);
+            return response;
+        }
+
         // GET: api/ProveedorEstatusList
         [HttpPost]
         [Route("ProveedorEstatusList")]

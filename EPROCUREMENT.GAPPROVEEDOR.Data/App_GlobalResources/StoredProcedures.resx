@@ -129,11 +129,17 @@
   <data name="usp_EPROCUREMENT_CatalogoGiro_GETL" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_CatalogoGiro_GETL]</value>
   </data>
+  <data name="usp_EPROCUREMENT_CuentaEmpresa_INS" xml:space="preserve">
+    <value>[dbo].[usp_EPROCUREMENT_CuentaEmpresa_INS]</value>
+  </data>
   <data name="usp_EPROCUREMENT_Estado_GETL" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_Estado_GETL]</value>
   </data>
   <data name="usp_EPROCUREMENT_EstatusProveedor_INS" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_EstatusProveedor_INS]</value>
+  </data>
+  <data name="usp_EPROCUREMENT_FormatoArchivo_GETL" xml:space="preserve">
+    <value>[dbo].[usp_EPROCUREMENT_FormatoArchivo_GETL]</value>
   </data>
   <data name="usp_EPROCUREMENT_Idioma_GETL" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_Idioma_GETL]</value>
@@ -152,6 +158,9 @@
   </data>
   <data name="usp_EPROCUREMENT_ProveedorContacto_INS" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_ProveedorContacto_INS]</value>
+  </data>
+  <data name="usp_EPROCUREMENT_ProveedorCuenta_INS" xml:space="preserve">
+    <value>[dbo].[usp_EPROCUREMENT_ProveedorCuenta_INS]</value>
   </data>
   <data name="usp_EPROCUREMENT_ProveedorDireccion_GETIByIdProveedor" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_ProveedorDireccion_GETIByIdProveedor]</value>

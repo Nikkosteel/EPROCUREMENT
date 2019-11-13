@@ -97,6 +97,15 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_CuentaEmpresa_INS].
+        /// </summary>
+        internal static string usp_EPROCUREMENT_CuentaEmpresa_INS {
+            get {
+                return ResourceManager.GetString("usp_EPROCUREMENT_CuentaEmpresa_INS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_Estado_GETL].
         /// </summary>
         internal static string usp_EPROCUREMENT_Estado_GETL {
@@ -111,6 +120,15 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data.App_GlobalResources {
         internal static string usp_EPROCUREMENT_EstatusProveedor_INS {
             get {
                 return ResourceManager.GetString("usp_EPROCUREMENT_EstatusProveedor_INS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_FormatoArchivo_GETL].
+        /// </summary>
+        internal static string usp_EPROCUREMENT_FormatoArchivo_GETL {
+            get {
+                return ResourceManager.GetString("usp_EPROCUREMENT_FormatoArchivo_GETL", resourceCulture);
             }
         }
         
@@ -192,6 +210,15 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data.App_GlobalResources {
         internal static string usp_EPROCUREMENT_ProveedorContacto_INS {
             get {
                 return ResourceManager.GetString("usp_EPROCUREMENT_ProveedorContacto_INS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_ProveedorCuenta_INS].
+        /// </summary>
+        internal static string usp_EPROCUREMENT_ProveedorCuenta_INS {
+            get {
+                return ResourceManager.GetString("usp_EPROCUREMENT_ProveedorCuenta_INS", resourceCulture);
             }
         }
         
