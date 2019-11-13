@@ -127,6 +127,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Business\BusinessLogic.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TesoreriaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -445,6 +446,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\AceptarProveedor.cshtml" />
+    <Content Include="Views\Tesoreria\AprobarTesoreria.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

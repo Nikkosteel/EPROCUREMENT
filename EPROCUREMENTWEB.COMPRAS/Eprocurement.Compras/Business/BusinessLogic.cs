@@ -67,7 +67,7 @@ namespace Eprocurement.Compras.Business
             return response;
         }
 
-        public ProveedorEstatusResponseDTO AprobarProveedor(ProveedorAprobarRequestDTO request)
+        public ProveedorEstatusResponseDTO SetProveedorEstatus(ProveedorAprobarRequestDTO request)
         {
             ProveedorEstatusResponseDTO response = new ProveedorEstatusResponseDTO();
 
