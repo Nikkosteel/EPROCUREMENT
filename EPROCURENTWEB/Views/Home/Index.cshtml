@@ -288,7 +288,7 @@
                                                 @Html.Label("", "Favor de seleccionar el (los) giro (s) específicos que su empresa esta calificada*", new { @class = "control-label m-b-1" })
                                             </span>
 
-                                            @for (int idx = 0; idx < 3; idx++)
+                                            @for (int idx = 0; idx < 5; idx++)
                                             {
                                                 @Html.HiddenFor(model => model.ProveedorGiroList[idx].IdProveedorGiro)
                                                 <div class="form-group col-md-6 ">
