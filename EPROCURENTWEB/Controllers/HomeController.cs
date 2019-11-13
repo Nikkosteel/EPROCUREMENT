@@ -127,7 +127,6 @@ namespace EprocurementWeb.Controllers
             //}
 
 
-
             ViewBag.Title = RHome.About;
             ViewBag.Message = RHome.AboutMessage;
 

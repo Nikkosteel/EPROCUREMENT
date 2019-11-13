@@ -37,11 +37,8 @@ namespace Eprocurement.Compras.Business
                 }
             }
             return response;
-
-
-
-            
         }
+
         public ProveedorDetalleResponseDTO GetProveedorElemento(ProveedorDetalleRequestDTO request)
         {
             ProveedorDetalleResponseDTO response = new ProveedorDetalleResponseDTO();
@@ -65,10 +62,6 @@ namespace Eprocurement.Compras.Business
                 }
             }
             return response;
-
-
-
-
         }
         public List<PaisDTO> GetPaisesList()
         {

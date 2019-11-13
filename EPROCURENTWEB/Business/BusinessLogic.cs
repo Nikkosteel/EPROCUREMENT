@@ -10,12 +10,62 @@ using EPROCUREMENT.GAPPROVEEDOR.Entities;
 using Newtonsoft.Json;
 using System.Text;
 using System.Threading.Tasks;
+using EprocurementWeb.Properties;
+using System.IO;
 
 namespace EprocurementWeb.Business
 {
     public class BusinessLogic
     {
         string urlApi = ConfigurationManager.AppSettings["urlApi"].ToString();
+
+        public ProveedorEstatusResponseDTO GetProveedorEstatusList(ProveedorEstatusRequestDTO request)
+        {
+            ProveedorEstatusResponseDTO response = new ProveedorEstatusResponseDTO();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi + "api/Proveedor/");
+                var json = JsonConvert.SerializeObject(request);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var responseTask = client.PostAsync("ProveedorEstatusList", content);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSSerializer = new JavaScriptSerializer();
+                    response = JSSerializer.Deserialize<ProveedorEstatusResponseDTO>(readTask.Result);
+                }
+            }
+            return response;
+        }
+
+        public ProveedorDetalleResponseDTO GetProveedorElemento(ProveedorDetalleRequestDTO request)
+        {
+            ProveedorDetalleResponseDTO response = new ProveedorDetalleResponseDTO();
+
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi + "api/Proveedor/");
+                var json = JsonConvert.SerializeObject(request);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var responseTask = client.PostAsync("ProveedorElemento", content);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSSerializer = new JavaScriptSerializer();
+                    response = JSSerializer.Deserialize<ProveedorDetalleResponseDTO>(readTask.Result);
+
+                }
+            }
+            return response;
+        }
+
         public List<PaisDTO> GetPaisesList()
         {
             var lstPaises = new List<PaisDTO>();
@@ -233,6 +283,32 @@ namespace EprocurementWeb.Business
                 }
             }
             return response;
+        }
+
+        public void GuardarDocumentos(string rfc, HttpFileCollectionBase archivos)
+        {
+            string ruta = Settings.Default["RutaDocumentos"].ToString();
+            string rutaF = HttpContext.Current.Server.MapPath(ruta);
+            string rutaP = rutaF + "\\" + rfc;
+
+            if (!Directory.Exists(rutaF))
+            {
+                Directory.CreateDirectory(rutaF);
+            }
+
+            if (!Directory.Exists(rutaP))
+            {
+                Directory.CreateDirectory(rutaP);
+            }
+
+            try
+            {
+
+            }
+            catch (Exception excep)
+            {
+
+            }
         }
     }
 }
