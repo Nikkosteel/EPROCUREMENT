@@ -26,7 +26,7 @@ namespace EprocurementWeb
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/Styles/site.css"));
+                      "~/Content/Styles/Site.css"));
         }
     }
 }

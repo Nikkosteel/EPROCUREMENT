@@ -143,5 +143,25 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Business.Catalogo
             }
             return response;
         }
+
+        public TipoCuentaResponseDTO GetTipoCuentaList()
+        {
+            TipoCuentaResponseDTO response = catalogoData.GetTipoCuentaList();
+            if (!response.Success)
+            {
+                response.ErrorList = new List<ErrorDTO> { new ErrorDTO { Codigo = "", Mensaje = string.Format("No fue posible recuperar datos disponibles o no se encontro alguna solicitud en proceso") } };
+            }
+            return response;
+        }
+
+        public BancoResponseDTO GetBancoList()
+        {
+            BancoResponseDTO response = catalogoData.GetBancoList();
+            if (!response.Success)
+            {
+                response.ErrorList = new List<ErrorDTO> { new ErrorDTO { Codigo = "", Mensaje = string.Format("No fue posible recuperar datos disponibles o no se encontro alguna solicitud en proceso") } };
+            }
+            return response;
+        }
     }
 }
