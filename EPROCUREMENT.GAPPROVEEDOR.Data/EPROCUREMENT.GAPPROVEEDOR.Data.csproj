@@ -44,6 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\ResourceConstants.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceConstants.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\StoredProcedures.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -51,6 +56,8 @@
     </Compile>
     <Compile Include="Catalogo\CatalogoData.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="HelperData\EmailData.cs" />
+    <Compile Include="HelperData\UtileriaData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proveedor\ProveedorData.cs" />
     <Compile Include="TryCatchExecutor.cs" />
@@ -62,6 +69,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="App_GlobalResources\ResourceConstants.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceConstants.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="App_GlobalResources\StoredProcedures.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>StoredProcedures.Designer.cs</LastGenOutput>

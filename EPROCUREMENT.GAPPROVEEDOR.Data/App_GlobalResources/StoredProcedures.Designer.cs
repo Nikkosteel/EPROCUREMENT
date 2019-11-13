@@ -70,6 +70,24 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_Banco_GETL].
+        /// </summary>
+        internal static string usp_EPROCUREMENT_Banco_GETL {
+            get {
+                return ResourceManager.GetString("usp_EPROCUREMENT_Banco_GETL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_CatalogoDocumento_GETL].
+        /// </summary>
+        internal static string usp_EPROCUREMENT_CatalogoDocumento_GETL {
+            get {
+                return ResourceManager.GetString("usp_EPROCUREMENT_CatalogoDocumento_GETL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_CatalogoGiro_GETL].
         /// </summary>
         internal static string usp_EPROCUREMENT_CatalogoGiro_GETL {
@@ -232,11 +250,38 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_ProveedorUsuario_GETIById].
+        /// </summary>
+        internal static string usp_EPROCUREMENT_ProveedorUsuario_GETIById {
+            get {
+                return ResourceManager.GetString("usp_EPROCUREMENT_ProveedorUsuario_GETIById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_TipoCuenta_GETL].
+        /// </summary>
+        internal static string usp_EPROCUREMENT_TipoCuenta_GETL {
+            get {
+                return ResourceManager.GetString("usp_EPROCUREMENT_TipoCuenta_GETL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_TipoProveedor_GETL].
         /// </summary>
         internal static string usp_EPROCUREMENT_TipoProveedor_GETL {
             get {
                 return ResourceManager.GetString("usp_EPROCUREMENT_TipoProveedor_GETL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_UsuarioProveedor_INS].
+        /// </summary>
+        internal static string usp_EPROCUREMENT_UsuarioProveedor_IN {
+            get {
+                return ResourceManager.GetString("usp_EPROCUREMENT_UsuarioProveedor_IN", resourceCulture);
             }
         }
         
