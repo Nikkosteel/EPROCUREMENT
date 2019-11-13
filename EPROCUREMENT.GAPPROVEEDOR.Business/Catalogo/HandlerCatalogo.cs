@@ -163,5 +163,25 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Business.Catalogo
             }
             return response;
         }
+
+        public CatalogoDocumentoResponseDTO GetCatalogoDocumentoList()
+        {
+            CatalogoDocumentoResponseDTO response = catalogoData.GetCatalogoDocumentoList();
+            if (!response.Success)
+            {
+                response.ErrorList = new List<ErrorDTO> { new ErrorDTO { Codigo = "", Mensaje = string.Format("No fue posible recuperar datos disponibles o no se encontro alguna solicitud en proceso") } };
+            }
+            return response;
+        }
+
+        public FormatoArchivoResponseDTO GetFormatoArchivoList()
+        {
+            FormatoArchivoResponseDTO response = catalogoData.GetFormatoArchivoList();
+            if (!response.Success)
+            {
+                response.ErrorList = new List<ErrorDTO> { new ErrorDTO { Codigo = "", Mensaje = string.Format("No fue posible recuperar datos disponibles o no se encontro alguna solicitud en proceso") } };
+            }
+            return response;
+        }
     }
 }

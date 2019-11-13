@@ -84,6 +84,65 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
             return response;
         }
 
+        public ProveedorCuentaResponseDTO GuardarProveedorCuenta(ProveedorCuentaRequestDTO request)
+        {
+            ProveedorCuentaResponseDTO response = new ProveedorCuentaResponseDTO()
+            {
+                ErrorList = new List<ErrorDTO>()
+            };
+
+            try
+            {
+                using (var conexion = new SqlConnection(Helper.Connection()))
+                {
+                    conexion.Open();
+
+                    using (TransactionScope transactionScope = new TransactionScope())
+                    {
+                        foreach (var proveedorCuenta in request.ProveedorCuentaList)
+                        {
+                            var cmdCuenta = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_ProveedorCuenta_INS, conexion);
+                            cmdCuenta.CommandType = CommandType.StoredProcedure;
+                            cmdCuenta.Parameters.Add(new SqlParameter("@Cuenta", proveedorCuenta.Cuenta));
+                            cmdCuenta.Parameters.Add(new SqlParameter("@IdBanco", proveedorCuenta.IdBanco));
+                            cmdCuenta.Parameters.Add(new SqlParameter("@CLABE", proveedorCuenta.CLABE));
+                            cmdCuenta.Parameters.Add(new SqlParameter("@IdTipoCuenta", proveedorCuenta.IdTipoCuenta));
+                            cmdCuenta.Parameters.Add(new SqlParameter("@IdProveedor", proveedorCuenta.IdProveedor));
+                            cmdCuenta.Parameters.Add(new SqlParameter("Result", SqlDbType.BigInt) { Direction = ParameterDirection.ReturnValue });
+                            cmdCuenta.ExecuteNonQuery();
+                            var idProveedorCuenta = Convert.ToInt32(cmdCuenta.Parameters["Result"].Value);
+                            if (idProveedorCuenta > 0)
+                            {
+                                foreach (var aeropuerto in proveedorCuenta.AeropuertoList)
+                                {
+
+                                    var cmdAeropuerto = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_CuentaEmpresa_INS, conexion);
+                                    cmdAeropuerto.CommandType = CommandType.StoredProcedure;
+                                    cmdAeropuerto.Parameters.Add(new SqlParameter("@IdProveedorCuenta", idProveedorCuenta));
+                                    cmdAeropuerto.Parameters.Add(new SqlParameter("@IdCatalogoAeropuerto", SqlDbType.NVarChar, 50)).Value = aeropuerto.Id;
+                                    cmdAeropuerto.Parameters.Add(new SqlParameter("Result", SqlDbType.BigInt) { Direction = ParameterDirection.ReturnValue });
+                                    cmdAeropuerto.ExecuteNonQuery();
+                                    if (Convert.ToInt32(cmdAeropuerto.Parameters["Result"].Value) < 1)
+                                    {
+                                        return response;
+                                    }
+                                }
+                            }
+                            else { return response; }
+                        }
+
+                        transactionScope.Complete();
+                        response.Success = true;
+
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+            }
+            return response;
+        }
+
         /// <summary>
         /// Obtiene un listado de provedores por filtro
         /// </summary>

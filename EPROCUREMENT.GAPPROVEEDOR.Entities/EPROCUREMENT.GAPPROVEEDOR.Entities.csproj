@@ -84,6 +84,7 @@
     <Compile Include="Response\CatalogoDocumentoResponseDTO.cs" />
     <Compile Include="Response\EstadoResponseDTO.cs" />
     <Compile Include="Response\EstatusProveedorResponseDTO.cs" />
+    <Compile Include="Response\FormatoArchivoResponseDTO.cs" />
     <Compile Include="Response\GiroResponseDTO.cs" />
     <Compile Include="Response\IdiomaResponseDTO.cs" />
     <Compile Include="Response\MunicipioResponseDTO.cs" />
