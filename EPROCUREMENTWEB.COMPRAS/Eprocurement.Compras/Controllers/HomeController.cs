@@ -115,7 +115,7 @@ namespace Eprocurement.Compras.Controllers
 
                 var response = businessLogic.GetProveedorEstatusList(request);
                 var proveedorEstatus = (from t in response.ProveedorList
-                                        where estatus.Contains(t.Estatus)
+                                        where estatus.Contains(t.IdEstatus.ToString())
                                         select t).ToList();
 
 
@@ -132,7 +132,7 @@ namespace Eprocurement.Compras.Controllers
                 return Json(proveedorEstatus, JsonRequestBehavior.AllowGet);
 
 
-                return Json(response.ProveedorList, JsonRequestBehavior.AllowGet);
+              
             }
             catch (Exception ex)
             {

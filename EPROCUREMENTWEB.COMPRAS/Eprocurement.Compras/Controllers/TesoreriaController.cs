@@ -45,11 +45,12 @@ namespace Eprocurement.Compras.Controllers
                 BusinessLogic businessLogic = new BusinessLogic();
                 ProveedorEstatusRequestDTO request = new ProveedorEstatusRequestDTO();
                 request.ProveedorFiltro = new ProveedorFiltroDTO { IdTipoProveedor = idTipoProveedor, IdGiroProveedor = idGiroProveedor, IdAeropuerto = idAeropuerto, NombreEmpresa = nombreEmpresa, RFC = rfc, Email = email };
-
+                //var response = businessLogic.GetProveedorEstatusList(request);
+                string[] estatus = { "5", "6", "7", "8" };
                 var response = businessLogic.GetProveedorEstatusList(request);
                 var proveedorEstatus = (from t in response.ProveedorList
-                                       where t.Estatus.Contains("5,6,7,8")
-                                       select t).ToList();
+                                        where estatus.Contains(t.IdEstatus.ToString())
+                                        select t).ToList();
                 return Json(proveedorEstatus, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

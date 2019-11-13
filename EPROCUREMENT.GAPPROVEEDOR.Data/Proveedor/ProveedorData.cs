@@ -226,6 +226,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                             proveedorEstatus.NombreEmpresa = reader["NombreEmpresa"].ToString();
                             proveedorEstatus.Email = reader["Email"].ToString();
                             proveedorEstatus.Estatus = reader["Estatus"].ToString();
+                            proveedorEstatus.IdEstatus = Convert.ToInt32(reader["IdEstatus"]);
                             response.ProveedorList.Add(proveedorEstatus);
                         }
                     }
@@ -314,7 +315,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                     //}
 
                     var cmdEstatus = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_EstatusProveedor_INS, conexion);
-                    if (request.EstatusProveedor.IdEstatusProveedor == 3)
+                    if (request.EstatusProveedor.IdEstatusProveedor == 4)
                     {
                         var userPassword = GenerarPassword(10);
                         var cmdUsuario = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_UsuarioProveedor_IN, conexion);
@@ -331,6 +332,13 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                         }
                     }
                     else if (request.EstatusProveedor.IdEstatusProveedor == 2)
+                    {
+                        if (ExecuteComandEstatus(cmdEstatus, request.EstatusProveedor) > 0)
+                        {
+                            response.Success = true;
+                        }
+                    }
+                    else if (request.EstatusProveedor.IdEstatusProveedor == 5)
                     {
                         if (ExecuteComandEstatus(cmdEstatus, request.EstatusProveedor) > 0)
                         {

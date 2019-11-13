@@ -62,7 +62,8 @@ namespace EprocurementWeb.Controllers
             ProveedorResponseDTO response = businessLogic.PostProveedor(proveedor);
             if (response.Success)
             {
-                return RedirectToAction("Contact");
+                return Redirect("/Home/Index#success");
+                //return RedirectToAction("Contact");
             }
             return View(proveedor);
         }
