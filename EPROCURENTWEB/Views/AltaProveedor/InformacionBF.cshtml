@@ -1,80 +1,100 @@
 ﻿
-@model EPROCUREMENT.GAPPROVEEDOR.Entities.ProveedorCuentaDTO
+@model EPROCUREMENT.GAPPROVEEDOR.Entities.Proveedor.ProveedorInformacionFinanciera
 
 @{
     ViewBag.Title = "Información Bancaria - Financiera";
 }
 
-
-
-<div class="formPrincipal">
-    <ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" href="#IB" role="tab" data-toggle="tab">Información Bancaria</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#IF" role="tab" data-toggle="tab">Información Financiera</a>
-        </li>
-    </ul>
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane fade in active" id="IB">
-            <div class="col100">
-                Por favor llena la siguiente información
-            </div>
-            <div class="col100">
-                <div class="col25">
-                    <div class="form-group col-md-6">
-                        @Html.Label("cuenta", @RHome.BName, new { @class = "col-md-4 control-label" })
-                        <div class="col-md-8">
-                            @Html.TextBoxFor(model => model.Cuenta, new { @class = "form-control" })
+@using (Html.BeginForm("InformacionBF", "AltaProveedor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(m => m.RFC)
+    <div class="formPrincipal">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" href="#IB" role="tab" data-toggle="tab">Información Bancaria</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#IF" role="tab" data-toggle="tab">Información Financiera</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active show" id="IB">
+                <div class="col100">
+                    Por favor llena la siguiente información
+                </div>
+                <div class="col100">
+                    @Html.HiddenFor(model => model.ProveedorCuentaList[0].IdProveedor)
+                    <div class="col25">
+                        <div class="inputIF">
+                            @Html.Label("cuenta", @RHome.Account, new { @class = "labelTexto control-label" })
+                        </div>
+                        <div class="inputIF">
+                            @Html.TextBoxFor(model => model.ProveedorCuentaList[0].Cuenta, new { @class = "form-control inputIF" })
+                        </div>
+                    </div>
+                    <div class="col25">
+                        <div class="inputIF">
+                            @Html.Label("banco", @RHome.Bank, new { @class = "labelTexto control-label" })
+                        </div>
+                        <div class="inputIF">
+                            @Html.DropDownListFor(model => model.ProveedorCuentaList[0].IdBanco, new SelectList(ViewBag.BancoList, "IdBanco", "Nombre"), "...", new { @class = "form-control inputIF", @id = "idBanco" })
+                        </div>
+                    </div>
+                    <div class="col25">
+                        <div class="inputIF">
+                            @Html.Label("clabe", @RHome.CLABE, new { @class = "labelTexto control-label" })
+                        </div>
+                        <div class="inputIF">
+                            @Html.TextBoxFor(model => model.ProveedorCuentaList[0].CLABE, new { @class = "form-control inputIF" })
+                        </div>
+                    </div>
+                    <div class="col25">
+                        <div class="inputIF">
+                            @Html.Label("tipo", @RHome.Type, new { @class = "labelTexto control-label" })
+                        </div>
+                        <div class="inputIF">
+                            @Html.DropDownListFor(model => model.ProveedorCuentaList[0].IdTipoCuenta, new SelectList(ViewBag.TipoCuentaList, "IdTipoCuenta", "Tipo"), "...", new { @class = "form-control inputIF", @id = "idTipoCuenta" })
                         </div>
                     </div>
                 </div>
-                @*<div class="col25">
-                    <div class="form-group col-md-6">
-                        @Html.Label("cuenta", @RHome.BName, new { @class = "col-md-4 control-label" })
-                        <div class="col-md-8">
-                            @Html.DropDownListFor(model => model.IdBanco, new SelectList(ViewBag.PaisList, "IdPais", "Nombre"), "...", new { @class = "form-control col-md-12", @id = "PaisProveedor" })
-                            @Html.TextBoxFor(model => model.RazonSocial, new { @class = "form-control" })
-                        </div>
-                    </div>
+                <hr />
+                <div class="col100">
+                    Elige el (o los) aeropuertos que tomará como referencia la cuenta bancaria proporcionada
                 </div>
-                <div class="col25">
-                    <div class="form-group col-md-6">
-                        @Html.Label("cuenta", @RHome.BName, new { @class = "col-md-4 control-label" })
-                        <div class="col-md-8">
-                            @Html.TextBoxFor(model => model.RazonSocial, new { @class = "form-control" })
+                <div class="col100">
+                    @for (int idx = 0; idx < Model.ProveedorCuentaList[0].AeropuertoList.Count; idx++)
+                    {
+                        @Html.HiddenFor(model => model.ProveedorCuentaList[0].AeropuertoList[idx].Id)
+                        @Html.HiddenFor(model => model.ProveedorCuentaList[0].AeropuertoList[idx].Nombre)
+                        <div class="col25">
+                            @Html.CheckBoxFor(model => model.ProveedorCuentaList[0].AeropuertoList[idx].Checado)
+                            @Html.DisplayTextFor(model => model.ProveedorCuentaList[0].AeropuertoList[idx].Nombre)
                         </div>
-                    </div>
+                    }
                 </div>
-                <div class="col25">
-                    <div class="form-group col-md-6">
-                        @Html.Label("cuenta", @RHome.BName, new { @class = "col-md-4 control-label" })
-                        <div class="col-md-8">
-                            @Html.TextBoxFor(model => model.RazonSocial, new { @class = "form-control" })
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="IF">
+                <div class="col100">
+                    @for (int idx = 0; idx < Model.CatalogoDocumentoList.Count; idx++)
+                    {
+                        <div class="col100">
+                            <div class="col25">
+                                <div class="inputIF">
+                                    @Html.LabelFor(m => m.CatalogoDocumentoList[idx].NombreDocumento, new { @class = "labelTexto control-label" })
+                                    @Html.HiddenFor(m => m.CatalogoDocumentoList[idx].IdCatalogoDocumento)
+                                    @Html.HiddenFor(m => m.CatalogoDocumentoList[idx].IdFormatoArchivo)
+                                    @Html.HiddenFor(m => m.CatalogoDocumentoList[idx].IdFormulario)
+                                </div>
+                            </div>
+                            <div class="col25">
+                                <input class="text-box single-line" type="file" name="@Html.NameFor(m => m.CatalogoDocumentoList[idx].File)" id="@Html.IdFor(m => m.CatalogoDocumentoList[idx].File)" />
+                            </div>
                         </div>
-                    </div>
-                </div>*@
+                    }
+                </div>
             </div>
-            <hr />
-            <div class="col100">
-                Elige el (o los) aeropuertos que tomará como referencia la cuenta bancaria proporcionada
-            </div>
-            @*<div class="col100">
-                @for (int idx = 0; idx < ViewBag.AeropuertoList.Count; idx++)
-                {
-                    @Html.Hidden()
-                    @Html.HiddenFor(model => model.AeropuertoList[idx].Id)
-                    @Html.HiddenFor(model => model.AeropuertoList[idx].Nombre)
-                    <li class="col-sm-6">
-                        @Html.CheckBoxFor(model => model.AeropuertoList[idx].Checado)
-                        @Html.DisplayTextFor(model => model.AeropuertoList[idx].Nombre)
-                    </li>
-                }
-            </div>*@
         </div>
-        <div role="tabpanel" class="tab-pane fade" id="IF">
-
-        </div>
+        <input type="submit" value="Upload" class="btn btn-primary" />
     </div>
-</div>
+
+}

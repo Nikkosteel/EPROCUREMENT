@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -70,6 +71,7 @@
     <Compile Include="Proveedor\ProveedorDTO.cs" />
     <Compile Include="Proveedor\ProveedorEmpresaDTO.cs" />
     <Compile Include="Proveedor\ProveedorGiroDTO.cs" />
+    <Compile Include="Proveedor\ProveedorInformacionFinanciera.cs" />
     <Compile Include="Request\EstadoRequestDTO.cs" />
     <Compile Include="Request\ProveedorAprobarRequestDTO.cs" />
     <Compile Include="Request\MunicipioRequestDTO.cs" />

@@ -246,4 +246,16 @@
   <data name="Suburb" xml:space="preserve">
     <value>Suburb</value>
   </data>
+  <data name="Account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="Bank" xml:space="preserve">
+    <value>Bank</value>
+  </data>
+  <data name="CLABE" xml:space="preserve">
+    <value>CLABE</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
 </root>

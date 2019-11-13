@@ -516,7 +516,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                         while (reader.Read())
                         {
                             catalogoDocumento = new CatalogoDocumentoDTO();
-                            catalogoDocumento.IdProveedorDocumento = Convert.ToInt32(reader["IdProveedorDocumento"]);
+                            catalogoDocumento.IdCatalogoDocumento = Convert.ToInt32(reader["IdCatalogoDocumento"]);
                             catalogoDocumento.NombreDocumento = reader["NombreDocumento"].ToString();
                             catalogoDocumento.IdFormatoArchivo = Convert.ToInt32(reader["IdFormatoArchivo"]);
                             catalogoDocumento.EsRequerido = Convert.ToBoolean(reader["EsRequerido"]);

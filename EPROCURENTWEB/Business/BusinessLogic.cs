@@ -285,11 +285,12 @@ namespace EprocurementWeb.Business
             return response;
         }
 
-        public void GuardarDocumentos(string rfc, HttpFileCollectionBase archivos)
+        public bool GuardarDocumentos(string rfc, List<CatalogoDocumentoDTO> files)
         {
             string ruta = Settings.Default["RutaDocumentos"].ToString();
             string rutaF = HttpContext.Current.Server.MapPath(ruta);
             string rutaP = rutaF + "\\" + rfc;
+            bool respuesta = false;
 
             if (!Directory.Exists(rutaF))
             {
@@ -300,15 +301,136 @@ namespace EprocurementWeb.Business
             {
                 Directory.CreateDirectory(rutaP);
             }
-
             try
             {
-
+                foreach (var file in files)
+                {
+                    if (file != null)
+                    {
+                        var InputFileName = Path.GetFileName(file.File.FileName);
+                        InputFileName = file.IdCatalogoDocumento + "_" + InputFileName;
+                        var ServerSavePath = Path.Combine(rutaP + "\\"+ InputFileName);
+                        file.File.SaveAs(ServerSavePath);
+                    }
+                }
+                respuesta = true;
             }
             catch (Exception excep)
             {
-
+                respuesta = false;
             }
+            return respuesta;
+        }
+
+        public List<TipoCuentaDTO> GetTipoCuentaList()
+        {
+            var lstTipoCuenta = new List<TipoCuentaDTO>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi + "api/Catalogo/");
+                var responseTask = client.GetAsync("TipoCuentaGetList");
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSserializer = new JavaScriptSerializer();
+
+                    var response = JSserializer.Deserialize<TipoCuentaResponseDTO>(readTask.Result);
+                    lstTipoCuenta = response.TipoCuentaList;
+                }
+            }
+            return lstTipoCuenta;
+        }
+
+        public List<BancoDTO> GetBancoList()
+        {
+            var lstBanco = new List<BancoDTO>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi + "api/Catalogo/");
+                var responseTask = client.GetAsync("BancoGetList");
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSserializer = new JavaScriptSerializer();
+
+                    var response = JSserializer.Deserialize<BancoResponseDTO>(readTask.Result);
+                    lstBanco = response.BancoList;
+                }
+            }
+            return lstBanco;
+        }
+
+        public List<CatalogoDocumentoDTO> GetCatalogoDocumentoList()
+        {
+            var lstDocumento = new List<CatalogoDocumentoDTO>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi + "api/Catalogo/");
+                var responseTask = client.GetAsync("CatalogoDocumentoList");
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSserializer = new JavaScriptSerializer();
+
+                    var response = JSserializer.Deserialize<CatalogoDocumentoResponseDTO>(readTask.Result);
+                    lstDocumento = response.CatalogoDocumentoList;
+                }
+            }
+            return lstDocumento;
+        }
+
+        public List<FormatoArchivoDTO> GetFormatoArchivoList()
+        {
+            var lstFormato = new List<FormatoArchivoDTO>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi + "api/Catalogo/");
+                var responseTask = client.GetAsync("FormatoArchivoList");
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSserializer = new JavaScriptSerializer();
+
+                    var response = JSserializer.Deserialize<FormatoArchivoResponseDTO>(readTask.Result);
+                    lstFormato = response.FormatoArchivoList;
+                }
+            }
+            return lstFormato;
+        }
+
+        public ProveedorCuentaResponseDTO GuardarProveedorCuenta(ProveedorCuentaRequestDTO proveedorCuenta)
+        {
+            ProveedorCuentaResponseDTO response = null;
+            ProveedorCuentaRequestDTO proveedorRequest = proveedorCuenta;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi + "api/Proveedor/");
+                var json = JsonConvert.SerializeObject(proveedorRequest);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var responseTask = client.PostAsync("GuardarProveedorCuenta", content);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSSerializer = new JavaScriptSerializer();
+                    response = JSSerializer.Deserialize<ProveedorCuentaResponseDTO>(readTask.Result);
+                }
+            }
+            return response;
         }
     }
 }

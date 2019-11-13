@@ -88,6 +88,15 @@ namespace EprocurementWeb.Content.Texts {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Account.
+        /// </summary>
+        public static string Account {
+            get {
+                return ResourceManager.GetString("Account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a address.
         /// </summary>
         public static string Address {
@@ -102,6 +111,15 @@ namespace EprocurementWeb.Content.Texts {
         public static string AXProviderNum {
             get {
                 return ResourceManager.GetString("AXProviderNum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Bank.
+        /// </summary>
+        public static string Bank {
+            get {
+                return ResourceManager.GetString("Bank", resourceCulture);
             }
         }
         
@@ -138,6 +156,15 @@ namespace EprocurementWeb.Content.Texts {
         public static string City {
             get {
                 return ResourceManager.GetString("City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a CLABE.
+        /// </summary>
+        public static string CLABE {
+            get {
+                return ResourceManager.GetString("CLABE", resourceCulture);
             }
         }
         
@@ -417,6 +444,15 @@ namespace EprocurementWeb.Content.Texts {
         public static string TitlePP {
             get {
                 return ResourceManager.GetString("TitlePP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Type.
+        /// </summary>
+        public static string Type {
+            get {
+                return ResourceManager.GetString("Type", resourceCulture);
             }
         }
         

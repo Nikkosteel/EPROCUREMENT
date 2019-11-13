@@ -179,6 +179,7 @@
     <Content Include="Content\Images\es-es\welcome.jpg" />
     <Content Include="Content\Images\Spain.png" />
     <Content Include="Content\Images\United-States-of-America.png" />
+    <Content Include="Content\StyleIBF.css" />
     <Content Include="Content\validacionProveedor.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
