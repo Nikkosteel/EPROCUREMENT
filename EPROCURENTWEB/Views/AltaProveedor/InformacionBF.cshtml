@@ -1,5 +1,5 @@
 ﻿
-@model EprocurementWeb.Models.ProveedorRegistro
+@model EPROCUREMENT.GAPPROVEEDOR.Entities.ProveedorCuentaDTO
 
 @{
     ViewBag.Title = "Información Bancaria - Financiera";
@@ -26,8 +26,16 @@
                     <div class="form-group col-md-6">
                         @Html.Label("cuenta", @RHome.BName, new { @class = "col-md-4 control-label" })
                         <div class="col-md-8">
-                            @Html.TextBox("cuenta")
-                            @*@Html.TextBoxFor(model => model.RazonSocial, new { @class = "form-control" })*@
+                            @Html.TextBoxFor(model => model.Cuenta, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col25">
+                    <div class="form-group col-md-6">
+                        @Html.Label("cuenta", @RHome.BName, new { @class = "col-md-4 control-label" })
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.IdBanco, new SelectList(ViewBag.PaisList, "IdPais", "Nombre"), "...", new { @class = "form-control col-md-12", @id = "PaisProveedor" })
+                            @Html.TextBoxFor(model => model.RazonSocial, new { @class = "form-control" })
                         </div>
                     </div>
                 </div>
@@ -35,8 +43,7 @@
                     <div class="form-group col-md-6">
                         @Html.Label("cuenta", @RHome.BName, new { @class = "col-md-4 control-label" })
                         <div class="col-md-8">
-                            @Html.TextBox("banco")
-                            @*@Html.TextBoxFor(model => model.RazonSocial, new { @class = "form-control" })*@
+                            @Html.TextBoxFor(model => model.RazonSocial, new { @class = "form-control" })
                         </div>
                     </div>
                 </div>
@@ -44,20 +51,10 @@
                     <div class="form-group col-md-6">
                         @Html.Label("cuenta", @RHome.BName, new { @class = "col-md-4 control-label" })
                         <div class="col-md-8">
-                            @Html.TextBox("clabe")
-                            @*@Html.TextBoxFor(model => model.RazonSocial, new { @class = "form-control" })*@
+                            @Html.TextBoxFor(model => model.RazonSocial, new { @class = "form-control" })
                         </div>
                     </div>
-                </div>
-                <div class="col25">
-                    <div class="form-group col-md-6">
-                        @Html.Label("cuenta", @RHome.BName, new { @class = "col-md-4 control-label" })
-                        <div class="col-md-8">
-                            @Html.TextBox("tipo")
-                            @*@Html.TextBoxFor(model => model.RazonSocial, new { @class = "form-control" })*@
-                        </div>
-                    </div>
-                </div>
+                </div>*@
             </div>
             <hr />
             <div class="col100">
