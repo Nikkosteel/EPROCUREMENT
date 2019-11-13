@@ -15,15 +15,16 @@
 }
 
 .card-border {
-    border-radius: 0.8rem !important;
+    border-radius: 12px !important;
 }
 
 .card-titulo {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500 !important;
 }
 
 .card-header {
+
     padding: 5px 0px 0px 25px;
     background: rgba(67,41,121,1);
     background: -moz-linear-gradient(left, rgba(67,41,121,1) 0%, rgba(92,61,147,1) 0%, rgba(114,78,170,1) 100%);
@@ -46,6 +47,7 @@
 
 .label-formulario {
     font-weight: 500 !important;
+    font-size:12px;
 }
 .btnStyle {
     border-radius: 20px;

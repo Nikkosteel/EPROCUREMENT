@@ -11,20 +11,13 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-purple">
-        @*<a class="navbar-brand" href="#">Navbar</a>*@
+    @*
+    <nav class="navbar navbar-expand-lg navbar-dark bg-test">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            @*<ul class="navbar-nav">
-                <li><a href="@Url.HttpRouteUrl(this.Culture==GlobalHelper.DefaultCulture ? "Default" : "LocalizedDefault",new { lang=GlobalHelper.CurrentCulture, action="Index", controller="Home"})">@RGlobal.Home</a></li>
-
-            </ul>*@
             <ul class="langs" style="list-style:none;">
-                @*<li style="display:inline;">
-                        <a href="" class="setLang" data-lang="fr-FR"><img src="@Url.GetImage("france.png", false)" /></a>
-                    </li>*@
                 <li style="display:inline;">
                     <a href="" class="setLang" data-lang="es-MX"><img src="@Url.GetImage("Mexico.png",false)" /></a>
                 </li>
@@ -33,12 +26,11 @@
                 </li>
             </ul>
         </div>
-
-    </nav>
-
+    </nav>*@
 
 
-    <div class="container body-content">
+
+    <div class="body-content">
 
         @RenderBody()
         <hr />
