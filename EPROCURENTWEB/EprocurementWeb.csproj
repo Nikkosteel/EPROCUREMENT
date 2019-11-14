@@ -172,6 +172,9 @@
     <Content Include="Content\Images\fr-fr\eiffel.jpg" />
     <Content Include="Content\Images\fr-fr\welcome.jpg" />
     <Content Include="Content\Images\France.png" />
+    <Content Include="Content\Images\logo-gap-color%402x.png" />
+    <Content Include="Content\Images\logo-gap-color%403x.png" />
+    <Content Include="Content\Images\logo-gap-color.png" />
     <Content Include="Content\Images\Mexico.png" />
     <Content Include="Content\Scripts\es-mx\jquery.validate.extension.js" />
     <Content Include="Content\Scripts\fr-fr\jquery.validate.extension.js" />

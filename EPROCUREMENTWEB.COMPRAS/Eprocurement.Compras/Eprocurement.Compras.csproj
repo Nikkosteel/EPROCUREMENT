@@ -298,6 +298,10 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\Gestor.css" />
+    <Content Include="Content\Images\logo-gap-color%402x.png" />
+    <Content Include="Content\Images\logo-gap-color%403x.png" />
+    <Content Include="Content\Images\logo-gap-color.png" />
     <Content Include="Content\StyleIBF.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />

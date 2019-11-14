@@ -2,70 +2,49 @@
     ViewBag.Title = "Home Page";
 }
 
-<link href="~/Content/validacionProveedor.css" rel="stylesheet" />
+    <link href="~/Content/Gestor.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <div class="row">
     <div class="col-md-12">
-        <div class="card mt-5">
-            <div class="card-header bg-purple">
-                Filtrar por
-                <button id="buscar" class="btn btn-purple float-right"><i class="fas fa-search"></i></button>
-            </div>
+        <div class="card mt-4">
             <div class="card-body">
                 <div class="row">
+                    <div class="col-md-12 h-filtro">Filtrar por</div>
                     <div class="form-group col-md-4">
-                        <div class="form-group row">
-                            @Html.Label("proveedor", "Proveedor", new { @class = "col-md-4 control-label text-right " })
-                            <div class="col-sm-8">
-                                @Html.TextBox("proveedor", "", new { @class = "form-control" })
-                            </div>
-                        </div>
+                        @Html.Label("rfc", "RFC", new { @class = "control-label text-right " })
+                        @Html.TextBox("rfc", "", new { @class = "form-control" })
                     </div>
                     <div class="form-group col-md-4">
-                        <div class="form-group row">
-                            @Html.Label("tipoProveedor", "Tipo proveedor", new { @class = "col-md-4 control-label text-right " })
-                            <div class="col-sm-8">
-                                @Html.DropDownList("tipoProveedor", new SelectList(ViewBag.TipoProveedorList, "IdTipoProveedor", "Tipo"), "Seleccione una opción", new { @class = "form-control" })
-
-                            </div>
-                        </div>
+                        @Html.Label("proveedor", "Proveedor", new { @class = "control-label text-right " })<br />
+                        @Html.TextBox("proveedor", "", new { @class = "form-control" })
+                        @*@Html.Label("tipoProveedor", "Tipo proveedor", new { @class = "control-label text-right " })<br />
+                        @Html.DropDownList("tipoProveedor", new SelectList(ViewBag.TipoProveedorList, "IdTipoProveedor", "Tipo"), "Seleccione una opción", new { @class = "form-control" })*@
                     </div>
                     <div class="form-group col-md-4">
-                        <div class="form-group row">
-                            @Html.Label("giro", "Giro", new { @class = "col-md-4 control-label text-right " })
-                            <div class="col-sm-8">
-                                @Html.DropDownList("giro", new SelectList(ViewBag.GiroList, "IdGiro", "GiroNombre"), "Seleccione una opción", new { @class = "form-control" })
-
-                            </div>
-                        </div>
+                        @Html.Label("email", "Correo Electrónico", new { @class = "control-label text-right " })
+                        @Html.TextBox("email", "", new { @class = "form-control" })
+                        @*@Html.Label("giro", "Giro", new { @class = "control-label text-right " })<br />
+                        @Html.DropDownList("giro", new SelectList(ViewBag.GiroList, "IdGiro", "GiroNombre"), "Seleccione una opción", new { @class = "form-control" })*@
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <div class="form-group row">
-                            @Html.Label("email", "Correo Electrónico", new { @class = "col-md-4 control-label text-right " })
-                            <div class="col-sm-8">
-                                @Html.TextBox("email", "", new { @class = "form-control" })
-                            </div>
-                        </div>
+                        @Html.Label("aeropuerto", "Aeropuerto", new { @class = "control-label text-right " })
+                        @Html.DropDownList("aeropuerto", new SelectList(ViewBag.AeropuertoList, "Id", "Nombre"), "Seleccione una opción", new { @class = "form-control" })
+                        @*@Html.Label("email", "Correo Electrónico", new { @class = "control-label text-right " })
+                        @Html.TextBox("email", "", new { @class = "form-control" })*@
                     </div>
                     <div class="form-group col-md-4">
-                        <div class="form-group row">
-                            @Html.Label("aeropuerto", "Aeropuerto", new { @class = "col-md-4 control-label text-right " })
-                            <div class="col-sm-8">
-                                @Html.DropDownList("aeropuerto", new SelectList(ViewBag.AeropuertoList, "Id", "Nombre"), "Seleccione una opción", new { @class = "form-control" })
-
-                            </div>
-                        </div>
+                        <label class="control-label text-right">Estatus</label>
+                        <select class="form-control">
+                            <option>...</option>
+                        </select>
                     </div>
                     <div class="form-group col-md-4">
-                        <div class="form-group row">
-                            @Html.Label("rfc", "RFC", new { @class = "col-md-4 control-label text-right " })
-                            <div class="col-sm-8">
-                                @Html.TextBox("rfc", "", new { @class = "form-control" })
-                            </div>
-                        </div>
+                        <button id="buscar" class="btn btn-search btn-purple float-right">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
                     </div>
 
 
@@ -94,63 +73,69 @@
 </div>
 
 <script type="text/javascript">
-    $("#buscar").click(function () {
-       
-     var tipoProveedor = $('#tipoProveedor').val() == '' ? null : $('#tipoProveedor').val();
-     var idGiroProveedor = $('#giro').val() == '' ? null : $('#giro').val();
-     var idAeropuerto = $('#aeropuerto').val() == '' ? null : $('#aeropuerto').val();
-     var email = $('#email').val() == '' ? null : $('#email').val();
-     var nombreEmpresa = $('#proveedor').val() == '' ? null : $('#proveedor').val();
-     var rfc = $('#rfc').val() == '' ? null : $('#rfc').val();
-     var jsonData = JSON.stringify({ idTipoProveedor: tipoProveedor, idGiroProveedor: idGiroProveedor, idAeropuerto: idAeropuerto, nombreEmpresa: nombreEmpresa, rfc: rfc, email: email });
-     $.ajax({
-         type: "POST",
-         contentType: "application/json; charset=utf-8",
-         url: '@Url.Action("GetProveedorEstatusList", "Home")',
-         data: jsonData,
-         async: false,
-         success: function(data) {
-             console.log("Traigo Datos", data)
-                       
-             $("#Table").append('<thead class="bg-purple"><tr><td>IdProveedor</td>' +
-                 '<td>Proveedor</td>' +
-                 '<td>RFC</td>' +
-                 '<td>Email</td>' +
-                 '<td>Estatus</td>' +
-                 '<td>Ver</td></tr></thead>'
-             );
-              //("#Table").DataTable().destroy();
-             $("#Table").DataTable().clear().draw();
-             $("#Table").DataTable().destroy();
+    var fn_buscar = function() {
+         var tipoProveedor = $('#tipoProveedor').val() == '' ? null : $('#tipoProveedor').val();
+         var idGiroProveedor = $('#giro').val() == '' ? null : $('#giro').val();
+         var idAeropuerto = $('#aeropuerto').val() == '' ? null : $('#aeropuerto').val();
+         var email = $('#email').val() == '' ? null : $('#email').val();
+         var nombreEmpresa = $('#proveedor').val() == '' ? null : $('#proveedor').val();
+         var rfc = $('#rfc').val() == '' ? null : $('#rfc').val();
+         var jsonData = JSON.stringify({ idTipoProveedor: tipoProveedor, idGiroProveedor: idGiroProveedor, idAeropuerto: idAeropuerto, nombreEmpresa: nombreEmpresa, rfc: rfc, email: email });
+         $.ajax({
+             type: "POST",
+             contentType: "application/json; charset=utf-8",
+             url: '@Url.Action("GetProveedorEstatusList", "Home")',
+             data: jsonData,
+             async: false,
+             success: function(data) {
+                 console.log("Traigo Datos", data)
+                 $("#Table").html('');
+                 $("#Table").append('<thead class="bg-light-purple"><tr>' +
+                    //'<td>IdProveedor</td>' +
+                     '<td>RFC</td>' +
+                     '<td>Proveedor</td>' +
+                     '<td>Email</td>' +
+                     '<td>Estatus</td>' +
+                     '<td>Ver</td></tr></thead>'
+                 );
+                  //("#Table").DataTable().destroy();
+                 $("#Table").DataTable().clear().draw();
+                 $("#Table").DataTable().destroy();
              
-             $("#Table").append('<tbody>');
-             for (i = 0; i < data.length; i++) {
+                 $("#Table").append('<tbody>');
+                 for (i = 0; i < data.length; i++) {
                  
-                 var link = '@Html.ActionLink(" ", "AceptarProveedor", "Home", new { idProvider ="_idProv_" }, new { @class = "fas fa-eye icon-color" })';
-                 link = link.replace('_idProv_', data[i].IdProveedor);
-                 console.log("link", link);
+                     var link = '@Html.ActionLink(" ", "AceptarProveedor", "Home", new { idProvider ="_idProv_" }, new { @class = "fas fa-eye icon-color" })';
+                     link = link.replace('_idProv_', data[i].IdProveedor);
+                     console.log("link", link);
 
-                 $("#Table").append('<tr>' +
-                     '<td align="center" style="dislay: none;">' + data[i].IdProveedor + '</td>' +
-                     '<td align="center" style="dislay: none;">' + data[i].NombreEmpresa + '</td>' +
-                     '<td align="center" style="dislay: none;">' + data[i].RFC + '</td>' +
-                     '<td align="center" style="dislay: none;">' + data[i].Email + '</td>' +
-                     '<td align="center" style="dislay: none;">' + data[i].Estatus + '</td>' +
-                     '<td align="center" style="dislay: none;">' + link + '</td>' + '</tr>'
-                 );                 
-             }
-             $("#Table").append('</tbody>');
+                     $("#Table").append('<tr>' +
+                         //'<td align="center" style="dislay: none;">' + data[i].IdProveedor + '</td>' +
+                         '<td align="center" style="dislay: none;"><b>' + data[i].RFC + '</b></td>' +
+                         '<td align="center" style="dislay: none;">' + data[i].NombreEmpresa + '</td>' +
+                         '<td align="center" style="dislay: none;">' + data[i].Email + '</td>' +
+                         '<td align="center" style="dislay: none;">' + data[i].Estatus + '</td>' +
+                         '<td align="center" style="dislay: none;">' + link + '</td>' + '</tr>'
+                     );                 
+                 }
+                 $("#Table").append('</tbody>');
               
-             $('#Table').DataTable({
-                    "paging": false,
-                     "bScrollInfinite": true,
-                     "bScrollCollapse": true,
-                     "sScrollY": "200px"
-                 });
+                 $('#Table').DataTable({
+                        "paging": false,
+                         "bScrollInfinite": true,
+                         "bScrollCollapse": true
+                     });
              
-         },
-     });
- });
+             },
+         });
+    }
+    $("#buscar").click(function () {
+        fn_buscar(); 
+    });
+
+    $(document).ready(function() {
+        fn_buscar(); 
+    });
 
 </script>
 

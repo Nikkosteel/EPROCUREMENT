@@ -190,7 +190,7 @@
     <value>Nacionalidad</value>
   </data>
   <data name="NameOfCompany" xml:space="preserve">
-    <value>Nom. Empresa</value>
+    <value>Reg. Nombre de la empresa</value>
   </data>
   <data name="NIF" xml:space="preserve">
     <value>NIF</value>

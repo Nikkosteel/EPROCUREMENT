@@ -24,10 +24,11 @@ textarea {
 }
 
 .langs {
-    position: fixed;
+    /*position: fixed;*/
     /*bottom:20px;*/
     right: 20px;
     top: 10px;
+    width:150px;
 }
 
 .setLang img {
@@ -94,6 +95,7 @@ textarea {
     color: white;
     height: 40px;
     border-radius: 5px;
+    border: solid 1px #432979;
 }
 
     .btnStyle:hover {
@@ -104,8 +106,27 @@ textarea {
         border-radius: 5px;
     }
 
+    .btnWhite {
+        background-color: white;
+        color: #432979;
+    }
+
+.btnStyleGray {
+    width: 100%;
+    background-color: #f7f6f9;
+    color: #432979;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    border-radius: 50px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+
 .chkCondiciones {
     list-style-type: none;
+    font-size:14px;
 }
 
 input[type="checkbox"] {
@@ -198,4 +219,49 @@ input[type="checkbox"] {
 .bg-purple {
     background-color: #432979 !important;
     color: white;
+}
+
+
+.h-title {
+    font-size:18px !important;
+    font-weight:bold;
+    padding-top:10px;
+    color:#212121;
+}
+
+.bg-test{
+    background-color:red;
+}
+
+.navbar{
+    overflow:hidden;
+}
+
+body{
+    background-color:#f6f6f8;
+}
+
+.panel-header{
+    background-color:white;
+    height:55px;
+    overflow:hidden;
+    padding-top:5px;
+}
+
+.gap-logo{
+    width:120px;
+}
+
+.subtitle{
+    font-size:22px;
+    color:#212121;
+    padding:6px 0;
+}
+
+.pb-0 {
+    padding-bottom:0 !important;
+}
+
+.form-control{
+    font-size:14px;
 }

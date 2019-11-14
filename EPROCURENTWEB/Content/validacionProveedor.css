@@ -15,15 +15,16 @@
 }
 
 .card-border {
-    border-radius: 0.8rem !important;
+    border-radius: 12px !important;
 }
 
 .card-titulo {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500 !important;
 }
 
 .card-header {
+
     padding: 5px 0px 0px 25px;
     background: rgba(67,41,121,1);
     background: -moz-linear-gradient(left, rgba(67,41,121,1) 0%, rgba(92,61,147,1) 0%, rgba(114,78,170,1) 100%);
@@ -46,10 +47,32 @@
 
 .label-formulario {
     font-weight: 500 !important;
+    font-size:12px;
 }
 .btnStyle {
     border-radius: 20px;
 }
 .btnStyle:hover {
     border-radius: 20px;
+}
+
+.nav-tabs .nav-item {
+    background-color:white;
+    color:#212121;
+    border-bottom:solid 2px #edeef2;
+}
+
+.nav-tabs .nav-item a{
+    color: #212121;
+}
+
+    .nav-tabs .nav-item .active {
+        background-color: rgba(67,41,121,1);
+        color: white;
+        border-bottom: solid 2px white;
+    }
+
+.labelTexto{
+    font-size:12px;
+    font-weight:600;
 }
