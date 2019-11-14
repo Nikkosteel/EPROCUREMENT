@@ -135,3 +135,30 @@ table.dataTable tbody tr {
         background-color: white;
         border-top: solid 5px #f6f6f8
     }
+
+.subtitle {
+    font-size: 22px;
+    color: #212121;
+    padding: 6px 0;
+}
+
+.card-titulo {
+    font-size: 16px;
+    font-weight: 500 !important;
+}
+
+.label-formulario {
+    font-weight: 500 !important;
+    font-size: 12px;
+}
+
+.btnWhite {
+    background-color: white;
+    color: #432979;
+}
+
+.btnStyle {
+    border: solid 1px #432979;
+    font-size:14px;
+    font-weight:600;
+}
