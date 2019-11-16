@@ -186,6 +186,9 @@
   <data name="usp_EPROCUREMENT_ProveedorUsuario_GETIById" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_ProveedorUsuario_GETIById]</value>
   </data>
+  <data name="usp_EPROCUREMENT_ProveedorUsuario_GETIByNombreUsuario" xml:space="preserve">
+    <value>[dbo].[usp_EPROCUREMENT_ProveedorUsuario_GETIByNombreUsuario]</value>
+  </data>
   <data name="usp_EPROCUREMENT_Proveedor_GETIById" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_Proveedor_GETIById]</value>
   </data>
@@ -195,6 +198,9 @@
   <data name="usp_EPROCUREMENT_Proveedor_INS" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_Proveedor_INS]</value>
   </data>
+  <data name="usp_EPROCUREMENT_RecoveryPassword_UPD" xml:space="preserve">
+    <value>[dbo].[usp_EPROCUREMENT_RecoveryPassword_UPD]</value>
+  </data>
   <data name="usp_EPROCUREMENT_TipoCuenta_GETL" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_TipoCuenta_GETL]</value>
   </data>
@@ -203,6 +209,12 @@
   </data>
   <data name="usp_EPROCUREMENT_UsuarioProveedor_IN" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_UsuarioProveedor_INS]</value>
+  </data>
+  <data name="usp_EPROCUREMENT_Usuario_GETIByLogin" xml:space="preserve">
+    <value>[dbo].[usp_EPROCUREMENT_Usuario_GETIByLogin]</value>
+  </data>
+  <data name="usp_EPROCUREMENT_Usuario_GEToken" xml:space="preserve">
+    <value>[dbo].[usp_EPROCUREMENT_Usuario_GEToken]</value>
   </data>
   <data name="usp_EPROCUREMENT_ZonaHoraria_GETL" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_ZonaHoraria_GETL]</value>

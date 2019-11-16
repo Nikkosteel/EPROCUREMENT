@@ -80,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EmailLayout\RecuperarPassword.htm" />
     <Content Include="EmailLayout\UsuarioRechazado.htm" />
     <Content Include="EmailLayout\UssuarioAprobado.htm" />
     <Content Include="Global.asax" />
@@ -89,6 +90,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CatalogoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
+    <Compile Include="Controllers\SeguridadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

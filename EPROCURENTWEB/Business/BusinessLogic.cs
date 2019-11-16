@@ -457,5 +457,102 @@ namespace EprocurementWeb.Business
             }
             return response;
         }
+
+        public UsuarioDTO LoginUsuarioItem(string usuario, string password)
+        {
+            UsuarioDTO usuarioDTO = null;
+            LoginUsuarioRequestDTO loginUsuario = new LoginUsuarioRequestDTO { Usuario = new UsuarioDTO { NombreUsuario = usuario, Password = password } };
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi + "api/Seguridad/");
+                var json = JsonConvert.SerializeObject(loginUsuario);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var responseTask = client.PostAsync("Login", content);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSSerializer = new JavaScriptSerializer();
+                    var response = JSSerializer.Deserialize<LoginUsuarioResponseDTO>(readTask.Result);
+                    if(response.Success)
+                    {
+                        usuarioDTO = response.Usuario;
+                    }
+                    else
+                    {
+                        usuarioDTO = null;
+                    }
+                }
+            }
+            return usuarioDTO;
+        }
+
+        public string RecuperarPasswordUsuario(string email, bool esSolicitud)
+        {
+            UsuarioDTO usuarioDTO = new UsuarioDTO
+            {
+                Email = email
+            };
+            ResetPasswordRequestDTO loginUsuario = new ResetPasswordRequestDTO { Usuario = usuarioDTO, EsSolicitud = esSolicitud };
+            string token = null;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi + "api/Seguridad/");
+                var json = JsonConvert.SerializeObject(loginUsuario);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var responseTask = client.PostAsync("IniciarRecovery", content);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSSerializer = new JavaScriptSerializer();
+                    var response = JSSerializer.Deserialize<ResetPasswordResponseDTO>(readTask.Result);
+                    if(response.Success)
+                    {
+                        token = response.TokenRecovery;
+                    }
+                }
+            }
+            return token;
+        }
+
+        public bool RecuperarPasswordUsuario(UsuarioModel usuario, bool esSolicitud)
+        {
+            UsuarioDTO usuarioDTO = new UsuarioDTO
+            {
+                Token = usuario.Token,
+                Password = usuario.PasswordNueva
+
+            };
+            ResetPasswordRequestDTO loginUsuario = new ResetPasswordRequestDTO { Usuario = usuarioDTO, EsSolicitud = esSolicitud };
+            bool resultado = false;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi + "api/Seguridad/");
+                var json = JsonConvert.SerializeObject(loginUsuario);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var responseTask = client.PostAsync("IniciarRecovery", content);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSSerializer = new JavaScriptSerializer();
+                    var response = JSSerializer.Deserialize<ResetPasswordResponseDTO>(readTask.Result);
+                    if (response.Success)
+                    {
+                        resultado = response.Success;
+                    }
+                }
+            }
+            return resultado;
+        }
     }
 }

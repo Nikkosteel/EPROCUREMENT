@@ -326,7 +326,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                             if (ExecuteComandEstatus(cmdEstatus, request.EstatusProveedor) > 0)
                             {
 
-                                new EmailData().Enviar(request.EstatusProveedor.IdProveedor, idUsuario, request.EstatusProveedor.IdEstatusProveedor, request.EstatusProveedor.Observaciones);
+                                new EmailData().EnviarEmailRegistro(request.EstatusProveedor.IdProveedor, idUsuario, request.EstatusProveedor.IdEstatusProveedor, request.EstatusProveedor.Observaciones);
                                 response.Success = true;
                             }
                         }
@@ -335,7 +335,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                     {
                         if (ExecuteComandEstatus(cmdEstatus, request.EstatusProveedor) > 0)
                         {
-                            new EmailData().Enviar(request.EstatusProveedor.IdProveedor, 0, request.EstatusProveedor.IdEstatusProveedor, request.EstatusProveedor.Observaciones);
+                            new EmailData().EnviarEmailRegistro(request.EstatusProveedor.IdProveedor, 0, request.EstatusProveedor.IdEstatusProveedor, request.EstatusProveedor.Observaciones);
                             response.Success = true;
                         }
                     }
@@ -383,6 +383,39 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                             response.NombreEmpresa = reader["NombreEmpresa"].ToString();
                             response.Email = reader["Email"].ToString();
                             response.Password = reader["Password"].ToString();
+                        }
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+            }
+
+            return response;
+        }
+
+        public ProveedorUsuarioDTO GetProvedorUsuarioPorRFC(string email)
+        {
+            ProveedorUsuarioDTO response = new ProveedorUsuarioDTO();
+
+            try
+            {
+                using (var conexion = new SqlConnection(Helper.Connection()))
+                {
+                    conexion.Open();
+                    var cmdReset = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_ProveedorUsuario_GETIByNombreUsuario, conexion)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+                    cmdReset.Parameters.Add(new SqlParameter("@Email", SqlDbType.NVarChar, 300)).Value = email;
+                    using (SqlDataReader reader = cmdReset.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            response = new ProveedorUsuarioDTO();
+                            response.RFC = reader["RFC"].ToString();
+                            response.NombreEmpresa = reader["NombreEmpresa"].ToString();
+                            response.Email = reader["Email"].ToString();
                         }
                     }
                 }

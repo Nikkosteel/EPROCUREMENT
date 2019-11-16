@@ -18,13 +18,9 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
         /// Envia el correo electronico a los destinatarios
         /// </summary>
         /// <param name="emailEntity">Representa la información del correo a enviar</param>
-        public void Enviar(int idProveedor, int idUsuario, int idEstatus, string comentarios)
+        public void EnviarEmailRegistro(int idProveedor, int idUsuario, int idEstatus, string comentarios)
         {
             string EmailOrigen = "GAPProveedoresTest@gmail.com";
-           // string Contraseña = "Kal08Test";
-            //string url = "http://localhost:7886//Access/Recovery/?token=aab6714c9f6328f8dea4210141369515fa4f6ba40b31d0eaea9880c93d7d162f";
-            string url = "http://localhost:7886//Access/Recovery/?token=aab6714c9f6328f8dea4210141369515fa4f6ba40b31d0eaea9880c93d7d162f";
-            string hrefUrl = "<a href='" + url + "'>Click para ingresar</a>";
             EmailDTO emailEntidad = new EmailDTO
             {
                 Origin = EmailOrigen,
@@ -38,13 +34,73 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
             proveedorUsuario = new ProveedorData().GetProvedorUsuarioItem(idProveedor, idUsuario);
             if (idEstatus == 4)
             {
-                emailEntidad.Message = GetMaailBodyAprobar(proveedorUsuario, hrefUrl);
+                emailEntidad.Message = GetBodyAprobar(proveedorUsuario);
             } 
             else if(idEstatus == 2)
             {
-                emailEntidad.Message = GetMaailBodyRechazar(proveedorUsuario, comentarios);
+                emailEntidad.Message = GetBodyRechazar(proveedorUsuario, comentarios);
             }
             emailEntidad.RecipientsList.Add(new DireccionEmailDTO { Address = proveedorUsuario.Email, DisplayName = proveedorUsuario.NombreEmpresa, UserIdentifier = 1 });             
+            var mailMessage = ObtenerMensajeEmail(emailEntidad);
+            var cliente = ObtenerClienteSmtp();
+            try
+            {
+                cliente.Send(mailMessage);
+            }
+            catch (SmtpFailedRecipientException smtpFailedException)
+            {
+            }
+        }
+
+        //public void EnviarEmailRecuperar(int idProveedor, int idUsuario, int idEstatus, string comentarios)
+        //{
+        //    string EmailOrigen = "GAPProveedoresTest@gmail.com";
+        //    EmailDTO emailEntidad = new EmailDTO
+        //    {
+        //        Origin = EmailOrigen,
+        //        Subject = "Estatus de Registro",
+        //        Html = true,
+        //        RecipientsList = new List<DireccionEmailDTO>(),
+        //        Prioridad = EmailPrioridadDTO.Normal
+        //    };
+
+        //    ProveedorUsuarioDTO proveedorUsuario = null;
+        //    proveedorUsuario = new ProveedorData().GetProvedorUsuarioItem(idProveedor, idUsuario);
+        //    if (idEstatus == 4)
+        //    {
+        //        emailEntidad.Message = GetBodyRecuperarPassword(proveedorUsuario);
+        //    }
+        //    else if (idEstatus == 2)
+        //    {
+        //        emailEntidad.Message = GetBodyRechazar(proveedorUsuario, comentarios);
+        //    }
+        //    emailEntidad.RecipientsList.Add(new DireccionEmailDTO { Address = proveedorUsuario.Email, DisplayName = proveedorUsuario.NombreEmpresa, UserIdentifier = 1 });
+        //    var mailMessage = ObtenerMensajeEmail(emailEntidad);
+        //    var cliente = ObtenerClienteSmtp();
+        //    try
+        //    {
+        //        cliente.Send(mailMessage);
+        //    }
+        //    catch (SmtpFailedRecipientException smtpFailedException)
+        //    {
+        //    }
+        //}
+        public void EnviarEmailRecuperarPassword(UsuarioDTO usuario)
+        {
+            //string EmailOrigen = "GAPProveedoresTest@gmail.com";
+            EmailDTO emailEntidad = new EmailDTO
+            {
+                Origin = ConfigurationManager.AppSettings["EmailOrigen"],
+                Subject = "Recuperación de Contraseña",
+                Html = true,
+                RecipientsList = new List<DireccionEmailDTO>(),
+                Prioridad = EmailPrioridadDTO.Normal
+            };
+
+            ProveedorUsuarioDTO proveedorUsuario = null;
+            proveedorUsuario = new ProveedorData().GetProvedorUsuarioPorRFC(usuario.Email);
+            emailEntidad.Message = GetBodyRecuperarPassword(proveedorUsuario, usuario.Token);
+            emailEntidad.RecipientsList.Add(new DireccionEmailDTO { Address = proveedorUsuario.Email, DisplayName = proveedorUsuario.NombreEmpresa, UserIdentifier = 1 });
             var mailMessage = ObtenerMensajeEmail(emailEntidad);
             var cliente = ObtenerClienteSmtp();
             try
@@ -62,24 +118,38 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
         /// <param name="nombreCompañia">Nombre de la compañia</param>
         /// <param name="urlLogin">Url para el logueo</param>
         /// <returns>La estructura del correo</returns>
-        private string GetMaailBodyAprobar(ProveedorUsuarioDTO proveedorUsuario, string urlLogin)
+        private string GetBodyAprobar(ProveedorUsuarioDTO proveedorUsuario)
         {
+            string url = ConfigurationManager.AppSettings["UrlLogin"];
+            string hrefUrl = "<a href='" + url + "'>Click para ingresar</a>";
             string layoutName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, App_GlobalResources.ResourceConstants.EmailLayout, "UssuarioAprobado.htm");
             string message = File.ReadAllText(layoutName);
             var details = new StringBuilder();
             message = message.Replace("<!--NombreCompania-->", proveedorUsuario.NombreEmpresa);
             message = message.Replace("<!--RFCCompania-->", proveedorUsuario.RFC);
             message = message.Replace("<!--ContaseñaCompania-->", proveedorUsuario.Password);
-            message = message.Replace("<!--urlAction-->", urlLogin);
+            message = message.Replace("<!--urlAction-->", hrefUrl);
             return message;
         }
-        private string GetMaailBodyRechazar(ProveedorUsuarioDTO proveedorUsuario, string comentarios)
+        private string GetBodyRechazar(ProveedorUsuarioDTO proveedorUsuario, string comentarios)
         {
             string layoutName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, App_GlobalResources.ResourceConstants.EmailLayout, "UsuarioRechazado.htm");
             string message = File.ReadAllText(layoutName);
             var details = new StringBuilder();
             message = message.Replace("<!--NombreCompania-->", "Proveedor");
             message = message.Replace("<!--observaciones-->", comentarios);
+            return message;
+        }
+
+        private string GetBodyRecuperarPassword(ProveedorUsuarioDTO proveedorUsuario, string tokenRecovery)
+        {
+            string url = ConfigurationManager.AppSettings["UrlrRecoveryPassword"] + tokenRecovery;
+            string hrefUrl = "<a href='" + url + "'>Click para recuperar</a>";
+            string layoutName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, App_GlobalResources.ResourceConstants.EmailLayout, "RecuperarPassword.htm");
+            string message = File.ReadAllText(layoutName);
+            var details = new StringBuilder();
+            message = message.Replace("<!--NombreCompania-->", proveedorUsuario.NombreEmpresa);
+            message = message.Replace("<!--urlAction-->", hrefUrl);
             return message;
         }
 
@@ -91,13 +161,13 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
         /// <returns></returns>
         private SmtpClient ObtenerClienteSmtp()
         {
-            string EmailOrigen = "GAPProveedoresTest@gmail.com";
-            string Contraseña = "Kal08Test";
+            string EmailOrigen = ConfigurationManager.AppSettings["EmailOrigen"];//"GAPProveedoresTest@gmail.com";
+            string password = "Kal08Test";
             SmtpClient oSmtpClient = new SmtpClient("smtp.gmail.com");
             oSmtpClient.EnableSsl = true;
             oSmtpClient.UseDefaultCredentials = false;
             oSmtpClient.Port = Convert.ToInt32(ConfigurationManager.AppSettings["PORT"]);
-            oSmtpClient.Credentials = new System.Net.NetworkCredential(EmailOrigen, Contraseña);
+            oSmtpClient.Credentials = new System.Net.NetworkCredential(EmailOrigen, password);
             return oSmtpClient;
             //return new SmtpClient
             //{

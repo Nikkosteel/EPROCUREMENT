@@ -1,0 +1,101 @@
+﻿@model EprocurementWeb.Models.UsuarioModel
+@{
+    ViewBag.Title = "Bienvenido";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/validacionProveedor.css" rel="stylesheet" />
+<div class="container">
+    @using (Html.BeginForm("Login", "Seguridad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row pb-0">
+            <div class="col-sm-12">
+                <h3 class="subtitle">
+                    Inicio de sesion
+                </h3>
+            </div>
+        </div>
+
+        <div class="formPrincipal">
+          
+            <div class="tab-content" style="background-color:white; padding: 15px;">
+                <div role="tabpanel" class="tab-pane fade in active show" id="IB">
+                    <div class="col100" style="font-size:14px;">
+                        Contraseña
+                    </div>                
+                    <div class="col100 mt-2">
+                        @*@Html.HiddenFor(model => model.Token)*@
+                        <div class="col25">
+                            <div class="inputIF">
+                                @Html.LabelFor(model => model.NombreUsuario, new { @class = "labelTexto control-label" })
+                            </div>
+                            <div class="inputIF">
+                                @Html.TextBoxFor(model => model.NombreUsuario, new { @class = "form-control inputIF" })
+                            </div>
+                        </div>
+                        <div class="col25">
+                            <div class="inputIF">
+                                @Html.LabelFor(model => model.Password, new { @class = "labelTexto control-label" })
+                            </div>
+                            <div class="inputIF">
+                                @Html.PasswordFor(model => model.Password, new { @class = "form-control inputIF" })
+                            </div>
+                        </div>
+                        @ViewBag.Error
+                    </div>
+                    <div class="col100 mt-2">
+                        <div class="col25" style="text-align:center">
+                            @Html.ActionLink("Olvidaste tu contraseña", "IniciarRecuperacion", "Seguridad")
+                        </div>
+                    </div>
+                    <div class="col100 mt-2">
+                        <div class="col25" style="text-align:center">
+                            @Html.ActionLink("Registrate aquí", "IniciarRecuperacion", "Seguridad")
+                        </div>
+                    </div>
+
+                </div>
+                </div>
+
+            <div class="row mt-4">
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-2"><input type="submit" value="Ingresar" class="btnStyle" /></div>
+                <div class="col-sm-2">&nbsp;</div>
+            </div>
+        </div>
+
+    }
+</div>
+
+
+
+
+@*<div class="row">
+    <div class="danger">
+        @ViewBag.Error
+    </div>
+    <form action="@Url.Content("~/Seguridad/Login")" method="post">
+        <div class="row">
+            <div class="col-md-6" style="text-align: right; ">
+                <label>Usuario:</label>
+            </div>
+            <div class="col-md-6" style="text-align: left; ">
+                <input type="text" name="usuario" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" style="text-align: right; ">
+                <label>Contraseña:</label>
+            </div>
+            <div class="col-md-6" style="text-align: left; ">
+                <input type="password" name="password" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" style="text-align: right; ">
+                <input type="submit" value="Entrar" class="btn btn-success" />
+            </div>
+        </div>
+
+    </form>
+</div>*@

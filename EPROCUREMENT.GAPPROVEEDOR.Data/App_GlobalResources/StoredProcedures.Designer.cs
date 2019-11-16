@@ -295,6 +295,24 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_ProveedorUsuario_GETIByNombreUsuario].
+        /// </summary>
+        internal static string usp_EPROCUREMENT_ProveedorUsuario_GETIByNombreUsuario {
+            get {
+                return ResourceManager.GetString("usp_EPROCUREMENT_ProveedorUsuario_GETIByNombreUsuario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_RecoveryPassword_UPD].
+        /// </summary>
+        internal static string usp_EPROCUREMENT_RecoveryPassword_UPD {
+            get {
+                return ResourceManager.GetString("usp_EPROCUREMENT_RecoveryPassword_UPD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_TipoCuenta_GETL].
         /// </summary>
         internal static string usp_EPROCUREMENT_TipoCuenta_GETL {
@@ -309,6 +327,24 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data.App_GlobalResources {
         internal static string usp_EPROCUREMENT_TipoProveedor_GETL {
             get {
                 return ResourceManager.GetString("usp_EPROCUREMENT_TipoProveedor_GETL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_Usuario_GETIByLogin].
+        /// </summary>
+        internal static string usp_EPROCUREMENT_Usuario_GETIByLogin {
+            get {
+                return ResourceManager.GetString("usp_EPROCUREMENT_Usuario_GETIByLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_Usuario_GEToken].
+        /// </summary>
+        internal static string usp_EPROCUREMENT_Usuario_GEToken {
+            get {
+                return ResourceManager.GetString("usp_EPROCUREMENT_Usuario_GEToken", resourceCulture);
             }
         }
         

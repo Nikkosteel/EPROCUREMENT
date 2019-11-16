@@ -60,6 +60,7 @@
     <Compile Include="HelperData\UtileriaData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proveedor\ProveedorData.cs" />
+    <Compile Include="Seguridad\SeguridadData.cs" />
     <Compile Include="TryCatchExecutor.cs" />
   </ItemGroup>
   <ItemGroup>
