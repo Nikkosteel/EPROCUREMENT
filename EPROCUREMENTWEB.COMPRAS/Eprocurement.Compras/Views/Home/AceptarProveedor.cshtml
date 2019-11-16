@@ -34,49 +34,49 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             @Html.Label("empresa", "Nombre de la empresa", new { @class = "label-formulario" })
-                                            @Html.TextBoxFor(model => model.NombreEmpresa, new { @class = "form-control col-md-12" })
+                                            @Html.TextBoxFor(model => model.NombreEmpresa, new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             @Html.Label("razonSocial", "Razón social", new { @class = "label-formulario" })
-                                            @Html.TextBoxFor(model => model.RazonSocial, new { @class = "form-control col-md-12" })
+                                            @Html.TextBoxFor(model => model.RazonSocial, new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             @Html.Label("rfc", "RFC", new { @class = "label-formulario" })
-                                            @Html.TextBoxFor(model => model.RFC, new { @class = "form-control col-md-12" })
+                                            @Html.TextBoxFor(model => model.RFC, new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             @Html.Label("nif", "NIF", new { @class = "label-formulario" })
-                                            @Html.TextBoxFor(model => model.NIF, new { @class = "form-control col-md-12" })
+                                            @Html.TextBoxFor(model => model.NIF, new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("codigo", "Código postal", new { @class = "label-formulario" })
-                                            @Html.TextBoxFor(model => model.Direccion.CodigoPostal, new { @class = "form-control col-md-12" })
+                                            @Html.TextBoxFor(model => model.Direccion.CodigoPostal, new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("colonia", "Colonia", new { @class = "label-formulario" })
-                                            @Html.TextBoxFor(model => model.Direccion.Colonia, new { @class = "form-control col-md-12" })
+                                            @Html.TextBoxFor(model => model.Direccion.Colonia, new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("pais", "País", new { @class = "label-formulario" })
-                                            @Html.DropDownListFor(model => model.Direccion.IdPais, new SelectList(ViewBag.PaisList, "IdPais", "Nombre"), "...", new { @class = "form-control col-md-12", @id = "PaisProveedor" })
+                                            @Html.DropDownListFor(model => model.Direccion.IdPais, new SelectList(ViewBag.PaisList, "IdPais", "Nombre"), "...", new { @class = "form-control col-md-12 disabled", @id = "PaisProveedor" })
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("estado", "Estado", new { @class = "label-formulario" })
-                                            @Html.DropDownListFor(model => model.Direccion.IdEstado, new SelectList(Enumerable.Empty<EPROCUREMENT.GAPPROVEEDOR.Entities.EstadoDTO>(), "IdEstado", "Nombre"), "...", new { @class = "form-control col-md-12", @id = "EstadoProveedor" })
+                                            @Html.DropDownListFor(model => model.Direccion.IdEstado, new SelectList(Enumerable.Empty<EPROCUREMENT.GAPPROVEEDOR.Entities.EstadoDTO>(), "IdEstado", "Nombre"), "...", new { @class = "form-control col-md-12 disabled", @id = "EstadoProveedor" })
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -88,50 +88,50 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("municipio", "Municipio", new { @class = "label-formulario" })
-                                            @Html.DropDownListFor(model => model.Direccion.IdMunicipio, new SelectList(Enumerable.Empty<EPROCUREMENT.GAPPROVEEDOR.Entities.MunicipioDTO>(), "idMunicipio", "Nombre"), "...", new { @class = "form-control col-md-12", @id = "MunicipioProveedor" })
+                                            @Html.DropDownListFor(model => model.Direccion.IdMunicipio, new SelectList(Enumerable.Empty<EPROCUREMENT.GAPPROVEEDOR.Entities.MunicipioDTO>(), "idMunicipio", "Nombre"), "...", new { @class = "form-control col-md-12 disabled", @id = "MunicipioProveedor" })
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("zonaHoraria", "Zona horaria", new { @class = "label-formulario" })
-                                            @Html.DropDownListFor(model => model.IdZonaHoraria, new SelectList(ViewBag.ZonaHorariaList, "IdZonaHoraria", "Nombre"), "...", new { @class = "form-control col-md-12" })
+                                            @Html.DropDownListFor(model => model.IdZonaHoraria, new SelectList(ViewBag.ZonaHorariaList, "IdZonaHoraria", "Nombre"), "...", new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("telefono", "Teléfono", new { @class = "label-formulario" })
-                                            @Html.TextBoxFor(model => model.ProvTelefono, new { @class = "form-control col-md-12" })
+                                            @Html.TextBoxFor(model => model.ProvTelefono, new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("fax", "Fax", new { @class = "label-formulario" })
-                                            @Html.TextBoxFor(model => model.ProvFax, new { @class = "form-control col-md-12" })
+                                            @Html.TextBoxFor(model => model.ProvFax, new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             @Html.Label("paginaWeb", "Página web", new { @class = "label-formulario" })
-                                            @Html.TextBoxFor(model => model.PaginaWeb, new { @class = "form-control col-md-12" })
+                                            @Html.TextBoxFor(model => model.PaginaWeb, new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             @Html.Label("tipoProveedor", "Tipo proveedor", new { @class = "label-formulario" })
-                                            @Html.DropDownListFor(model => model.IdTipoProveedor, new SelectList(ViewBag.TipoProveedorList, "IdTipoProveedor", "Tipo"), "...", new { @class = "form-control col-md-12" })
+                                            @Html.DropDownListFor(model => model.IdTipoProveedor, new SelectList(ViewBag.TipoProveedorList, "IdTipoProveedor", "Tipo"), "...", new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             @Html.Label("axNumeroProveedor", "Número AX", new { @class = "label-formulario" })
-                                            @Html.TextBoxFor(model => model.AXNumeroProveedor, new { @class = "form-control col-md-12" })
+                                            @Html.TextBoxFor(model => model.AXNumeroProveedor, new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             @Html.Label("nacionalidad", "Nacionalidad", new { @class = "label-formulario" })
-                                            @Html.DropDownListFor(model => model.IdNacionalidad, new SelectList(ViewBag.NacionalidadList, "IdNacionalidad", "Nombre"), "...", new { @class = "form-control col-md-12" })
+                                            @Html.DropDownListFor(model => model.IdNacionalidad, new SelectList(ViewBag.NacionalidadList, "IdNacionalidad", "Nombre"), "...", new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                 </div>
@@ -161,61 +161,61 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             @Html.Label("contacto", "Contacto", new { @class = "label-formulario" })
-                                            @Html.TextBoxFor(model => model.Contacto.NombreContacto, new { @class = "form-control col-md-12" })
+                                            @Html.TextBoxFor(model => model.Contacto.NombreContacto, new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("cargo", "Cargo", new { @class = "label-formulario" })
-                                            @Html.TextBoxFor(model => model.Contacto.Cargo, new { @class = "form-control col-md-12" })
+                                            @Html.TextBoxFor(model => model.Contacto.Cargo, new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("nacionalidad", "Nacionalidad", new { @class = "label-formulario" })
-                                            @Html.DropDownListFor(model => model.Contacto.IdNacionalidad, new SelectList(ViewBag.NacionalidadList, "IdNacionalidad", "Nombre"), "...", new { @class = "form-control col-md-12" })
+                                            @Html.DropDownListFor(model => model.Contacto.IdNacionalidad, new SelectList(ViewBag.NacionalidadList, "IdNacionalidad", "Nombre"), "...", new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("teledonoDirecto", "Número de teléfono", new { @class = "label-formulario" })
-                                            @Html.TextBoxFor(model => model.Contacto.TelefonoDirecto, new { @class = "form-control col-md-12" })
+                                            @Html.TextBoxFor(model => model.Contacto.TelefonoDirecto, new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("movil", "Número de celular", new { @class = "label-formulario" })
-                                            @Html.TextBoxFor(model => model.Contacto.TelefonoMovil, new { @class = "form-control col-md-12" })
+                                            @Html.TextBoxFor(model => model.Contacto.TelefonoMovil, new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("fax", "Fax", new { @class = "label-formulario" })
-                                            @Html.TextBoxFor(model => model.Contacto.Fax, new { @class = "form-control col-md-12" })
+                                            @Html.TextBoxFor(model => model.Contacto.Fax, new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("emailContacto", "Email", new { @class = "label-formulario" })
-                                            @Html.TextBoxFor(model => model.Contacto.Email, new { @class = "form-control col-md-12" })
+                                            @Html.TextBoxFor(model => model.Contacto.Email, new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("paisContacto", "País", new { @class = "label-formulario" })
-                                            @Html.DropDownListFor(model => model.Contacto.IdPais, new SelectList(ViewBag.PaisList, "IdPais", "Nombre"), "...", new { @class = "form-control col-md-12" })
+                                            @Html.DropDownListFor(model => model.Contacto.IdPais, new SelectList(ViewBag.PaisList, "IdPais", "Nombre"), "...", new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("zonaHorariaConctacto", "Zona horaria", new { @class = "label-formulario" })
-                                            @Html.DropDownListFor(model => model.Contacto.IdZonaHoraria, new SelectList(ViewBag.ZonaHorariaList, "IdZonaHoraria", "Nombre"), "...", new { @class = "form-control col-md-12" })
+                                            @Html.DropDownListFor(model => model.Contacto.IdZonaHoraria, new SelectList(ViewBag.ZonaHorariaList, "IdZonaHoraria", "Nombre"), "...", new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("idioma", "Idioma", new { @class = "label-formulario" })
-                                            @Html.DropDownListFor(model => model.Contacto.IdIdioma, new SelectList(ViewBag.IdiomaList, "IdIdioma", "NombreIdioma"), "...", new { @class = "form-control col-md-12" })
+                                            @Html.DropDownListFor(model => model.Contacto.IdIdioma, new SelectList(ViewBag.IdiomaList, "IdIdioma", "NombreIdioma"), "...", new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
                                 </div>

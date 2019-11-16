@@ -20,7 +20,7 @@
         </div>
 
         <div class="col-sm-4">
-            <ul class="pull-right" style="list-style:none; float: right;">
+            <ul class="pull-right" style="list-style:none; float: right; display:none;">
                 <li style="display:inline;">
                     <a href="" class="setLang" data-lang="es-MX"><img src="@Url.GetImage("Mexico.png",false)" /></a>
                 </li>
@@ -55,6 +55,13 @@
                         <div id="detallecompania" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <div>
                                 <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12" style="font-size:12px;">
+                                            <label class="label-formulario">Tipo de Empresa</label><br />
+                                            <input type="checkbox" checked> Mexicana &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <input type="checkbox" disabled> Extranjera
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
