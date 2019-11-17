@@ -31,5 +31,15 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
 
             return response;
         }
+
+        // GET: api/ActualizaPassword
+        [HttpPost]
+        [Route("ActualizaPassword")]
+        public ActualizaPasswordResponseDTO ActualizaPasswordUsuario([FromBody]ActualizaPasswordRequestDTO request)
+        {
+            var response = new HandlerSeguridad().ActualizaPasswordUsuario(request);
+
+            return response;
+        }
     }
 }

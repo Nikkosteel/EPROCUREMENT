@@ -36,5 +36,14 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Business.Seguridad
             }
             return response;
         }
+        public ActualizaPasswordResponseDTO ActualizaPasswordUsuario(ActualizaPasswordRequestDTO request)
+        {
+            var response = seguridadData.ActualizaPasswordUsuario(request);
+            if (!response.Success && !response.ErrorList.Any())
+            {
+                response.ErrorList = new List<ErrorDTO> { new ErrorDTO { Codigo = "EG" } };
+            }
+            return response;
+        }
     }
 }

@@ -113,6 +113,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Business\BusinessLogic.cs" />
+    <Compile Include="Business\SeguridadBusiness.cs" />
     <Compile Include="Content\Texts\RError.es-mx1.Designer.cs">
       <DependentUpon>RError.es-mx.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -146,13 +147,25 @@
     <Compile Include="Controllers\AltaProveedorController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MiCuentaController.cs" />
     <Compile Include="Controllers\SeguridadController.cs" />
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Filters\ValidaSession.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="GlobalResources\EtiquetaForm.en-US.Designer.cs">
+      <DependentUpon>EtiquetaForm.en-US.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="GlobalResources\EtiquetaForm.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EtiquetaForm.resx</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\GlobalHelper.cs" />
+    <Compile Include="Models\ActualizaPasswordModel.cs" />
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\PaisModel.cs" />
     <Compile Include="Models\ProveedorRegistro.cs" />
@@ -293,6 +306,7 @@
     <Content Include="Views\Seguridad\Index.cshtml" />
     <Content Include="Views\Seguridad\Recovery.cshtml" />
     <Content Include="Views\Seguridad\IniciarRecuperacion.cshtml" />
+    <Content Include="Views\MiCuenta\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -325,6 +339,15 @@
     <EmbeddedResource Include="Content\Texts\RGlobal.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RGlobal.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlobalResources\EtiquetaForm.en-US.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EtiquetaForm.en-US.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlobalResources\EtiquetaForm.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EtiquetaForm.Designer.cs</LastGenOutput>
+      <BrowseToURL>EtiquetaForm</BrowseToURL>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

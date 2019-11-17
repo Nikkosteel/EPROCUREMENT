@@ -98,5 +98,44 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
             }
             return response;
         }
+
+        public ActualizaPasswordResponseDTO ActualizaPasswordUsuario(ActualizaPasswordRequestDTO request)
+        {
+            ActualizaPasswordResponseDTO response = new ActualizaPasswordResponseDTO();
+            response.ErrorList = new List<ErrorDTO>();
+
+            try
+            {
+                using (var conexion = new SqlConnection(Helper.Connection()))
+                {
+                    conexion.Open();
+                    var cmdUpdatePassword = new SqlCommand("[dbo].[usp_EPROCUREMENT_UsuarioResetPassword_UPD]", conexion);
+                    cmdUpdatePassword.CommandType = CommandType.StoredProcedure;
+                    cmdUpdatePassword.Parameters.Add(new SqlParameter("@IdUsuario", request.Usuario.IdUsuario));
+                    cmdUpdatePassword.Parameters.Add(new SqlParameter("@PasswordAnterior", SqlDbType.NVarChar, 300)).Value = request.Usuario.Password;
+                    cmdUpdatePassword.Parameters.Add(new SqlParameter("@PasswordNueva", SqlDbType.NVarChar, 1000)).Value = request.NuevaPassword;
+                    cmdUpdatePassword.Parameters.Add(new SqlParameter("Result", SqlDbType.BigInt) { Direction = ParameterDirection.ReturnValue });
+                    cmdUpdatePassword.ExecuteNonQuery();
+                    var resultado = Convert.ToInt32(cmdUpdatePassword.Parameters["Result"].Value);
+                    if (resultado == 1)
+                    {
+                        response.Success = true;
+                    }
+                    else if(resultado == -4)
+                    {
+                        response.ErrorList.Add(new ErrorDTO { Codigo = "SDRPDP" });
+                    }
+                    else
+                    {
+                        response.ErrorList.Add(new ErrorDTO { Codigo = "GE" });
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                response.ErrorList.Add(new ErrorDTO { Codigo = "GE" });
+            }
+            return response;
+        }
     }
 }

@@ -72,6 +72,7 @@
     <Compile Include="Proveedor\ProveedorEmpresaDTO.cs" />
     <Compile Include="Proveedor\ProveedorGiroDTO.cs" />
     <Compile Include="Proveedor\ProveedorInformacionFinanciera.cs" />
+    <Compile Include="Request\ActualizaPasswordRequestDTO.cs" />
     <Compile Include="Request\EstadoRequestDTO.cs" />
     <Compile Include="Request\FormatoArchivoRequestDTO.cs" />
     <Compile Include="Request\LoginUsuarioRequestDTO.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Request\ProveedorRequestDTO.cs" />
     <Compile Include="Request\RequestBaseDTO.cs" />
     <Compile Include="Request\ResetPasswordRequestDTO.cs" />
+    <Compile Include="Response\ActualizaPasswordResponseDTO.cs" />
     <Compile Include="Response\AeropuertoResponseDTO.cs" />
     <Compile Include="Response\BancoResponseDTO.cs" />
     <Compile Include="Response\CatalogoDocumentoResponseDTO.cs" />

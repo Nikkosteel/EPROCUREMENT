@@ -1,0 +1,157 @@
+﻿@*@model EprocurementWeb.Models.UsuarioModel*@
+@{
+    ViewBag.Title = "Recuperación de contraseña";
+}
+
+<link href="~/Content/validacionProveedor.css" rel="stylesheet" />
+<div class="row panel-header">
+    <div class="col-sm-4 pull-left">
+        <img class="gap-logo" src="@Url.GetImage("logo-gap-color.png",false)" />
+    </div>
+
+    <div class="col-sm-4 t-a-c ">
+        <h1 class="h-title">
+            PORTAL DE PROVEEDORES
+        </h1>
+    </div>
+
+    @*<div class="col-sm-4">
+        <ul class="pull-right" style="list-style:none; float: right;">
+            <li style="display:inline;">
+                <a href="" class="setLang" data-lang="es-MX"><img src="@Url.GetImage("Mexico.png",false)" /></a>
+            </li>
+            <li style="display:inline;">
+                <a href="" class="setLang" data-lang="en-US"><img src="@Url.GetImage("usa.png", false)" /></a>
+            </li>
+        </ul>
+    </div>*@
+</div>
+
+<div class="container">
+        <div class="row pb-0">
+            <div class="col-sm-12">
+                <h3 class="subtitle">
+                    Mi cuenta
+                </h3>
+            </div>
+        </div>
+        <div class="formPrincipal">
+            <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item" style="width:50%">
+                        <a class="nav-link active" href="#tbInfoCuenta" role="tab" data-toggle="tab">Información de la cuenta</a>
+                    </li>
+                    <li class="nav-item" style="width:50%">
+                        <a class="nav-link" href="#tbPassword" role="tab" data-toggle="tab">Contraseña</a>
+                    </li>
+                </ul>
+            <div class="tab-content" style="background-color:white; padding: 15px;">
+                <div role="tabpanel" class="tab-pane fade in active show" id="tbInfoCuenta">
+                    <div class="col100" style="font-size:14px;">
+                        Información de cuenta
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade in active hide" id="tbPassword">
+                    <div class="col100" style="font-size:14px;">
+                        Contraseña
+                    </div>
+                    @model EprocurementWeb.Models.ActualizaPasswordModel
+                    @using (Html.BeginForm("ActualizarPassword", "MiCuenta", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                <div class="col100" style="font-size:14px;">
+                    @*@Html.ValidationSummary("ErrorGenerico")*@
+                    @Html.ValidationSummary(true)
+                    <div class="col100 mt-2">
+                        <div class="col25">
+                            <div class="inputIF">
+                                @Html.LabelFor(model => model.Password, new { @class = "labelTexto control-label" })
+                            </div>
+                            <div class="inputIF">
+                                @Html.PasswordFor(model => model.Password, new { @class = "form-control inputIF" })
+                            </div>
+                        </div>
+                        <div class="col25">
+                            <div class="inputIF">
+                                @Html.LabelFor(model => model.PasswordNueva, new { @class = "labelTexto control-label" })
+                            </div>
+                            <div class="inputIF">
+                                @Html.PasswordFor(model => model.PasswordNueva, new { @class = "form-control inputIF" })
+                            </div>
+                        </div>
+                        <div class="col25">
+                            <div class="inputIF">
+                                @Html.LabelFor(model => model.ConfirmarPassword, new { @class = "labelTexto control-label" })
+                            </div>
+                            <div class="inputIF">
+                                @Html.PasswordFor(model => model.ConfirmarPassword, new { @class = "form-control inputIF" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col100 mt-2">
+                        <div class="col25">
+                            <div class="inputIF">
+                                @Html.ValidationMessageFor(model => model.Password)
+                            </div>
+                        </div>
+                        <div class="col25">
+                            <div class="inputIF">
+                                @Html.ValidationMessageFor(model => model.PasswordNueva)
+                            </div>
+                        </div>
+                        <div class="col25">
+                            <div class="inputIF">
+                                @Html.ValidationMessageFor(model => model.ConfirmarPassword)
+                            </div>
+                        </div>
+                    </div>
+                    @ViewBag.Respuesta
+                </div>
+
+                        <div class="row mt-4">
+                            <div class="col-sm-8">&nbsp;</div>
+                            <div class="col-sm-2"><input type="button" value="Cancelar" class="btnStyle btnWhite" /></div>
+                            <div class="col-sm-2"><input type="submit" value="Aceptar" class="btnStyle" /></div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="row">
+        <div class="col-md-6 offset-3">
+            <div class="form-style">
+                <form action="@Url.Content("~/Seguridad/Recovery")" method="post">
+                    @Html.HiddenFor(d => d.Token)
+
+                    <label>Escribe tu contraeña:</label>
+                    @Html.PasswordFor(d => d.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(d => d.Password, null, new { style = "color:red;" })
+
+                    <label>Nueva contraseña:</label>
+                    @Html.PasswordFor(d => d.PasswordNueva, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(d => d.PasswordNueva, null, new { style = "color:red;" })
+
+                    <label>Confirmar contraseña:</label>
+                    @Html.PasswordFor(d => d.ConfirmarPassword, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(d => d.ConfirmarPassword, null, new { style = "color:red;" })
+                    <br />
+                    <div class="text-right">
+                        <button class="btn btn-primary">Recuperar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>*@
+
