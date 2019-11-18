@@ -58,5 +58,27 @@ namespace EprocurementWeb.Controllers
             }
             return View(proveedor);
         }
+
+        public ActionResult DocumentacionBF(int idProveedor)
+        {
+            BusinessLogic business = new BusinessLogic();
+            var proveedorDocumento = business.GetCatalogoDocumentoList();
+            ProveedorDetalleRequestDTO request = new ProveedorDetalleRequestDTO();
+            request.IdProveedor = idProveedor;
+            var response = business.GetProveedorElemento(request).Proveedor;
+            ProveedorInformacionFinanciera cuenta = new ProveedorInformacionFinanciera();
+            cuenta.RFC = response.RFC;
+            cuenta.CatalogoDocumentoList = business.ObtenerDocumentos(cuenta.RFC, proveedorDocumento);
+            return View(cuenta);
+        }
+
+        public FileResult DescargarArchivo(string ruta, string nombre)
+        {
+            byte[] fileBytes = System.IO.File.ReadAllBytes(@ruta);
+            string fileName = nombre;
+
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
     }
 }

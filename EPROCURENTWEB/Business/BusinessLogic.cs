@@ -307,9 +307,10 @@ namespace EprocurementWeb.Business
                 {
                     if (file != null)
                     {
+                        //var extension = Path.GetExtension(file.File.FileName);
                         var InputFileName = Path.GetFileName(file.File.FileName);
                         InputFileName = file.IdCatalogoDocumento + "_" + InputFileName;
-                        var ServerSavePath = Path.Combine(rutaP + "\\"+ InputFileName);
+                        var ServerSavePath = Path.Combine(rutaP + "\\" + InputFileName);
                         file.File.SaveAs(ServerSavePath);
                     }
                 }
@@ -320,6 +321,37 @@ namespace EprocurementWeb.Business
                 respuesta = false;
             }
             return respuesta;
+        }
+
+        public List<CatalogoDocumentoDTO> ObtenerDocumentos(string rfc, List<CatalogoDocumentoDTO> files)
+        {
+            string ruta = Settings.Default["RutaDocumentos"].ToString();
+            string rutaF = HttpContext.Current.Server.MapPath(ruta);
+            string rutaP = rutaF + "\\" + rfc;
+            List<string> fnDocumentos = new List<string>();
+            try
+            {
+                foreach (string file in Directory.EnumerateFiles(rutaP))
+                {
+                    string fn = Path.GetFileName(file);
+                    string[] idDoc = fn.Split('_');
+                    int id = idDoc.Length > 0 ? Convert.ToInt32(idDoc[0]) : 0;
+                    foreach(var doc in files)
+                    {
+                        if (doc.IdCatalogoDocumento == id)
+                        {
+                            doc.NombreDocumento = fn;
+                            doc.RutaDocumento = file;
+                        }
+                    }
+                    //string contents = File.ReadAllText(file);
+                }
+            }
+            catch (Exception excep)
+            {
+                throw excep;
+            }
+            return files;
         }
 
         public List<TipoCuentaDTO> GetTipoCuentaList()
@@ -476,7 +508,7 @@ namespace EprocurementWeb.Business
                     var readTask = result.Content.ReadAsStringAsync();
                     JavaScriptSerializer JSSerializer = new JavaScriptSerializer();
                     var response = JSSerializer.Deserialize<LoginUsuarioResponseDTO>(readTask.Result);
-                    if(response.Success)
+                    if (response.Success)
                     {
                         usuarioDTO = response.Usuario;
                     }
@@ -512,7 +544,7 @@ namespace EprocurementWeb.Business
                     var readTask = result.Content.ReadAsStringAsync();
                     JavaScriptSerializer JSSerializer = new JavaScriptSerializer();
                     var response = JSSerializer.Deserialize<ResetPasswordResponseDTO>(readTask.Result);
-                    if(response.Success)
+                    if (response.Success)
                     {
                         token = response.TokenRecovery;
                     }

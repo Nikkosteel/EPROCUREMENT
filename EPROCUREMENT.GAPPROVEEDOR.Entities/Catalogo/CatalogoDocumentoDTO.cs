@@ -11,6 +11,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Entities
     {
         public int IdCatalogoDocumento { get; set; }
         public string NombreDocumento { get; set; }
+        public string RutaDocumento { get; set; }
         public int IdFormatoArchivo { get; set; }
         public bool EsRequerido { get; set; }
         public int IdFormulario { get; set; }
