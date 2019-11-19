@@ -267,7 +267,7 @@
                                             @Html.HiddenFor(model => aeropuerto.Id)
                                             @Html.HiddenFor(model => aeropuerto.Nombre)
                                             <div class="col-sm-4" style="font-size:12px;">
-                                                @Html.CheckBoxFor(model => aeropuerto.Checado)
+                                                @Html.CheckBoxFor(model => aeropuerto.Checado, new { @value = aeropuerto.Checado })
                                                 @Html.DisplayTextFor(model => aeropuerto.Nombre)
                                             </div>
                                         }
