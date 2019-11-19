@@ -113,7 +113,7 @@
                         <div class="col100">
                             <div class="col25">
                                 <div class="inputIF">
-                                    @Html.LabelFor(m => m.CatalogoDocumentoList[idx].NombreDocumento, new { @class = "labelTexto control-label" })
+                                    @Html.DisplayFor(m => m.CatalogoDocumentoList[idx].NombreDocumento)
                                     @Html.HiddenFor(m => m.CatalogoDocumentoList[idx].IdCatalogoDocumento)
                                     @Html.HiddenFor(m => m.CatalogoDocumentoList[idx].IdFormatoArchivo)
                                     @Html.HiddenFor(m => m.CatalogoDocumentoList[idx].IdFormulario)
