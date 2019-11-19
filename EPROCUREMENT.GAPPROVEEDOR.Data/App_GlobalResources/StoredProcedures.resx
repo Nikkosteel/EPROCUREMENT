@@ -132,6 +132,9 @@
   <data name="usp_EPROCUREMENT_CuentaEmpresa_INS" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_CuentaEmpresa_INS]</value>
   </data>
+  <data name="usp_EPROCUREMENT_DocumentoProveedor_GETL" xml:space="preserve">
+    <value>[dbo].[usp_EPROCUREMENT_DocumentoProveedor_GETL]</value>
+  </data>
   <data name="usp_EPROCUREMENT_Estado_GETL" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_Estado_GETL]</value>
   </data>

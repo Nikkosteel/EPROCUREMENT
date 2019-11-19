@@ -19,7 +19,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data.App_GlobalResources {
     // a través de una herramienta como ResGen o Visual Studio.
     // Para agregar o quitar un miembro, edite el archivo .ResX y, a continuación, vuelva a ejecutar ResGen
     // con la opción /str o recompile su proyecto de VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class StoredProcedures {
@@ -102,6 +102,15 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data.App_GlobalResources {
         internal static string usp_EPROCUREMENT_CuentaEmpresa_INS {
             get {
                 return ResourceManager.GetString("usp_EPROCUREMENT_CuentaEmpresa_INS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_DocumentoProveedor_GETL].
+        /// </summary>
+        internal static string usp_EPROCUREMENT_DocumentoProveedor_GETL {
+            get {
+                return ResourceManager.GetString("usp_EPROCUREMENT_DocumentoProveedor_GETL", resourceCulture);
             }
         }
         

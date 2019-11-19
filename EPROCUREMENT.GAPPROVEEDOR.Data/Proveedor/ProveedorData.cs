@@ -267,10 +267,10 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
 
                     var cmdContacto = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_ProveedorContacto_GETIByIdProveedor, conexion);
                     response.Proveedor.Contacto = ExecuteQueryContacto(cmdContacto, request.IdProveedor);
-                    
+
                     var cmdEmpresa = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_ProveedorEmpresa_GETLByIdProveedor, conexion);
                     response.Proveedor.EmpresaList = ExecuteQueryEmpresa(cmdEmpresa, request.IdProveedor);
-                    
+
                     var cmdProveedorGiro = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_ProveedorGiro_GETLByIdProveedor, conexion);
                     response.Proveedor.ProveedorGiroList = ExecuteQueryProveedorGiroList(cmdProveedorGiro, request.IdProveedor);
                 }
@@ -424,6 +424,46 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
             {
             }
 
+            return response;
+        }
+
+        public CatalogoDocumentoResponseDTO GetDocumentoProveedorList()
+        {
+            CatalogoDocumentoResponseDTO response = new CatalogoDocumentoResponseDTO()
+            {
+                CatalogoDocumentoList = new List<CatalogoDocumentoDTO>()
+            };
+
+            CatalogoDocumentoDTO catalogoDocumento = null;
+            try
+            {
+                using (var conexion = new SqlConnection(Helper.Connection()))
+                {
+                    conexion.Open();
+                    var cmd = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_DocumentoProveedor_GETL, conexion)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            catalogoDocumento = new CatalogoDocumentoDTO();
+                            catalogoDocumento.IdCatalogoDocumento = !reader.IsDBNull(0) ? Convert.ToInt32(reader["IdCatalogoDocumento"]) : 0;
+                            catalogoDocumento.NombreDocumento = !reader.IsDBNull(1) ? reader["NombreDocumento"].ToString() : string.Empty;
+                            catalogoDocumento.IdFormatoArchivo = !reader.IsDBNull(2) ? Convert.ToInt32(reader["IdFormatoArchivo"]) : 0;
+                            catalogoDocumento.EsRequerido = !reader.IsDBNull(3) ? Convert.ToBoolean(reader["EsRequerido"]) : false;
+                            catalogoDocumento.IdFormulario = !reader.IsDBNull(4) ? Convert.ToInt32(reader["IdFormulario"]) : 0;
+                            response.CatalogoDocumentoList.Add(catalogoDocumento);
+                        }
+                    }
+                }
+                response.Success = true;
+            } catch(Exception exception)
+            {
+
+            }
             return response;
         }
 
