@@ -93,10 +93,12 @@ namespace Eprocurement.Compras.Controllers
                     ProvFax = response.ProvFax,
                     ProvTelefono = response.ProvTelefono,
                     RazonSocial = response.RazonSocial,
-                    RFC = response.RFC
-
-                    
+                    RFC = response.RFC                    
                 };
+                ViewBag.EstadoList = estadoList;
+                ViewBag.MunicipioList = municipioList;
+                ViewBag.idEstado = proveedor.Direccion.IdEstado;
+                ViewBag.idMunicipio = proveedor.Direccion.IdMunicipio;
             }
             catch (Exception ex)
             {

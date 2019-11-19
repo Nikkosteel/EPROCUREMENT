@@ -116,7 +116,7 @@
                                             @Html.TextBoxFor(model => model.PaginaWeb, new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    @*<div class="col-md-6">
                                         <div class="form-group">
                                             @Html.Label("tipoProveedor", "Tipo proveedor", new { @class = "label-formulario" })
                                             @Html.DropDownListFor(model => model.IdTipoProveedor, new SelectList(ViewBag.TipoProveedorList, "IdTipoProveedor", "Tipo"), "...", new { @class = "form-control col-md-12 disabled" })
@@ -127,7 +127,7 @@
                                             @Html.Label("axNumeroProveedor", "Número AX", new { @class = "label-formulario" })
                                             @Html.TextBoxFor(model => model.AXNumeroProveedor, new { @class = "form-control col-md-12 disabled" })
                                         </div>
-                                    </div>
+                                    </div>*@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             @Html.Label("nacionalidad", "Nacionalidad", new { @class = "label-formulario" })
@@ -246,21 +246,22 @@
                                         @Html.Label("", "Aeropuertos que puede atender*", new { @class = "label-formulario" })
                                     </div>
                                     <div class="col-md-12">
-                                            @for (int idx = 0; idx < Model.AeropuertoList.Count; idx++)
-                                            {@Html.HiddenFor(model => model.AeropuertoList[idx].Id)
-                                            @Html.HiddenFor(model => model.AeropuertoList[idx].Nombre)
-                                            <div class="col-sm-4" style="font-size:12px;">
-                                                @Html.CheckBoxFor(model => model.AeropuertoList[idx].Checado)
-                                                @Html.DisplayTextFor(model => model.AeropuertoList[idx].Nombre)
-                                            </div>
+                                            @foreach (var aeropuerto in Model.AeropuertoList)
+                                            {
+                                                @Html.HiddenFor(model => aeropuerto.Id)
+                                                @Html.HiddenFor(model => aeropuerto.Nombre)
+                                                <div class="col-sm-4" style="font-size:12px;">
+                                                    @Html.CheckBoxFor(model => aeropuerto.Checado, new { @value = aeropuerto.Checado })
+                                                    @Html.DisplayTextFor(model => aeropuerto.Nombre)
+                                                </div>
                                             }
                                          @Html.Label("", "Giro (s) específicos de la empresa en los que esta calificada", new { @class = "control-label m-b-1 m-t-1" })
-                                        @for (int idx = 0; idx < 5; idx++)
+                                        @foreach (var giro in Model.ProveedorGiroList)
                                          {
-                                            @Html.HiddenFor(model => model.ProveedorGiroList[idx].IdProveedorGiro)
+                                            @Html.HiddenFor(model => giro.IdProveedorGiro)
                                             <div class="form-group col-md-12 ">
                                                 <div class="col-md-10">
-                                                    @Html.DropDownListFor(x => x.ProveedorGiroList[idx].IdCatalogoGiro, new SelectList(ViewBag.GiroList, "IdGiro", "GiroNombre", @Model.ProveedorGiroList[idx].IdCatalogoGiro), "...", new { @class = "form-control col-md-12" })
+                                                    @Html.DropDownListFor(x => giro.IdCatalogoGiro, new SelectList(ViewBag.GiroList, "IdGiro", "GiroNombre", giro.IdCatalogoGiro), "...", new { @class = "form-control col-md-12" })
                                                 </div>
                                             </div>
                                          }
@@ -323,7 +324,7 @@
         var observaciones = "";
         var estatus = 0;
         var url = '@Url.Action("Index", "Home")'; 
-
+        var idPais = $('#PaisProveedor option:selected').val();
 
 
         $("#PaisProveedor").change(function () {
