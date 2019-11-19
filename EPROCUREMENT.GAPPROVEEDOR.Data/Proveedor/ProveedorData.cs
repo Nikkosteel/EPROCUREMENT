@@ -480,6 +480,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                     direccion.IdMunicipio = Convert.ToInt32(reader["IdMunicipio"]);
                     direccion.Calle = reader["Calle"].ToString();
                     direccion.IdPais = Convert.ToInt32(reader["IdPais"]);
+                    direccion.IdEstado = Convert.ToInt32(reader["IdEstado"]);
                     direccion.Estado = reader["Estado"].ToString();
                     direccion.Municipio = reader["Municipio"].ToString();
                     direccion.DireccionValidada = Convert.ToBoolean(reader["DireccionValidada"]);
