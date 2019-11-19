@@ -60,7 +60,7 @@ namespace EprocurementWeb.Controllers
                 BusinessLogic businessLogic = new BusinessLogic();
                 ProveedorDetalleRequestDTO request = new ProveedorDetalleRequestDTO();
                 request.IdProveedor = usuarioInfo.IdProveedor;
-                ViewBag.idProveedor = usuarioInfo.IdProveedor;
+
                 var response = businessLogic.GetProveedorElemento(request).Proveedor;
                 var empresaList = response.EmpresaList;
                 proveedor = new ProveedorRegistro

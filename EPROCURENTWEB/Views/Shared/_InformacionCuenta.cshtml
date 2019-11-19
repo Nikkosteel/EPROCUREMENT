@@ -129,7 +129,8 @@
                                             @Html.TextBoxFor(model => model.PaginaWeb, new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+
+                                    @*<div class="col-md-6">
                                         <div class="form-group">
                                             @Html.Label("tipoProveedor", "Tipo proveedor", new { @class = "label-formulario" })
                                             @Html.DropDownListFor(model => model.IdTipoProveedor, new SelectList(ViewBag.TipoProveedorList, "IdTipoProveedor", "Tipo"), "...", new { @class = "form-control col-md-12 disabled" })
@@ -140,7 +141,7 @@
                                             @Html.Label("axNumeroProveedor", "Número AX", new { @class = "label-formulario" })
                                             @Html.TextBoxFor(model => model.AXNumeroProveedor, new { @class = "form-control col-md-12 disabled" })
                                         </div>
-                                    </div>
+                                    </div>*@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             @Html.Label("nacionalidad", "Nacionalidad", new { @class = "label-formulario" })
@@ -267,7 +268,7 @@
                                             @Html.HiddenFor(model => aeropuerto.Id)
                                             @Html.HiddenFor(model => aeropuerto.Nombre)
                                             <div class="col-sm-4" style="font-size:12px;">
-                                                @Html.CheckBoxFor(model => aeropuerto.Checado)
+                                                @Html.CheckBoxFor(model => aeropuerto.Checado, new { @value = aeropuerto.Checado })
                                                 @Html.DisplayTextFor(model => aeropuerto.Nombre)
                                             </div>
                                         }
