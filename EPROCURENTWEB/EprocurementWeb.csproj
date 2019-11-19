@@ -192,6 +192,10 @@
     <Content Include="Content\Images\logo-gap-color%403x.png" />
     <Content Include="Content\Images\logo-gap-color.png" />
     <Content Include="Content\Images\Mexico.png" />
+    <Content Include="Content\Images\proveedores%402x.jpg" />
+    <Content Include="Content\Images\proveedores%403x.jpg" />
+    <Content Include="Content\Images\proveedores.jpg" />
+    <Content Include="Content\Styles\Login.css" />
     <Content Include="Content\Scripts\es-mx\jquery.validate.extension.js" />
     <Content Include="Content\Scripts\fr-fr\jquery.validate.extension.js" />
     <Content Include="Content\Images\en-us\welcome.jpg" />
