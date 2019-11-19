@@ -167,6 +167,7 @@
     <Compile Include="Helpers\GlobalHelper.cs" />
     <Compile Include="Models\ActualizaPasswordModel.cs" />
     <Compile Include="Models\ContactModel.cs" />
+    <Compile Include="Models\MiCuentaModel.cs" />
     <Compile Include="Models\PaisModel.cs" />
     <Compile Include="Models\ProveedorRegistro.cs" />
     <Compile Include="Models\UsuarioModel.cs" />
@@ -184,6 +185,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Css\infoCuenta.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Images\fr-fr\eiffel.jpg" />
     <Content Include="Content\Images\fr-fr\welcome.jpg" />
@@ -312,6 +314,8 @@
     <Content Include="Views\Seguridad\IniciarRecuperacion.cshtml" />
     <Content Include="Views\MiCuenta\Index.cshtml" />
     <Content Include="Views\AltaProveedor\DocumentacionBF.cshtml" />
+    <Content Include="Views\Shared\_ActualizarPassword.cshtml" />
+    <Content Include="Views\Shared\_InformacionCuenta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

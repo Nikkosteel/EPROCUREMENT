@@ -28,5 +28,7 @@ namespace EprocurementWeb.Models
         [Compare("PasswordNueva", ErrorMessageResourceName = "Mensaje_Error_ComparePassword", ErrorMessageResourceType = typeof(EtiquetaForm))]
         [Required(ErrorMessageResourceType = typeof(EtiquetaForm), ErrorMessageResourceName = "Mensaje_Error_Required")]
         public string ConfirmarPassword { get; set; }
+
+        public bool Accion { get; set; }
     }
 }
