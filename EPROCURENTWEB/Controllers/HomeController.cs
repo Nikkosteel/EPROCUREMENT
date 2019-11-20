@@ -50,6 +50,7 @@ namespace EprocurementWeb.Controllers
         public ActionResult GuardarProveedor(ProveedorRegistro proveedor)
         {
             proveedor.Direccion.DireccionValidada = true;
+            //proveedor.Direccion.IdPais = proveedor.i
             CargarCatalogos();
             ViewBag.GiroList = giroList;
             ViewBag.ZonaHorariaList = zonaHorariaList;

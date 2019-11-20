@@ -630,7 +630,7 @@
             $("#lblTIN").addClass("control-display-none");
             $("#Direccion_TIN").addClass("control-display-none");
                 $("#PaisProveedor").val(1);
-            $("#PaisProveedor").prop("disabled", true);
+            //$("#PaisProveedor").prop("disabled", true);
 
             $("#inpgro-tin").hide();
         } else {
@@ -675,7 +675,7 @@
                 $("#ColoniaProveedor").removeClass("control-display-none");
                 $("#Direccion_Colonia").addClass("control-display-none");
                 $("#PaisProveedor option:disabled").removeAttr('disabled');
-                $("#PaisProveedor").prop("disabled", true);
+                //$("#PaisProveedor").prop("disabled", true);
                 $("#PaisProveedor").val(1);
                 $("#Extranjera").prop("checked", false);
 
@@ -693,7 +693,7 @@
             } else {
                 var value = 1;
                 $('#PaisProveedor option[value="' + value + '"]').attr("disabled", true);
-                $("#PaisProveedor").prop("disabled", false);
+                //$("#PaisProveedor").prop("disabled", false);
                 $("#PaisProveedor").val(2);
                 //$("#ColoniaProveedor").addClass("control-display-none");
                 $("#ColoniaProveedor").addClass("control-display-none");
@@ -717,7 +717,7 @@
             if ($(this).is(':checked')) {
                 var value = 1;
                 $('#PaisProveedor option[value="' + value + '"]').attr("disabled", true);
-                $("#PaisProveedor").prop("disabled", false);
+                //$("#PaisProveedor").prop("disabled", false);
                 $("#PaisProveedor").val(2);
                 $("#Direccion_Colonia").addClass("control-display-none");
                 $("#ColoniaProveedor").addClass("control-display-none");
@@ -740,7 +740,7 @@
                 //$("#Direccion_Colonia").removeClass("control-display-none");
                 $("#PaisProveedor option:disabled").removeAttr('disabled');
                 $("#PaisProveedor").val(1);
-                $("#PaisProveedor").prop("disabled", true);
+                //$("#PaisProveedor").prop("disabled", true);
                 $("#Mexicana").prop("checked", true);
 
                 $("#lblColonia").removeClass("control-display-none");
