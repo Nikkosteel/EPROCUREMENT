@@ -104,9 +104,9 @@
 
                         @for (int idx = 0; idx < Model.CatalogoDocumentoList.Count; idx++)
                         {
-                            <div class="col100 mt-2">
-                                <div class="col25">
-                                    <div class="inputIF">
+                            <div class="col-sm-6 mt-2" style="border:solid 1px #c6c7cb; padding:10px;">
+                                <div class="col50">
+                                    <div class="inputIF" style="font-weight:600;">
                                         @Html.DisplayFor(m => m.CatalogoDocumentoList[idx].NombreDocumento)
                                         @Html.HiddenFor(m => m.CatalogoDocumentoList[idx].IdCatalogoDocumento)
                                         @Html.HiddenFor(m => m.CatalogoDocumentoList[idx].IdFormatoArchivo)
