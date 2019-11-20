@@ -134,21 +134,21 @@ namespace EprocurementWeb.Controllers
             return View("Index");
         }
 
+        [HttpPost]
         public ActionResult ActualizarProveedor(ProveedorRegistro proveedor)
         {
-            if (ModelState.IsValid)
-            {
-                //var usuarioInfo = new ValidaSession().ObtenerUsuarioSession();
-                //if (new SeguridadBusiness().ResetPasswordUsuario(actualizaPassword, usuarioInfo.IdUsuario))
-                //{
-                //    ViewBag.Respuesta = "Se ha actualizado su contraseña";
-                //}
-                //else
-                //{
-                //    ModelState.AddModelError("ErrorGenerico", "Se genero un error al procesar la solicitud");
-                //}
-            }
-            ViewBag.Accion = 2;
+            //if (ModelState.IsValid)
+            //{
+            //var usuarioInfo = new ValidaSession().ObtenerUsuarioSession();
+            //if (new BusinessLogic().PostTempProveedor(proveedor))
+            //{
+            //    //    ViewBag.Respuesta = "Se ha actualizado su contraseña";
+            //}
+            //else
+            //{
+            //    ModelState.AddModelError("ErrorGenerico", "Se genero un error al procesar la solicitud");
+            //}
+            //}
             return View("Index");
         }
 

@@ -454,6 +454,8 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                     proveedor.AXNumeroProveedor = reader["AXNumeroProveedor"].ToString();
                     proveedor.AXFechaRegistro = Convert.ToDateTime(reader["AXFechaRegistro"]);
                     proveedor.IdNacionalidad = Convert.ToInt32(reader["IdNacionalidad"]);
+                    proveedor.Mexicana = Convert.ToInt32(reader["TipoEmpresa"]) == 1;
+                    proveedor.Extranjera = Convert.ToInt32(reader["TipoEmpresa"]) != 1;
                 }
             }
             return proveedor;
@@ -689,6 +691,16 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
             return resultado;
         }
 
+        private int ExecuteComandDelete(SqlCommand cmdGiro, int idProveedor)
+        {
+            cmdGiro.CommandType = CommandType.StoredProcedure;
+            cmdGiro.Parameters.Add(new SqlParameter("@IdProveedor", idProveedor));
+            cmdGiro.Parameters.Add(new SqlParameter("Result", SqlDbType.BigInt) { Direction = ParameterDirection.ReturnValue });
+            cmdGiro.ExecuteNonQuery();
+            var resultado = Convert.ToInt32(cmdGiro.Parameters["Result"].Value);
+            return resultado;
+        }
+
         /// <summary>
         /// Recupera los parametros para el registro del giro
         /// </summary>
@@ -742,23 +754,83 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
             return contrasenia;
         }
 
+        public ProveedorResponseDTO TempProveedorInsertar(ProveedorRequesteDTO request)
+        {
+            ProveedorResponseDTO response = new ProveedorResponseDTO()
+            {
+                ErrorList = new List<ErrorDTO>()
+            };
+
+            try
+            {
+                using (var conexion = new SqlConnection(Helper.Connection()))
+                {
+                    conexion.Open();
+                    var cmdProveedor = new SqlCommand("[dbo].[usp_EPROCUREMENT_TmpProveedor_INS]", conexion);
+
+                    using (TransactionScope transactionScope = new TransactionScope())
+                    {
+                        var resultado = ExecuteComandTempProveedor(cmdProveedor, request.Proveedor);
+                        if (resultado > 0)
+                        {
+                            var idProveedor = request.Proveedor.IdProveedor;
+                            //var cmdGiroDelete = new SqlCommand("[dbo].[usp_EPROCUREMENT_ProveedorGiro_DEL]", conexion);
+                            //if (ExecuteComandDelete(cmdGiroDelete, idProveedor) < 1) { return response; }
+                            var cmdEmpresaDelete = new SqlCommand("[dbo].[usp_EPROCUREMENT_ProveedorEmpresa_DEL]", conexion);
+                            if (ExecuteComandDelete(cmdEmpresaDelete, idProveedor) < 1) { return response; }
+
+                            //foreach (var proveedorGiro in request.Proveedor.ProveedorGiroList)
+                            //{
+                            //    var cmdGiro = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_ProveedorGiro_INS, conexion);
+                            //    if (ExecuteComandGiro(cmdGiro, proveedorGiro.IdCatalogoGiro, idProveedor) < 1) { return response; }
+                            //}
+
+                            foreach (var empresa in request.Proveedor.EmpresaList)
+                            {
+                                var cmdEmpresa = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_ProveedorEmpresa_INS, conexion);
+                                empresa.IdProveedor = idProveedor;
+                                if (ExecuteComandEmpresa(cmdEmpresa, empresa) < 1) { return response; }
+                            }
+
+                            var cmdContacto = new SqlCommand("[dbo].[usp_EPROCUREMENT_ProveedorContacto_UPD]", conexion);
+                            request.Proveedor.Contacto.IdProveedor = idProveedor;
+                            if (ExecuteComandContacto(cmdContacto, request.Proveedor.Contacto) < 1) { return response; }
+
+                            var cmdDireccion = new SqlCommand("[dbo].[usp_EPROCUREMENT_ProveedorDireccion_UPD]", conexion);
+                            request.Proveedor.Direccion.IdProveedor = idProveedor;
+                            if (ExecuteComandDireccion(cmdDireccion, request.Proveedor.Direccion) < 1) { return response; }
+
+                            var cmdEstatus = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_EstatusProveedor_INS, conexion);
+                            var estatusProveedor = new HistoricoEstatusProveedorDTO
+                            {
+                                IdEstatusProveedor = 1,
+                                IdProveedor = idProveedor,
+                                IdUsuario = null,
+                                Observaciones = null
+                            };
+                            if (ExecuteComandEstatus(cmdEstatus, estatusProveedor) < 1) { return response; }
+                            transactionScope.Complete();
+                            response.Success = true;
+                        }
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+            }
+            return response;
+        }
+
         private int ExecuteComandTempProveedor(SqlCommand cmdProveedor, ProveedorDTO proveedor)
         {
             proveedor.AXFechaRegistro = DateTime.Now;
             cmdProveedor.CommandType = CommandType.StoredProcedure;
-            cmdProveedor.Parameters.Add(new SqlParameter("@IdProveedor", proveedor.IdZonaHoraria));
+            cmdProveedor.Parameters.Add(new SqlParameter("@IdProveedor", proveedor.IdProveedor));
             cmdProveedor.Parameters.Add(new SqlParameter("@NombreEmpresa", SqlDbType.NVarChar, 500)).Value = proveedor.NombreEmpresa;
             cmdProveedor.Parameters.Add(new SqlParameter("@RazonSocial", SqlDbType.NVarChar, 500)).Value = proveedor.RazonSocial;
-            cmdProveedor.Parameters.Add(new SqlParameter("@RFC", SqlDbType.NVarChar, 40)).Value = proveedor.RFC;
-            cmdProveedor.Parameters.Add(new SqlParameter("@NIF", SqlDbType.NVarChar, 30)).Value = proveedor.NIF;
             cmdProveedor.Parameters.Add(new SqlParameter("@ProvTelefono", SqlDbType.NVarChar, 50)).Value = proveedor.ProvTelefono;
-            cmdProveedor.Parameters.Add(new SqlParameter("@ProvFax", SqlDbType.NVarChar, 50)).Value = proveedor.ProvFax;
             cmdProveedor.Parameters.Add(new SqlParameter("@PaginaWeb", SqlDbType.NVarChar, 500)).Value = proveedor.PaginaWeb;
             cmdProveedor.Parameters.Add(new SqlParameter("@IdZonaHoraria", proveedor.IdZonaHoraria));
-            cmdProveedor.Parameters.Add(new SqlParameter("@IdTipoProveedor", proveedor.IdTipoProveedor));
-            cmdProveedor.Parameters.Add(new SqlParameter("@AXNumeroProveedor", SqlDbType.NVarChar, 30)).Value = proveedor.AXNumeroProveedor;
-            cmdProveedor.Parameters.Add(new SqlParameter("@AXFechaRegistro", proveedor.AXFechaRegistro));
-            cmdProveedor.Parameters.Add(new SqlParameter("@IdNacionalidad", proveedor.IdNacionalidad));
             cmdProveedor.Parameters.Add(new SqlParameter("Result", SqlDbType.Int) { Direction = ParameterDirection.ReturnValue });
             cmdProveedor.ExecuteNonQuery();
             var idProveedor = Convert.ToInt32(cmdProveedor.Parameters["Result"].Value);

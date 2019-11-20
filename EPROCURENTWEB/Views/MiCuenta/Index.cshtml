@@ -1,6 +1,6 @@
 ﻿@model EprocurementWeb.Models.MiCuentaModel
 @{
-    ViewBag.Title = "Recuperación de contraseña";
+    ViewBag.Title = "Mi Cuenta";
 }
 
 <link href="~/Content/validacionProveedor.css" rel="stylesheet" />
@@ -50,8 +50,8 @@
                 <div class="col100" style="font-size:14px;">
                     Información de cuenta
                 </div>
-
-                @Html.Partial("~/Views/Shared/_InformacionCuenta.cshtml", Model.Proveedor)
+                @*~/Views/Shared/_InformacionCuenta.cshtml*@
+                @Html.Partial("_InformacionCuenta", Model.Proveedor)
 
             </div>
             <div role="tabpanel" class="tab-pane fade in active hide" id="tbPassword">
