@@ -221,7 +221,12 @@ table.dataTable tbody tr {
         fn_AgregarCuenta();
     });
 
-    $(document).ready(function() {
+    $(document).ready(function () {
+        $("#ProveedorCuentaList_0__Cuenta").val("");
+        $("#ProveedorCuentaList_0__CLABE").val("");
+        $("#idBanco").val(0);
+        $("#idTipoCuenta").val(0);
+
         fn_buscar();
     });
 
