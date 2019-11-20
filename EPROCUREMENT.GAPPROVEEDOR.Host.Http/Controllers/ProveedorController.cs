@@ -1,5 +1,6 @@
 ﻿using EPROCUREMENT.GAPPROVEEDOR.Business.Proveedor;
 using EPROCUREMENT.GAPPROVEEDOR.Entities;
+using EPROCUREMENT.GAPPROVEEDOR.Entities.Proveedor;
 using System.Web.Http;
 
 namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
@@ -69,6 +70,14 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
         public ProveedorResponseDTO GuardarTempProveedor([FromBody]ProveedorRequesteDTO request)
         {
             var response = new HandlerProveedor().TempProveedorInsertar(request);
+            return response;
+        }
+
+        [HttpPost]
+        [Route("ProveedorInfoFinanciera")]
+        public ProveedorInformacionFinanciera GetProveedorInfoFinanciera([FromBody]ProveedorInformacionFinancieraRequestDTO request)
+        {
+            var response = new HandlerProveedor().GetProveedorInfoFinanciera(request);
             return response;
         }
 

@@ -7,6 +7,7 @@ using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
 using EPROCUREMENT.GAPPROVEEDOR.Entities;
+using EPROCUREMENT.GAPPROVEEDOR.Entities.Proveedor;
 using Newtonsoft.Json;
 
 namespace Eprocurement.Compras.Business
@@ -17,8 +18,8 @@ namespace Eprocurement.Compras.Business
         public ProveedorEstatusResponseDTO GetProveedorEstatusList(ProveedorEstatusRequestDTO request)
         {
             ProveedorEstatusResponseDTO response = new ProveedorEstatusResponseDTO();
-                              
-            
+
+
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(urlApi + "api/Proveedor/");
@@ -33,7 +34,7 @@ namespace Eprocurement.Compras.Business
                     var readTask = result.Content.ReadAsStringAsync();
                     JavaScriptSerializer JSSerializer = new JavaScriptSerializer();
                     response = JSSerializer.Deserialize<ProveedorEstatusResponseDTO>(readTask.Result);
-                    
+
                 }
             }
             return response;
@@ -313,6 +314,31 @@ namespace Eprocurement.Compras.Business
                 }
             }
             return usuarioDTO;
+        }
+
+        public ProveedorInformacionFinanciera GetProveedorInfoFinanciera(int idProveedor)
+        {
+            List<EstadoDTO> lstEstado = new List<EstadoDTO>();
+            ProveedorInformacionFinancieraRequestDTO estado = new ProveedorInformacionFinancieraRequestDTO { IdProveedor = idProveedor };
+            ProveedorInformacionFinanciera proveedor = new ProveedorInformacionFinanciera();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi + "api/Proveedor/");
+                var json = JsonConvert.SerializeObject(estado);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var responseTask = client.PostAsync("ProveedorInfoFinanciera", content);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSSerializer = new JavaScriptSerializer();
+                    var response = JSSerializer.Deserialize<ProveedorInformacionFinanciera>(readTask.Result);
+                    proveedor = response;
+                }
+            }
+            return proveedor;
         }
     }
 }

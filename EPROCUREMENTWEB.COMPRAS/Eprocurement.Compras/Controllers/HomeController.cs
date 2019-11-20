@@ -231,13 +231,14 @@ namespace Eprocurement.Compras.Controllers
             try
             {
                 ProveedorInformacionFinanciera informacionFinanciera = new ProveedorInformacionFinanciera();
-                informacionFinanciera.ProveedorCuentaListRegistro = new List<ProveedorCuentaDTO>();
-                informacionFinanciera.ProveedorCuentaListRegistro.Add(new ProveedorCuentaDTO {
-                    CLABE = "123456789012345678",
-                    Cuenta = "1234567890",
-                    NombreBanco = "BBVA",
-                    TipoCuenta = "Débito"
-                });
+                informacionFinanciera = new BusinessLogic().GetProveedorInfoFinanciera(idProveedor);
+                //informacionFinanciera.ProveedorCuentaListRegistro = new List<ProveedorCuentaDTO>();
+                //informacionFinanciera.ProveedorCuentaListRegistro.Add(new ProveedorCuentaDTO {
+                //    CLABE = "123456789012345678",
+                //    Cuenta = "1234567890",
+                //    NombreBanco = "BBVA",
+                //    TipoCuenta = "Débito"
+                //});
 
                 return Json(informacionFinanciera.ProveedorCuentaListRegistro, JsonRequestBehavior.AllowGet);
             }
@@ -253,12 +254,13 @@ namespace Eprocurement.Compras.Controllers
             try
             {
                 ProveedorInformacionFinanciera informacionFinanciera = new ProveedorInformacionFinanciera();
-                informacionFinanciera.CatalogoDocumentoList = new List<CatalogoDocumentoDTO>();
-                informacionFinanciera.CatalogoDocumentoList.Add(new CatalogoDocumentoDTO
-                {
-                    NombreDocumento = "PDF",
-                    RutaDocumento = "localhost"
-                });
+                informacionFinanciera = new BusinessLogic().GetProveedorInfoFinanciera(idProveedor);
+                //informacionFinanciera.CatalogoDocumentoList = new List<CatalogoDocumentoDTO>();
+                //informacionFinanciera.CatalogoDocumentoList.Add(new CatalogoDocumentoDTO
+                //{
+                //    NombreDocumento = "PDF",
+                //    RutaDocumento = "localhost"
+                //});
 
                 return Json(informacionFinanciera.CatalogoDocumentoList, JsonRequestBehavior.AllowGet);
             }

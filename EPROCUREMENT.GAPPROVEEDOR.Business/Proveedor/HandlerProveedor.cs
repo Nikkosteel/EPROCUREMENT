@@ -1,5 +1,6 @@
 ﻿using EPROCUREMENT.GAPPROVEEDOR.Data;
 using EPROCUREMENT.GAPPROVEEDOR.Entities;
+using EPROCUREMENT.GAPPROVEEDOR.Entities.Proveedor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -105,6 +106,15 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Business.Proveedor
             {
                 response.ErrorList = new List<ErrorDTO> { new ErrorDTO { Codigo = "", Mensaje = string.Format("No fue posible recuperar datos disponibles o no se encontro alguna solicitud en proceso") } };
             }
+            return response;
+        }
+
+        public ProveedorInformacionFinanciera GetProveedorInfoFinanciera(ProveedorInformacionFinancieraRequestDTO request)
+        {
+            var response = new ProveedorInformacionFinanciera();
+            response.ProveedorCuentaList = proveedorData.GetProveedorCuentaList(request.IdProveedor);
+            response.CatalogoDocumentoList = proveedorData.GetProveedorDocumentoList(request.IdProveedor);
+
             return response;
         }
     }

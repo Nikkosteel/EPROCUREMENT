@@ -84,6 +84,7 @@
     <Compile Include="Request\ProveedorDetalleRequestDTO.cs" />
     <Compile Include="Request\ProveedorDocumentoRequestDTO.cs" />
     <Compile Include="Request\ProveedorEstatusRequestDTO.cs" />
+    <Compile Include="Request\ProveedorInformacionFinancieraRequestDTO.cs" />
     <Compile Include="Request\ProveedorRequestDTO.cs" />
     <Compile Include="Request\RequestBaseDTO.cs" />
     <Compile Include="Request\ResetPasswordRequestDTO.cs" />
