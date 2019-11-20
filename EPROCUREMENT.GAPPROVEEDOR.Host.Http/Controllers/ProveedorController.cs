@@ -1,5 +1,7 @@
 ﻿using EPROCUREMENT.GAPPROVEEDOR.Business.Proveedor;
 using EPROCUREMENT.GAPPROVEEDOR.Entities;
+using EPROCUREMENT.GAPPROVEEDOR.Entities.Request;
+using EPROCUREMENT.GAPPROVEEDOR.Entities.Response;
 using System.Web.Http;
 
 namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
@@ -61,6 +63,14 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Host.Http.Controllers
         public ProveedorEstatusResponseDTO EstatusProveedorInsertar([FromBody]ProveedorAprobarRequestDTO request)
         {
             var response = new HandlerProveedor().EstatusProveedorInsertar(request);
+            return response;
+        }
+
+        [HttpPost]
+        [Route("GetProveedorDocumento")]
+        public GetProveedorDocumentoResponseDTO GetProveedorDocumento([FromBody] GetProveedorDocumentoRequestDTO request)
+        {
+            var response = new HandlerProveedor().GetDocumentoProveedor(request);
             return response;
         }
     }

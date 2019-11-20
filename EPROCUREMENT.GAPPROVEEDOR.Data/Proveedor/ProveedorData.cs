@@ -1,4 +1,6 @@
 ﻿using EPROCUREMENT.GAPPROVEEDOR.Entities;
+using EPROCUREMENT.GAPPROVEEDOR.Entities.Request;
+using EPROCUREMENT.GAPPROVEEDOR.Entities.Response;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -427,14 +429,13 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
             return response;
         }
 
-        public CatalogoDocumentoResponseDTO GetDocumentoProveedorList()
+        public GetProveedorDocumentoResponseDTO GetProveedorDocumentoList(GetProveedorDocumentoRequestDTO request)
         {
-            CatalogoDocumentoResponseDTO response = new CatalogoDocumentoResponseDTO()
+            GetProveedorDocumentoResponseDTO response = new GetProveedorDocumentoResponseDTO()
             {
-                CatalogoDocumentoList = new List<CatalogoDocumentoDTO>()
+                ProveedorDocumentoList = new List<ProveedorDocumentoDTO>()
             };
-
-            CatalogoDocumentoDTO catalogoDocumento = null;
+            ProveedorDocumentoDTO proveedorDocumento = null;
             try
             {
                 using (var conexion = new SqlConnection(Helper.Connection()))
@@ -444,18 +445,21 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                     {
                         CommandType = CommandType.StoredProcedure
                     };
-
+                    cmd.Parameters.Add(new SqlParameter("@idProveedor", SqlDbType.Int)).Value = request.IdProveedor;
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            catalogoDocumento = new CatalogoDocumentoDTO();
-                            catalogoDocumento.IdCatalogoDocumento = !reader.IsDBNull(0) ? Convert.ToInt32(reader["IdCatalogoDocumento"]) : 0;
-                            catalogoDocumento.NombreDocumento = !reader.IsDBNull(1) ? reader["NombreDocumento"].ToString() : string.Empty;
-                            catalogoDocumento.IdFormatoArchivo = !reader.IsDBNull(2) ? Convert.ToInt32(reader["IdFormatoArchivo"]) : 0;
-                            catalogoDocumento.EsRequerido = !reader.IsDBNull(3) ? Convert.ToBoolean(reader["EsRequerido"]) : false;
-                            catalogoDocumento.IdFormulario = !reader.IsDBNull(4) ? Convert.ToInt32(reader["IdFormulario"]) : 0;
-                            response.CatalogoDocumentoList.Add(catalogoDocumento);
+                            proveedorDocumento = new ProveedorDocumentoDTO();
+                            proveedorDocumento.IdProveedorDocumento = !reader.IsDBNull(0) ? Convert.ToInt32(reader["IdProveedorDocumento"]) : 0;
+                            proveedorDocumento.IdProveedor = !reader.IsDBNull(1) ? Convert.ToInt32(reader["IdProveedor"]) : 0;
+                            proveedorDocumento.IdCatalogoDocumento = !reader.IsDBNull(2) ? Convert.ToInt32(reader["IdCatalogoDocumento"]) : 0;
+                            proveedorDocumento.FechaAlta = !reader.IsDBNull(3) ? Convert.ToDateTime(reader["FechaAlta"]) : DateTime.MinValue;
+                            proveedorDocumento.DescripcionDocumento = !reader.IsDBNull(4) ? reader["DescripcionDocumento"].ToString() : string.Empty;
+                            proveedorDocumento.DocumentoAutorizado = !reader.IsDBNull(5) ? Convert.ToBoolean(reader["DocumentoAutorizado"]) : false;
+                            proveedorDocumento.NombreArchivo = !reader.IsDBNull(6) ? reader["NombreArchivo"].ToString() : string.Empty;
+                            proveedorDocumento.RutaArchivo = reader.IsDBNull(7) ? reader["RutaArchivo"].ToString() : string.Empty;
+                            response.ProveedorDocumentoList.Add(proveedorDocumento);
                         }
                     }
                 }

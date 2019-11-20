@@ -75,6 +75,7 @@
     <Compile Include="Request\ActualizaPasswordRequestDTO.cs" />
     <Compile Include="Request\EstadoRequestDTO.cs" />
     <Compile Include="Request\FormatoArchivoRequestDTO.cs" />
+    <Compile Include="Request\GetProveedorDocumentoRequestDTO.cs" />
     <Compile Include="Request\LoginUsuarioRequestDTO.cs" />
     <Compile Include="Request\ProveedorAprobarRequestDTO.cs" />
     <Compile Include="Request\MunicipioRequestDTO.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Response\EstadoResponseDTO.cs" />
     <Compile Include="Response\EstatusProveedorResponseDTO.cs" />
     <Compile Include="Response\FormatoArchivoResponseDTO.cs" />
+    <Compile Include="Response\GetProveedorDocumentoResponseDTO.cs" />
     <Compile Include="Response\GiroResponseDTO.cs" />
     <Compile Include="Response\IdiomaResponseDTO.cs" />
     <Compile Include="Response\LoginUsuarioResponseDTO.cs" />
