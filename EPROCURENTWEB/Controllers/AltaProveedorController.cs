@@ -52,22 +52,32 @@ namespace EprocurementWeb.Controllers
 
         public ActionResult AgregarCuenta(ProveedorInformacionFinanciera cuenta)
         {
+            BusinessLogic business = new BusinessLogic();
+            var bancoList = business.GetBancoList();
+            var tipoCuentaList = business.GetTipoCuentaList();
             ProveedorCuentaListRegistro = new ValidaSession().RecuperaRegistrosSession();
             if (cuenta.ProveedorCuentaListRegistro == null)
             {
                 cuenta.ProveedorCuentaListRegistro = new List<ProveedorCuentaDTO>();
             }
-            if (ProveedorCuentaListRegistro == null)
+            if (ProveedorCuentaListRegistro != null)
             {
                 ProveedorCuentaListRegistro = new List<ProveedorCuentaDTO>();
             }
-            ProveedorCuentaListRegistro.Add(cuenta.ProveedorCuentaList.First());
+            if (cuenta.ProveedorCuentaList != null && cuenta.ProveedorCuentaList.Count > 0)
+            {
+                ProveedorCuentaListRegistro.Add(cuenta.ProveedorCuentaList.First());
+            }
             Session["ProveedorCuentaListRegistro"] = ProveedorCuentaListRegistro;
+            foreach(var registro in ProveedorCuentaListRegistro)
+            {
+                registro.NombreBanco = bancoList.FirstOrDefault(x => x.IdBanco == registro.IdBanco).Nombre;
+                registro.TipoCuenta = tipoCuentaList.FirstOrDefault(x => x.IdTipoCuenta == registro.IdTipoCuenta).Tipo;
+            }
             cuenta.ProveedorCuentaListRegistro = ProveedorCuentaListRegistro;
-            BusinessLogic business = new BusinessLogic();
             var aeropuertos = business.GetAeropuertosList();
-            ViewBag.BancoList = business.GetBancoList();
-            ViewBag.TipoCuentaList = business.GetTipoCuentaList();
+            ViewBag.BancoList = bancoList;
+            ViewBag.TipoCuentaList = tipoCuentaList;
             ProveedorDetalleRequestDTO request = new ProveedorDetalleRequestDTO();
             request.IdProveedor = cuenta.ProveedorCuentaList.First().IdProveedor;
             var response = business.GetProveedorElemento(request).Proveedor;
@@ -76,9 +86,9 @@ namespace EprocurementWeb.Controllers
             var formatoDocumento = business.GetFormatoArchivoList();
             if (cuenta == null)
             {
-                cuenta = new ProveedorInformacionFinanciera();
-                cuenta.ProveedorCuentaList = new List<ProveedorCuentaDTO> { new ProveedorCuentaDTO { Cuenta = null, IdBanco = 0, CLABE = null, IdTipoCuenta = 0, IdProveedor = cuenta.ProveedorCuentaList.First().IdProveedor } };
+                cuenta = new ProveedorInformacionFinanciera();                
             }
+            cuenta.ProveedorCuentaList = new List<ProveedorCuentaDTO> { new ProveedorCuentaDTO { Cuenta = null, IdBanco = 0, CLABE = null, IdTipoCuenta = 0, IdProveedor = cuenta.ProveedorCuentaList.First().IdProveedor } };
             cuenta.RFC = response.RFC;
             cuenta.ProveedorCuentaList[0].AeropuertoList = (from aeropuerto in aeropuertos
                                                             join aeropuertoA in aeropuertosAsignados on aeropuerto.Id equals aeropuertoA.IdCatalogoAeropuerto
@@ -166,12 +176,12 @@ namespace EprocurementWeb.Controllers
                 bool respuestaDoc = business.GuardarDocumentos(proveedor.RFC, proveedor.CatalogoDocumentoList);
                 if (respuestaDoc)
                 {
-                    ProveedorAprobarRequestDTO requestAprobador = new ProveedorAprobarRequestDTO { EstatusProveedor = new HistoricoEstatusProveedorDTO { IdEstatusProveedor = 5, IdProveedor = proveedor.ProveedorCuentaList[0].IdProveedor, IdUsuario = 3 } };
+                    ProveedorAprobarRequestDTO requestAprobador = new ProveedorAprobarRequestDTO { EstatusProveedor = new HistoricoEstatusProveedorDTO { IdEstatusProveedor = 5, IdProveedor = idProveedor, IdUsuario = 3 } };
                     var responseAprobar = business.SetProveedorEstatus(requestAprobador);
-                    if (responseAprobar.Success)
-                    {
-                        return View(proveedor);
-                    }
+                    //if (responseAprobar.Success)
+                    //{
+                    //    return View(proveedor);
+                    //}
                 }
             //}
             ProveedorDetalleRequestDTO request = new ProveedorDetalleRequestDTO();
