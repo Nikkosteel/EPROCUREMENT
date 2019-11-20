@@ -94,23 +94,25 @@
                 <div class="col100 mt-5" style="font-size:14px;">
                     <b>Elige el (o los) aeropuertos que tomará como referencia la cuenta bancaria proporcionada</b>
                 </div>
-                <div class="col100 mt-3">
-                    @for (int idx = 0; idx < Model.ProveedorCuentaList[0].AeropuertoList.Count; idx++)
-                    {
-                        @Html.HiddenFor(model => model.ProveedorCuentaList[0].AeropuertoList[idx].Id)
-                        @Html.HiddenFor(model => model.ProveedorCuentaList[0].AeropuertoList[idx].Nombre)
-                        <div class="col25">
-                            @Html.CheckBoxFor(model => model.ProveedorCuentaList[0].AeropuertoList[idx].Checado)
-                            @Html.DisplayTextFor(model => model.ProveedorCuentaList[0].AeropuertoList[idx].Nombre)
-                        </div>
-                    }
+                <div class="col100 mt-3"  style="font-size:12px;">
+                    <div class="row">
+                        @for (int idx = 0; idx < Model.ProveedorCuentaList[0].AeropuertoList.Count; idx++)
+                        {
+                            @Html.HiddenFor(model => model.ProveedorCuentaList[0].AeropuertoList[idx].Id)
+                            @Html.HiddenFor(model => model.ProveedorCuentaList[0].AeropuertoList[idx].Nombre)
+                            <div class="col-sm-4 mt-2">
+                                @Html.CheckBoxFor(model => model.ProveedorCuentaList[0].AeropuertoList[idx].Checado)
+                                @Html.DisplayTextFor(model => model.ProveedorCuentaList[0].AeropuertoList[idx].Nombre)
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane fade" id="IF">
-                <div class="col100">
+                <div class="col100" style="font-size:12px;">
                     @for (int idx = 0; idx < Model.CatalogoDocumentoList.Count; idx++)
                     {
-                        <div class="col100">
+                        <div class="col100 mt-2">
                             <div class="col25">
                                 <div class="inputIF">
                                     @Html.DisplayFor(m => m.CatalogoDocumentoList[idx].NombreDocumento)

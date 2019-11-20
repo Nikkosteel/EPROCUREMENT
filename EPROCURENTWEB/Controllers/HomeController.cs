@@ -40,6 +40,8 @@ namespace EprocurementWeb.Controllers
             ViewBag.EstadoList = estadoList;
             ViewBag.MunicipioList = municipioList;
             ViewBag.TipoProveedorList = tipoProveedorList;
+            proveedor.Mexicana = true;
+            ViewBag.colonias = new List<string>();
             return View(proveedor);
         }
 
@@ -94,6 +96,13 @@ namespace EprocurementWeb.Controllers
             BusinessLogic businessLogic = new BusinessLogic();
             municipioList = businessLogic.GetMunicipioList(idEstado);
             return Json(municipioList, JsonRequestBehavior.AllowGet);
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult GetCodigoPostalInfo(string codigoPostal)
+        {
+            var infoCodigo = new BusinessLogic().RecuperaCodigoPostalInfo(codigoPostal); ;
+            return Json(infoCodigo, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult About()

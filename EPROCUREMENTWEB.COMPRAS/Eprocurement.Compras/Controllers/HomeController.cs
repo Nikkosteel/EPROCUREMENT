@@ -93,10 +93,22 @@ namespace Eprocurement.Compras.Controllers
                     ProvFax = response.ProvFax,
                     ProvTelefono = response.ProvTelefono,
                     RazonSocial = response.RazonSocial,
-                    RFC = response.RFC
-
-                    
+                    RFC = response.RFC                    
                 };
+                ViewBag.EstadoList = estadoList;
+                ViewBag.MunicipioList = municipioList;
+                ViewBag.idEstado = proveedor.Direccion.IdEstado;
+                ViewBag.idMunicipio = proveedor.Direccion.IdMunicipio;
+                if (proveedor.Direccion.IdPais == 1)
+                {
+                    ViewBag.EstadoList = businessLogic.GetEstadoList(proveedor.Direccion.IdPais);
+
+                    if (proveedor.Direccion.IdEstado > 0)
+                    {
+                        ViewBag.idEstado = proveedor.Direccion.IdEstado;
+                        ViewBag.MunicipioList = businessLogic.GetMunicipioList(proveedor.Direccion.IdEstado);
+                    }
+                }
             }
             catch (Exception ex)
             {

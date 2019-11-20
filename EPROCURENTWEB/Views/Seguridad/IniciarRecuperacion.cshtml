@@ -4,40 +4,48 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link href="~/Content/validacionProveedor.css" rel="stylesheet" />
-<div class="container">
-    @using (Html.BeginForm("IniciarRecuperacion", "Seguridad", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <div class="row pb-0">
-            <div class="col-sm-12">
-                <h3 class="subtitle">
-                    Recuperación de contraseña
-                </h3>
+<link href="~/Content/Styles/Login.css" rel="stylesheet" />
+<div class="background row" style="padding-bottom: 0px;">
+    <div class="col-sm-7">
+        &nbsp;
+        <h1 class="title">PORTAL<br /> DE PROVEEDORES</h1>
+    </div>
+    <div class="col-sm-5 containerLogin">
+        @using (Html.BeginForm("IniciarRecuperacion", "Seguridad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row pb-0">
+                <div class="col-sm-12">
+                    <br /><br /><br /><br /><br /><br /><br />
+                    <h3 class="subtitle">
+                        Recuperación de contraseña
+                    </h3>
+                </div>
             </div>
-        </div>
 
-        <div class="formPrincipal">
-            <div class="col100" style="font-size:14px;">
-                Recuperación de contraseña
-            </div>
-            <div class="col100 mt-2">
-                <div class="col25">
-                    <div class="inputIF">
-                        @Html.LabelFor(model => model.Email, new { @class = "labelTexto control-label" })
+            <div class="formPrincipal">
+                <div class="row login-user">
+                    <div class="col-sm-2">
+                        &nbsp;
                     </div>
-                    <div class="inputIF">
-                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control inputIF" })
+                    <div class="col-sm-8">
+                        <div class="inputIF">
+                            @Html.LabelFor(model => model.Email, new { @class = "labelTexto control-label" })
+                        </div>
+                        <div class="inputIF">
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control inputIF" })
+                        </div>
                     </div>
                 </div>
+                <div class="row" style="text-align:center;">
+                    <div class="col-sm-12">@ViewBag.Error</div>
+                </div>
 
-                @ViewBag.Error
+                <div class="row mt-4">
+                    <div class="col-sm-2">&nbsp;</div>
+                    <div class="col-sm-8"><input type="submit" value="Recuperar" class="btnStyle btn-radius" /></div>
+                </div>
             </div>
 
-            <div class="row mt-4">
-                <div class="col-sm-6">&nbsp;</div>
-                <div class="col-sm-3"><input type="submit" value="Recuperar" class="btnStyle" /></div>
-            </div>
-        </div>
-
-    }
+        }
+    </div>
 </div>

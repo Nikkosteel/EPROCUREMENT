@@ -210,6 +210,9 @@
   <data name="usp_EPROCUREMENT_TipoProveedor_GETL" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_TipoProveedor_GETL]</value>
   </data>
+  <data name="usp_EPROCUREMENT_UsuarioInterno_INS" xml:space="preserve">
+    <value>[dbo].[usp_EPROCUREMENT_UsuarioInterno_INS]</value>
+  </data>
   <data name="usp_EPROCUREMENT_UsuarioProveedor_IN" xml:space="preserve">
     <value>[dbo].[usp_EPROCUREMENT_UsuarioProveedor_INS]</value>
   </data>

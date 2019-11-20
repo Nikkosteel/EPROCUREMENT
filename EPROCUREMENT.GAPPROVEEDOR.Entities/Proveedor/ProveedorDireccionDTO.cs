@@ -17,6 +17,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR
         public int IdEstado { get; set; }
         public string Estado { get; set; }
         public string Municipio { get; set; }
+        public string TIN { get; set; }
         public bool DireccionValidada { get; set; }
         public int IdProveedor { get; set; }        
     }

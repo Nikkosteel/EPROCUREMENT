@@ -60,7 +60,7 @@ namespace EprocurementWeb.Controllers
                 BusinessLogic businessLogic = new BusinessLogic();
                 ProveedorDetalleRequestDTO request = new ProveedorDetalleRequestDTO();
                 request.IdProveedor = usuarioInfo.IdProveedor;
-                ViewBag.idProveedor = usuarioInfo.IdProveedor;
+
                 var response = businessLogic.GetProveedorElemento(request).Proveedor;
                 var empresaList = response.EmpresaList;
                 proveedor = new ProveedorRegistro
@@ -88,17 +88,24 @@ namespace EprocurementWeb.Controllers
                 ViewBag.MunicipioList = municipioList;
                 ViewBag.idEstado = proveedor.Direccion.IdEstado;
                 ViewBag.idMunicipio = proveedor.Direccion.IdMunicipio;
-
+                ViewBag.colonias = new List<string>();
+                proveedor.Mexicana = true;
+                CodigoPostalModel infoCodigo;
                 if (proveedor.Direccion.IdPais == 1)
                 {
-                    ViewBag.EstadoList = businessLogic.GetEstadoList(proveedor.Direccion.IdPais);
-
-                    if (proveedor.Direccion.IdEstado > 0)
-                    {
-                        ViewBag.idEstado = proveedor.Direccion.IdEstado;
-                        ViewBag.MunicipioList = businessLogic.GetMunicipioList(proveedor.Direccion.IdEstado);
-                    }
+                    infoCodigo = new BusinessLogic().RecuperaCodigoPostalInfo(proveedor.Direccion.CodigoPostal);
+                    ViewBag.colonias = infoCodigo.colonias;
                 }
+                //if (proveedor.Direccion.IdPais == 1)
+                //{
+                //    ViewBag.EstadoList = businessLogic.GetEstadoList(proveedor.Direccion.IdPais);
+
+                //    if (proveedor.Direccion.IdEstado > 0)
+                //    {
+                //        ViewBag.idEstado = proveedor.Direccion.IdEstado;
+                //        ViewBag.MunicipioList = businessLogic.GetMunicipioList(proveedor.Direccion.IdEstado);
+                //    }
+                //}
                 miCuenta.Proveedor = proveedor;
             }
             catch (Exception ex)
@@ -127,22 +134,29 @@ namespace EprocurementWeb.Controllers
             return View("Index");
         }
 
+        [HttpPost]
         public ActionResult ActualizarProveedor(ProveedorRegistro proveedor)
         {
-            if (ModelState.IsValid)
-            {
-                //var usuarioInfo = new ValidaSession().ObtenerUsuarioSession();
-                //if (new SeguridadBusiness().ResetPasswordUsuario(actualizaPassword, usuarioInfo.IdUsuario))
-                //{
-                //    ViewBag.Respuesta = "Se ha actualizado su contraseña";
-                //}
-                //else
-                //{
-                //    ModelState.AddModelError("ErrorGenerico", "Se genero un error al procesar la solicitud");
-                //}
-            }
-            ViewBag.Accion = 2;
+            //if (ModelState.IsValid)
+            //{
+            //var usuarioInfo = new ValidaSession().ObtenerUsuarioSession();
+            //if (new BusinessLogic().PostTempProveedor(proveedor))
+            //{
+            //    //    ViewBag.Respuesta = "Se ha actualizado su contraseña";
+            //}
+            //else
+            //{
+            //    ModelState.AddModelError("ErrorGenerico", "Se genero un error al procesar la solicitud");
+            //}
+            //}
             return View("Index");
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult GetCodigoPostalInfo(string codigoPostal)
+        {
+            var infoCodigo = new BusinessLogic().RecuperaCodigoPostalInfo(codigoPostal); ;
+            return Json(infoCodigo, JsonRequestBehavior.AllowGet);
         }
 
         [AcceptVerbs(HttpVerbs.Get)]

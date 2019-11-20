@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,5 +26,14 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Entities
         public List<ProveedorEmpresaDTO> EmpresaList { get; set; }
         public ProveedorContactoDTO Contacto { get; set; }
         public List<ProveedorGiroDTO> ProveedorGiroList { get; set; }
+
+        public DateTime FechaSolicitud { get; set; }
+        public DateTime FechaRevision { get; set; }
+        public int IdUsuario { get; set; }
+        public string Observaciones { get; set; }
+        public int IdEstatusEdicion { get; set; }
+
+        public bool Mexicana { get; set; }
+        public bool Extranjera { get; set; }
     }
 }
