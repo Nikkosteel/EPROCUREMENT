@@ -99,6 +99,16 @@ namespace Eprocurement.Compras.Controllers
                 ViewBag.MunicipioList = municipioList;
                 ViewBag.idEstado = proveedor.Direccion.IdEstado;
                 ViewBag.idMunicipio = proveedor.Direccion.IdMunicipio;
+                if (proveedor.Direccion.IdPais == 1)
+                {
+                    ViewBag.EstadoList = businessLogic.GetEstadoList(proveedor.Direccion.IdPais);
+
+                    if (proveedor.Direccion.IdEstado > 0)
+                    {
+                        ViewBag.idEstado = proveedor.Direccion.IdEstado;
+                        ViewBag.MunicipioList = businessLogic.GetMunicipioList(proveedor.Direccion.IdEstado);
+                    }
+                }
             }
             catch (Exception ex)
             {

@@ -20,8 +20,10 @@
                                 <div class="row">
                                     <div class="col-sm-12" style="font-size:12px;">
                                         <label class="label-formulario">Tipo de Empresa</label><br />
-                                        <input type="checkbox" checked> Mexicana &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox" disabled> Extranjera
+                                        @Html.CheckBoxFor(m => m.Mexicana, new { @class = "" })
+                                        @Html.Label("Mexicana", new { @class = "" })&nbsp;&nbsp;&nbsp;&nbsp;
+                                        @Html.CheckBoxFor(m => m.Extranjera, new { @class = "" })
+                                        @Html.Label("Extranjera", new { @class = "" })
                                     </div>
                                 </div>
                                 <div class="row">
@@ -58,6 +60,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("colonia", "Colonia", new { @class = "label-formulario" })
+                                            @Html.DropDownListFor(model => model.Direccion.Colonia, new SelectList(ViewBag.colonias), "...", new { @class = "form-control col-md-12 ", @id = "ColoniaProveedor" })
                                             @Html.TextBoxFor(model => model.Direccion.Colonia, new { @class = "form-control col-md-12 disabled" })
                                         </div>
                                     </div>
@@ -71,16 +74,7 @@
                                         <div class="form-group">
 
                                             @Html.Label("estado", "Estado", new { @class = "label-formulario" })
-                                            @if (Model.Direccion.IdPais == 1)
-                                            {
-                                                @Html.DropDownListFor(model => model.Direccion.IdEstado, new SelectList(ViewBag.EstadoList, "IdEstado", "Nombre"), "...", new { @class = "form-control col-md-12 ", @id = "EstadoProveedor" })
-                                                @Html.TextBoxFor(model => model.Direccion.Estado, new { @class = "form-control col-md-12 control-display-none" })
-                                            }
-                                            else
-                                            {
-                                                @Html.TextBoxFor(model => model.Direccion.Estado, new { @class = "form-control col-md-12 " })
-                                                @Html.DropDownListFor(model => model.Direccion.IdEstado, new SelectList(ViewBag.EstadoList, "IdEstado", "Nombre"), "...", new { @class = "form-control col-md-12 control-display-none", @id = "EstadoProveedor" })
-                                            }
+                                            @Html.TextBoxFor(model => model.Direccion.Estado, new { @class = "form-control col-md-12" })
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -92,16 +86,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("municipio", "Municipio", new { @class = "label-formulario" })
-                                            @if (Model.Direccion.IdPais == 1)
-                                            {
-                                                @Html.DropDownListFor(model => model.Direccion.IdMunicipio, new SelectList(Enumerable.Empty<EPROCUREMENT.GAPPROVEEDOR.Entities.MunicipioDTO>(), "idMunicipio", "Nombre"), "...", new { @class = "form-control col-md-12", @id = "MunicipioProveedor" })
-                                                @Html.TextBoxFor(model => model.Direccion.Municipio, new { @class = "form-control col-md-12 control-display-none" })
-                                            }
-                                            else
-                                            {
-                                                @Html.DropDownListFor(model => model.Direccion.IdMunicipio, new SelectList(Enumerable.Empty<EPROCUREMENT.GAPPROVEEDOR.Entities.MunicipioDTO>(), "idMunicipio", "Nombre"), "...", new { @class = "form-control col-md-12 control-display-none", @id = "MunicipioProveedor" })
-                                                @Html.TextBoxFor(model => model.Direccion.Municipio, new { @class = "form-control col-md-12 " })
-                                            }
+                                            @Html.TextBoxFor(model => model.Direccion.Municipio, new { @class = "form-control col-md-12" })
                                         </div>
                                     </div>
 
@@ -303,6 +288,21 @@
     $(document).ready(function () {
         var idProveedor = '@ViewBag.idProveedor';
         var idEstado = '@ViewBag.idEstado';
+
+        if ($("#Mexicana").is(':checked')) {
+            $("#ColoniaProveedor").removeClass("control-display-none");
+            $("#Direccion_Colonia").addClass("control-display-none");
+            $("#PaisProveedor option:disabled").removeAttr('disabled');
+                $("#PaisProveedor").prop("disabled", true);
+        } else {
+            var value = 1;
+            $('#PaisProveedor option[value="'+value+'"]').attr("disabled", true);
+            $("#Extranjera").val(true);
+            $("#Direccion_Colonia").removeClass("control-display-none");
+            $("#ColoniaProveedor").addClass("control-display-none");
+                $("#PaisProveedor").prop("disabled", false);
+        }
+
         var idPais = $('#PaisProveedor option:selected').val();
         if (idPais == 1) {
             var idEstado = $('#EstadoProveedor option:selected').val();
@@ -311,58 +311,118 @@
             }
         }
 
-
-        $("#PaisProveedor").change(function () {
+        $("#Direccion_CodigoPostal").on("change", function () {
             var idPais = $('#PaisProveedor option:selected').val();
-            if (idPais == 1) {
-                $("#EstadoProveedor").removeClass("control-display-none");
-                $("#Direccion_Estado").addClass("control-display-none");
-                $("#MunicipioProveedor").removeClass("control-display-none");
-                $("#Direccion_Municipio").addClass("control-display-none");
-            } else {
-                $("#Direccion_Estado").removeClass("control-display-none");
-                $("#EstadoProveedor").addClass("control-display-none");
-                $("#Direccion_Municipio").removeClass("control-display-none");
-                $("#MunicipioProveedor").addClass("control-display-none");
-            }
-
-        });
-
-        $("#EstadoProveedor").change(function () {
-            var idEstado = $('#EstadoProveedor option:selected').val();
-            console.log(idEstado);
-            if (idEstado > 0) {
-                obtenerMunicipio($('#EstadoProveedor option:selected').val(), 0);
-            } else {
-                var selectMunicipio = $("#MunicipioProveedor");
-                    selectMunicipio.empty();
-                    selectMunicipio.empty();
-                    selectMunicipio.append($('<option/>', {
-                        value: 0,
-                        text: "..."
-                    }));
+            var codigoPostal = this.value;
+            console.log(this.value.length);
+            if (idPais == 1 && this.value.length == 5) {
+                obtenerCodigoInfo(codigoPostal);
             }
         });
 
-        function obtenerMunicipio(idEstado, idMunicipio) {
-            $.getJSON("/MiCuenta/GetMunicipios", { idEstado: idEstado },
+        $("#Mexicana").on("change", function () {
+            if ($(this).is(':checked')) {
+                $("#ColoniaProveedor").removeClass("control-display-none");
+                $("#Direccion_Colonia").addClass("control-display-none");
+                $("#PaisProveedor option:disabled").removeAttr('disabled');
+                $("#PaisProveedor").prop("disabled", true);
+                $("#PaisProveedor").val(1);
+                 $("#Extranjera").prop("checked", false);
+            } else {
+            var value = 1;
+                $('#PaisProveedor option[value="' + value + '"]').attr("disabled", true);
+                $("#PaisProveedor").prop("disabled", false);
+                $("#PaisProveedor").val(0);
+                $("#Direccion_Colonia").removeClass("control-display-none");
+                $("#ColoniaProveedor").addClass("control-display-none");
+                 $("#Extranjera").prop("checked", true);
+            }
+        });
+        $("#Extranjera").on("change", function () {
+            if ($(this).is(':checked')) {
+                var value = 1;
+                $('#PaisProveedor option[value="' + value + '"]').attr("disabled", true);
+                $("#PaisProveedor").prop("disabled", false);
+                $("#PaisProveedor").val(2);
+                $("#Direccion_Colonia").removeClass("control-display-none");
+                $("#ColoniaProveedor").addClass("control-display-none");
+                 $("#Mexicana").prop("checked", false);
+            } else {
+                $("#ColoniaProveedor").removeClass("control-display-none");
+                $("#Direccion_Colonia").addClass("control-display-none");
+                $("#PaisProveedor option:disabled").removeAttr('disabled');
+                $("#PaisProveedor").prop("disabled", true);
+                $("#PaisProveedor").val(1);
+                 $("#Extranjera").prop("checked", true);
+            }
+        });
+
+
+        //$("#PaisProveedor").change(function () {
+        //    var idPais = $('#PaisProveedor option:selected').val();
+        //    if (idPais == 1) {
+        //        //$("#EstadoProveedor").removeClass("control-display-none");
+        //        //$("#Direccion_Estado").addClass("control-display-none");
+        //        //$("#MunicipioProveedor").removeClass("control-display-none");
+        //        //$("#Direccion_Municipio").addClass("control-display-none");
+        //    } else {
+        //        //$("#Direccion_Estado").removeClass("control-display-none");
+        //        //$("#EstadoProveedor").addClass("control-display-none");
+        //        //$("#Direccion_Municipio").removeClass("control-display-none");
+        //        //$("#MunicipioProveedor").addClass("control-display-none");
+        //    }
+
+        //});
+
+        //$("#EstadoProveedor").change(function () {
+        //    var idEstado = $('#EstadoProveedor option:selected').val();
+        //    console.log(idEstado);
+        //    if (idEstado > 0) {
+        //        obtenerMunicipio($('#EstadoProveedor option:selected').val(), 0);
+        //    } else {
+        //        var selectMunicipio = $("#MunicipioProveedor");
+        //            selectMunicipio.empty();
+        //            selectMunicipio.empty();
+        //            selectMunicipio.append($('<option/>', {
+        //                value: 0,
+        //                text: "..."
+        //            }));
+        //    }
+        //});
+
+
+
+        function obtenerCodigoInfo(codigoPostal) {
+            $.getJSON("/MiCuenta/GetCodigoPostalInfo", { codigoPostal: codigoPostal },
                 function (data) {
-                    var select = $("#MunicipioProveedor");
-                    select.empty();
-                    select.append($('<option/>', {
+                    console.log();
+                    $("#Direccion_Estado").val(data.estado);
+                    $("#Direccion_Municipio").val(data.municipio);
+                    var selectColonia = $("#ColoniaProveedor");
+                    selectColonia.empty();
+                    selectColonia.append($('<option/>', {
                         value: 0,
                         text: "..."
                     }));
-                    $.each(data, function (index, itemData) {
-                        select.append($('<option/>', {
-                            value: itemData.IdMunicipio,
-                            text: itemData.Nombre
+                    if (data.colonias.length > 1) {
+                $("#ColoniaProveedor").removeClass("control-display-none");
+                        $("#Direccion_Colonia").addClass("control-display-none");
+                        $.each(data.colonias, function (index, itemData) {
+                        selectColonia.append($('<option/>', {
+                            value: itemData,
+                            text: itemData
                         }));
                     });
-                    console.log('aasas: ', '@ViewBag.idMunicipio');
-                    select.val(idMunicipio);
-                });
+            } else {
+                $("#Mexicana").val(true);
+                $("#Direccion_Colonia").removeClass("control-display-none");
+                        $("#ColoniaProveedor").addClass("control-display-none");
+                        $("#Direccion_Colonia").val(data.colonias[0]);
             }
+
+
+                });
+        }
 
             function obtenerEstado(idPais) {
             $.getJSON("/Home/GetEstados", { idPais: idPais },

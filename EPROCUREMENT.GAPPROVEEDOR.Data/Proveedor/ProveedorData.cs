@@ -741,5 +741,28 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
             }
             return contrasenia;
         }
+
+        private int ExecuteComandTempProveedor(SqlCommand cmdProveedor, ProveedorDTO proveedor)
+        {
+            proveedor.AXFechaRegistro = DateTime.Now;
+            cmdProveedor.CommandType = CommandType.StoredProcedure;
+            cmdProveedor.Parameters.Add(new SqlParameter("@IdProveedor", proveedor.IdZonaHoraria));
+            cmdProveedor.Parameters.Add(new SqlParameter("@NombreEmpresa", SqlDbType.NVarChar, 500)).Value = proveedor.NombreEmpresa;
+            cmdProveedor.Parameters.Add(new SqlParameter("@RazonSocial", SqlDbType.NVarChar, 500)).Value = proveedor.RazonSocial;
+            cmdProveedor.Parameters.Add(new SqlParameter("@RFC", SqlDbType.NVarChar, 40)).Value = proveedor.RFC;
+            cmdProveedor.Parameters.Add(new SqlParameter("@NIF", SqlDbType.NVarChar, 30)).Value = proveedor.NIF;
+            cmdProveedor.Parameters.Add(new SqlParameter("@ProvTelefono", SqlDbType.NVarChar, 50)).Value = proveedor.ProvTelefono;
+            cmdProveedor.Parameters.Add(new SqlParameter("@ProvFax", SqlDbType.NVarChar, 50)).Value = proveedor.ProvFax;
+            cmdProveedor.Parameters.Add(new SqlParameter("@PaginaWeb", SqlDbType.NVarChar, 500)).Value = proveedor.PaginaWeb;
+            cmdProveedor.Parameters.Add(new SqlParameter("@IdZonaHoraria", proveedor.IdZonaHoraria));
+            cmdProveedor.Parameters.Add(new SqlParameter("@IdTipoProveedor", proveedor.IdTipoProveedor));
+            cmdProveedor.Parameters.Add(new SqlParameter("@AXNumeroProveedor", SqlDbType.NVarChar, 30)).Value = proveedor.AXNumeroProveedor;
+            cmdProveedor.Parameters.Add(new SqlParameter("@AXFechaRegistro", proveedor.AXFechaRegistro));
+            cmdProveedor.Parameters.Add(new SqlParameter("@IdNacionalidad", proveedor.IdNacionalidad));
+            cmdProveedor.Parameters.Add(new SqlParameter("Result", SqlDbType.Int) { Direction = ParameterDirection.ReturnValue });
+            cmdProveedor.ExecuteNonQuery();
+            var idProveedor = Convert.ToInt32(cmdProveedor.Parameters["Result"].Value);
+            return idProveedor;
+        }
     }
 }

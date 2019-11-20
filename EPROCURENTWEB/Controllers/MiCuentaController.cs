@@ -88,17 +88,24 @@ namespace EprocurementWeb.Controllers
                 ViewBag.MunicipioList = municipioList;
                 ViewBag.idEstado = proveedor.Direccion.IdEstado;
                 ViewBag.idMunicipio = proveedor.Direccion.IdMunicipio;
-
+                ViewBag.colonias = new List<string>();
+                proveedor.Mexicana = true;
+                CodigoPostalModel infoCodigo;
                 if (proveedor.Direccion.IdPais == 1)
                 {
-                    ViewBag.EstadoList = businessLogic.GetEstadoList(proveedor.Direccion.IdPais);
-
-                    if (proveedor.Direccion.IdEstado > 0)
-                    {
-                        ViewBag.idEstado = proveedor.Direccion.IdEstado;
-                        ViewBag.MunicipioList = businessLogic.GetMunicipioList(proveedor.Direccion.IdEstado);
-                    }
+                    infoCodigo = new BusinessLogic().RecuperaCodigoPostalInfo(proveedor.Direccion.CodigoPostal);
+                    ViewBag.colonias = infoCodigo.colonias;
                 }
+                //if (proveedor.Direccion.IdPais == 1)
+                //{
+                //    ViewBag.EstadoList = businessLogic.GetEstadoList(proveedor.Direccion.IdPais);
+
+                //    if (proveedor.Direccion.IdEstado > 0)
+                //    {
+                //        ViewBag.idEstado = proveedor.Direccion.IdEstado;
+                //        ViewBag.MunicipioList = businessLogic.GetMunicipioList(proveedor.Direccion.IdEstado);
+                //    }
+                //}
                 miCuenta.Proveedor = proveedor;
             }
             catch (Exception ex)
@@ -143,6 +150,13 @@ namespace EprocurementWeb.Controllers
             }
             ViewBag.Accion = 2;
             return View("Index");
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult GetCodigoPostalInfo(string codigoPostal)
+        {
+            var infoCodigo = new BusinessLogic().RecuperaCodigoPostalInfo(codigoPostal); ;
+            return Json(infoCodigo, JsonRequestBehavior.AllowGet);
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
