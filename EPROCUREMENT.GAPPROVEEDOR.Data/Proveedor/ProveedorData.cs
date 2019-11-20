@@ -888,7 +888,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                 using (var conexion = new SqlConnection(Helper.Connection()))
                 {
                     conexion.Open();
-                    var cmd = new SqlCommand("[dbo].[usp_EPROCUREMENT_ProveedorDocumento_GETLByIdProveedor]]", conexion)
+                    var cmd = new SqlCommand("[dbo].[usp_EPROCUREMENT_ProveedorDocumento_GETLByIdProveedor]", conexion)
                     {
                         CommandType = CommandType.StoredProcedure
                     };
@@ -900,7 +900,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                         {
                             proveedorDocumento = new CatalogoDocumentoDTO();
                             proveedorDocumento.NombreDocumento = reader["NombreDocumento"].ToString();
-                            proveedorDocumento.RutaDocumento = reader["RutaDocumento"].ToString();
+                            proveedorDocumento.RutaDocumento = reader["RutaArchivo"].ToString();
                             catalogoDocumentoList.Add(proveedorDocumento);
 
                         }

@@ -240,7 +240,7 @@ namespace Eprocurement.Compras.Controllers
                 //    TipoCuenta = "Débito"
                 //});
 
-                return Json(informacionFinanciera.ProveedorCuentaListRegistro, JsonRequestBehavior.AllowGet);
+                return Json(informacionFinanciera.ProveedorCuentaList, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
