@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Eprocurement.Compras.Models;
+using EPROCUREMENT.GAPPROVEEDOR.Entities.Proveedor;
 
 namespace Eprocurement.Compras.Controllers
 {
@@ -216,6 +217,56 @@ namespace Eprocurement.Compras.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult AprobarInformacionBF(int idProveedor)
+        {
+            ProveedorInformacionFinanciera informacionFinanciera = new ProveedorInformacionFinanciera();
+            ViewBag.IdProveedor = idProveedor;
+            return View(informacionFinanciera);
+        }
+
+        public JsonResult GetDetalleCuentaList(int idProveedor)
+        {
+            try
+            {
+                ProveedorInformacionFinanciera informacionFinanciera = new ProveedorInformacionFinanciera();
+                informacionFinanciera.ProveedorCuentaListRegistro = new List<ProveedorCuentaDTO>();
+                informacionFinanciera.ProveedorCuentaListRegistro.Add(new ProveedorCuentaDTO {
+                    CLABE = "123456789012345678",
+                    Cuenta = "1234567890",
+                    NombreBanco = "BBVA",
+                    TipoCuenta = "Débito"
+                });
+
+                return Json(informacionFinanciera.ProveedorCuentaListRegistro, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+        }
+
+        public JsonResult GetDocumentosList(int idProveedor)
+        {
+            try
+            {
+                ProveedorInformacionFinanciera informacionFinanciera = new ProveedorInformacionFinanciera();
+                informacionFinanciera.CatalogoDocumentoList = new List<CatalogoDocumentoDTO>();
+                informacionFinanciera.CatalogoDocumentoList.Add(new CatalogoDocumentoDTO
+                {
+                    NombreDocumento = "PDF",
+                    RutaDocumento = "localhost"
+                });
+
+                return Json(informacionFinanciera.CatalogoDocumentoList, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
         }
     }
 }

@@ -164,7 +164,7 @@
                      @*var link = '@Html.ActionLink(" ", "About", "Home", new { idProvider ="_idProv_" }, new { @class = "fas fa-eye icon-color" })';
                      link = link.replace('_idProv_', data[i].IdProveedor);*@
 
-                     var link = '@Html.ActionLink(" ", "AceptarProveedor", "Home", new { idProvider ="_idProv_" }, new { @class = "fas fa-eye icon-color" })';
+                     var link = '@Html.ActionLink(" ", "AprobarInformacionBF", "Home", new { idProveedor ="_idProv_" }, new { @class = "fas fa-eye icon-color" })';
                      link = link.replace('_idProv_', data[i].IdProveedor);
                      console.log("link", link);
 

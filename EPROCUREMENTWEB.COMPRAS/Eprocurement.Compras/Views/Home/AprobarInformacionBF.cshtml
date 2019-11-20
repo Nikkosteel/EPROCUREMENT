@@ -1,0 +1,158 @@
+﻿@model EPROCUREMENT.GAPPROVEEDOR.Entities.Proveedor.ProveedorInformacionFinanciera
+@{
+    ViewBag.Title = "Mi Cuenta";
+}
+
+<link href="~/Content/Gestor.css" rel="stylesheet" />
+<link href="~/Content/validacionProveedor.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mt-4">
+            <div class="card-body">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item" style="width:50%">
+                        <a class="nav-link active" href="#tbInfoBancaria" role="tab" data-toggle="tab">Información Bancaria</a>
+                    </li>
+                    <li class="nav-item" style="width:50%">
+                        <a class="nav-link" href="#tbInfoFinanciera" role="tab" data-toggle="tab">Inofrmación Financiera</a>
+                    </li>
+                </ul>
+
+                @Html.Hidden("IdProveedor", (int)ViewBag.IdProveedor)
+                <div class="tab-content" style="background-color:white; padding: 15px;">
+                    <div role="tabpanel" class="tab-pane fade in active show" id="tbInfoBancaria">
+                        <div class="col100" style="font-size:14px;">
+                            Detalle de Cuenta
+                        </div>
+
+                        <table id="Table">
+                        </table>
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade in active hide" id="tbInfoFinanciera">
+                        <div class="col100" style="font-size:14px;">
+                            Inofrmación Financiera
+                        </div>
+                        <table id="TableDocumento">
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-sm-3">
+                <input id="btnDocumentacion" class="btnStyle btnWhite" type="button" value="Documentacion pendiente " />
+            </div>
+            <div class="col-sm-3">
+                <input type="button" class="btnStyle btnWhite" data-toggle="modal" data-target="#modalRechazar" value="Rechazar" />
+            </div>
+            <div class="col-sm-3">
+                <input id="btnCancelar" class="btnStyle btnWhite" type="button" value="Cancelar" />
+            </div>
+            <div class="col-sm-3">
+                <input id="btnAprobar" class="btnStyle" type="button" value="Guardar" />
+            </div>
+        </div>
+    </div>
+  
+</div>
+
+
+<script type="text/javascript">
+    var fn_CargarDoctos = function (idProveedor) {
+        var jsonData = JSON.stringify({ idProveedor: idProveedor });
+         $.ajax({
+             type: "POST",
+             contentType: "application/json; charset=utf-8",
+             url: '@Url.Action("GetDocumentosList", "Home")',
+             data: jsonData,
+             async: false,
+             success: function(data) {
+                 console.log("Traigo Datos", data)
+                 $("#TableDocumento").html('');
+                 $("#TableDocumento").append('<thead class="bg-light-purple"><tr>' +
+                     //'<td>IdProveedor</td>'+
+                     '<td>Nombre</td>' +
+                     '<td>Descargar</td>' + '</tr></thead>'
+                 );
+                  //("#Table").DataTable().destroy();
+                 $("#TableDocumento").DataTable().clear().draw();
+                 $("#TableDocumento").DataTable().destroy();
+
+                 $("#TableDocumento").append('<tbody>');
+                 for (i = 0; i < data.length; i++) {
+
+                     $("#TableDocumento").append('<tr>' +
+                         //'<td align="center" style="dislay: none;">' + data[i].IdProveedor + '</td>' +
+                         '<td align="center" style="dislay: none;"><b>' + data[i].NombreDocumento + '</b></td>' +
+                         '<td align="center" style="dislay: none;">' + data[i].RutaDocumento + '</tr>'
+                     );
+                 }
+                 $("#TableDocumento").append('</tbody>');
+
+                 $('#TableDocumento').DataTable({
+                        "paging": false,
+                         "bScrollInfinite": true,
+                         "bScrollCollapse": true
+                     });
+
+             },
+         });
+    }
+
+    var fn_CargarCuentas = function (idProveedor) {
+        var jsonData = JSON.stringify({ idProveedor: idProveedor });
+         $.ajax({
+             type: "POST",
+             contentType: "application/json; charset=utf-8",
+             url: '@Url.Action("GetDetalleCuentaList", "Home")',
+             data: jsonData,
+             async: false,
+             success: function(data) {
+                 console.log("Traigo Datos", data)
+                 $("#Table").html('');
+                 $("#Table").append('<thead class="bg-light-purple"><tr>' +
+                     //'<td>IdProveedor</td>'+
+                     '<td>Cuenta</td>' +
+                     '<td>NombreBanco</td>' +
+                     '<td>CLABE</td>' +
+                     '<td>TipoCuenta</td>' + '</tr></thead>'
+                 );
+                  //("#Table").DataTable().destroy();
+                 $("#Table").DataTable().clear().draw();
+                 $("#Table").DataTable().destroy();
+
+                 $("#Table").append('<tbody>');
+                 for (i = 0; i < data.length; i++) {
+
+                     $("#Table").append('<tr>' +
+                         //'<td align="center" style="dislay: none;">' + data[i].IdProveedor + '</td>' +
+                         '<td align="center" style="dislay: none;"><b>' + data[i].Cuenta + '</b></td>' +
+                         '<td align="center" style="dislay: none;">' + data[i].NombreBanco + '</td>' +
+                         '<td align="center" style="dislay: none;">' + data[i].CLABE + '</td>' +
+                         '<td align="center" style="dislay: none;">' + data[i].TipoCuenta + '</td>' + '</tr>'
+                     );
+                 }
+                 $("#Table").append('</tbody>');
+
+                 $('#Table').DataTable({
+                        "paging": false,
+                         "bScrollInfinite": true,
+                         "bScrollCollapse": true
+                     });
+
+             },
+         });
+    }
+
+    $(document).ready(function () {
+        var idProveedor = $("#IdProveedor").val();
+        console.log(idProveedor);
+        fn_CargarCuentas(idProveedor);
+        fn_CargarDoctos(idProveedor);
+    });
+</script>
+
+
