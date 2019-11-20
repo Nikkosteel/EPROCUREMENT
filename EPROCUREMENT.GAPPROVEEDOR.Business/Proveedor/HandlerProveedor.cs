@@ -97,5 +97,15 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Business.Proveedor
             }
             return response;
         }
+
+        public ProveedorResponseDTO TempProveedorInsertar(ProveedorRequesteDTO request)
+        {
+            var response = proveedorData.TempProveedorInsertar(request);
+            if (!response.Success)
+            {
+                response.ErrorList = new List<ErrorDTO> { new ErrorDTO { Codigo = "", Mensaje = string.Format("No fue posible recuperar datos disponibles o no se encontro alguna solicitud en proceso") } };
+            }
+            return response;
+        }
     }
 }

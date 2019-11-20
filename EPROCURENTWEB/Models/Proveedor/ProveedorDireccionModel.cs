@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace EPROCUREMENT.GAPPROVEEDOR
+namespace EprocurementWeb.Models.Proveedor
 {
-    public class ProveedorDireccionDTO
+    public class ProveedorDireccionModel
     {
         public int IdProveedorDireccion { get; set; }
         public string CodigoPostal { get; set; }
@@ -17,8 +16,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR
         public int IdEstado { get; set; }
         public string Estado { get; set; }
         public string Municipio { get; set; }
-        public string TIN { get; set; }
         public bool DireccionValidada { get; set; }
-        public int IdProveedor { get; set; }        
+        public int IdProveedor { get; set; }
     }
 }

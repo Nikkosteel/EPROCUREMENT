@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -72,6 +73,7 @@
     <Compile Include="Proveedor\ProveedorEmpresaDTO.cs" />
     <Compile Include="Proveedor\ProveedorGiroDTO.cs" />
     <Compile Include="Proveedor\ProveedorInformacionFinanciera.cs" />
+    <Compile Include="Proveedor\TmpProveedoDTO.cs" />
     <Compile Include="Request\ActualizaPasswordRequestDTO.cs" />
     <Compile Include="Request\EstadoRequestDTO.cs" />
     <Compile Include="Request\FormatoArchivoRequestDTO.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="Request\ProveedorRequestDTO.cs" />
     <Compile Include="Request\RequestBaseDTO.cs" />
     <Compile Include="Request\ResetPasswordRequestDTO.cs" />
+    <Compile Include="Request\TmpProveedoRequestDTO.cs" />
     <Compile Include="Response\ActualizaPasswordResponseDTO.cs" />
     <Compile Include="Response\AeropuertoResponseDTO.cs" />
     <Compile Include="Response\BancoResponseDTO.cs" />
@@ -107,6 +110,7 @@
     <Compile Include="Response\ResponseBaseDTO.cs" />
     <Compile Include="Response\TipoCuentaResponseDTO.cs" />
     <Compile Include="Response\TipoProveedorResponseDTO.cs" />
+    <Compile Include="Response\TmpProveedoResponseDTO.cs.cs" />
     <Compile Include="Response\ZonaHorariaResponseDTO.cs" />
     <Compile Include="Seguridad\UsuarioDTO.cs" />
   </ItemGroup>

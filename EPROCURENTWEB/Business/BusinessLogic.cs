@@ -18,6 +18,7 @@ namespace EprocurementWeb.Business
     public class BusinessLogic
     {
         string urlApi = ConfigurationManager.AppSettings["urlApi"].ToString();
+        string urlApiCp = ConfigurationManager.AppSettings["urlApiCP"].ToString();
 
         public ProveedorEstatusResponseDTO GetProveedorEstatusList(ProveedorEstatusRequestDTO request)
         {
@@ -585,6 +586,55 @@ namespace EprocurementWeb.Business
                 }
             }
             return resultado;
+        }
+
+        public CodigoPostalModel RecuperaCodigoPostalInfo(string codigoPostal)
+        {
+            var codigoPostalItem = new CodigoPostalModel();
+            using (var client = new HttpClient())
+            {
+                //client.BaseAddress = new Uri(urlApi + "codigo_postal/" + codigoPostal);
+                ////var json = JsonConvert.SerializeObject(loginUsuario);
+                //var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var responseTask = client.GetAsync(urlApiCp + "codigo_postal/" + codigoPostal);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSSerializer = new JavaScriptSerializer();
+                    codigoPostalItem = JSSerializer.Deserialize<CodigoPostalModel>(readTask.Result);
+                    //if (response.Success)
+                    //{
+                    //    resultado = response.Success;
+                    //}
+                }
+            }
+            return codigoPostalItem;
+        }
+
+        public bool PostTempProveedor(ProveedorRegistro proveedor)
+        {
+            ProveedorResponseDTO response = null;
+            ProveedorRequesteDTO proveedorRequest = new ProveedorRequesteDTO { IdUsuario = 0, Proveedor = proveedor };
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi + "api/Proveedor/");
+                var json = JsonConvert.SerializeObject(proveedorRequest);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var responseTask = client.PostAsync("InsertarTempProveedor", content);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSSerializer = new JavaScriptSerializer();
+                    response = JSSerializer.Deserialize<ProveedorResponseDTO>(readTask.Result);
+                }
+            }
+            return response.Success;
         }
     }
 }

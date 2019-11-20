@@ -76,7 +76,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("estado", "Estado", new { @class = "label-formulario" })
-                                            @Html.DropDownListFor(model => model.Direccion.IdEstado, new SelectList(Enumerable.Empty<EPROCUREMENT.GAPPROVEEDOR.Entities.EstadoDTO>(), "IdEstado", "Nombre"), "...", new { @class = "form-control col-md-12 disabled", @id = "EstadoProveedor" })
+                                            @Html.DropDownListFor(model => model.Direccion.IdEstado, new SelectList(ViewBag.EstadoList, "IdEstado", "Nombre"), "...", new { @class = "form-control col-md-12 disabled", @id = "EstadoProveedor" })
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -88,7 +88,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             @Html.Label("municipio", "Municipio", new { @class = "label-formulario" })
-                                            @Html.DropDownListFor(model => model.Direccion.IdMunicipio, new SelectList(Enumerable.Empty<EPROCUREMENT.GAPPROVEEDOR.Entities.MunicipioDTO>(), "idMunicipio", "Nombre"), "...", new { @class = "form-control col-md-12 disabled", @id = "MunicipioProveedor" })
+                                            @Html.DropDownListFor(model => model.Direccion.IdMunicipio, new SelectList(ViewBag.MunicipioList, "idMunicipio", "Nombre"), "...", new { @class = "form-control col-md-12 disabled", @id = "MunicipioProveedor" })
                                         </div>
                                     </div>
 
@@ -325,7 +325,15 @@
         var estatus = 0;
         var url = '@Url.Action("Index", "Home")'; 
         var idPais = $('#PaisProveedor option:selected').val();
-
+        if (idPais == 1) {
+            var idEstado = $('#EstadoProveedor option:selected').val();
+            if (idEstado > 0) {                
+                $('#EstadoProveedor').val('@ViewBag.idEstado');
+                if ('@ViewBag.idEstado' > 0) {
+                    $('#MunicipioProveedor').val('@ViewBag.idMunicipio');
+                }
+            }
+        }
 
         $("#PaisProveedor").change(function () {
             var dID = $('#PaisProveedor option:selected').val();
