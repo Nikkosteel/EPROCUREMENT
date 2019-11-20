@@ -17,7 +17,9 @@ namespace EprocurementWeb.Controllers
         public List<ProveedorCuentaDTO>  ProveedorCuentaListRegistro = new List<ProveedorCuentaDTO>();
         public ActionResult InformacionBF(int idProveedor)
         {
-            Session["IdProveedor"] = idProveedor;
+            var usuarioInfo = new ValidaSession().ObtenerUsuarioSession();
+            idProveedor = usuarioInfo.IdProveedor;
+            Session["IdProveedor"] = usuarioInfo.IdProveedor;
             BusinessLogic business = new BusinessLogic();
             Session["ProveedorCuentaListRegistro"] = new List<ProveedorCuentaDTO>();
             var aeropuertos = business.GetAeropuertosList();

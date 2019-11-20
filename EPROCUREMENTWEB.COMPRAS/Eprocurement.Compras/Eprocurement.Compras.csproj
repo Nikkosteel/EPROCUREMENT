@@ -129,6 +129,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SeguridadADController.cs" />
     <Compile Include="Controllers\TesoreriaController.cs" />
+    <Compile Include="Filters\ValidaSession.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

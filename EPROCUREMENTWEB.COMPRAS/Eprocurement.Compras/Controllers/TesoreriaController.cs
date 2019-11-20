@@ -1,4 +1,5 @@
 ﻿using Eprocurement.Compras.Business;
+using Eprocurement.Compras.Filters;
 using EPROCUREMENT.GAPPROVEEDOR.Entities;
 using System;
 using System.Collections.Generic;
@@ -42,16 +43,28 @@ namespace Eprocurement.Compras.Controllers
         {
             try
             {
+                var usuarioInfo = new ValidaSession().ObtenerUsuarioSession();
                 BusinessLogic businessLogic = new BusinessLogic();
                 ProveedorEstatusRequestDTO request = new ProveedorEstatusRequestDTO();
                 request.ProveedorFiltro = new ProveedorFiltroDTO { IdTipoProveedor = idTipoProveedor, IdGiroProveedor = idGiroProveedor, IdAeropuerto = idAeropuerto, NombreEmpresa = nombreEmpresa, RFC = rfc, Email = email };
                 //var response = businessLogic.GetProveedorEstatusList(request);
-                string[] estatus = { "5", "6", "7", "8" };
-                var response = businessLogic.GetProveedorEstatusList(request);
-                var proveedorEstatus = (from t in response.ProveedorList
-                                        where estatus.Contains(t.IdEstatus.ToString())
-                                        select t).ToList();
-                return Json(proveedorEstatus, JsonRequestBehavior.AllowGet);
+                if (usuarioInfo.IdUsuarioRol == 3)
+                {
+                    string[] estatus = { "5", "6", "7", "8" };
+                    var response = businessLogic.GetProveedorEstatusList(request);
+                    var proveedorEstatus = (from t in response.ProveedorList
+                                            where estatus.Contains(t.IdEstatus.ToString())
+                                            select t).ToList();
+                    return Json(proveedorEstatus, JsonRequestBehavior.AllowGet);
+                } else
+                {
+                    string[] estatus = { "1", "2", "3", "4", "5", "6", "7", "8" };
+                    var response = businessLogic.GetProveedorEstatusList(request);
+                    var proveedorEstatus = (from t in response.ProveedorList
+                                            where estatus.Contains(t.IdEstatus.ToString())
+                                            select t).ToList();
+                    return Json(proveedorEstatus, JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception ex)
             {
