@@ -94,3 +94,16 @@ html, body {
     position: absolute;
     bottom: 0px;
 }
+
+.pnl-logo {
+    background-color: white;
+    width: 210px;
+    height: 80px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding-top: 13px;
+    -webkit-border-bottom-right-radius: 40px;
+    -moz-border-radius-bottomright: 40px;
+    border-bottom-right-radius: 40px;
+}
