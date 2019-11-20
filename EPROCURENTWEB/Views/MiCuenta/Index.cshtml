@@ -15,17 +15,6 @@
             PORTAL DE PROVEEDORES
         </h1>
     </div>
-
-    @*<div class="col-sm-4">
-            <ul class="pull-right" style="list-style:none; float: right;">
-                <li style="display:inline;">
-                    <a href="" class="setLang" data-lang="es-MX"><img src="@Url.GetImage("Mexico.png",false)" /></a>
-                </li>
-                <li style="display:inline;">
-                    <a href="" class="setLang" data-lang="en-US"><img src="@Url.GetImage("usa.png", false)" /></a>
-                </li>
-            </ul>
-        </div>*@
 </div>
 
 <div class="container">
@@ -59,66 +48,6 @@
                     Contraseña
                 </div>
                 @Html.Partial("_ActualizarPassword", Model.ActualizaPassword)
-                @*@model EprocurementWeb.Models.ActualizaPasswordModel*@
-                @*@using (Html.BeginForm("ActualizarPassword", "MiCuenta", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                    {
-                        <div class="col100" style="font-size:14px;">
-                            @Html.Hidden("Accion2", (int)ViewBag.Accion)
-                            <input type="hidden" name="Accion" id="Accion" value="@ViewBag.Accion" />
-
-                            @Html.ValidationSummary(true)
-                            <div class="col100 mt-2">
-                                <div class="col25">
-                                    <div class="inputIF">
-                                        @Html.LabelFor(model => model.ActualizaPassword.Password, new { @class = "labelTexto control-label" })
-                                    </div>
-                                    <div class="inputIF">
-                                        @Html.PasswordFor(model => model.ActualizaPassword.Password, new { @class = "form-control inputIF" })
-                                    </div>
-                                </div>
-                                <div class="col25">
-                                    <div class="inputIF">
-                                        @Html.LabelFor(model => model.ActualizaPassword.PasswordNueva, new { @class = "labelTexto control-label" })
-                                    </div>
-                                    <div class="inputIF">
-                                        @Html.PasswordFor(model => model.ActualizaPassword.PasswordNueva, new { @class = "form-control inputIF" })
-                                    </div>
-                                </div>
-                                <div class="col25">
-                                    <div class="inputIF">
-                                        @Html.LabelFor(model => model.ActualizaPassword.ConfirmarPassword, new { @class = "labelTexto control-label" })
-                                    </div>
-                                    <div class="inputIF">
-                                        @Html.PasswordFor(model => model.ActualizaPassword.ConfirmarPassword, new { @class = "form-control inputIF" })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col100 mt-2">
-                                <div class="col25">
-                                    <div class="inputIF">
-                                        @Html.ValidationMessageFor(model => model.ActualizaPassword.Password)
-                                    </div>
-                                </div>
-                                <div class="col25">
-                                    <div class="inputIF">
-                                        @Html.ValidationMessageFor(model => model.ActualizaPassword.PasswordNueva)
-                                    </div>
-                                </div>
-                                <div class="col25">
-                                    <div class="inputIF">
-                                        @Html.ValidationMessageFor(model => model.ActualizaPassword.ConfirmarPassword)
-                                    </div>
-                                </div>
-                            </div>
-                            @ViewBag.Respuesta
-                        </div>
-
-                        <div class="row mt-4">
-                            <div class="col-sm-8">&nbsp;</div>
-                            <div class="col-sm-2"><input type="button" value="Cancelar" class="btnStyle btnWhite" /></div>
-                            <div class="col-sm-2"><input type="submit" value="Aceptar" class="btnStyle" /></div>
-                        </div>
-                    }*@
             </div>
 
         </div>

@@ -29,7 +29,6 @@ namespace Eprocurement.Compras.Controllers
             tipoProveedorList = businessLogic.GetTipoProveedorList();
         }
 
-
         public ActionResult AprobarTesoreria()
         {
             CargarCatalogos();
@@ -41,13 +40,14 @@ namespace Eprocurement.Compras.Controllers
             ViewBag.IdUsuarioRol = usuarioInfo.IdUsuarioRol;
             return View();
         }
+
         public JsonResult GetProveedorEstatusList(int? idTipoProveedor, int? idGiroProveedor, string idAeropuerto, string nombreEmpresa, string rfc, string email)
         {
             try
             {
                 var usuarioInfo = new ValidaSession().ObtenerUsuarioSession();
                 ViewBag.IdUsuarioRol = usuarioInfo.IdUsuarioRol;
-               BusinessLogic businessLogic = new BusinessLogic();
+                BusinessLogic businessLogic = new BusinessLogic();
                 ProveedorEstatusRequestDTO request = new ProveedorEstatusRequestDTO();
                 request.ProveedorFiltro = new ProveedorFiltroDTO { IdTipoProveedor = idTipoProveedor, IdGiroProveedor = idGiroProveedor, IdAeropuerto = idAeropuerto, NombreEmpresa = nombreEmpresa, RFC = rfc, Email = email };
                 //var response = businessLogic.GetProveedorEstatusList(request);
@@ -59,7 +59,8 @@ namespace Eprocurement.Compras.Controllers
                                             where estatus.Contains(t.IdEstatus.ToString())
                                             select t).ToList();
                     return Json(proveedorEstatus, JsonRequestBehavior.AllowGet);
-                } else
+                }
+                else
                 {
                     string[] estatus = { "1", "2", "3", "4", "5", "6", "7", "8" };
                     var response = businessLogic.GetProveedorEstatusList(request);
@@ -75,7 +76,6 @@ namespace Eprocurement.Compras.Controllers
                 return null;
             }
         }
-
-
+                
     }
 }

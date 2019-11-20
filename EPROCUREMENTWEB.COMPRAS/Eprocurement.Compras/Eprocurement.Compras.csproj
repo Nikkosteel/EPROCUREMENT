@@ -459,6 +459,7 @@
     <Content Include="Views\Home\AceptarProveedor.cshtml" />
     <Content Include="Views\Tesoreria\AprobarTesoreria.cshtml" />
     <Content Include="Views\SeguridadAD\Index.cshtml" />
+    <Content Include="Views\Home\AprobarInformacionBF.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
