@@ -7,8 +7,12 @@
 <link href="~/Content/Styles/Login.css" rel="stylesheet" />
 <div class="background row" style="padding-bottom: 0px;">
     <div class="col-sm-7">
-        &nbsp;
-        <h1 class="title">PORTAL<br /> DE PROVEEDORES</h1>
+        <div class="pnl-logo">
+            <img src="~/Content/Images/logo-gap-color.png" width="154" />
+        </div>
+        <div class="content-title">
+            <h1 class="title">PORTAL<br /> DE PROVEEDORES</h1>
+        </div>
     </div>
     <div class="col-sm-5 containerLogin">
         @using (Html.BeginForm("IniciarRecuperacion", "Seguridad", FormMethod.Post, new { enctype = "multipart/form-data" }))
