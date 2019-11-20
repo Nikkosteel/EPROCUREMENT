@@ -18,8 +18,11 @@ namespace EprocurementWeb.Controllers
         public ActionResult InformacionBF(int idProveedor)
         {
             var usuarioInfo = new ValidaSession().ObtenerUsuarioSession();
-            idProveedor = usuarioInfo.IdProveedor;
-            Session["IdProveedor"] = usuarioInfo.IdProveedor;
+            if (usuarioInfo != null)
+            {
+                idProveedor = usuarioInfo.IdProveedor;
+            }
+            Session["IdProveedor"] = idProveedor;
             BusinessLogic business = new BusinessLogic();
             Session["ProveedorCuentaListRegistro"] = new List<ProveedorCuentaDTO>();
             var aeropuertos = business.GetAeropuertosList();
