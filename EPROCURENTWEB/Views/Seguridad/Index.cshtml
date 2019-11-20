@@ -33,7 +33,7 @@
                             @Html.LabelFor(model => model.NombreUsuario, new { @class = "labelTexto control-label" })
                         </div>
                         <div class="inputIF">
-                            @Html.TextBoxFor(model => model.NombreUsuario, new { @class = "form-control inputIF" })
+                            @Html.TextBoxFor(model => model.NombreUsuario, new { @class = "form-control inputIF val-rfc" })
                         </div>
                     </div>
                 </div>
@@ -111,13 +111,27 @@
 
 <script type="text/javascript">
     var LoginSiguiente = function () {
-        $(".btn-next").hide();
-        $(".login-user").hide();
+        var valrfc = $(".val-rfc").val();
+        if (valrfc == '') {
+            Swal.fire({
+                position: 'middle',
+                icon: 'warning',
+                title: '',
+                html: 'El RFC se encuentra vacío',
+                showConfirmButton: true,
+                timer: 3000
+            });
+            //alert("El RFC se encuentra vacío");
+        }
+        else {
+            $(".btn-next").hide();
+            $(".login-user").hide();
 
-        $(".btn-fin").show();
-        $(".login-pass").show();
+            $(".btn-fin").show();
+            $(".login-pass").show();
 
-        $(".txt-pass").focus();
+            $(".txt-pass").focus();
+        }
     }
 </script>
 
