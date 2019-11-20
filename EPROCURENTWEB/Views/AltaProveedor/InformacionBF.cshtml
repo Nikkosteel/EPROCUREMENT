@@ -63,24 +63,28 @@
                     <b>Detalles de la compañia</b>
                     <div class="row mt-5">
                         <div class="col-sm-12">
-                            <table id="Table">
+                            <table class="dataTable" width="100%">
                                 <thead class="bg-light-purple">
                                     <tr>
                                         <td>Cuenta</td>
                                         <td>NombreBancco</td>
                                         <td>Clabe</td>
                                         <td>Tipo</td>
+                                        <td>Aeropuertos</td>
                                     </tr>
                                 </thead>
-                                @foreach (var cuenta in Model.ProveedorCuentaListRegistro)
-                                {
+                                <tbody>
+                                    @foreach (var cuenta in Model.ProveedorCuentaListRegistro)
+                                    {
                                     <tr>
-                                        <td align="center" style="dislay: none;">@cuenta.Cuenta</td>
-                                        <td align="center" style="dislay: none;">@cuenta.NombreBanco</td>
-                                        <td align="center" style="dislay: none;">@cuenta.CLABE</td>
-                                        <td align="center" style="dislay: none;">@cuenta.TipoCuenta</td>
+                                        <td style="dislay: none;">@cuenta.Cuenta</td>
+                                        <td style="dislay: none;">@cuenta.NombreBanco</td>
+                                        <td style="dislay: none;">@cuenta.CLABE</td>
+                                        <td style="dislay: none;">@cuenta.TipoCuenta</td>
+                                        <td style="dislay: none;"><a href="">Ver</a></td>
                                     </tr>
-                                }
+                                    }
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -128,6 +132,34 @@
         </div>
     </div>
 </div>
+
+<style>
+.dataTable {
+    font-size: 14px;
+    color: #68686a;
+    width: 100%;
+    text-align:left;
+}
+
+.dataTable tbody {
+/*background-color: red !important;*/
+}
+
+table.dataTable thead tr td {
+    height:40px;
+}
+
+table.dataTable tbody tr {
+    background-color: transparent !important;
+}
+
+    table.dataTable tbody tr td {
+        background-color: white;
+        border-top: solid 5px #f6f6f8;
+        text-align:left;
+        font-size:12px;
+    }
+</style>
 
 <script type="text/javascript">
     var fn_buscar = function () {
