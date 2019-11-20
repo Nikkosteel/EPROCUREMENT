@@ -22,8 +22,9 @@
 <body>
     <div class="background row" style="padding-bottom: 0px;">
         <div class="col-sm-7">
-            &nbsp;
-            <h1 class="title">PORTAL INTERNO<br /> PARA EMPLEADOS</h1>
+            <div class="content-title">
+                <h1 class="title">PORTAL INTERNO<br /> PARA EMPLEADOS</h1>
+            </div>
         </div>
         <div class="col-sm-5 containerLogin">
             @using (Html.BeginForm("Login", "SeguridadAD", FormMethod.Post, new { enctype = "multipart/form-data" }))

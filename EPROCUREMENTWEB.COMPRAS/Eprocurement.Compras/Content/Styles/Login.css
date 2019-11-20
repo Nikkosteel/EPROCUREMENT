@@ -24,7 +24,7 @@ html, body {
 }
 
 .background {
-    background: url('../Images/proveedores@3x.jpg') no-repeat fixed center;
+    background: url('../Images/apreton-manos.jpg') no-repeat fixed center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -87,5 +87,10 @@ html, body {
     line-height: 1.09;
     letter-spacing: normal;
     color: white;
-    margin: 360px 60px 60px 60px;
+    margin: 60px 60px 60px 60px;
+}
+
+.content-title{
+    position:absolute;
+    bottom:0px;
 }
