@@ -37,5 +37,15 @@ namespace EprocurementWeb.Filters
         {
             return (UsuarioDTO)HttpContext.Current.Session["User"];
         }
+
+        public List<ProveedorCuentaDTO> RecuperaRegistrosSession()
+        {
+            return (List<ProveedorCuentaDTO>)HttpContext.Current.Session["ProveedorCuentaListRegistro"];
+        }
+        public int RecuperaIdProveedorSession()
+        {
+            return (int)HttpContext.Current.Session["IdProveedor"];
+        }
+        
     }
 }
