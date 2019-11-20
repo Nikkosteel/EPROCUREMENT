@@ -349,6 +349,15 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_UsuarioInterno_INS].
+        /// </summary>
+        internal static string usp_EPROCUREMENT_UsuarioInterno_INS {
+            get {
+                return ResourceManager.GetString("usp_EPROCUREMENT_UsuarioInterno_INS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a [dbo].[usp_EPROCUREMENT_UsuarioProveedor_INS].
         /// </summary>
         internal static string usp_EPROCUREMENT_UsuarioProveedor_IN {

@@ -284,5 +284,35 @@ namespace Eprocurement.Compras.Business
             }
             return lstTipoProveedor;
         }
+        public UsuarioDTO LoginUsuarioItem(string usuario, string password)
+        {
+            UsuarioDTO usuarioDTO = null;
+            LoginUsuarioRequestDTO loginUsuario = new LoginUsuarioRequestDTO { Usuario = new UsuarioDTO { NombreUsuario = usuario, Password = password } };
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi + "api/SeguridadAD/");
+                var json = JsonConvert.SerializeObject(loginUsuario);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var responseTask = client.PostAsync("Login", content);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSSerializer = new JavaScriptSerializer();
+                    var response = JSSerializer.Deserialize<LoginUsuarioResponseDTO>(readTask.Result);
+                    if (response.Success)
+                    {
+                        usuarioDTO = response.Usuario;
+                    }
+                    else
+                    {
+                        usuarioDTO = null;
+                    }
+                }
+            }
+            return usuarioDTO;
+        }
     }
 }

@@ -127,11 +127,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Business\BusinessLogic.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SeguridadADController.cs" />
     <Compile Include="Controllers\TesoreriaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ProveedorRegistro.cs" />
+    <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -302,7 +304,10 @@
     <Content Include="Content\Images\logo-gap-color%402x.png" />
     <Content Include="Content\Images\logo-gap-color%403x.png" />
     <Content Include="Content\Images\logo-gap-color.png" />
+    <Content Include="Content\Images\proveedores%402x.jpg" />
+    <Content Include="Content\Images\proveedores%403x.jpg" />
     <Content Include="Content\StyleIBF.css" />
+    <Content Include="Content\Styles\Login.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -451,6 +456,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\AceptarProveedor.cshtml" />
     <Content Include="Views\Tesoreria\AprobarTesoreria.cshtml" />
+    <Content Include="Views\SeguridadAD\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
