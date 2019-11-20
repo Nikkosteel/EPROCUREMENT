@@ -4,6 +4,12 @@
     ViewBag.Title = @RHome.Title;
 }
 
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script type="text/javascript">
+        var onloadCallback = function () {
+            //alert("grecaptcha is ready!");
+        };
+    </script>
 <link href="~/Content/Css/infoCuenta.css" rel="stylesheet" />
 <link href="~/Content/validacionProveedor.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
@@ -321,29 +327,43 @@
                                                     </div>
                                                 </div>
                                             }
-
-                                            <button class="btnStyleGray col-md-3">Agregar</button>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btnStyleGray col-md-3">Agregar</button>
+                                            </div>
+                                        </div>
+                                            
 
                                             <hr />
-                                            <ul id="condiciones" class="chkCondiciones">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <ul id="condiciones" class="chkCondiciones">
+                                                        <li class="mb-2">
+                                                            <input type="checkbox" data-val="true" data-val-required="Es necesario aceptar los términos y condiciones." id="termino" name="termino" value="true" required>
+                                                            He leído y acepto los
+                                                            <a href="#" data-toggle="modal" data-target="#modalTerminos" class="a-c">
+                                                                Términos y condiciones
+                                                            </a>
 
-                                                <li class="mb-2">
-                                                    <input type="checkbox" data-val="true" data-val-required="Es necesario aceptar los términos y condiciones." id="termino" name="termino" value="true" required>
-                                                    He leído y acepto los
-                                                    <a href="#" data-toggle="modal" data-target="#modalTerminos" class="a-c">
-                                                        Términos y condiciones
-                                                    </a>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox" data-val="true" data-val-required="Es necesario aceptar el aviso de privacidad" id="avisos" name="avisos" value="true" required>
+                                                            He leído y acepto el
+                                                            <a href="#" data-toggle="modal" data-target="#modalAviso" class="a-c">
+                                                                Aviso de privacidad
 
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" data-val="true" data-val-required="Es necesario aceptar el aviso de privacidad" id="avisos" name="avisos" value="true" required>
-                                                    He leído y acepto el
-                                                    <a href="#" data-toggle="modal" data-target="#modalAviso" class="a-c">
-                                                        Aviso de privacidad
-
-                                                    </a>
-                                                </li>
-                                            </ul>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+                                                            async defer>
+                                                    </script>
+                                                    <div class="g-recaptcha" data-sitekey="6LdH08MUAAAAACNZbhvqmIvsC3WMofzii0OmyUbH"></div>
+                                                </div>
+                                            </div>
+                                            
                                         </div>
 
 
