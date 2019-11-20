@@ -227,7 +227,9 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                             proveedorEstatus.Email = reader["Email"].ToString();
                             proveedorEstatus.Estatus = reader["Estatus"].ToString();
                             proveedorEstatus.IdEstatus = Convert.ToInt32(reader["IdEstatus"]);
+                            proveedorEstatus.AXNumeroProveedor = reader["AXNumeroProveedor"].ToString();
                             response.ProveedorList.Add(proveedorEstatus);
+                            
                         }
                     }
                 }

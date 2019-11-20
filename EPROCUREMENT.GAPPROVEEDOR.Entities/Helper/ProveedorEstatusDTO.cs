@@ -14,5 +14,6 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Entities
         public string Email { get; set; }
         public string Estatus { get; set; }
         public int IdEstatus { get; set; }
+        public string AXNumeroProveedor { get; set; }
     }
 }

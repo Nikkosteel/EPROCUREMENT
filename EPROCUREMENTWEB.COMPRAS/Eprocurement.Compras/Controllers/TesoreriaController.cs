@@ -37,6 +37,8 @@ namespace Eprocurement.Compras.Controllers
             ViewBag.AeropuertoList = aeropuertoList;
             ViewBag.GiroList = giroList;
             ViewBag.TipoProveedorList = tipoProveedorList;
+            var usuarioInfo = new ValidaSession().ObtenerUsuarioSession();
+            ViewBag.IdUsuarioRol = usuarioInfo.IdUsuarioRol;
             return View();
         }
         public JsonResult GetProveedorEstatusList(int? idTipoProveedor, int? idGiroProveedor, string idAeropuerto, string nombreEmpresa, string rfc, string email)
@@ -44,7 +46,8 @@ namespace Eprocurement.Compras.Controllers
             try
             {
                 var usuarioInfo = new ValidaSession().ObtenerUsuarioSession();
-                BusinessLogic businessLogic = new BusinessLogic();
+                ViewBag.IdUsuarioRol = usuarioInfo.IdUsuarioRol;
+               BusinessLogic businessLogic = new BusinessLogic();
                 ProveedorEstatusRequestDTO request = new ProveedorEstatusRequestDTO();
                 request.ProveedorFiltro = new ProveedorFiltroDTO { IdTipoProveedor = idTipoProveedor, IdGiroProveedor = idGiroProveedor, IdAeropuerto = idAeropuerto, NombreEmpresa = nombreEmpresa, RFC = rfc, Email = email };
                 //var response = businessLogic.GetProveedorEstatusList(request);
