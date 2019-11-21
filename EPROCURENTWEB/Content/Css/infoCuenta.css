@@ -133,11 +133,13 @@ body {
 
 table.dataTable tbody tr {
     background-color: transparent !important;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.12);
 }
 
     table.dataTable tbody tr td {
         background-color: white;
-        border-top: solid 5px #f6f6f8
+        border-top: solid 5px #f6f6f8;
+        text-align:left;
     }
 
 .subtitle {
