@@ -47,6 +47,7 @@ namespace EprocurementWeb.Controllers
             cuenta.ProveedorCuentaListRegistro = new List<ProveedorCuentaDTO>();
             cuenta.CuentaBancaria = new ProveedorCuentaDTO();
             cuenta.CuentaBancaria.AeropuertoList = cuenta.ProveedorCuentaList[0].AeropuertoList;
+            Session["ProveedorCuentaListRegistro"] = new List<ProveedorCuentaDTO>();
             return View(cuenta);
         }
 
@@ -60,12 +61,13 @@ namespace EprocurementWeb.Controllers
             {
                 cuenta.ProveedorCuentaListRegistro = new List<ProveedorCuentaDTO>();
             }
-            if (ProveedorCuentaListRegistro != null)
+            if (ProveedorCuentaListRegistro == null)
             {
                 ProveedorCuentaListRegistro = new List<ProveedorCuentaDTO>();
             }
             if (cuenta.ProveedorCuentaList != null && cuenta.ProveedorCuentaList.Count > 0)
             {
+                cuenta.ProveedorCuentaList.First().AeropuertoList = cuenta.ProveedorCuentaList.First().AeropuertoList.Where(x => x.Checado).ToList();
                 ProveedorCuentaListRegistro.Add(cuenta.ProveedorCuentaList.First());
             }
             Session["ProveedorCuentaListRegistro"] = ProveedorCuentaListRegistro;
@@ -79,7 +81,10 @@ namespace EprocurementWeb.Controllers
             ViewBag.BancoList = bancoList;
             ViewBag.TipoCuentaList = tipoCuentaList;
             ProveedorDetalleRequestDTO request = new ProveedorDetalleRequestDTO();
-            request.IdProveedor = cuenta.ProveedorCuentaList.First().IdProveedor;
+            if (cuenta.ProveedorCuentaList != null)
+            {
+                request.IdProveedor = cuenta.ProveedorCuentaList.First().IdProveedor;
+            }
             var response = business.GetProveedorElemento(request).Proveedor;
             var aeropuertosAsignados = response.EmpresaList;
             var proveedorDocumento = business.GetCatalogoDocumentoList();
@@ -93,6 +98,19 @@ namespace EprocurementWeb.Controllers
             cuenta.ProveedorCuentaList[0].AeropuertoList = (from aeropuerto in aeropuertos
                                                             join aeropuertoA in aeropuertosAsignados on aeropuerto.Id equals aeropuertoA.IdCatalogoAeropuerto
                                                             select new AeropuertoDTO { Id = aeropuerto.Id, Nombre = aeropuerto.Nombre, Checado = false }).ToList();
+            foreach(var aeropuerto in cuenta.ProveedorCuentaList[0].AeropuertoList)
+            {
+                foreach(var reg in ProveedorCuentaListRegistro)
+                {
+                    if(reg.AeropuertoList.Exists(x => x.Id == aeropuerto.Id && x.Checado))
+                    {
+                        aeropuerto.Agregado = true;
+                        break;
+                    }
+                }
+                aeropuerto.Checado = false;
+            }
+            
             cuenta.CatalogoDocumentoList = proveedorDocumento;
             //cuenta.ProveedorCuentaListRegistro = new List<ProveedorCuentaDTO>();
             cuenta.CuentaBancaria = new ProveedorCuentaDTO();
