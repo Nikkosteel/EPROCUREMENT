@@ -341,7 +341,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                             response.Success = true;
                         }
                     }
-                    else if (request.EstatusProveedor.IdEstatusProveedor == 5)
+                    else if (request.EstatusProveedor.IdEstatusProveedor == 5 || request.EstatusProveedor.IdEstatusProveedor == 8 || request.EstatusProveedor.IdEstatusProveedor == 6)
                     {
                         if (ExecuteComandEstatus(cmdEstatus, request.EstatusProveedor) > 0)
                         {

@@ -169,10 +169,19 @@ namespace EprocurementWeb.Controllers
             var aeropuertos = business.GetAeropuertosList();
             ViewBag.BancoList = business.GetBancoList();
             ViewBag.TipoCuentaList = business.GetTipoCuentaList();
-            //ProveedorCuentaRequestDTO request = new ProveedorCuentaRequestDTO { IdUsuario = 3, ProveedorCuentaList = proveedor.ProveedorCuentaList };
-            //var response = business.GuardarProveedorCuenta(request);
-            //if (response.Success)
-            //{
+            List<ProveedorDocumentoDTO> provDoctos = new List<ProveedorDocumentoDTO>();
+            foreach(var item in proveedor.CatalogoDocumentoList)
+            {
+                provDoctos.Add(new ProveedorDocumentoDTO
+                {
+                    IdCatalogoDocumento = item.IdCatalogoDocumento,
+                    IdProveedor = idProveedor
+                });
+            }
+            ProveedorDocumentoRequestDTO requestPC = new ProveedorDocumentoRequestDTO { IdUsuario = 3, ProveedorDocumentoList = provDoctos };
+            var responsePC = business.GuardarProveedorCuenta(requestPC);
+            if (responsePC.Success)
+            {
                 bool respuestaDoc = business.GuardarDocumentos(proveedor.RFC, proveedor.CatalogoDocumentoList);
                 if (respuestaDoc)
                 {
@@ -183,7 +192,7 @@ namespace EprocurementWeb.Controllers
                     //    return View(proveedor);
                     //}
                 }
-            //}
+            }
             ProveedorDetalleRequestDTO request = new ProveedorDetalleRequestDTO();
             request.IdProveedor = idProveedor;
             var response = business.GetProveedorElemento(request).Proveedor;

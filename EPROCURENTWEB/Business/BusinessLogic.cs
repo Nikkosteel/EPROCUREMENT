@@ -466,6 +466,28 @@ namespace EprocurementWeb.Business
             return response;
         }
 
+        public ProveedorDocumentoResponseDTO GuardarProveedorCuenta(ProveedorDocumentoRequestDTO proveedorDocumento)
+        {
+            ProveedorDocumentoResponseDTO response = null;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi + "api/Proveedor/");
+                var json = JsonConvert.SerializeObject(proveedorDocumento);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var responseTask = client.PostAsync("GuardarProveedorDocumento", content);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    JavaScriptSerializer JSSerializer = new JavaScriptSerializer();
+                    response = JSSerializer.Deserialize<ProveedorDocumentoResponseDTO>(readTask.Result);
+                }
+            }
+            return response;
+        }
+
         public ProveedorEstatusResponseDTO SetProveedorEstatus(ProveedorAprobarRequestDTO request)
         {
             ProveedorEstatusResponseDTO response = new ProveedorEstatusResponseDTO();
