@@ -19,5 +19,6 @@
         /// Representa El nombre del aeropuerto
         /// </summary>
         public bool Checado { get; set; }
+        public bool Agregado { get; set; }
     }
 }

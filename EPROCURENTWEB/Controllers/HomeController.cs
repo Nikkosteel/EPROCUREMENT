@@ -63,6 +63,7 @@ namespace EprocurementWeb.Controllers
             ViewBag.MunicipioList = municipioList;
             ViewBag.TipoProveedorList = tipoProveedorList;
             proveedor.EmpresaList = proveedor.AeropuertoList.Where(a => a.Checado).Select(a => new ProveedorEmpresaDTO { IdCatalogoAeropuerto = a.Id }).ToList();
+            ViewBag.colonias = new List<string>();
             BusinessLogic businessLogic = new BusinessLogic();
             ProveedorResponseDTO response = businessLogic.PostProveedor(proveedor);
             if (response.Success)
@@ -104,7 +105,7 @@ namespace EprocurementWeb.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public JsonResult GetCodigoPostalInfo(string codigoPostal)
         {
-            var infoCodigo = new BusinessLogic().RecuperaCodigoPostalInfo(codigoPostal); ;
+            var infoCodigo = new BusinessLogic().RecuperaCodigoPostalInfo(codigoPostal);
             return Json(infoCodigo, JsonRequestBehavior.AllowGet);
         }
 

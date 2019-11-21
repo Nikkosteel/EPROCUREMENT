@@ -42,7 +42,7 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
                         var idProveedor = ExecuteComandProveedor(cmdProveedor, request.Proveedor);
                         if (idProveedor > 0)
                         {
-                            foreach (var proveedorGiro in request.Proveedor.ProveedorGiroList)
+                            foreach (var proveedorGiro in request.Proveedor.ProveedorGiroList.Where(x => x.IdCatalogoGiro != 0).ToList())
                             {
                                 var cmdGiro = new SqlCommand(App_GlobalResources.StoredProcedures.usp_EPROCUREMENT_ProveedorGiro_INS, conexion);
                                 if (ExecuteComandGiro(cmdGiro, proveedorGiro.IdCatalogoGiro, idProveedor) < 1) { return response; }
@@ -602,6 +602,8 @@ namespace EPROCUREMENT.GAPPROVEEDOR.Data
             cmdProveedor.Parameters.Add(new SqlParameter("@AXNumeroProveedor", SqlDbType.NVarChar, 30)).Value = proveedor.AXNumeroProveedor;
             cmdProveedor.Parameters.Add(new SqlParameter("@AXFechaRegistro", proveedor.AXFechaRegistro));
             cmdProveedor.Parameters.Add(new SqlParameter("@IdNacionalidad", proveedor.IdNacionalidad));
+            cmdProveedor.Parameters.Add(new SqlParameter("@TipoEmpresa", proveedor.Mexicana ? 1 : 2 ));
+            
             cmdProveedor.Parameters.Add(new SqlParameter("Result", SqlDbType.Int) { Direction = ParameterDirection.ReturnValue });
             cmdProveedor.ExecuteNonQuery();
             var idProveedor = Convert.ToInt32(cmdProveedor.Parameters["Result"].Value);
