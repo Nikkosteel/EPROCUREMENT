@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <div class="row">
     <div class="col-md-12">
-        <div class="card mt-4">
+        <div class="card mt-3">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12 h-filtro">Filtrar por</div>
@@ -55,7 +55,7 @@
     </div>
 </div>
 
-<div class="row mt-5">
+<div class="row mt-3">
     <div class="col-sm-12">
         <table id="Table">
             @*<thead>
@@ -107,15 +107,28 @@
                  
                      var link = '@Html.ActionLink(" ", "AceptarProveedor", "Home", new { idProvider ="_idProv_" }, new { @class = "fas fa-eye icon-color" })';
                      link = link.replace('_idProv_', data[i].IdProveedor);
-                     console.log("link", link);
+
+                     var color = ''
+                     switch (data[i].IdEstatus) {
+                         case 1: color = '#43ac3e';
+                             break;
+                         case 2: color = '#de343c';
+                             break;
+                         case 3: color = '#f9a32f';
+                             break;
+                         case 4: color = '#f9a32f';
+                             break;
+                         case 5: color = '#f9a32f';
+                             break;
+                     }
 
                      $("#Table").append('<tr>' +
                          //'<td align="center" style="dislay: none;">' + data[i].IdProveedor + '</td>' +
-                         '<td align="center" style="dislay: none;"><b>' + data[i].RFC + '</b></td>' +
-                         '<td align="center" style="dislay: none;">' + data[i].NombreEmpresa + '</td>' +
-                         '<td align="center" style="dislay: none;">' + data[i].Email + '</td>' +
-                         '<td align="center" style="dislay: none;">' + data[i].Estatus + '</td>' +
-                         '<td align="center" style="dislay: none;">' + link + '</td>' + '</tr>'
+                         '<td style="dislay: none;"><b>' + data[i].RFC + '</b></td>' +
+                         '<td style="dislay: none;">' + data[i].NombreEmpresa + '</td>' +
+                         '<td style="dislay: none;">' + data[i].Email + '</td>' +
+                         '<td style="dislay: none; color:'+ color +';">' + data[i].Estatus + '</td>' +
+                         '<td style="dislay: none;"><div class="btn-circle">' + link + '</div></td>' + '</tr>'
                      );                 
                  }
                  $("#Table").append('</tbody>');

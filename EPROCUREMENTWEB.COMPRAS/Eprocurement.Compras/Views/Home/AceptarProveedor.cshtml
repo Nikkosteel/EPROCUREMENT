@@ -15,7 +15,7 @@
             </h3>
         </div>
     </div>
-    <div class="row mt-2">
+    <div class="row mt-1">
         <div class="col-md-12">
             <div class="accordion" id="accordionExample">
                 <div class="card card-border">
@@ -159,7 +159,7 @@
             </div>
         </div>
     </div>
-    <div class="row mt-4">
+    <div class="row mt-3">
         <div class="col-md-12">
             <div class="accordion" id="accordionExample">
                 <div class="card card-border">
@@ -243,7 +243,7 @@
             </div>
         </div>
     </div>
-    <div class="row mt-4">
+    <div class="row mt-3">
         <div class="col-md-12">
             <div class="accordion" id="accordionExample">
                 <div class="card card-border">
@@ -263,20 +263,23 @@
                                         @Html.Label("", "Aeropuertos que puede atender*", new { @class = "label-formulario" })
                                     </div>
                                     <div class="col-md-12">
+                                        <div class="row">
                                             @foreach (var aeropuerto in Model.AeropuertoList)
                                             {
                                                 @Html.HiddenFor(model => aeropuerto.Id)
                                                 @Html.HiddenFor(model => aeropuerto.Nombre)
-                                                <div class="col-sm-4" style="font-size:12px;">
+                                                <div class="col-sm-4 mt-2" style="font-size:12px;">
                                                     @Html.CheckBoxFor(model => aeropuerto.Checado, new { @value = aeropuerto.Checado })
                                                     @Html.DisplayTextFor(model => aeropuerto.Nombre)
                                                 </div>
                                             }
+                                        </div>
+                                            
                                          @Html.Label("", "Giro (s) específicos de la empresa en los que esta calificada", new { @class = "control-label m-b-1 m-t-1" })
                                         @foreach (var giro in Model.ProveedorGiroList)
                                          {
                                             @Html.HiddenFor(model => giro.IdProveedorGiro)
-                                            <div class="form-group col-md-12 ">
+                                            <div class="form-group col-md-12 mt-2">
                                                 <div class="col-md-10">
                                                     @Html.DropDownListFor(x => giro.IdCatalogoGiro, new SelectList(ViewBag.GiroList, "IdGiro", "GiroNombre", giro.IdCatalogoGiro), "...", new { @class = "form-control col-md-12" })
                                                 </div>
