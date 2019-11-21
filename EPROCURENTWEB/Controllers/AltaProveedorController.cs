@@ -175,7 +175,9 @@ namespace EprocurementWeb.Controllers
                 provDoctos.Add(new ProveedorDocumentoDTO
                 {
                     IdCatalogoDocumento = item.IdCatalogoDocumento,
-                    IdProveedor = idProveedor
+                    IdProveedor = idProveedor,
+                    DescripcionDocumento = "NA",
+                    DocumentoAutorizado = false
                 });
             }
             ProveedorDocumentoRequestDTO requestPC = new ProveedorDocumentoRequestDTO { IdUsuario = 3, ProveedorDocumentoList = provDoctos };

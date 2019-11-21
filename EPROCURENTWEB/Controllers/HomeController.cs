@@ -49,6 +49,8 @@ namespace EprocurementWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult GuardarProveedor(ProveedorRegistro proveedor)
         {
+            proveedor.IdTipoProveedor = 1;
+            proveedor.IdNacionalidad = 1;
             proveedor.Direccion.DireccionValidada = true;
             //proveedor.Direccion.IdPais = proveedor.i
             CargarCatalogos();

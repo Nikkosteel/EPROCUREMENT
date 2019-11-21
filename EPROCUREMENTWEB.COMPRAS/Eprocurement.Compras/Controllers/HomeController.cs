@@ -94,8 +94,11 @@ namespace Eprocurement.Compras.Controllers
                     ProvFax = response.ProvFax,
                     ProvTelefono = response.ProvTelefono,
                     RazonSocial = response.RazonSocial,
-                    RFC = response.RFC                    
+                    RFC = response.RFC     ,
+                    Mexicana = response.Mexicana,
+                    Extranjera = response.Extranjera
                 };
+                proveedor.AeropuertoList = proveedor.AeropuertoList.Where(x => x.Checado).ToList();
                 ViewBag.EstadoList = estadoList;
                 ViewBag.MunicipioList = municipioList;
                 ViewBag.idEstado = proveedor.Direccion.IdEstado;
