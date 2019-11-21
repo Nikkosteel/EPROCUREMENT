@@ -93,6 +93,7 @@
                         <div class="col-sm-6">&nbsp;</div>
                         <div class="col-sm-3"><input type="button" value="Cancelar" class="btnStyle btnWhite" /></div>
                         <div class="col-sm-3"><input type="submit" value="Enviar" class="btnStyle" /></div>
+                        @ViewBag.Respuesta
                     </div>
                 }
             </div>
@@ -222,6 +223,15 @@ table.dataTable tbody tr {
     });
 
     $(document).ready(function () {
+        if ('@ViewBag.Respuesta' != "") {
+            Swal.fire({
+                position: 'middle',
+                icon: 'success',
+                title: 'Las cuentas han sido guardadas con éxito',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
         $("#ProveedorCuentaList_0__Cuenta").val("");
         $("#ProveedorCuentaList_0__CLABE").val("");
         $("#idBanco").val(0);

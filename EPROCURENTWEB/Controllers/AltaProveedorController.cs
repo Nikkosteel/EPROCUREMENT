@@ -17,6 +17,7 @@ namespace EprocurementWeb.Controllers
         public List<ProveedorCuentaDTO>  ProveedorCuentaListRegistro = new List<ProveedorCuentaDTO>();
         public ActionResult InformacionBF(int idProveedor)
         {
+            ViewBag.Respuesta = "";
             var usuarioInfo = new ValidaSession().ObtenerUsuarioSession();
             if (usuarioInfo != null)
             {
@@ -53,6 +54,7 @@ namespace EprocurementWeb.Controllers
 
         public ActionResult AgregarCuenta(ProveedorInformacionFinanciera cuenta)
         {
+            ViewBag.Respuesta = "";
             BusinessLogic business = new BusinessLogic();
             var bancoList = business.GetBancoList();
             var tipoCuentaList = business.GetTipoCuentaList();
@@ -138,6 +140,7 @@ namespace EprocurementWeb.Controllers
                     proveedor.ProveedorCuentaList.Add(registro);
                     ProveedorCuentaRequestDTO requestg = new ProveedorCuentaRequestDTO { IdUsuario = 3, ProveedorCuentaList = proveedor.ProveedorCuentaList };
                     var responseg = business.GuardarProveedorCuenta(requestg);
+                    ViewBag.Respuesta = "Se guardaron las cuentas correctamente";
                 }
             }
             //if (response.Success)
